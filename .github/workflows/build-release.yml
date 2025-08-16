@@ -23,6 +23,7 @@ jobs:
       KEYBOARD_REPO: "FossifyOrg/Keyboard"
       REVANCED_REPO: "j-hc/revanced-magisk-module"
       MICROG_REPO: "ReVanced/GmsCore"
+      WEATHERMASTER_REPO: "PranshulGG/WeatherMaster"
 
     steps:
       - name: Checkout
@@ -84,7 +85,7 @@ jobs:
       - name: Download WeatherMaster APK
         uses: robinraju/release-downloader@v1
         with:
-          repository: PranshulGG/WeatherMaster
+          repository: ${{ env.WEATHERMASTER_REPO }}
           latest: true
           fileName: "*arm64-v8a-Standard*.apk"
 
@@ -97,7 +98,6 @@ jobs:
           # Load existing versions from latest-apk-versions.txt if present
           declare -A OLD
           if [ -f latest-apk-versions.txt ]; then
-            # Expect lines like: APP: VERSION
             while IFS=: read -r app ver; do
               app="$(echo "$app" | xargs)"
               ver="$(echo "$ver" | xargs)"
@@ -134,7 +134,6 @@ jobs:
               continue
             fi
 
-            # Replace any stored APK for this app
             rm -f ${APP}_v*.apk 2>/dev/null || true
 
             NEW_FILE="${APP}_v${NEW_VER}.apk"
@@ -158,11 +157,29 @@ jobs:
       - name: Write latest versions
         if: env.UPDATED_APPS != ''
         run: |
+          declare -A LATEST
+
+          # Load old versions
+          if [ -f latest-apk-versions.txt ]; then
+            while IFS=: read -r app ver; do
+              app="$(echo "$app" | xargs)"
+              ver="$(echo "$ver" | xargs)"
+              [ -z "$app" ] && continue
+              LATEST["$app"]="$ver"
+            done < latest-apk-versions.txt
+          fi
+
+          # Overwrite with updated apps in this run
           for apk in *_v*.apk; do
             APP="${apk%%_v*}"
             VER="$(echo "$apk" | sed -E "s/.*_v(.*)\.apk/\1/")"
-            echo "$APP: $VER"
-          done > latest-apk-versions.txt
+            LATEST["$APP"]="$VER"
+          done
+
+          # Write full list sorted
+          for app in "${!LATEST[@]}"; do
+            echo "$app: ${LATEST[$app]}"
+          done | sort > latest-apk-versions.txt
 
       - name: Commit latest versions
         if: env.UPDATED_APPS != ''
