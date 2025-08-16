@@ -2,8 +2,14 @@ name: Update Prebuilt APKs
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**.md'
+      - '**.txt'
   schedule:
-    - cron: '30 4 * * *' 
+    - cron: '30 4 * * *'
 
 jobs:
   update-apps:
@@ -13,6 +19,7 @@ jobs:
       ACCESS_TOKEN: ${{ secrets.TOKEN }}
       TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
       TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+
       VIA_URL: "https://res.viayoo.com/v1/via-release.apk"
       DOTGALLERY_REPO: "IacobIonut01/Gallery"
       DUCKDUCKGO_REPO: "duckduckgo/Android"
@@ -36,7 +43,7 @@ jobs:
       # ---- Download APKs ----
       - name: Download Via Browser
         run: |
-          curl -L -o Via.apk ${{ env.VIA_URL }}
+          curl -L -o Via.apk "${{ env.VIA_URL }}"
 
       - name: Download DotGallery arm64-v8a APK
         uses: robinraju/release-downloader@v1
@@ -47,7 +54,7 @@ jobs:
 
       - name: Remove nomaps APKs
         run: |
-          rm -f *nomaps*.apk
+          rm -f *nomaps*.apk || true
 
       - name: Download DuckDuckGo APK
         uses: robinraju/release-downloader@v1
@@ -63,7 +70,6 @@ jobs:
           latest: true
           fileName: "*.apk"
 
-      # ---- ReVanced APKs ----
       - name: Download ReVanced APKs
         uses: robinraju/release-downloader@v1
         with:
@@ -71,8 +77,7 @@ jobs:
           latest: true
           fileName: "*.apk"
 
-      # ---- ReVanced MicroG ----
-      - name: Download ReVanced MicroG
+      - name: Download ReVanced MicroG (signed)
         uses: robinraju/release-downloader@v1
         with:
           repository: ${{ env.MICROG_REPO }}
@@ -81,11 +86,12 @@ jobs:
 
       - name: Remove hw-signed MicroG
         run: |
-          rm -f *hw-signed*.apk
+          rm -f *hw-signed*.apk || true
 
       # ---- Process APKs ----
       - name: Update APKs with version check
         run: |
+          set -e
           UPDATED_APPS=""
           COMMIT_MSG="prebuilts: Update"
 
@@ -140,30 +146,83 @@ jobs:
             echo "COMMIT_MSG=" >> $GITHUB_ENV
           fi
 
-      # ---- Commit changes ----
-      - name: Commit Changes
+      # ---- Commit and Push ----
+      - name: Write latest versions to txt file
         if: env.UPDATED_APPS != ''
         run: |
+          echo "Latest Prebuilt APK Versions:" > latest-apk-versions.txt
+          for apk in *_v*.apk; do
+            APP=$(echo "$apk" | cut -d'_' -f1)
+            VER=$(echo "$apk" | sed -E "s/.*_v(.*)\.apk/\1/")
+            echo "$APP: $VER" >> latest-apk-versions.txt
+          done
+
+      - name: Commit and push latest versions txt
+        if: env.UPDATED_APPS != ''
+        run: |
+          set -e
           git config --local user.email "sipunkumar85@gmail.com"
           git config --local user.name "S I P U N"
-          git add .
-          git commit -sm "$COMMIT_MSG"
+          git add latest-apk-versions.txt
+          # Ensure we are on main and up-to-date to avoid non-fast-forward
+          git fetch origin main
+          git checkout -B main
+          git pull --rebase origin main || true
+          git commit -m "Update latest APK versions list [ci skip]" || echo "No changes to commit"
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ env.ACCESS_TOKEN }}
 
-      - name: Push Changes
+      # ---- Generate Release Notes ----
+      - name: Generate Release Notes
         if: env.UPDATED_APPS != ''
-        uses: ad-m/github-push-action@master
+        run: |
+          NOTES="### Prebuilt APKs Update\n\n"
+          declare -A sources=(
+            ["Via"]="https://viayoo.com/"
+            ["DotGallery"]="https://github.com/IacobIonut01/Gallery/releases"
+            ["DuckDuckGo"]="https://github.com/duckduckgo/Android/releases"
+            ["Keyboard"]="https://github.com/FossifyOrg/Keyboard/releases"
+            ["GooglePhotosReVanced"]="https://github.com/j-hc/revanced-magisk-module/releases"
+            ["MusicReVanced"]="https://github.com/j-hc/revanced-magisk-module/releases"
+            ["SpotifyReVanced"]="https://github.com/j-hc/revanced-magisk-module/releases"
+            ["YouTubeReVanced"]="https://github.com/j-hc/revanced-magisk-module/releases"
+            ["ReVancedMicroG"]="https://github.com/ReVanced/GmsCore/releases"
+          )
+          for apk in *_v*.apk; do
+            APP=$(echo "$apk" | cut -d'_' -f1)
+            VER=$(echo "$apk" | sed -E "s/.*_v(.*)\.apk/\1/")
+            SIZE=$(du -h "$apk" | cut -f1)
+            SRC=${sources[$APP]}
+            NOTES+="- **$APP**: v$VER • $SIZE ([source]($SRC))\n"
+          done
+          echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
+          echo "$NOTES" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      # ---- Create GitHub Release ----
+      - name: Create GitHub Release
+        if: env.UPDATED_APPS != ''
+        uses: softprops/action-gh-release@v2
         with:
-          github_token: ${{ env.ACCESS_TOKEN }}
+          tag_name: prebuilts-${{ github.run_id }}
+          name: "Prebuilts Update - $(date +'%Y-%m-%d %H:%M')"
+          body: ${{ env.RELEASE_NOTES }}
+          files: |
+            *_v*.apk
+        env:
+          GITHUB_TOKEN: ${{ env.ACCESS_TOKEN }}
 
       # ---- Telegram upload ----
       - name: Upload to Telegram
         if: env.UPDATED_APPS != ''
         run: |
           for apk in *_v*.apk; do
-            APP=$(echo $apk | cut -d'_' -f1)
-            VER=$(echo $apk | sed -E "s/.*_v(.*)\.apk/\1/")
+            APP=$(echo "$apk" | cut -d'_' -f1)
+            VER=$(echo "$apk" | sed -E "s/.*_v(.*)\.apk/\1/")
             CAPTION="$APP updated to v$VER"
             curl -s -X POST "https://api.telegram.org/bot${{ env.TELEGRAM_TOKEN }}/sendDocument" \
               -F chat_id=${{ env.TELEGRAM_CHAT_ID }} \
               -F document=@$apk \
               -F caption="$CAPTION"
+          done
