@@ -81,11 +81,26 @@ jobs:
       - name: Remove hw-signed MicroG
         run: rm -f *hw-signed*.apk || true
 
-      - name: Version and rename APKs
+      - name: Version and rename APKs (compare against latest-apk-versions.txt)
         id: versioning
         run: |
           set -e
           UPDATED_APPS=""
+
+          # Load existing versions from latest-apk-versions.txt if present
+          declare -A OLD
+          if [ -f latest-apk-versions.txt ]; then
+            # Expect lines like: APP: VERSION
+            while IFS=: read -r app ver; do
+              app="$(echo "$app" | xargs)"
+              ver="$(echo "$ver" | xargs)"
+              [ -z "$app" ] && continue
+              [[ "$app" == "Latest Prebuilt APK Versions" ]] && continue
+              OLD["$app"]="$ver"
+            done < latest-apk-versions.txt
+          fi
+
+          # Patterns to friendly app names
           declare -A apps=(
             ["Via.apk"]="Via"
             ["IacobIonut01.Gallery*.apk"]="GooglePhotos"
@@ -97,24 +112,30 @@ jobs:
             ["youtube-revanced-*-all.apk"]="YouTube"
             ["app.revanced.android.gms-*.apk"]="ReVancedMicroG"
           )
+
           for pattern in "${!apps[@]}"; do
             NEW_APK=$(ls $pattern 2>/dev/null | head -n 1 || true)
             APP=${apps[$pattern]}
             [ -z "$NEW_APK" ] && continue
-            VER=$(aapt dump badging "$NEW_APK" | grep versionName | sed -E "s/.*versionName='([^']+)'.*/\1/")
-            NEW_FILE="${APP}_v${VER}.apk"
-            if ls ${APP}_v*.apk >/dev/null 2>&1; then
-              OLD_FILE=$(ls ${APP}_v*.apk | head -n 1)
-              OLD_VER=$(aapt dump badging "$OLD_FILE" | grep versionName | sed -E "s/.*versionName='([^']+)'.*/\1/")
-              if [ "$OLD_VER" = "$VER" ]; then
-                rm -f "$NEW_APK"; continue
-              else
-                rm -f "$OLD_FILE"
-              fi
+
+            NEW_VER=$(aapt dump badging "$NEW_APK" | grep versionName | sed -E "s/.*versionName='([^']+)'.*/\1/")
+            OLD_VER="${OLD[$APP]:-}"
+
+            if [ -n "$OLD_VER" ] && [ "$OLD_VER" = "$NEW_VER" ]; then
+              echo "$APP unchanged (v$NEW_VER) — skipping"
+              rm -f "$NEW_APK"
+              continue
             fi
+
+            # Replace any stored APK for this app
+            rm -f ${APP}_v*.apk 2>/dev/null || true
+
+            NEW_FILE="${APP}_v${NEW_VER}.apk"
             mv "$NEW_APK" "$NEW_FILE"
-            UPDATED_APPS+="$APP(v$VER) "
+            UPDATED_APPS+="$APP(v$NEW_VER) "
+            echo "Will update $APP → v$NEW_VER (was: ${OLD_VER:-none})"
           done
+
           if [ -n "$UPDATED_APPS" ]; then
             echo "UPDATED_APPS=$UPDATED_APPS" >> $GITHUB_ENV
           else
