@@ -1,0 +1,8 @@
+DuckDuckGo: 5.244.1
+GooglePhotos: 7.41.0.793809016
+Latest Prebuilt APK Versions:
+Music: 8.25.54
+ReVancedMicroG: 0.3.1.4.240913
+Spotify: 9.0.68.613
+Via: 6.6.0
+YouTube: 20.13.41
