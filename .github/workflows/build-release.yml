@@ -24,6 +24,7 @@ jobs:
       REVANCED_REPO: "j-hc/revanced-magisk-module"
       MICROG_REPO: "ReVanced/GmsCore"
       WEATHERMASTER_REPO: "PranshulGG/WeatherMaster"
+      MICROG_RE_REPO: "WSTxda/MicroG-RE"
 
     steps:
       - name: Checkout
@@ -89,6 +90,13 @@ jobs:
           latest: true
           fileName: "*arm64-v8a-Standard*.apk"
 
+      - name: Download MicroG RE APK
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: ${{ env.MICROG_RE_REPO }}
+          latest: true
+          fileName: "*.apk"
+
       - name: Version and rename APKs (compare against latest-apk-versions.txt)
         id: versioning
         run: |
@@ -109,15 +117,16 @@ jobs:
           # Patterns to friendly app names
           declare -A apps=(
             ["Via.apk"]="Via"
-            ["IacobIonut01.Gallery*.apk"]="DotGallery"
+            ["*Gallery*arm64-v8a*.apk"]="DotGallery"
             ["duckduckgo*.apk"]="DuckDuckGo"
-            ["FossifyOrg.Keyboard*.apk"]="Keyboard"
-            ["googlephotos-revanced-*-arm64-v8a.apk"]="GooglePhotos"
-            ["music-revanced-*-arm64-v8a.apk"]="Music"
-            ["spotify-revanced-*-all.apk"]="Spotify"
-            ["youtube-revanced-*-all.apk"]="YouTube"
-            ["app.revanced.android.gms-*.apk"]="ReVancedMicroG"
+            ["keyboard*.apk"]="Fossify_Keyboard"
+            ["googlephotos-revanced-*-arm64-v8a.apk"]="revanced_GooglePhotos"
+            ["music-revanced-*-arm64-v8a.apk"]="ReVanced_YTMusic"
+            ["spotify-revanced-*-all.apk"]="Spotify_Revanced"
+            ["youtube-revanced-*-all.apk"]="ReVanced_YouTube"
+            ["app.revanced.android.gms-*.apk"]="ReVanced_MicroG"
             ["WeatherMaster*.arm64-v8a-Standard.apk"]="WeatherMaster"
+            ["microg*.apk"]="MicroG_RE"
           )
 
           for pattern in "${!apps[@]}"; do
@@ -206,7 +215,7 @@ jobs:
             echo "${APP}:${VER}" >> "$tmp"
           done
           sort -t: -k1,1 "$tmp" | awk -F: '!seen[$1]{last[$1]=$0; seen[$1]=1; next}{last[$1]=$0} END{for(k in last)print last[k]}' | sort -t: -k1,1 > "${tmp}.dedup"
-          order=("GooglePhotos" "Music" "Spotify" "YouTube" "DuckDuckGo" "Keyboard" "Via" "ReVancedMicroG" "DotGallery" "WeatherMaster")
+          order=("GooglePhotos" "ReVanced_YTMusic" "Spotify_Revanced" "ReVanced_YouTube" "DuckDuckGo" "Fossify_Keyboard" "Via" "ReVancedMicroG" "DotGallery" "WeatherMaster" "MicroG_RE")
           NOTES=""
           for key in "${order[@]}"; do
             line=$(grep -E "^${key}:" "${tmp}.dedup" || true)

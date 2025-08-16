@@ -15,6 +15,7 @@ Keeps popular Android APKs updated and easy to download — automatically. 🚀
   - 🎧 Spotify (ReVanced)  
 - 🔗 ReVanced MicroG
 - 🌦️ WeatherMaster
+- 🟢 MicroG RE
 
 ## What You’ll See
 
