@@ -1,0 +1,139 @@
+name: Update Prebuilt APKs
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 4 * * *' 
+jobs:
+  update-apps:
+    runs-on: ubuntu-latest
+
+    env:
+      ACCESS_TOKEN: ${{ secrets.TOKEN }}
+      TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      VIA_URL: "https://res.viayoo.com/v1/via-release.apk"
+      DOTGALLERY_REPO: "IacobIonut01/Gallery"
+      DUCKDUCKGO_REPO: "duckduckgo/Android"
+      KEYBOARD_REPO: "FossifyOrg/Keyboard"
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: "adopt"
+          java-version: "11"
+
+      - name: Install aapt
+        run: sudo apt-get update && sudo apt-get install -y aapt
+
+      # ---- Download APKs ----
+      - name: Download Via Browser
+        run: |
+          curl -L -o Via.apk ${{ env.VIA_URL }}
+
+      - name: Download DotGallery APK
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: ${{ env.DOTGALLERY_REPO }}
+          latest: true
+          fileName: "*.apk"
+
+      - name: Download DuckDuckGo APK
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: ${{ env.DUCKDUCKGO_REPO }}
+          latest: true
+          fileName: "*.apk"
+
+      - name: Download Keyboard APK
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: ${{ env.KEYBOARD_REPO }}
+          latest: true
+          fileName: "*.apk"
+
+      # ---- Process APKs ----
+      - name: Update APKs with version check
+        run: |
+          UPDATED_APPS=""
+          COMMIT_MSG="prebuilts: Update"
+
+          declare -A apps=(
+            ["Via.apk"]="Via"
+            ["IacobIonut01.Gallery*.apk"]="DotGallery"
+            ["duckduckgo*.apk"]="DuckDuckGo"
+            ["FossifyOrg.Keyboard*.apk"]="Keyboard"
+          )
+
+          for pattern in "${!apps[@]}"; do
+            NEW_APK=$(ls $pattern 2>/dev/null | head -n 1 || true)
+            APP_NAME=${apps[$pattern]}
+
+            if [ -n "$NEW_APK" ]; then
+              NEW_VER=$(aapt dump badging "$NEW_APK" | grep versionName | sed -E "s/.*versionName='([^']+)'.*/\1/")
+              NEW_FILE="${APP_NAME}_v${NEW_VER}.apk"
+
+              # Check if existing version already present
+              if ls ${APP_NAME}_v*.apk >/dev/null 2>&1; then
+                OLD_FILE=$(ls ${APP_NAME}_v*.apk | head -n 1)
+                OLD_VER=$(aapt dump badging "$OLD_FILE" | grep versionName | sed -E "s/.*versionName='([^']+)'.*/\1/")
+
+                if [ "$OLD_VER" = "$NEW_VER" ]; then
+                  echo "$APP_NAME already up to date (v$OLD_VER)"
+                  rm -f "$NEW_APK"
+                  continue
+                else
+                  echo "Updating $APP_NAME from v$OLD_VER → v$NEW_VER"
+                  rm -f "$OLD_FILE"
+                fi
+              else
+                echo "Adding new app $APP_NAME (v$NEW_VER)"
+              fi
+
+              mv "$NEW_APK" "$NEW_FILE"
+              UPDATED_APPS+="$APP_NAME(v$NEW_VER) "
+              COMMIT_MSG+=" $APP_NAME(v$NEW_VER)"
+            fi
+          done
+
+          if [ -n "$UPDATED_APPS" ]; then
+            echo "UPDATED_APPS=$UPDATED_APPS" >> $GITHUB_ENV
+            echo "COMMIT_MSG=$COMMIT_MSG" >> $GITHUB_ENV
+          else
+            echo "No updates found."
+            echo "UPDATED_APPS=" >> $GITHUB_ENV
+            echo "COMMIT_MSG=" >> $GITHUB_ENV
+          fi
+
+      # ---- Commit changes ----
+      - name: Commit Changes
+        if: env.UPDATED_APPS != ''
+        run: |
+          git config --local user.email "sipunkumar85@gmail.com"
+          git config --local user.name "S I P U N"
+          git add .
+          git commit -sm "$COMMIT_MSG"
+
+      - name: Push Changes
+        if: env.UPDATED_APPS != ''
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ env.ACCESS_TOKEN }}
+
+      # ---- Telegram upload ----
+      - name: Upload to Telegram
+        if: env.UPDATED_APPS != ''
+        run: |
+          for apk in *_v*.apk; do
+            APP=$(echo $apk | cut -d'_' -f1)
+            VER=$(echo $apk | sed -E "s/.*_v(.*)\.apk/\1/")
+            CAPTION="$APP updated to v$VER"
+            curl -s -X POST "https://api.telegram.org/bot${{ env.TELEGRAM_TOKEN }}/sendDocument" \
+              -F chat_id=${{ env.TELEGRAM_CHAT_ID }} \
+              -F document=@$apk \
+              -F caption="$CAPTION"
+          done
