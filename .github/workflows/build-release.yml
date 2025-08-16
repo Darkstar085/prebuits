@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths-ignore: ['**.md','**.txt']
+    paths-ignore: ["**.md", "**.txt"]
   schedule:
-    - cron: '30 4 * * *' # 10:00 AM IST
+    - cron: "30 4 * * *" # 10:00 AM IST
 
 concurrency:
   group: prebuilts-build-${{ github.ref }}
@@ -32,7 +32,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: adopt
-          java-version: '11'
+          java-version: "11"
 
       - name: Install aapt
         run: sudo apt-get update && sudo apt-get install -y aapt
