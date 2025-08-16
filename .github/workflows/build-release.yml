@@ -81,6 +81,13 @@ jobs:
       - name: Remove hw-signed MicroG
         run: rm -f *hw-signed*.apk || true
 
+      - name: Download WeatherMaster APK
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: PranshulGG/WeatherMaster
+          latest: true
+          fileName: "*arm64-v8a-Standard*.apk"
+
       - name: Version and rename APKs (compare against latest-apk-versions.txt)
         id: versioning
         run: |
@@ -95,7 +102,6 @@ jobs:
               app="$(echo "$app" | xargs)"
               ver="$(echo "$ver" | xargs)"
               [ -z "$app" ] && continue
-              [[ "$app" == "Latest Prebuilt APK Versions" ]] && continue
               OLD["$app"]="$ver"
             done < latest-apk-versions.txt
           fi
@@ -103,7 +109,7 @@ jobs:
           # Patterns to friendly app names
           declare -A apps=(
             ["Via.apk"]="Via"
-            ["IacobIonut01.Gallery*.apk"]="GooglePhotos"
+            ["IacobIonut01.Gallery*.apk"]="DotGallery"
             ["duckduckgo*.apk"]="DuckDuckGo"
             ["FossifyOrg.Keyboard*.apk"]="Keyboard"
             ["googlephotos-revanced-*-arm64-v8a.apk"]="GooglePhotos"
@@ -111,6 +117,7 @@ jobs:
             ["spotify-revanced-*-all.apk"]="Spotify"
             ["youtube-revanced-*-all.apk"]="YouTube"
             ["app.revanced.android.gms-*.apk"]="ReVancedMicroG"
+            ["WeatherMaster*.arm64-v8a-Standard.apk"]="WeatherMaster"
           )
 
           for pattern in "${!apps[@]}"; do
@@ -151,15 +158,11 @@ jobs:
       - name: Write latest versions
         if: env.UPDATED_APPS != ''
         run: |
-          {
-            echo "Latest Prebuilt APK Versions:"
-            for apk in *_v*.apk; do
-              APP="${apk%%_v*}"
-              VER="$(echo "$apk" | sed -E "s/.*_v(.*)\.apk/\1/")"
-              echo "$APP: $VER"
-            done
-          } > latest-apk-versions.txt
-          sort -u -o latest-apk-versions.txt latest-apk-versions.txt
+          for apk in *_v*.apk; do
+            APP="${apk%%_v*}"
+            VER="$(echo "$apk" | sed -E "s/.*_v(.*)\.apk/\1/")"
+            echo "$APP: $VER"
+          done > latest-apk-versions.txt
 
       - name: Commit latest versions
         if: env.UPDATED_APPS != ''
@@ -186,7 +189,7 @@ jobs:
             echo "${APP}:${VER}" >> "$tmp"
           done
           sort -t: -k1,1 "$tmp" | awk -F: '!seen[$1]{last[$1]=$0; seen[$1]=1; next}{last[$1]=$0} END{for(k in last)print last[k]}' | sort -t: -k1,1 > "${tmp}.dedup"
-          order=("GooglePhotos" "Music" "Spotify" "YouTube" "DuckDuckGo" "Keyboard" "Via" "ReVancedMicroG")
+          order=("GooglePhotos" "Music" "Spotify" "YouTube" "DuckDuckGo" "Keyboard" "Via" "ReVancedMicroG" "DotGallery" "WeatherMaster")
           NOTES=""
           for key in "${order[@]}"; do
             line=$(grep -E "^${key}:" "${tmp}.dedup" || true)
