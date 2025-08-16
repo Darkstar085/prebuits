@@ -2,6 +2,7 @@ DotGallery: 3.2.0
 DuckDuckGo: 5.244.1
 Fossify_Keyboard: 1.3.0
 MicroG_RE: 5.11 GMS-25.14.62
+ReVanced_GooglePhotos: 7.41.0.793809016
 ReVanced_MicroG: 0.3.1.4.240913
 ReVanced_YTMusic: 8.25.54
 ReVanced_YouTube: 20.13.41
