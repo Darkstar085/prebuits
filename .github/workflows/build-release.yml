@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths-ignore: ["**.md", "**.txt"]
+    paths-ignore: ["*.md", "*.txt"]
   schedule:
     - cron: "30 4 * * *" # 10:00 AM IST
 
@@ -114,13 +114,13 @@ jobs:
             done < latest-apk-versions.txt
           fi
 
-          # Patterns to friendly app names
+          # Patterns to friendly app names (ensure patterns match actual filenames)
           declare -A apps=(
             ["Via.apk"]="Via"
             ["*Gallery*arm64-v8a*.apk"]="DotGallery"
             ["duckduckgo*.apk"]="DuckDuckGo"
             ["keyboard*.apk"]="Fossify_Keyboard"
-            ["googlephotos-revanced-*-arm64-v8a.apk"]="revanced_GooglePhotos"
+            ["googlephotos-revanced-*-arm64-v8a.apk"]="ReVanced_GooglePhotos"
             ["music-revanced-*-arm64-v8a.apk"]="ReVanced_YTMusic"
             ["spotify-revanced-*-all.apk"]="Spotify_Revanced"
             ["youtube-revanced-*-all.apk"]="ReVanced_YouTube"
@@ -185,7 +185,7 @@ jobs:
             LATEST["$APP"]="$VER"
           done
 
-          # Write full list sorted
+          # Write full list sorted alphabetically
           for app in "${!LATEST[@]}"; do
             echo "$app: ${LATEST[$app]}"
           done | sort > latest-apk-versions.txt
@@ -208,29 +208,30 @@ jobs:
       - name: Build release notes
         if: env.UPDATED_APPS != ''
         run: |
-          tmp="$(mktemp)"
+          declare -A app_versions
           for apk in *_v*.apk; do
             APP="${apk%%_v*}"
             VER="$(echo "$apk" | sed -E "s/.*_v(.*)\.apk/\1/")"
-            echo "${APP}:${VER}" >> "$tmp"
+            app_versions["$APP"]="$VER"
           done
-          sort -t: -k1,1 "$tmp" | awk -F: '!seen[$1]{last[$1]=$0; seen[$1]=1; next}{last[$1]=$0} END{for(k in last)print last[k]}' | sort -t: -k1,1 > "${tmp}.dedup"
-          order=("GooglePhotos" "ReVanced_YTMusic" "Spotify_Revanced" "ReVanced_YouTube" "DuckDuckGo" "Fossify_Keyboard" "Via" "ReVancedMicroG" "DotGallery" "WeatherMaster" "MicroG_RE")
+
+          order=("ReVanced_GooglePhotos" "ReVanced_YTMusic" "Spotify_Revanced" "ReVanced_YouTube" "DuckDuckGo" "Fossify_Keyboard" "Via" "ReVanced_MicroG" "DotGallery" "WeatherMaster" "MicroG_RE")
+
           NOTES=""
+
+          # Add apps in custom order first
           for key in "${order[@]}"; do
-            line=$(grep -E "^${key}:" "${tmp}.dedup" || true)
-            if [ -n "$line" ]; then
-              app="${line%%:*}"; ver="${line#*:}"
-              NOTES+="${app}: ${ver}"$'\n'
-              grep -Ev "^${key}:" "${tmp}.dedup" > "${tmp}.left" || true
-              mv "${tmp}.left" "${tmp}.dedup"
+            if [[ -n "${app_versions[$key]}" ]]; then
+              NOTES+="$key: ${app_versions[$key]}"$'\n'
+              unset app_versions["$key"]
             fi
           done
-          while IFS= read -r line; do
-            [ -z "$line" ] && continue
-            app="${line%%:*}"; ver="${line#*:}"
-            NOTES+="${app}: ${ver}"$'\n'
-          done < "${tmp}.dedup"
+
+          # Append the rest sorted alphabetically
+          for app in $(printf "%s\n" "${!app_versions[@]}" | sort); do
+            NOTES+="$app: ${app_versions[$app]}"$'\n'
+          done
+
           NOTES="$(echo "$NOTES" | sed '/^$/d')"
           echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
           echo "$NOTES" >> $GITHUB_ENV
