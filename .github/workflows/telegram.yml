@@ -1,0 +1,82 @@
+name: Telegram Delivery
+
+on:
+  workflow_run:
+    workflows: ["Build and Release"]
+    types: [completed]
+
+concurrency:
+  group: prebuilts-telegram-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  send-telegram:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    env:
+      TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      API_ID: ${{ secrets.TELEGRAM_API_ID }}
+      API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+      SESSION: ${{ secrets.TELEGRAM_SESSION }}
+
+    steps:
+      - name: Download telegram payload
+        uses: actions/download-artifact@v4
+        with:
+          name: telegram-payload
+          path: .
+
+      - name: Extract payload
+        run: tar -xzf telegram_payload.tgz
+
+      - name: Upload small APKs via bot (≤48MB)
+        run: |
+          set -e
+          shopt -s nullglob
+          for apk in out/*_v*.apk; do
+            SIZE_MB=$(( ( $(stat -c%s "$apk") + 1048575 ) / 1048576 ))
+            if [ "$SIZE_MB" -le 48 ]; then
+              curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendDocument" \
+                -F chat_id=${TELEGRAM_CHAT_ID} \
+                -F document=@$apk >/dev/null
+            fi
+          done
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Telethon
+        run: pip install telethon
+
+      - name: Upload large APKs via user (>48MB) parallel=2
+        env:
+          CHAT_ID: ${{ env.TELEGRAM_CHAT_ID }}
+        run: |
+          python - <<'PY'
+          import os, glob, asyncio
+          from telethon import TelegramClient
+          from telethon.sessions import StringSession
+          from asyncio import Semaphore
+
+          api_id=int(os.environ['API_ID'])
+          api_hash=os.environ['API_HASH']
+          session=os.environ['SESSION']
+          chat_id=os.environ['CHAT_ID']
+          chat = chat_id if not chat_id.lstrip('-').isdigit() else int(chat_id)
+
+          files=sorted(glob.glob('out/*_v*.apk'))
+          files=[f for f in files if os.path.getsize(f)>48*1024*1024]
+          if not files: raise SystemExit(0)
+
+          sem=Semaphore(2)
+          async def send_one(client,f):
+              async with sem:
+                  await client.send_file(chat,f,force_document=True)
+          async def main():
+              async with TelegramClient(StringSession(session),api_id,api_hash) as client:
+                  await asyncio.gather(*(send_one(client,f) for f in files))
+          asyncio.run(main())
+          PY
