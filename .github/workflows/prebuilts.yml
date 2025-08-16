@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '30 4 * * *' 
+
 jobs:
   update-apps:
     runs-on: ubuntu-latest
@@ -16,6 +17,8 @@ jobs:
       DOTGALLERY_REPO: "IacobIonut01/Gallery"
       DUCKDUCKGO_REPO: "duckduckgo/Android"
       KEYBOARD_REPO: "FossifyOrg/Keyboard"
+      REVANCED_REPO: "j-hc/revanced-magisk-module"
+      MICROG_REPO: "ReVanced/GmsCore"
 
     steps:
       - name: Checkout Repository
@@ -35,12 +38,16 @@ jobs:
         run: |
           curl -L -o Via.apk ${{ env.VIA_URL }}
 
-      - name: Download DotGallery APK
+      - name: Download DotGallery arm64-v8a APK
         uses: robinraju/release-downloader@v1
         with:
           repository: ${{ env.DOTGALLERY_REPO }}
           latest: true
-          fileName: "*.apk"
+          fileName: "*arm64-v8a*.apk"
+
+      - name: Remove nomaps APKs
+        run: |
+          rm -f *nomaps*.apk
 
       - name: Download DuckDuckGo APK
         uses: robinraju/release-downloader@v1
@@ -56,6 +63,26 @@ jobs:
           latest: true
           fileName: "*.apk"
 
+      # ---- ReVanced APKs ----
+      - name: Download ReVanced APKs
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: ${{ env.REVANCED_REPO }}
+          latest: true
+          fileName: "*.apk"
+
+      # ---- ReVanced MicroG ----
+      - name: Download ReVanced MicroG
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: ${{ env.MICROG_REPO }}
+          latest: true
+          fileName: "*signed.apk"
+
+      - name: Remove hw-signed MicroG
+        run: |
+          rm -f *hw-signed*.apk
+
       # ---- Process APKs ----
       - name: Update APKs with version check
         run: |
@@ -67,6 +94,11 @@ jobs:
             ["IacobIonut01.Gallery*.apk"]="DotGallery"
             ["duckduckgo*.apk"]="DuckDuckGo"
             ["FossifyOrg.Keyboard*.apk"]="Keyboard"
+            ["googlephotos-revanced-*-arm64-v8a.apk"]="GooglePhotosReVanced"
+            ["music-revanced-*-arm64-v8a.apk"]="MusicReVanced"
+            ["spotify-revanced-*-all.apk"]="SpotifyReVanced"
+            ["youtube-revanced-*-all.apk"]="YouTubeReVanced"
+            ["app.revanced.android.gms-*.apk"]="ReVancedMicroG"
           )
 
           for pattern in "${!apps[@]}"; do
@@ -77,7 +109,6 @@ jobs:
               NEW_VER=$(aapt dump badging "$NEW_APK" | grep versionName | sed -E "s/.*versionName='([^']+)'.*/\1/")
               NEW_FILE="${APP_NAME}_v${NEW_VER}.apk"
 
-              # Check if existing version already present
               if ls ${APP_NAME}_v*.apk >/dev/null 2>&1; then
                 OLD_FILE=$(ls ${APP_NAME}_v*.apk | head -n 1)
                 OLD_VER=$(aapt dump badging "$OLD_FILE" | grep versionName | sed -E "s/.*versionName='([^']+)'.*/\1/")
@@ -136,4 +167,3 @@ jobs:
               -F chat_id=${{ env.TELEGRAM_CHAT_ID }} \
               -F document=@$apk \
               -F caption="$CAPTION"
-          done
