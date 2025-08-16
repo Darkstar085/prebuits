@@ -88,7 +88,6 @@ jobs:
         run: |
           rm -f *hw-signed*.apk || true
 
-      # ---- Process APKs ----
       - name: Update APKs with version check
         run: |
           set -e
@@ -164,7 +163,6 @@ jobs:
           git config --local user.email "sipunkumar85@gmail.com"
           git config --local user.name "S I P U N"
           git add latest-apk-versions.txt
-          # Ensure we are on main and up-to-date to avoid non-fast-forward
           git fetch origin main
           git checkout -B main
           git pull --rebase origin main || true
@@ -213,16 +211,73 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ env.ACCESS_TOKEN }}
 
-      # ---- Telegram upload ----
-      - name: Upload to Telegram
+      # ---- Telegram uploads ----
+      # Send small files (<=48MB) via Bot API
+      - name: Upload small APKs via Telegram bot (≤48MB)
         if: env.UPDATED_APPS != ''
         run: |
+          set -e
+          MAX_MB=48
           for apk in *_v*.apk; do
-            APP=$(echo "$apk" | cut -d'_' -f1)
-            VER=$(echo "$apk" | sed -E "s/.*_v(.*)\.apk/\1/")
-            CAPTION="$APP updated to v$VER"
-            curl -s -X POST "https://api.telegram.org/bot${{ env.TELEGRAM_TOKEN }}/sendDocument" \
-              -F chat_id=${{ env.TELEGRAM_CHAT_ID }} \
-              -F document=@$apk \
-              -F caption="$CAPTION"
+            SIZE_BYTES=$(stat -c%s "$apk")
+            SIZE_MB=$(( (SIZE_BYTES + 1024*1024 - 1) / (1024*1024) ))
+            if [ "$SIZE_MB" -le "$MAX_MB" ]; then
+              APP=$(echo "$apk" | cut -d'_' -f1)
+              VER=$(echo "$apk" | sed -E "s/.*_v(.*)\.apk/\1/")
+              CAPTION="$APP updated to v$VER"
+              curl -s -X POST "https://api.telegram.org/bot${{ env.TELEGRAM_TOKEN }}/sendDocument" \
+                -F chat_id=${{ env.TELEGRAM_CHAT_ID }} \
+                -F document=@$apk \
+                -F caption="$CAPTION" >/dev/null
+            fi
           done
+
+      # Send large files (>48MB) via user session (Telethon)
+      - name: Set up Python
+        if: env.UPDATED_APPS != ''
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Telethon
+        if: env.UPDATED_APPS != ''
+        run: pip install telethon
+
+      - name: Upload large APKs via Telegram user (>48MB)
+        if: env.UPDATED_APPS != ''
+        env:
+          API_ID: ${{ secrets.TELEGRAM_API_ID }}
+          API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+          SESSION: ${{ secrets.TELEGRAM_SESSION }}
+          CHAT_ID: ${{ env.TELEGRAM_CHAT_ID }}
+        run: |
+          python - <<'PY'
+          import os, glob, asyncio
+          from telethon import TelegramClient
+          from telethon.sessions import StringSession
+
+          api_id = int(os.environ['API_ID'])
+          api_hash = os.environ['API_HASH']
+          session = os.environ['SESSION']
+          chat_id_env = os.environ['CHAT_ID']
+          chat = chat_id_env if not chat_id_env.lstrip('-').isdigit() else int(chat_id_env)
+
+          files = sorted(glob.glob('*_v*.apk'))
+          if not files:
+              raise SystemExit(0)
+
+          def is_large(path):
+              return os.path.getsize(path) > 48 * 1024 * 1024  # >48MB
+
+          async def main():
+              async with TelegramClient(StringSession(session), api_id, api_hash) as client:
+                  for f in files:
+                      if not is_large(f):
+                          continue
+                      app = f.split('_', 1)[0]
+                      ver = f.rsplit('_v', 1)[-1].rsplit('.apk', 1)
+                      caption = f"{app} updated to v{ver}"
+                      await client.send_file(chat, f, caption=caption, force_document=True)
+
+          asyncio.run(main())
+          PY
