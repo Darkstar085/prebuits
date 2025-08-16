@@ -19,22 +19,50 @@ jobs:
       API_ID: ${{ secrets.TELEGRAM_API_ID }}
       API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
       SESSION: ${{ secrets.TELEGRAM_SESSION }}
+      GH_TOKEN: ${{ secrets.TOKEN }}
 
     steps:
-      - name: Download telegram payload
-        uses: actions/download-artifact@v4
-        with:
-          name: telegram-payload
-          path: .
+      - name: Determine release tag from triggering run
+        id: tag
+        run: echo "TAG=prebuilts-${{ github.event.workflow_run.id }}" >> $GITHUB_ENV
 
-      - name: Extract payload
-        run: tar -xzf telegram_payload.tgz
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
 
-      - name: Upload small APKs via bot (≤48MB)
+      - name: Get release assets (APK URLs)
+        id: assets
+        run: |
+          set -e
+          resp=$(curl -sSf -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/${{ github.repository }}/releases/tags/${TAG})
+          echo "$resp" | jq -r '.assets[] | select(.name|test("_v.*\\.apk$")) | [.name, .browser_download_url] | @tsv' > urls.tsv
+          if [ ! -s urls.tsv ]; then
+            echo "No APK assets found on release ${TAG}. Exiting."
+            echo "NO_APKS=1" >> $GITHUB_ENV
+          fi
+
+      - name: Exit if no APKs
+        if: env.NO_APKS == '1'
+        run: echo "Nothing to send."
+
+      - name: Download APKs from release
+        if: env.NO_APKS != '1'
+        run: |
+          set -e
+          mkdir -p dl
+          while IFS=$'\t' read -r name url; do
+            echo "Downloading $name"
+            curl -L -o "dl/$name" "$url"
+          done < urls.tsv
+          ls -lh dl || true
+
+      - name: Upload small APKs via bot (≤48MB, no captions)
+        if: env.NO_APKS != '1'
         run: |
           set -e
           shopt -s nullglob
-          for apk in out/*_v*.apk; do
+          for apk in dl/*_v*.apk; do
             SIZE_MB=$(( ( $(stat -c%s "$apk") + 1048575 ) / 1048576 ))
             if [ "$SIZE_MB" -le 48 ]; then
               curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendDocument" \
@@ -44,14 +72,17 @@ jobs:
           done
 
       - name: Set up Python
+        if: env.NO_APKS != '1'
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
       - name: Install Telethon
+        if: env.NO_APKS != '1'
         run: pip install telethon
 
-      - name: Upload large APKs via user (>48MB) parallel=2
+      - name: Upload large APKs via user (>48MB) parallel=2, no captions
+        if: env.NO_APKS != '1'
         env:
           CHAT_ID: ${{ env.TELEGRAM_CHAT_ID }}
         run: |
@@ -61,22 +92,25 @@ jobs:
           from telethon.sessions import StringSession
           from asyncio import Semaphore
 
-          api_id=int(os.environ['API_ID'])
-          api_hash=os.environ['API_HASH']
-          session=os.environ['SESSION']
-          chat_id=os.environ['CHAT_ID']
+          api_id = int(os.environ['API_ID'])
+          api_hash = os.environ['API_HASH']
+          session = os.environ['SESSION']
+          chat_id = os.environ['CHAT_ID']
           chat = chat_id if not chat_id.lstrip('-').isdigit() else int(chat_id)
 
-          files=sorted(glob.glob('out/*_v*.apk'))
-          files=[f for f in files if os.path.getsize(f)>48*1024*1024]
-          if not files: raise SystemExit(0)
+          files = sorted(glob.glob('dl/*_v*.apk'))
+          files = [f for f in files if os.path.getsize(f) > 48 * 1024 * 1024]
+          if not files:
+              raise SystemExit(0)
 
-          sem=Semaphore(2)
-          async def send_one(client,f):
+          sem = Semaphore(2)
+          async def send_one(client, f):
               async with sem:
-                  await client.send_file(chat,f,force_document=True)
+                  await client.send_file(chat, f, force_document=True)
+
           async def main():
-              async with TelegramClient(StringSession(session),api_id,api_hash) as client:
-                  await asyncio.gather(*(send_one(client,f) for f in files))
+              async with TelegramClient(StringSession(session), api_id, api_hash) as client:
+                  await asyncio.gather(*(send_one(client, f) for f in files))
+
           asyncio.run(main())
           PY

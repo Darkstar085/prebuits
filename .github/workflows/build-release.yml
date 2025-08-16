@@ -6,7 +6,7 @@ on:
     branches: [main]
     paths-ignore: ['**.md','**.txt']
   schedule:
-    - cron: '30 4 * * *'
+    - cron: '30 4 * * *' # 10:00 AM IST
 
 concurrency:
   group: prebuilts-build-${{ github.ref }}
@@ -123,8 +123,10 @@ jobs:
 
       - name: Stop if no updates
         if: env.UPDATED_APPS == ''
-        run: echo "No updates found. Exiting."
-        
+        run: |
+          echo "No updates found. Exiting."
+          exit 0
+
       - name: Write latest versions
         if: env.UPDATED_APPS != ''
         run: |
@@ -201,19 +203,3 @@ jobs:
             *_v*.apk
         env:
           GITHUB_TOKEN: ${{ env.ACCESS_TOKEN }}
-
-      - name: Package APKs and metadata for Telegram workflow
-        if: env.UPDATED_APPS != ''
-        run: |
-          mkdir -p out && cp -f *_v*.apk out/
-          echo "${{ env.REL_NAME }}" > out/release_name.txt
-          echo "prebuilts-${{ github.run_id }}" > out/release_tag.txt
-          printf "%s\n" "${{ env.RELEASE_NOTES }}" > out/release_notes.txt
-          tar -czf telegram_payload.tgz -C out .
-      - name: Upload artifact (telegram payload)
-        if: env.UPDATED_APPS != ''
-        uses: actions/upload-artifact@v4
-        with:
-          name: telegram-payload
-          path: telegram_payload.tgz
-          if-no-files-found: error
