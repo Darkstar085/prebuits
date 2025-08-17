@@ -36,7 +36,7 @@ jobs:
           mkdir -p dl
           gh release download --repo "${{ github.repository }}" --pattern "*.apk" --dir dl
 
-      - name: Upload APKs to Telegram using captions.txt
+      - name: Upload APKs to Telegram using captions.txt with flexible filename matching
         run: |
           python3 - <<'PY'
           import os
@@ -58,7 +58,11 @@ jobs:
           else:
               chat = chat_id
 
-          # Load captions into dict keyed by filename
+          def normalize_name(name):
+              base = re.split(r'_v|-v', name, maxsplit=1)[0]
+              base = re.sub(r'[ .-]+', '', base.lower())
+              return base
+
           captions = {}
           with open('captions.txt', encoding='utf-8') as f:
               blocks = f.read().strip().split('----')
@@ -70,16 +74,28 @@ jobs:
                   match = re.search(r'File name</b> – ([^\n]+)', lines[0])
                   if match:
                       filename = match.group(1)
-                      captions[filename] = block
+                      caption_without_file = "\n".join(lines[1:]).strip()
+                      captions[normalize_name(filename)] = caption_without_file
 
-          files = sorted(glob.glob('dl/*_v*.apk'))
+          files = sorted(glob.glob('dl/*.apk'))
           if not files:
               raise SystemExit(0)
 
-          # Send small files (≤ 48MB) via Telegram Bot API using curl
+          def find_caption(captions, filename):
+              norm = normalize_name(filename)
+              # Exact match
+              if norm in captions:
+                  return captions[norm]
+              # Fallback: try partial matches if needed (optional)
+              for key in captions.keys():
+                  if norm.startswith(key) or key.startswith(norm):
+                      return captions[key]
+              return ""
+
+          # Send small files (<= 48MB) via Telegram Bot API
           for f in [x for x in files if os.path.getsize(x) <= 48 * 1024 * 1024]:
               base = os.path.basename(f)
-              cap = captions.get(base, "")
+              cap = find_caption(captions, base)
               subprocess.run([
                   "curl", "-s", "-X", "POST", f"https://api.telegram.org/bot{bot_token}/sendDocument",
                   "-F", f"chat_id={chat_id}",
@@ -90,14 +106,13 @@ jobs:
 
           # Send large files (> 48MB) via Telethon
           large_files = [x for x in files if os.path.getsize(x) > 48 * 1024 * 1024]
-
           if large_files:
               sem = Semaphore(2)
 
               async def send_one(client, filepath):
                   async with sem:
                       base = os.path.basename(filepath)
-                      caption = captions.get(base, "")[:1024]
+                      caption = find_caption(captions, base)[:1024]
                       await client.send_file(chat, filepath, force_document=True, caption=caption, parse_mode="html")
 
               async def main():

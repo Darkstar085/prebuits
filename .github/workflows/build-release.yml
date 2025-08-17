@@ -260,13 +260,13 @@ jobs:
             ["DotGallery"]="Jetpack Compose-based photo gallery app"
             ["DuckDuckGo"]="Private, tracker-blocking Android browser"
             ["Fossify_Keyboard"]="Privacy-friendly keyboard"
-            ["ReVanced_GooglePhotos"]="Google Photos (ReVanced) Patched with extra features"
-            ["ReVanced_YouTube"]="YouTube (ReVanced) – Ad-blocking and enhanced features"
-            ["ReVanced_YTMusic"]="YouTube Music (ReVanced) – Enriched playback features"
-            ["Spotify_Revanced"]="Spotify (ReVanced) – Modded Spotify with extra controls"
-            ["ReVanced_MicroG"]="ReVanced MicroG – Google sign-in bridge"
+            ["ReVanced_GooglePhotos"]="Google Photos with premium/unlocked features and ad/tracker removals"
+            ["ReVanced_YouTube"]="YouTube with ad-block, background play, sponsor block, premium and extra features"
+            ["ReVanced_YTMusic"]="YouTube Music with premium unlock, ad-block and advanced playback"
+            ["Spotify_Revanced"]="Spotify MOD with no ads, premium features and audio tweaks"
+            ["ReVanced_MicroG"]="MicroG for ReVanced – enables Google sign-in for patched apps"
             ["WeatherMaster"]="Modern weather app with graphs"
-            ["MicroG_RE"]="MicroG RE – Enhanced Play Services emulator"
+            ["MicroG_RE"]="MicroG RE – Enhanced Play Services compatibility"
             ["Cromite"]="Bromite-based privacy browser"
             ["Symphony"]="Lightweight music player for Android 9+"
           )
@@ -318,7 +318,7 @@ jobs:
               VERSION="🆕 Version – $OLD_VER → $NEW_VER"
             fi
             CHANGELOG="Changelog: <a href='${app_repo[$APP]}'>$APP</a>"
-            echo "
+            echo "📦 <b>File name</b> – ${FILE}
             ${EMOJI} ${DESC}
             ${VERSION}
             🔗 ${CHANGELOG}
