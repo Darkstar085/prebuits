@@ -83,10 +83,8 @@ jobs:
 
           def find_caption(captions, filename):
               norm = normalize_name(filename)
-              # Exact match
               if norm in captions:
                   return captions[norm]
-              # Fallback: try partial matches if needed (optional)
               for key in captions.keys():
                   if norm.startswith(key) or key.startswith(norm):
                       return captions[key]
