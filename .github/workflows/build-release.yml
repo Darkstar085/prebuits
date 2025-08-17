@@ -17,7 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ACCESS_TOKEN: ${{ secrets.TOKEN }}
-      VIA_URL: "https://res.viayoo.com/v1/via-release.apk"
       DOTGALLERY_REPO: "IacobIonut01/Gallery"
       DUCKDUCKGO_REPO: "duckduckgo/Android"
       KEYBOARD_REPO: "FossifyOrg/Keyboard"
@@ -197,21 +196,6 @@ jobs:
             echo "$app: ${LATEST[$app]}"
           done | sort > latest-apk-versions.txt
 
-      - name: Commit latest versions
-        if: env.UPDATED_APPS != ''
-        env:
-          GITHUB_TOKEN: ${{ env.ACCESS_TOKEN }}
-        run: |
-          set -e
-          git config --local user.email "sipunkumar85@gmail.com"
-          git config --local user.name "S I P U N"
-          git add latest-apk-versions.txt
-          git fetch origin main
-          git checkout -B main
-          git pull --rebase origin main || true
-          git commit -m "Update latest APK versions list [ci skip]" || echo "No changes to commit"
-          git push origin main
-
       - name: Build release notes
         if: env.UPDATED_APPS != ''
         run: |
@@ -268,3 +252,86 @@ jobs:
             *_v*.apk
         env:
           GITHUB_TOKEN: ${{ env.ACCESS_TOKEN }}
+
+      - name: Generate captions.txt
+        if: env.UPDATED_APPS != ''
+        run: |
+          declare -A app_desc=(
+            ["DotGallery"]="Jetpack Compose-based photo gallery app"
+            ["DuckDuckGo"]="Private, tracker-blocking Android browser"
+            ["Fossify_Keyboard"]="Privacy-friendly keyboard"
+            ["ReVanced_GooglePhotos"]="Google Photos (ReVanced) Patched with extra features"
+            ["ReVanced_YouTube"]="YouTube (ReVanced) – Ad-blocking and enhanced features"
+            ["ReVanced_YTMusic"]="YouTube Music (ReVanced) – Enriched playback features"
+            ["Spotify_Revanced"]="Spotify (ReVanced) – Modded Spotify with extra controls"
+            ["ReVanced_MicroG"]="ReVanced MicroG – Google sign-in bridge"
+            ["WeatherMaster"]="Modern weather app with graphs"
+            ["MicroG_RE"]="MicroG RE – Enhanced Play Services emulator"
+            ["Cromite"]="Bromite-based privacy browser"
+            ["Symphony"]="Lightweight music player for Android 9+"
+          )
+
+          declare -A app_emoji=(
+            ["Cromite"]="🌐"
+            ["DuckDuckGo"]="🌐"
+            ["DotGallery"]="📷"
+            ["ReVanced_GooglePhotos"]="📷"
+            ["Fossify_Keyboard"]="⌨️"
+            ["ReVanced_YouTube"]="🎬"
+            ["ReVanced_YTMusic"]="🎵"
+            ["Spotify_Revanced"]="🎶"
+            ["WeatherMaster"]="☁️"
+            ["Symphony"]="🎼"
+            ["MicroG_RE"]="🧩"
+            ["ReVanced_MicroG"]="🧩"
+          )
+
+          declare -A app_repo=(
+            ["DotGallery"]="https://github.com/IacobIonut01/Gallery/releases/latest"
+            ["DuckDuckGo"]="https://github.com/duckduckgo/Android/releases/latest"
+            ["Fossify_Keyboard"]="https://github.com/FossifyOrg/Keyboard/releases/latest"
+            ["ReVanced_GooglePhotos"]="https://github.com/j-hc/revanced-magisk-module/releases/latest"
+            ["ReVanced_YouTube"]="https://github.com/j-hc/revanced-magisk-module/releases/latest"
+            ["ReVanced_YTMusic"]="https://github.com/j-hc/revanced-magisk-module/releases/latest"
+            ["Spotify_Revanced"]="https://github.com/j-hc/revanced-magisk-module/releases/latest"
+            ["ReVanced_MicroG"]="https://github.com/ReVanced/GmsCore/releases/latest"
+            ["WeatherMaster"]="https://github.com/PranshulGG/WeatherMaster/releases/latest"
+            ["MicroG_RE"]="https://github.com/WSTxda/MicroG-RE/releases/latest"
+            ["Cromite"]="https://github.com/uazo/cromite/releases/latest"
+            ["Symphony"]="https://github.com/zyrouge/symphony/releases/latest"
+          )
+
+          rm -f captions.txt
+          for apkfile in *_v*.apk; do
+            FILE=$(basename "$apkfile")
+            APP="${FILE%%_v*}"
+            EMOJI="${app_emoji[$APP]:-📦}"
+            DESC="${app_desc[$APP]:-No description available}"
+            NEW_VER=$(echo "$FILE" | sed -E 's/.*_v(.*)\.apk/\1/')
+            OLD_VER=""
+            if [ -f latest-apk-versions.txt ]; then
+              OLD_VER=$(grep "^$APP:" latest-apk-versions.txt | cut -d: -f2 | xargs || true)
+            fi
+            if [ -z "$OLD_VER" ]; then
+              VERSION="🆕 Version – $NEW_VER"
+            else
+              VERSION="🆕 Version – $OLD_VER → $NEW_VER"
+            fi
+            CHANGELOG="Changelog: <a href='${app_repo[$APP]}'>$APP</a>"
+            echo "
+            ${EMOJI} ${DESC}
+            ${VERSION}
+            🔗 ${CHANGELOG}
+            ----" >> captions.txt
+          done
+
+      - name: Commit latest versions and captions
+        if: env.UPDATED_APPS != ''
+        env:
+          GITHUB_TOKEN: ${{ env.ACCESS_TOKEN }}
+        run: |
+          git config --local user.email "sipunkumar85@gmail.com"
+          git config --local user.name "S I P U N"
+          git add latest-apk-versions.txt captions.txt
+          git commit -m "Update APK versions and Telegram captions [ci skip]" || echo "No changes to commit"
+          git push origin main

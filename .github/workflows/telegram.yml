@@ -19,170 +19,86 @@ jobs:
       API_ID: ${{ secrets.TELEGRAM_API_ID }}
       API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
       SESSION: ${{ secrets.TELEGRAM_SESSION }}
+      GH_TOKEN: ${{ secrets.TOKEN }}
 
     steps:
-      - name: Determine release tag from triggering run
-        id: tag
-        run: echo "TAG=prebuilts-${{ github.event.workflow_run.id }}" >> $GITHUB_ENV
+      - name: Checkout repo to get captions.txt
+        uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y jq python3 python3-pip && pip3 install telethon
-
-      - name: Get release APK assets
-        id: assets
         run: |
-          set -e
-          url="https://api.github.com/repos/${{ github.repository }}/releases/tags/${TAG}"
-          resp=$(curl -sSf -H "Accept: application/vnd.github+json" "$url")
-          if echo "$resp" | grep -q '"Not Found"'; then
-            echo "NO_APKS=1" >> $GITHUB_ENV
-            exit 0
-          fi
-          echo "$resp" | jq -r '.assets[] | select(.name|test("_v.*\\.apk$")) | [.name, .browser_download_url] | @tsv' > urls.tsv
-          if [ ! -s urls.tsv ]; then
-            echo "NO_APKS=1" >> $GITHUB_ENV
-            exit 0
-          fi
+          sudo apt-get update
+          sudo apt-get install -y python3 python3-pip jq
+          pip3 install telethon
 
-      - name: Exit if no APKs found
-        if: env.NO_APKS == '1'
-        run: echo "No APKs to upload. Exiting."
-
-      - name: Download APKs
-        if: env.NO_APKS != '1'
+      - name: Download APKs from latest release
         run: |
           mkdir -p dl
-          while IFS=$'\t' read -r name url; do
-            curl -L -o "dl/$name" "$url"
-          done < urls.tsv
+          gh release download --repo "${{ github.repository }}" --pattern "*.apk" --dir dl
 
-      - name: Generate captions with emojis
-        if: env.NO_APKS != '1'
+      - name: Upload APKs to Telegram using captions.txt
         run: |
-          declare -A app_desc=(
-            ["DotGallery"]="Jetpack Compose-based photo gallery app"
-            ["DuckDuckGo"]="Private, tracker-blocking Android browser"
-            ["Fossify_Keyboard"]="Privacy-friendly keyboard"
-            ["ReVanced_GooglePhotos"]="Google Photos (ReVanced) Patched with extra features"
-            ["ReVanced_YouTube"]="YouTube (ReVanced) – Ad-blocking and enhanced features"
-            ["ReVanced_YTMusic"]="YouTube Music (ReVanced) – Enriched playback features"
-            ["Spotify_Revanced"]="Spotify (ReVanced) – Modded Spotify with extra controls"
-            ["ReVanced_MicroG"]="ReVanced MicroG – Google sign-in bridge"
-            ["WeatherMaster"]="Modern weather app with graphs"
-            ["MicroG_RE"]="MicroG RE – Enhanced Play Services emulator"
-            ["Cromite"]="Bromite-based privacy browser"
-            ["Symphony"]="Lightweight music player for Android 9+"
-          )
-
-          declare -A app_repo=(
-            ["DotGallery"]="https://github.com/IacobIonut01/Gallery/releases/latest"
-            ["DuckDuckGo"]="https://github.com/duckduckgo/Android/releases/latest"
-            ["Fossify_Keyboard"]="https://github.com/FossifyOrg/Keyboard/releases/latest"
-            ["ReVanced_GooglePhotos"]="https://github.com/j-hc/revanced-magisk-module/releases/latest"
-            ["ReVanced_YouTube"]="https://github.com/j-hc/revanced-magisk-module/releases/latest"
-            ["ReVanced_YTMusic"]="https://github.com/j-hc/revanced-magisk-module/releases/latest"
-            ["Spotify_Revanced"]="https://github.com/j-hc/revanced-magisk-module/releases/latest"
-            ["ReVanced_MicroG"]="https://github.com/ReVanced/GmsCore/releases/latest"
-            ["WeatherMaster"]="https://github.com/PranshulGG/WeatherMaster/releases/latest"
-            ["MicroG_RE"]="https://github.com/WSTxda/MicroG-RE/releases/latest"
-            ["Cromite"]="https://github.com/uazo/cromite/releases/latest"
-            ["Symphony"]="https://github.com/zyrouge/symphony/releases/latest"
-          )
-
-          declare -A app_emoji=(
-            ["Cromite"]="🌐"
-            ["DuckDuckGo"]="🌐"
-            ["DotGallery"]="📷"
-            ["ReVanced_GooglePhotos"]="📷"
-            ["Fossify_Keyboard"]="⌨️"
-            ["ReVanced_YouTube"]="🎬"
-            ["ReVanced_YTMusic"]="🎵"
-            ["Spotify_Revanced"]="🎶"
-            ["WeatherMaster"]="☁️"
-            ["Symphony"]="🎼"
-            ["MicroG_RE"]="🧩"
-            ["ReVanced_MicroG"]="🧩"
-          )
-
-          declare -A old_versions
-          if [ -f latest-apk-versions.txt ]; then
-            while IFS=: read -r app ver; do
-              app="$(echo "$app" | xargs)"
-              ver="$(echo "$ver" | xargs)"
-              [ -z "$app" ] && continue
-              old_versions["$app"]="$ver"
-            done < latest-apk-versions.txt
-          fi
-
-          rm -f tg_captions.tsv
-          shopt -s nullglob
-          for apk in dl/*_v*.apk; do
-            FILE=$(basename "$apk")
-            APP="${FILE%%_v*}"
-            EMOJI="${app_emoji[$APP]:-📦}"
-            DESC="${app_desc[$APP]:-No description available}"
-            VER=$(echo "$FILE" | sed -E 's/.*_v(.*)\.apk/\1/')
-            OLD="${old_versions[$APP]}"
-            if [ -z "$OLD" ]; then
-              VERSION="🆕 Version – ${VER}"
-            elif [ "$OLD" != "$VER" ]; then
-              VERSION="🆕 Version – ${OLD} → ${VER}"
-            else
-              VERSION="🆕 Version – ${VER}"
-            fi
-            REPO_LINK="${app_repo[$APP]}"
-            CAPTION="📦 File name – ${FILE}\\n${EMOJI} ${DESC}\\n${VERSION}\\n🔗 Changelogs – [Latest Release](${REPO_LINK})"
-            echo -e "${FILE}\t${CAPTION}" >> tg_captions.tsv
-          done
-
-      - name: Upload APKs (both small + large)
-        if: env.NO_APKS != '1'
-        env:
-          CHAT_ID: ${{ env.TELEGRAM_CHAT_ID }}
-        run: |
-          python - <<'PY'
-          import os, glob, asyncio, subprocess
+          python3 - <<'PY'
+          import os
+          import glob
+          import subprocess
+          import re
+          import asyncio
+          from asyncio import Semaphore
           from telethon import TelegramClient
           from telethon.sessions import StringSession
-          from asyncio import Semaphore
 
           api_id = int(os.environ['API_ID'])
           api_hash = os.environ['API_HASH']
           session = os.environ['SESSION']
           bot_token = os.environ['TELEGRAM_TOKEN']
-          chat_id = os.environ['CHAT_ID']
-          chat = chat_id if not chat_id.lstrip('-').isdigit() else int(chat_id)
+          chat_id = os.environ['TELEGRAM_CHAT_ID']
+          if chat_id.lstrip('-').isdigit():
+              chat = int(chat_id)
+          else:
+              chat = chat_id
 
+          # Load captions into dict keyed by filename
           captions = {}
-          with open('tg_captions.tsv', 'r', encoding='utf-8') as f:
-              for line in f:
-                  parts = line.strip('\n').split('\t', 1)
-                  if len(parts) == 2:
-                      captions[parts[0]] = parts[1]
+          with open('captions.txt', encoding='utf-8') as f:
+              blocks = f.read().strip().split('----')
+              for block in blocks:
+                  block = block.strip()
+                  if not block:
+                      continue
+                  lines = block.splitlines()
+                  match = re.search(r'File name</b> – ([^\n]+)', lines[0])
+                  if match:
+                      filename = match.group(1)
+                      captions[filename] = block
 
           files = sorted(glob.glob('dl/*_v*.apk'))
           if not files:
               raise SystemExit(0)
 
-          # Send small APKs via Bot API
+          # Send small files (≤ 48MB) via Telegram Bot API using curl
           for f in [x for x in files if os.path.getsize(x) <= 48 * 1024 * 1024]:
-              cap = captions.get(os.path.basename(f), "")
+              base = os.path.basename(f)
+              cap = captions.get(base, "")
               subprocess.run([
                   "curl", "-s", "-X", "POST", f"https://api.telegram.org/bot{bot_token}/sendDocument",
                   "-F", f"chat_id={chat_id}",
                   "-F", f"document=@{f}",
                   "-F", f"caption={cap}",
-                  "-F", "parse_mode=MarkdownV2"
+                  "-F", "parse_mode=HTML"
               ], check=False)
 
-          # Send large APKs via Telethon
+          # Send large files (> 48MB) via Telethon
           large_files = [x for x in files if os.path.getsize(x) > 48 * 1024 * 1024]
+
           if large_files:
               sem = Semaphore(2)
-              async def send_one(client, f):
+
+              async def send_one(client, filepath):
                   async with sem:
-                      caption = captions.get(os.path.basename(f), "")
-                      await client.send_file(chat, f, force_document=True, caption=caption[:1024], parse_mode="markdown")
+                      base = os.path.basename(filepath)
+                      caption = captions.get(base, "")[:1024]
+                      await client.send_file(chat, filepath, force_document=True, caption=caption, parse_mode="html")
 
               async def main():
                   async with TelegramClient(StringSession(session), api_id, api_hash) as client:
