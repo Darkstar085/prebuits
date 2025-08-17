@@ -19,7 +19,6 @@ jobs:
       API_ID: ${{ secrets.TELEGRAM_API_ID }}
       API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
       SESSION: ${{ secrets.TELEGRAM_SESSION }}
-      GH_TOKEN: ${{ secrets.TOKEN }}
 
     steps:
       - name: Determine release tag from triggering run
@@ -34,7 +33,7 @@ jobs:
         run: |
           set -e
           url="https://api.github.com/repos/${{ github.repository }}/releases/tags/${TAG}"
-          resp=$(curl -sSf -H "Authorization: Bearer $GH_TOKEN" \
+          resp=$(curl -sSf \
             -H "Accept: application/vnd.github+json" \
             "$url" || true )
           if echo "$resp" | grep -q '"Not Found"'; then
@@ -56,7 +55,6 @@ jobs:
       - name: Download APKs from release
         if: env.NO_APKS != '1'
         run: |
-          set -e
           mkdir -p dl
           while IFS=$'\t' read -r name url; do
             echo "Downloading $name"
@@ -64,19 +62,59 @@ jobs:
           done < urls.tsv
           ls -lh dl || true
 
-      - name: Upload small APKs via bot (≤48MB, no captions)
+      - name: Generate tg_captions.tsv from changelogs folder (with static descriptions)
+        if: env.NO_APKS != '1'
+        run: |
+          declare -A app_desc=(
+            ["Via"]="Via Browser - Simple, lightweight & highly customizable Android browser"
+            ["DotGallery"]="DotGallery - Jetpack Compose-based Android photo gallery app"
+            ["DuckDuckGo"]="DuckDuckGo - Private, tracker-blocking browser for Android"
+            ["Fossify_Keyboard"]="Keyboard (Fossify) - Open, privacy-friendly keyboard for Android"
+            ["ReVanced_GooglePhotos"]="Google Photos (ReVanced) - Patched Google Photos with extra features"
+            ["ReVanced_YouTube"]="YouTube (ReVanced) - Patched YouTube with ad-block and tweaks"
+            ["ReVanced_YTMusic"]="YouTube Music (ReVanced) - Patched YT Music with extra features"
+            ["Spotify_Revanced"]="Spotify (ReVanced) - Modded Spotify with more controls"
+            ["ReVanced_MicroG"]="ReVanced MicroG - Bridges ReVanced apps with Google sign-in"
+            ["WeatherMaster"]="WeatherMaster - Modern weather app with powerful graphs & details"
+            ["MicroG_RE"]="MicroG RE - MicroG fork with improved Play Services emulation"
+            ["Cromite"]="Cromite - Bromite-based browser focused on privacy & ad-blocking"
+            ["Symphony"]="Symphony - Elegant, lightweight music player for Android 9+"
+          )
+          rm -f tg_captions.tsv
+          shopt -s nullglob
+          for apk in dl/*_v*.apk; do
+            FILE=$(basename "$apk")
+            APP="${FILE%%_v*}"
+            VERSION=$(echo "$FILE" | sed -E 's/.*_v(.*)\.apk/\1/')
+            DESC="${app_desc[$APP]:-No description available}"
+
+            CHANGELOG_FILE="changelogs/${APP}.txt"
+            if [ -f "$CHANGELOG_FILE" ]; then
+              CHANGELOG=$(awk '/^### Version v'"$VERSION"'/,/^### Version v/{if(NR!=1)print}' "$CHANGELOG_FILE" | sed '$d' | sed '/^$/d')
+              [ -z "$CHANGELOG" ] && CHANGELOG="Developer doesn't provided any updated info"
+            else
+              CHANGELOG="Developer doesn't provided any updated info"
+            fi
+
+            CAPTION="${DESC}\n\n${APP} updated to v${VERSION}\nChangelog:\n${CHANGELOG}"
+            echo -e "${FILE}\t${CAPTION}" >> tg_captions.tsv
+          done
+
+      - name: Upload small APKs via bot (≤48MB, with captions)
         if: env.NO_APKS != '1'
         run: |
           set -e
           shopt -s nullglob
-          for apk in dl/*_v*.apk; do
-            SIZE_MB=$(( ( $(stat -c%s "$apk") + 1048575 ) / 1048576 ))
+          while IFS=$'\t' read -r APK CAPTION; do
+            SIZE_MB=$(( ( $(stat -c%s "dl/$APK") + 1048575 ) / 1048576 ))
             if [ "$SIZE_MB" -le 48 ]; then
               curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendDocument" \
                 -F chat_id=${TELEGRAM_CHAT_ID} \
-                -F document=@$apk >/dev/null
+                -F document=@"dl/$APK" \
+                -F caption="$CAPTION" \
+                -F parse_mode=HTML >/dev/null
             fi
-          done
+          done < tg_captions.tsv
 
       - name: Set up Python
         if: env.NO_APKS != '1'
@@ -88,7 +126,7 @@ jobs:
         if: env.NO_APKS != '1'
         run: pip install telethon
 
-      - name: Upload large APKs via user (>48MB) parallel=2, no captions
+      - name: Upload large APKs via user (>48MB, with captions)
         if: env.NO_APKS != '1'
         env:
           CHAT_ID: ${{ env.TELEGRAM_CHAT_ID }}
@@ -105,6 +143,13 @@ jobs:
           chat_id = os.environ['CHAT_ID']
           chat = chat_id if not chat_id.lstrip('-').isdigit() else int(chat_id)
 
+          captions = {}
+          with open('tg_captions.tsv', 'r', encoding='utf-8') as f:
+              for line in f:
+                  parts = line.strip('\n').split('\t', 1)
+                  if len(parts) == 2:
+                      captions[parts[0]] = parts[1]
+
           files = sorted(glob.glob('dl/*_v*.apk'))
           files = [f for f in files if os.path.getsize(f) > 48 * 1024 * 1024]
           if not files:
@@ -113,7 +158,8 @@ jobs:
           sem = Semaphore(2)
           async def send_one(client, f):
               async with sem:
-                  await client.send_file(chat, f, force_document=True)
+                  caption = captions.get(os.path.basename(f), "")
+                  await client.send_file(chat, f, force_document=True, caption=caption[:1024])
 
           async def main():
               async with TelegramClient(StringSession(session), api_id, api_hash) as client:

@@ -19,7 +19,7 @@ jobs:
           token: ${{ secrets.TOKEN }}
           repository: ${{ github.repository }}
           retain_days: 7
-          keep_minimum_runs: 6
+          keep_minimum_runs: 5
 
       - name: Delete old releases (keep latest 3, remove tags with them)
         uses: dev-drprasad/delete-older-releases@v0.3.3

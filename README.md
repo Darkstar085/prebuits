@@ -4,18 +4,20 @@ Keeps popular Android APKs updated and easy to download — automatically. 🚀
 
 ## Apps Covered
 
-- 🌐 Via Browser  
-- 🖼️ DotGallery  
-- 🦆 DuckDuckGo  
-- ⌨️ Keyboard (Fossify)  
-- 🛠️ ReVanced builds:  
-  - 🖼️ Google Photos (ReVanced)  
-  - ▶️ YouTube (ReVanced)  
-  - 🎵 YouTube Music (ReVanced)  
-  - 🎧 Spotify (ReVanced)  
-- 🔗 ReVanced MicroG
-- 🌦️ WeatherMaster
-- 🟢 MicroG RE
+- 🌐 Via Browser — Simple, lightweight & highly customizable Android browser
+- 🖼️ DotGallery — Jetpack Compose-based Android photo gallery app
+- 🦆 DuckDuckGo — Private, tracker-blocking browser for Android
+- ⌨️ Keyboard (Fossify) — Open, privacy-friendly keyboard for Android by Fossify
+- 🛠️ ReVanced builds
+  - 🖼️ Google Photos (ReVanced) — Patched Google Photos, with extra features and modding
+  - ▶️ YouTube (ReVanced) — Patched YouTube for ad-block, background play, and tweaks
+  - 🎵 YouTube Music (ReVanced) — Patched YT Music with extra features
+  - 🎧 Spotify (ReVanced) — Modded Spotify with more controls
+- 🔗 ReVanced MicroG — Bridges ReVanced apps with Google sign-in
+- 🟢 MicroG RE — MicroG fork with improved Play Services emulation
+- 🌦️ WeatherMaster — Modern weather app with powerful graphs & details
+- 🛡️ Cromite — Bromite-based browser focused on privacy & ad-blocking
+- 🎶 Symphony — Elegant, lightweight music player for Android 9+
 
 ## What You’ll See
 
