@@ -4,7 +4,6 @@ Keeps popular Android APKs updated and easy to download — automatically. 🚀
 
 ## Apps Covered
 
-- 🌐 Via Browser — Simple, lightweight & highly customizable Android browser
 - 🖼️ DotGallery — Jetpack Compose-based Android photo gallery app
 - 🦆 DuckDuckGo — Private, tracker-blocking browser for Android
 - ⌨️ Keyboard (Fossify) — Open, privacy-friendly keyboard for Android by Fossify

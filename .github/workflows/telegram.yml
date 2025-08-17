@@ -25,114 +25,123 @@ jobs:
         id: tag
         run: echo "TAG=prebuilts-${{ github.event.workflow_run.id }}" >> $GITHUB_ENV
 
-      - name: Install jq
-        run: sudo apt-get update && sudo apt-get install -y jq
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y jq python3 python3-pip && pip3 install telethon
 
-      - name: Get release assets (APK URLs)
+      - name: Get release APK assets
         id: assets
         run: |
           set -e
           url="https://api.github.com/repos/${{ github.repository }}/releases/tags/${TAG}"
-          resp=$(curl -sSf \
-            -H "Accept: application/vnd.github+json" \
-            "$url" || true )
+          resp=$(curl -sSf -H "Accept: application/vnd.github+json" "$url")
           if echo "$resp" | grep -q '"Not Found"'; then
-            echo "Release for tag ${TAG} not found (probably no updates). Exiting."
             echo "NO_APKS=1" >> $GITHUB_ENV
             exit 0
           fi
           echo "$resp" | jq -r '.assets[] | select(.name|test("_v.*\\.apk$")) | [.name, .browser_download_url] | @tsv' > urls.tsv
           if [ ! -s urls.tsv ]; then
-            echo "No APK assets found on release ${TAG}. Exiting."
             echo "NO_APKS=1" >> $GITHUB_ENV
             exit 0
           fi
 
-      - name: Exit if no APKs
+      - name: Exit if no APKs found
         if: env.NO_APKS == '1'
-        run: echo "Nothing to send."
+        run: echo "No APKs to upload. Exiting."
 
-      - name: Download APKs from release
+      - name: Download APKs
         if: env.NO_APKS != '1'
         run: |
           mkdir -p dl
           while IFS=$'\t' read -r name url; do
-            echo "Downloading $name"
             curl -L -o "dl/$name" "$url"
           done < urls.tsv
-          ls -lh dl || true
 
-      - name: Generate tg_captions.tsv from changelogs folder (with static descriptions)
+      - name: Generate captions with emojis
         if: env.NO_APKS != '1'
         run: |
           declare -A app_desc=(
-            ["Via"]="Via Browser - Simple, lightweight & highly customizable Android browser"
-            ["DotGallery"]="DotGallery - Jetpack Compose-based Android photo gallery app"
-            ["DuckDuckGo"]="DuckDuckGo - Private, tracker-blocking browser for Android"
-            ["Fossify_Keyboard"]="Keyboard (Fossify) - Open, privacy-friendly keyboard for Android"
-            ["ReVanced_GooglePhotos"]="Google Photos (ReVanced) - Patched Google Photos with extra features"
-            ["ReVanced_YouTube"]="YouTube (ReVanced) - Patched YouTube with ad-block and tweaks"
-            ["ReVanced_YTMusic"]="YouTube Music (ReVanced) - Patched YT Music with extra features"
-            ["Spotify_Revanced"]="Spotify (ReVanced) - Modded Spotify with more controls"
-            ["ReVanced_MicroG"]="ReVanced MicroG - Bridges ReVanced apps with Google sign-in"
-            ["WeatherMaster"]="WeatherMaster - Modern weather app with powerful graphs & details"
-            ["MicroG_RE"]="MicroG RE - MicroG fork with improved Play Services emulation"
-            ["Cromite"]="Cromite - Bromite-based browser focused on privacy & ad-blocking"
-            ["Symphony"]="Symphony - Elegant, lightweight music player for Android 9+"
+            ["DotGallery"]="Jetpack Compose-based photo gallery app"
+            ["DuckDuckGo"]="Private, tracker-blocking Android browser"
+            ["Fossify_Keyboard"]="Privacy-friendly keyboard"
+            ["ReVanced_GooglePhotos"]="Google Photos (ReVanced) Patched with extra features"
+            ["ReVanced_YouTube"]="YouTube (ReVanced) – Ad-blocking and enhanced features"
+            ["ReVanced_YTMusic"]="YouTube Music (ReVanced) – Enriched playback features"
+            ["Spotify_Revanced"]="Spotify (ReVanced) – Modded Spotify with extra controls"
+            ["ReVanced_MicroG"]="ReVanced MicroG – Google sign-in bridge"
+            ["WeatherMaster"]="Modern weather app with graphs"
+            ["MicroG_RE"]="MicroG RE – Enhanced Play Services emulator"
+            ["Cromite"]="Bromite-based privacy browser"
+            ["Symphony"]="Lightweight music player for Android 9+"
           )
+
+          declare -A app_repo=(
+            ["DotGallery"]="https://github.com/IacobIonut01/Gallery/releases/latest"
+            ["DuckDuckGo"]="https://github.com/duckduckgo/Android/releases/latest"
+            ["Fossify_Keyboard"]="https://github.com/FossifyOrg/Keyboard/releases/latest"
+            ["ReVanced_GooglePhotos"]="https://github.com/j-hc/revanced-magisk-module/releases/latest"
+            ["ReVanced_YouTube"]="https://github.com/j-hc/revanced-magisk-module/releases/latest"
+            ["ReVanced_YTMusic"]="https://github.com/j-hc/revanced-magisk-module/releases/latest"
+            ["Spotify_Revanced"]="https://github.com/j-hc/revanced-magisk-module/releases/latest"
+            ["ReVanced_MicroG"]="https://github.com/ReVanced/GmsCore/releases/latest"
+            ["WeatherMaster"]="https://github.com/PranshulGG/WeatherMaster/releases/latest"
+            ["MicroG_RE"]="https://github.com/WSTxda/MicroG-RE/releases/latest"
+            ["Cromite"]="https://github.com/uazo/cromite/releases/latest"
+            ["Symphony"]="https://github.com/zyrouge/symphony/releases/latest"
+          )
+
+          declare -A app_emoji=(
+            ["Cromite"]="🌐"
+            ["DuckDuckGo"]="🌐"
+            ["DotGallery"]="📷"
+            ["ReVanced_GooglePhotos"]="📷"
+            ["Fossify_Keyboard"]="⌨️"
+            ["ReVanced_YouTube"]="🎬"
+            ["ReVanced_YTMusic"]="🎵"
+            ["Spotify_Revanced"]="🎶"
+            ["WeatherMaster"]="☁️"
+            ["Symphony"]="🎼"
+            ["MicroG_RE"]="🧩"
+            ["ReVanced_MicroG"]="🧩"
+          )
+
+          declare -A old_versions
+          if [ -f latest-apk-versions.txt ]; then
+            while IFS=: read -r app ver; do
+              app="$(echo "$app" | xargs)"
+              ver="$(echo "$ver" | xargs)"
+              [ -z "$app" ] && continue
+              old_versions["$app"]="$ver"
+            done < latest-apk-versions.txt
+          fi
+
           rm -f tg_captions.tsv
           shopt -s nullglob
           for apk in dl/*_v*.apk; do
             FILE=$(basename "$apk")
             APP="${FILE%%_v*}"
-            VERSION=$(echo "$FILE" | sed -E 's/.*_v(.*)\.apk/\1/')
+            EMOJI="${app_emoji[$APP]:-📦}"
             DESC="${app_desc[$APP]:-No description available}"
-
-            CHANGELOG_FILE="changelogs/${APP}.txt"
-            if [ -f "$CHANGELOG_FILE" ]; then
-              CHANGELOG=$(awk '/^### Version v'"$VERSION"'/,/^### Version v/{if(NR!=1)print}' "$CHANGELOG_FILE" | sed '$d' | sed '/^$/d')
-              [ -z "$CHANGELOG" ] && CHANGELOG="Developer doesn't provided any updated info"
+            VER=$(echo "$FILE" | sed -E 's/.*_v(.*)\.apk/\1/')
+            OLD="${old_versions[$APP]}"
+            if [ -z "$OLD" ]; then
+              VERSION="🆕 Version – ${VER}"
+            elif [ "$OLD" != "$VER" ]; then
+              VERSION="🆕 Version – ${OLD} → ${VER}"
             else
-              CHANGELOG="Developer doesn't provided any updated info"
+              VERSION="🆕 Version – ${VER}"
             fi
-
-            CAPTION="${DESC}\n\n${APP} updated to v${VERSION}\nChangelog:\n${CHANGELOG}"
+            REPO_LINK="${app_repo[$APP]}"
+            CAPTION="📦 File name – ${FILE}\\n${EMOJI} ${DESC}\\n${VERSION}\\n🔗 Changelogs – [Latest Release](${REPO_LINK})"
             echo -e "${FILE}\t${CAPTION}" >> tg_captions.tsv
           done
 
-      - name: Upload small APKs via bot (≤48MB, with captions)
-        if: env.NO_APKS != '1'
-        run: |
-          set -e
-          shopt -s nullglob
-          while IFS=$'\t' read -r APK CAPTION; do
-            SIZE_MB=$(( ( $(stat -c%s "dl/$APK") + 1048575 ) / 1048576 ))
-            if [ "$SIZE_MB" -le 48 ]; then
-              curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendDocument" \
-                -F chat_id=${TELEGRAM_CHAT_ID} \
-                -F document=@"dl/$APK" \
-                -F caption="$CAPTION" \
-                -F parse_mode=HTML >/dev/null
-            fi
-          done < tg_captions.tsv
-
-      - name: Set up Python
-        if: env.NO_APKS != '1'
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install Telethon
-        if: env.NO_APKS != '1'
-        run: pip install telethon
-
-      - name: Upload large APKs via user (>48MB, with captions)
+      - name: Upload APKs (both small + large)
         if: env.NO_APKS != '1'
         env:
           CHAT_ID: ${{ env.TELEGRAM_CHAT_ID }}
         run: |
           python - <<'PY'
-          import os, glob, asyncio
+          import os, glob, asyncio, subprocess
           from telethon import TelegramClient
           from telethon.sessions import StringSession
           from asyncio import Semaphore
@@ -140,6 +149,7 @@ jobs:
           api_id = int(os.environ['API_ID'])
           api_hash = os.environ['API_HASH']
           session = os.environ['SESSION']
+          bot_token = os.environ['TELEGRAM_TOKEN']
           chat_id = os.environ['CHAT_ID']
           chat = chat_id if not chat_id.lstrip('-').isdigit() else int(chat_id)
 
@@ -151,19 +161,32 @@ jobs:
                       captions[parts[0]] = parts[1]
 
           files = sorted(glob.glob('dl/*_v*.apk'))
-          files = [f for f in files if os.path.getsize(f) > 48 * 1024 * 1024]
           if not files:
               raise SystemExit(0)
 
-          sem = Semaphore(2)
-          async def send_one(client, f):
-              async with sem:
-                  caption = captions.get(os.path.basename(f), "")
-                  await client.send_file(chat, f, force_document=True, caption=caption[:1024])
+          # Send small APKs via Bot API
+          for f in [x for x in files if os.path.getsize(x) <= 48 * 1024 * 1024]:
+              cap = captions.get(os.path.basename(f), "")
+              subprocess.run([
+                  "curl", "-s", "-X", "POST", f"https://api.telegram.org/bot{bot_token}/sendDocument",
+                  "-F", f"chat_id={chat_id}",
+                  "-F", f"document=@{f}",
+                  "-F", f"caption={cap}",
+                  "-F", "parse_mode=MarkdownV2"
+              ], check=False)
 
-          async def main():
-              async with TelegramClient(StringSession(session), api_id, api_hash) as client:
-                  await asyncio.gather(*(send_one(client, f) for f in files))
+          # Send large APKs via Telethon
+          large_files = [x for x in files if os.path.getsize(x) > 48 * 1024 * 1024]
+          if large_files:
+              sem = Semaphore(2)
+              async def send_one(client, f):
+                  async with sem:
+                      caption = captions.get(os.path.basename(f), "")
+                      await client.send_file(chat, f, force_document=True, caption=caption[:1024], parse_mode="markdown")
 
-          asyncio.run(main())
+              async def main():
+                  async with TelegramClient(StringSession(session), api_id, api_hash) as client:
+                      await asyncio.gather(*(send_one(client, f) for f in large_files))
+
+              asyncio.run(main())
           PY

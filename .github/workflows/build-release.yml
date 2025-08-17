@@ -38,13 +38,10 @@ jobs:
           distribution: adopt
           java-version: "11"
 
-      - name: Install aapt and jq
+      - name: Install aapt
         run: |
           sudo apt-get update
-          sudo apt-get install -y aapt jq
-
-      - name: Download Via
-        run: curl -L -o Via.apk "${{ env.VIA_URL }}"
+          sudo apt-get install -y aapt
 
       - name: Download DotGallery (arm64-v8a)
         uses: robinraju/release-downloader@v1
@@ -115,12 +112,11 @@ jobs:
           latest: true
           fileName: "*.apk"
 
-      - name: Version and rename APKs (compare against latest-apk-versions.txt)
+      - name: Version and rename APKs
         id: versioning
         run: |
           set -e
           UPDATED_APPS=""
-
           declare -A OLD
           if [ -f latest-apk-versions.txt ]; then
             while IFS=: read -r app ver; do
@@ -132,7 +128,6 @@ jobs:
           fi
 
           declare -A apps=(
-            ["Via.apk"]="Via"
             ["*Gallery*arm64-v8a*.apk"]="DotGallery"
             ["duckduckgo*.apk"]="DuckDuckGo"
             ["keyboard*.apk"]="Fossify_Keyboard"
@@ -181,37 +176,23 @@ jobs:
           echo "No updates found. Exiting."
           exit 0
 
-      - name: Write latest versions and clean missing entries
+      - name: Write latest versions
         if: env.UPDATED_APPS != ''
         run: |
-          CURRENT_APPS=()
-          for apk in *_v*.apk; do
-            APP="${apk%%_v*}"
-            CURRENT_APPS+=("$APP")
-          done
-
           declare -A LATEST
-
           if [ -f latest-apk-versions.txt ]; then
             while IFS=: read -r app ver; do
               app="$(echo "$app" | xargs)"
               ver="$(echo "$ver" | xargs)"
               [ -z "$app" ] && continue
-              for current_app in "${CURRENT_APPS[@]}"; do
-                if [[ "$app" == "$current_app" ]]; then
-                  LATEST["$app"]="$ver"
-                  break
-                fi
-              done
+              LATEST["$app"]="$ver"
             done < latest-apk-versions.txt
           fi
-
           for apk in *_v*.apk; do
             APP="${apk%%_v*}"
-            VER="$(echo "$apk" | sed -E "s/.*_v(.*)\.apk/\1/")"
+            VER="$(echo "$apk" | sed -E 's/.*_v(.*)\.apk/\1/')"
             LATEST["$APP"]="$VER"
           done
-
           for app in "${!LATEST[@]}"; do
             echo "$app: ${LATEST[$app]}"
           done | sort > latest-apk-versions.txt
@@ -231,124 +212,41 @@ jobs:
           git commit -m "Update latest APK versions list [ci skip]" || echo "No changes to commit"
           git push origin main
 
-      - name: Fetch and update changelogs for updated apps
-        if: env.UPDATED_APPS != ''
-        run: |
-          mkdir -p changelogs
-
-          declare -A repos=(
-            ["DotGallery"]="IacobIonut01/Gallery"
-            ["DuckDuckGo"]="duckduckgo/Android"
-            ["Fossify_Keyboard"]="FossifyOrg/Keyboard"
-            ["ReVanced_MicroG"]="ReVanced/GmsCore"
-            ["WeatherMaster"]="PranshulGG/WeatherMaster"
-            ["MicroG_RE"]="WSTxda/MicroG-RE"
-            ["Cromite"]="uazo/cromite"
-            ["Symphony"]="zyrouge/symphony"
-          )
-
-          REVANCED_APPS=("ReVanced_GooglePhotos" "ReVanced_YouTube" "Spotify_Revanced" "ReVanced_YTMusic")
-
-          for updated in $UPDATED_APPS; do
-            APP="$(echo $updated | sed -E 's/(.*)\(v.*\)/\1/')"
-            NEW_VER="$(echo $updated | sed -E 's/.*\(v(.*)\)/\1/')"
-
-            if [ "$APP" = "Via" ]; then
-              VERSION="$NEW_VER"
-              CHANGELOG_FILE="changelogs/Via.txt"
-              APK_URL="https://www.apkmirror.com/apk/tu-yafeng/via-browser-fast-light-geek-best-choice/"
-              curl -s "$APK_URL" > via_tmp.html
-              CHANGELOG=$(awk "/What.s new in Via Browser - Fast & Light ${VERSION}/,/<\/ul>/" via_tmp.html | sed -n '/<ul>/,/<\/ul>/p' | sed 's/<[^>]*>//g' | sed '/^$/d')
-              rm -f via_tmp.html
-              if [ -z "$CHANGELOG" ]; then
-                CHANGELOG="Developer doesn't provided any updated info"
-              fi
-              if ! grep -q "### Version v${VERSION}" "$CHANGELOG_FILE"; then
-                echo "" >> "$CHANGELOG_FILE"
-                echo "### Version v${VERSION} - $(date '+%Y-%m-%d')" >> "$CHANGELOG_FILE"
-                echo "$CHANGELOG" >> "$CHANGELOG_FILE"
-              fi
-              echo "APP_Via_CHANGELOG<<EOF" >> $GITHUB_ENV
-              echo "Version v${VERSION} changelog:" >> $GITHUB_ENV
-              echo "$CHANGELOG" >> $GITHUB_ENV
-              echo "EOF" >> $GITHUB_ENV
-
-            elif printf "%s\n" "${REVANCED_APPS[@]}" | grep -qx "$APP"; then
-              CHANGELOG_URL="https://github.com/ReVanced/revanced-patches/releases/latest"
-              CHANGELOG_MD="See the latest patch changelog here: $CHANGELOG_URL"
-              if [ -z "$CHANGELOG_MD" ]; then
-                CHANGELOG_MD="Developer doesn't provided any updated info"
-              fi
-              CHANGELOG_FILE="changelogs/${APP}.txt"
-              if ! grep -q "### Version v${NEW_VER}" "${CHANGELOG_FILE}"; then
-                echo "" >> "${CHANGELOG_FILE}"
-                echo "### Version v${NEW_VER} - $(date '+%Y-%m-%d')" >> "${CHANGELOG_FILE}"
-                echo "$CHANGELOG_MD" >> "${CHANGELOG_FILE}"
-              fi
-              echo "APP_${APP}_CHANGELOG<<EOF" >> $GITHUB_ENV
-              echo "$CHANGELOG_MD" >> $GITHUB_ENV
-              echo "EOF" >> $GITHUB_ENV
-
-            else
-              REPO="${repos[$APP]}"
-              if [ -z "$REPO" ]; then
-                CHANGELOG_BODY="Developer doesn't provided any updated info"
-              else
-                RELEASE_JSON=$(curl -s https://api.github.com/repos/$REPO/releases/latest)
-                CHANGELOG_BODY=$(echo "$RELEASE_JSON" | jq -r '.body // empty')
-                if [ -z "$CHANGELOG_BODY" ]; then
-                  CHANGELOG_BODY="Developer doesn't provided any updated info"
-                fi
-              fi
-              CHANGELOG_FILE="changelogs/${APP}.txt"
-              if ! grep -q "### Version v${NEW_VER}" "$CHANGELOG_FILE"; then
-                echo "" >> "$CHANGELOG_FILE"
-                echo "### Version v$NEW_VER - $(date '+%Y-%m-%d')" >> "$CHANGELOG_FILE"
-                echo "$CHANGELOG_BODY" >> "$CHANGELOG_FILE"
-              fi
-              echo "APP_${APP}_CHANGELOG<<EOF" >> $GITHUB_ENV
-              echo "Version v$NEW_VER changelog:" >> $GITHUB_ENV
-              echo "$CHANGELOG_BODY" >> $GITHUB_ENV
-              echo "EOF" >> $GITHUB_ENV
-            fi
-          done
-
       - name: Build release notes
         if: env.UPDATED_APPS != ''
         run: |
-          declare -A app_versions
+          declare -A old_versions
+          if [ -f latest-apk-versions.txt ]; then
+            while IFS=: read -r app ver; do
+              app="$(echo "$app" | xargs)"
+              ver="$(echo "$ver" | xargs)"
+              [ -z "$app" ] && continue
+              old_versions["$app"]="$ver"
+            done < latest-apk-versions.txt
+          fi
+
+          declare -A new_versions
           for apk in *_v*.apk; do
             APP="${apk%%_v*}"
-            VER="$(echo "$apk" | sed -E "s/.*_v(.*)\.apk/\1/")"
-            app_versions["$APP"]="$VER"
+            VER="$(echo "$apk" | sed -E 's/.*_v(.*)\.apk/\1/')"
+            new_versions["$APP"]="$VER"
           done
-
-          order=("ReVanced_GooglePhotos" "ReVanced_YTMusic" "Spotify_Revanced" "ReVanced_YouTube" "DuckDuckGo" "Fossify_Keyboard" "Via" "ReVanced_MicroG" "DotGallery" "WeatherMaster" "MicroG_RE" "Cromite" "Symphony")
 
           NOTES=""
-
-          for key in "${order[@]}"; do
-            if [[ -n "${app_versions[$key]}" ]]; then
-              NOTES+="$key: ${app_versions[$key]}"$'\n'
-              var="APP_${key}_CHANGELOG"
-              changelog="${!var}"
-              if [[ -n "$changelog" ]]; then
-                NOTES+="Changelog:\n$changelog\n"
-              fi
-              unset app_versions["$key"]
+          for app in "${!new_versions[@]}"; do
+            OLD="${old_versions[$app]}"
+            NEW="${new_versions[$app]}"
+            if [ -z "$OLD" ]; then
+              NOTES+="$app: $NEW"$'\n'
+            elif [ "$OLD" != "$NEW" ]; then
+              NOTES+="$app: $OLD → $NEW"$'\n'
             fi
           done
 
-          for app in $(printf "%s\n" "${!app_versions[@]}" | sort); do
-            NOTES+="$app: ${app_versions[$app]}"$'\n'
-            var="APP_${app}_CHANGELOG"
-            changelog="${!var}"
-            if [[ -n "$changelog" ]]; then
-              NOTES+="Changelog:\n$changelog\n"
-            fi
-          done
+          if [ -z "$NOTES" ]; then
+            NOTES="No app versions updated."
+          fi
 
-          NOTES="$(echo "$NOTES" | sed '/^$/d')"
           echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
           echo "$NOTES" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
@@ -359,7 +257,7 @@ jobs:
           export TZ=Asia/Kolkata
           echo "REL_NAME=Prebuilts Update - $(date +'%Y-%m-%d %H:%M %Z')" >> $GITHUB_ENV
 
-      - name: Create Release
+      - name: Create release
         if: env.UPDATED_APPS != ''
         uses: softprops/action-gh-release@v2
         with:
