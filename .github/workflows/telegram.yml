@@ -19,7 +19,6 @@ jobs:
       API_ID: ${{ secrets.TELEGRAM_API_ID }}
       API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
       SESSION: ${{ secrets.TELEGRAM_SESSION }}
-      GH_TOKEN: ${{ secrets.TOKEN }}
 
     steps:
       - name: Checkout repo to get captions.txt
@@ -31,10 +30,37 @@ jobs:
           sudo apt-get install -y python3 python3-pip jq
           pip3 install telethon
 
-      - name: Download APKs from latest release
+      - name: Determine release tag from triggering run
+        id: tag
+        run: echo "TAG=prebuilts-${{ github.event.workflow_run.id }}" >> $GITHUB_ENV
+
+      - name: Get release APK assets
+        id: assets
+        run: |
+          set -e
+          url="https://api.github.com/repos/${{ github.repository }}/releases/tags/${TAG}"
+          resp=$(curl -sSf -H "Accept: application/vnd.github+json" "$url")
+          if echo "$resp" | grep -q '"Not Found"'; then
+            echo "NO_APKS=1" >> $GITHUB_ENV
+            exit 0
+          fi
+          echo "$resp" | jq -r '.assets[] | select(.name|test("_v.*\\.apk$")) | [.name, .browser_download_url] | @tsv' > urls.tsv
+          if [ ! -s urls.tsv ]; then
+            echo "NO_APKS=1" >> $GITHUB_ENV
+            exit 0
+          fi
+
+      - name: Exit if no APKs found
+        if: env.NO_APKS == '1'
+        run: echo "No APKs to upload. Exiting."
+
+      - name: Download APKs
+        if: env.NO_APKS != '1'
         run: |
           mkdir -p dl
-          gh release download --repo "${{ github.repository }}" --pattern "*.apk" --dir dl
+          while IFS=$'\t' read -r name url; do
+            curl -L -o "dl/$name" "$url"
+          done < urls.tsv
 
       - name: Upload APKs to Telegram using captions.txt with flexible filename matching
         run: |
