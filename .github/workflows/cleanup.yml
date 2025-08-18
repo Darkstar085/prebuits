@@ -18,7 +18,7 @@ jobs:
         with:
           token: ${{ secrets.TOKEN }}
           repository: ${{ github.repository }}
-          retain_days: 7
+          retain_days: 1
           keep_minimum_runs: 5
 
       - name: Delete old releases (keep latest 3, remove tags with them)

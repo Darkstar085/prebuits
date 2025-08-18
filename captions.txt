@@ -90,6 +90,6 @@
   ----
 📦 <b>File name</b> – XedEditor_v3.1.5.apk
   ✏️ Simple and fast text/code editor
-  🆕 Version – 3.1.5 → 3.1.5
+  🆕 Version – 3.0
   🔗 Changelog: <a href='https://github.com/Xed-Editor/Xed-Editor/releases/latest'>XedEditor</a>
   ----

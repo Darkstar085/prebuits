@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ACCESS_TOKEN: ${{ secrets.TOKEN }}
-
+      # Repositories for APKs
       BREEZY_REPO: "breezy-weather/breezy-weather"
       CROMITE_REPO: "uazo/cromite"
       DOTGALLERY_REPO: "IacobIonut01/Gallery"
@@ -42,17 +42,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up JDK 11
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          distribution: adopt
-          java-version: "11"
+          distribution: "temurin"
+          java-version: "17"
 
       - name: Install aapt
         run: |
           sudo apt-get update
           sudo apt-get install -y aapt
 
+      # -- Download APKs --
       - name: Download Breezy Weather
         uses: robinraju/release-downloader@v1
         with:
@@ -172,19 +173,25 @@ jobs:
           latest: true
           fileName: "*.apk"
 
+      # -- Backup previous versions file before any processing --
+      - name: Backup previous versions for diff
+        run: |
+          cp latest-apk-versions.txt old-apk-versions.txt 2>/dev/null || touch old-apk-versions.txt
+
+      # -- Version and rename APKs --
       - name: Version and rename APKs
         id: versioning
         run: |
           set -e
           UPDATED_APPS=""
           declare -A OLD
-          if [ -f latest-apk-versions.txt ]; then
+          if [ -f old-apk-versions.txt ]; then
             while IFS=: read -r app ver; do
               app="$(echo "$app" | xargs)"
               ver="$(echo "$ver" | xargs)"
               [ -z "$app" ] && continue
               OLD["$app"]="$ver"
-            done < latest-apk-versions.txt
+            done < old-apk-versions.txt
           fi
 
           declare -A apps=(
@@ -206,8 +213,8 @@ jobs:
             ["calculator*.apk"]="Fossify_Calculator"
             ["musicplayer*.apk"]="Fossify_MusicPlayer"
             ["Gramophone*.apk"]="Gramophone"
-            ["app-release*.apk"]="VisualCodeSpace"
             ["app-release*.apk"]="PrismFileExplorer"
+            ["app-release*.apk"]="VisualCodeSpace"
             ["xed-editor*.apk"]="XedEditor"
             ["Echoir*.apk"]="EchoirX"
           )
@@ -246,83 +253,20 @@ jobs:
           echo "No updates found. Exiting."
           exit 0
 
-      - name: Write latest versions
-        if: env.UPDATED_APPS != ''
-        run: |
-          declare -A LATEST
-          if [ -f latest-apk-versions.txt ]; then
-            while IFS=: read -r app ver; do
-              app="$(echo "$app" | xargs)"
-              ver="$(echo "$ver" | xargs)"
-              [ -z "$app" ] && continue
-              LATEST["$app"]="$ver"
-            done < latest-apk-versions.txt
-          fi
-          for apk in *_v*.apk; do
-            APP="${apk%%_v*}"
-            VER="$(echo "$apk" | sed -E 's/.*_v(.*)\.apk/\1/')"
-            LATEST["$APP"]="$VER"
-          done
-          for app in "${!LATEST[@]}"; do
-            echo "$app: ${LATEST[$app]}"
-          done | sort > latest-apk-versions.txt
-
-      - name: Build release notes
+      # -- Generate captions.txt --
+      - name: Generate captions.txt
         if: env.UPDATED_APPS != ''
         run: |
           declare -A old_versions
-          if [ -f latest-apk-versions.txt ]; then
+          if [ -f old-apk-versions.txt ]; then
             while IFS=: read -r app ver; do
               app="$(echo "$app" | xargs)"
               ver="$(echo "$ver" | xargs)"
               [ -z "$app" ] && continue
               old_versions["$app"]="$ver"
-            done < latest-apk-versions.txt
+            done < old-apk-versions.txt
           fi
-          declare -A new_versions
-          for apk in *_v*.apk; do
-            APP="${apk%%_v*}"
-            VER="$(echo "$apk" | sed -E 's/.*_v(.*)\.apk/\1/')"
-            new_versions["$APP"]="$VER"
-          done
-          NOTES=""
-          for app in "${!new_versions[@]}"; do
-            OLD="${old_versions[$app]}"
-            NEW="${new_versions[$app]}"
-            if [ -z "$OLD" ]; then
-              NOTES+="$app: $NEW"$'\n'
-            elif [ "$OLD" != "$NEW" ]; then
-              NOTES+="$app: $OLD → $NEW"$'\n'
-            fi
-          done
-          if [ -z "$NOTES" ]; then
-            NOTES="No app versions updated."
-          fi
-          echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
-          echo "$NOTES" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
 
-      - name: Build release name (IST)
-        if: env.UPDATED_APPS != ''
-        run: |
-          export TZ=Asia/Kolkata
-          echo "REL_NAME=Prebuilts Update - $(date +'%Y-%m-%d %H:%M %Z')" >> $GITHUB_ENV
-
-      - name: Create release
-        if: env.UPDATED_APPS != ''
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: prebuilts-${{ github.run_id }}
-          name: ${{ env.REL_NAME }}
-          body: ${{ env.RELEASE_NOTES }}
-          files: |
-            *_v*.apk
-        env:
-          GITHUB_TOKEN: ${{ env.ACCESS_TOKEN }}
-
-      - name: Generate captions.txt
-        if: env.UPDATED_APPS != ''
-        run: |
           declare -A app_desc=(
             ["BreezyWeather"]="Clean, customizable open-source weather app"
             ["Cromite"]="Bromite-based privacy browser"
@@ -358,7 +302,7 @@ jobs:
             ["Fossify_Notes"]="🗒️"
             ["Fossify_VoiceRecorder"]="🎤"
             ["Gramophone"]="🎼"
-            ["Keyboard"]="⌨️"
+            ["Fossify_Keyboard"]="⌨️"
             ["MicroG_RE"]="🧩"
             ["PrismFileExplorer"]="🗂️"
             ["ReVanced_GooglePhotos"]="📷"
@@ -382,7 +326,7 @@ jobs:
             ["Fossify_Notes"]="https://github.com/FossifyOrg/Notes/releases/latest"
             ["Fossify_VoiceRecorder"]="https://github.com/FossifyOrg/Voice-Recorder/releases/latest"
             ["Gramophone"]="https://github.com/FoedusProgramme/Gramophone/releases/latest"
-            ["Keyboard"]="https://github.com/FossifyOrg/Keyboard/releases/latest"
+            ["Fossify_Keyboard"]="https://github.com/FossifyOrg/Keyboard/releases/latest"
             ["MicroG_RE"]="https://github.com/WSTxda/MicroG-RE/releases/latest"
             ["PrismFileExplorer"]="https://github.com/Raival-e/Prism-File-Explorer/releases/latest"
             ["ReVanced_GooglePhotos"]="https://github.com/j-hc/revanced-magisk-module/releases/latest"
@@ -402,22 +346,100 @@ jobs:
             EMOJI="${app_emoji[$APP]:-📦}"
             DESC="${app_desc[$APP]:-No description available}"
             NEW_VER=$(echo "$FILE" | sed -E 's/.*_v(.*)\.apk/\1/')
-            OLD_VER=""
-            if [ -f latest-apk-versions.txt ]; then
-              OLD_VER=$(grep "^$APP:" latest-apk-versions.txt | cut -d: -f2 | xargs || true)
-            fi
+            OLD_VER="${old_versions[$APP]:-}"
             if [ -z "$OLD_VER" ]; then
               VERSION="🆕 Version – $NEW_VER"
-            else
+            elif [ "$OLD_VER" != "$NEW_VER" ]; then
               VERSION="🆕 Version – $OLD_VER → $NEW_VER"
+            else
+              VERSION="🆕 Version – $NEW_VER"
             fi
             CHANGELOG="Changelog: <a href='${app_repo[$APP]}'>$APP</a>"
             echo "📦 <b>File name</b> – ${FILE}
-            ${EMOJI} ${DESC}
-            ${VERSION}
-            🔗 ${CHANGELOG}
-            ----" >> captions.txt
+              ${EMOJI} ${DESC}
+              ${VERSION}
+              🔗 ${CHANGELOG}
+              ----" >> captions.txt
           done
+
+      # -- Build release notes --
+      - name: Build release notes
+        if: env.UPDATED_APPS != ''
+        run: |
+          declare -A old_versions
+          if [ -f old-apk-versions.txt ]; then
+            while IFS=: read -r app ver; do
+              app="$(echo "$app" | xargs)"
+              ver="$(echo "$ver" | xargs)"
+              [ -z "$app" ] && continue
+              old_versions["$app"]="$ver"
+            done < old-apk-versions.txt
+          fi
+
+          declare -A new_versions
+          for apk in *_v*.apk; do
+            APP="${apk%%_v*}"
+            VER="$(echo "$apk" | sed -E 's/.*_v(.*)\.apk/\1/')"
+            new_versions["$APP"]="$VER"
+          done
+
+          NOTES=""
+          for app in "${!new_versions[@]}"; do
+            OLD="${old_versions[$app]}"
+            NEW="${new_versions[$app]}"
+            if [ -z "$OLD" ]; then
+              NOTES+="$app: $NEW"$'\n'
+            elif [ "$OLD" != "$NEW" ]; then
+              NOTES+="$app: $OLD → $NEW"$'\n'
+            fi
+          done
+
+          if [ -z "$NOTES" ]; then
+            if ls *_v*.apk 1>/dev/null 2>&1; then
+              for apk in *_v*.apk; do
+                APP="${apk%%_v*}"
+                VER="$(echo "$apk" | sed -E 's/.*_v(.*)\.apk/\1/')"
+                NOTES+="$APP: $VER"$'\n'
+              done
+            else
+              NOTES="No app versions updated."
+            fi
+          fi
+
+          echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
+          echo "$NOTES" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Build release name (IST)
+        if: env.UPDATED_APPS != ''
+        run: |
+          export TZ=Asia/Kolkata
+          echo "REL_NAME=Prebuilts Update - $(date +'%Y-%m-%d %H:%M %Z')" >> $GITHUB_ENV
+
+      - name: Write latest versions
+        if: env.UPDATED_APPS != ''
+        run: |
+          declare -A LATEST
+          for apk in *_v*.apk; do
+            APP="${apk%%_v*}"
+            VER="$(echo "$apk" | sed -E 's/.*_v(.*)\.apk/\1/')"
+            LATEST["$APP"]="$VER"
+          done
+          for app in "${!LATEST[@]}"; do
+            echo "$app: ${LATEST[$app]}"
+          done | sort > latest-apk-versions.txt
+
+      - name: Create release
+        if: env.UPDATED_APPS != ''
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: prebuilts-${{ github.run_id }}
+          name: ${{ env.REL_NAME }}
+          body: ${{ env.RELEASE_NOTES }}
+          files: |
+            *_v*.apk
+        env:
+          GITHUB_TOKEN: ${{ env.ACCESS_TOKEN }}
 
       - name: Commit latest versions and captions
         if: env.UPDATED_APPS != ''
