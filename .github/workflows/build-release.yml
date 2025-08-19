@@ -306,10 +306,10 @@ jobs:
             ["Fossify_VoiceRecorder"]="Simple, privacy-respecting voice recorder by Fossify"
             ["Gramophone"]="Minimalist, elegant music player"
             ["Fossify_Keyboard"]="Easy keyboard for inserting all kinds of texts, special characters and numbers"
-            ["MicroG_RE"]="MicroG RE – Enhanced Play Services compatibility"
+            ["MicroG_RE"]="MicroG RE - Enhanced Play Services compatibility"
             ["PrismFileExplorer"]="Powerful, material design file explorer"
             ["ReVanced_GooglePhotos"]="Google Photos with premium/unlocked features and ad/tracker removals"
-            ["ReVanced_MicroG"]="MicroG for ReVanced – enables Google sign-in for patched apps"
+            ["ReVanced_MicroG"]="MicroG for ReVanced - enables Google sign-in for patched apps"
             ["ReVanced_YTMusic"]="YouTube Music with premium unlock, ad-block and advanced playback"
             ["ReVanced_YouTube"]="YouTube with ad-block, background play, sponsor block, premium and extra features"
             ["Spotify_Revanced"]="Spotify MOD with no ads, premium features and audio tweaks"
@@ -387,17 +387,18 @@ jobs:
             fi
 
             if [ -z "$OLD_VER" ]; then
-              VERSION="🆕 Version – $NEW_VER"
+              VERSION="💠 Version: $NEW_VER"
             else
-              VERSION="🆕 Version – $OLD_VER → $NEW_VER"
+              VERSION="💠 Version: $OLD_VER → $NEW_VER"
             fi
 
             CHANGELOG="Changelog: <a href='${app_repo[$APP]}'>$APP</a>"
 
             echo "📦 <b>File name</b> – ${FILE}
               ${EMOJI} ${DESC}
-              ${VERSION}
-              🔗 ${CHANGELOG}
+            ${VERSION}
+
+            ${CHANGELOG}
               ----" >> captions.txt
           done
 
