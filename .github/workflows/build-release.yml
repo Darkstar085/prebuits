@@ -396,9 +396,9 @@ jobs:
 
             echo "📦 <b>File name</b> – ${FILE}
               ${EMOJI} ${DESC}
-            ${VERSION}
+          ${VERSION}
 
-            ${CHANGELOG}
+          ${CHANGELOG}
               ----" >> captions.txt
           done
 
