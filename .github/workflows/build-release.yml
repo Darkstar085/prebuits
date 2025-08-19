@@ -60,18 +60,21 @@ jobs:
           repository: ${{ env.BREEZY_REPO }}
           latest: true
           fileName: "*freenet*.apk"
+        continue-on-error: true
       - name: Download Cromite APK (arm64)
         uses: robinraju/release-downloader@v1
         with:
           repository: ${{ env.CROMITE_REPO }}
           latest: true
           fileName: "arm64_ChromePublic.apk"
+        continue-on-error: true
       - name: Download DotGallery (arm64-v8a)
         uses: robinraju/release-downloader@v1
         with:
           repository: ${{ env.DOTGALLERY_REPO }}
           latest: true
           fileName: "*arm64-v8a*.apk"
+        continue-on-error: true
       - name: Remove DotGallery nomaps
         run: rm -f *nomaps*.apk || true
       - name: Download DuckDuckGo
@@ -80,60 +83,70 @@ jobs:
           repository: ${{ env.DUCKDUCKGO_REPO }}
           latest: true
           fileName: "*.apk"
+        continue-on-error: true
       - name: Download EchoirX (Choir)
         uses: robinraju/release-downloader@v1
         with:
           repository: ${{ env.ECHOIRX_REPO }}
           latest: true
           fileName: "*universal*.apk"
+        continue-on-error: true
       - name: Download Fossify Calculator
         uses: robinraju/release-downloader@v1
         with:
           repository: ${{ env.FOSSIFY_CALC_REPO }}
           latest: true
           fileName: "*.apk"
+        continue-on-error: true
       - name: Download Fossify Music Player
         uses: robinraju/release-downloader@v1
         with:
           repository: ${{ env.FOSSIFY_MUSIC_REPO }}
           latest: true
           fileName: "*.apk"
+        continue-on-error: true
       - name: Download Fossify Notes
         uses: robinraju/release-downloader@v1
         with:
           repository: ${{ env.FOSSIFY_NOTES_REPO }}
           latest: true
           fileName: "*.apk"
+        continue-on-error: true
       - name: Download Fossify Voice Recorder
         uses: robinraju/release-downloader@v1
         with:
           repository: ${{ env.FOSSIFY_VR_REPO }}
           latest: true
           fileName: "*.apk"
+        continue-on-error: true
       - name: Download Gramophone
         uses: robinraju/release-downloader@v1
         with:
           repository: ${{ env.GRAMOPHONE_REPO }}
           latest: true
           fileName: "*.apk"
+        continue-on-error: true
       - name: Download Keyboard
         uses: robinraju/release-downloader@v1
         with:
           repository: ${{ env.KEYBOARD_REPO }}
           latest: true
           fileName: "*.apk"
+        continue-on-error: true
       - name: Download MicroG RE APK
         uses: robinraju/release-downloader@v1
         with:
           repository: ${{ env.MICROG_RE_REPO }}
           latest: true
           fileName: "*.apk"
+        continue-on-error: true
       - name: Download MicroG ReVanced MicroG (signed)
         uses: robinraju/release-downloader@v1
         with:
           repository: ${{ env.MICROG_REPO }}
           latest: true
           fileName: "*signed.apk"
+        continue-on-error: true
       - name: Remove hw-signed MicroG
         run: rm -f *hw-signed*.apk || true
       - name: Download Prism File Explorer
@@ -142,36 +155,42 @@ jobs:
           repository: ${{ env.PRISM_REPO }}
           latest: true
           fileName: "*.apk"
+        continue-on-error: true
       - name: Download ReVanced APKs
         uses: robinraju/release-downloader@v1
         with:
           repository: ${{ env.REVANCED_REPO }}
           latest: true
           fileName: "*.apk"
+        continue-on-error: true
       - name: Download Symphony APK
         uses: robinraju/release-downloader@v1
         with:
           repository: ${{ env.SYMPHONY_REPO }}
           latest: true
           fileName: "*.apk"
+        continue-on-error: true
       - name: Download Visual Code Space
         uses: robinraju/release-downloader@v1
         with:
           repository: ${{ env.VCS_REPO }}
           latest: true
           fileName: "*.apk"
+        continue-on-error: true
       - name: Download WeatherMaster APK
         uses: robinraju/release-downloader@v1
         with:
           repository: ${{ env.WEATHERMASTER_REPO }}
           latest: true
           fileName: "*arm64-v8a*.apk"
+        continue-on-error: true
       - name: Download Xed Editor
         uses: robinraju/release-downloader@v1
         with:
           repository: ${{ env.XED_REPO }}
           latest: true
           fileName: "*.apk"
+        continue-on-error: true
 
       # -- Backup previous versions file before any processing --
       - name: Backup previous versions for diff
@@ -233,8 +252,7 @@ jobs:
               continue
             fi
 
-            rm -f ${APP}_v*.apk 2>/dev/null || true
-
+            # Do NOT delete old APKs; just rename new one
             NEW_FILE="${APP}_v${NEW_VER}.apk"
             mv "$NEW_APK" "$NEW_FILE"
             UPDATED_APPS+="$APP(v$NEW_VER) "
@@ -260,8 +278,8 @@ jobs:
           declare -A old_versions
           if [ -f old-apk-versions.txt ]; then
             while IFS=: read -r app ver; do
-              app="$(echo "$app" | xargs)"
-              ver="$(echo "$ver" | xargs)"
+              app=$(echo "$app" | xargs)
+              ver=$(echo "$ver" | xargs)
               [ -z "$app" ] && continue
               old_versions["$app"]="$ver"
             done < old-apk-versions.txt
@@ -291,6 +309,7 @@ jobs:
             ["WeatherMaster"]="Modern weather app with graphs"
             ["XedEditor"]="Simple and fast text/code editor"
           )
+
           declare -A app_emoji=(
             ["BreezyWeather"]="🌦️"
             ["Cromite"]="🌐"
@@ -315,6 +334,7 @@ jobs:
             ["WeatherMaster"]="☁️"
             ["XedEditor"]="✏️"
           )
+
           declare -A app_repo=(
             ["BreezyWeather"]="https://github.com/breezy-weather/breezy-weather/releases/latest"
             ["Cromite"]="https://github.com/uazo/cromite/releases/latest"
@@ -339,6 +359,7 @@ jobs:
             ["WeatherMaster"]="https://github.com/PranshulGG/WeatherMaster/releases/latest"
             ["XedEditor"]="https://github.com/Xed-Editor/Xed-Editor/releases/latest"
           )
+
           rm -f captions.txt
           for apkfile in *_v*.apk; do
             FILE=$(basename "$apkfile")
@@ -347,14 +368,20 @@ jobs:
             DESC="${app_desc[$APP]:-No description available}"
             NEW_VER=$(echo "$FILE" | sed -E 's/.*_v(.*)\.apk/\1/')
             OLD_VER="${old_versions[$APP]:-}"
+
+            if [ "$OLD_VER" = "$NEW_VER" ]; then
+              # Skip unchanged apps from captions
+              continue
+            fi
+
             if [ -z "$OLD_VER" ]; then
               VERSION="🆕 Version – $NEW_VER"
-            elif [ "$OLD_VER" != "$NEW_VER" ]; then
-              VERSION="🆕 Version – $OLD_VER → $NEW_VER"
             else
-              VERSION="🆕 Version – $NEW_VER"
+              VERSION="🆕 Version – $OLD_VER → $NEW_VER"
             fi
+
             CHANGELOG="Changelog: <a href='${app_repo[$APP]}'>$APP</a>"
+
             echo "📦 <b>File name</b> – ${FILE}
               ${EMOJI} ${DESC}
               ${VERSION}
@@ -388,9 +415,9 @@ jobs:
             OLD="${old_versions[$app]}"
             NEW="${new_versions[$app]}"
             if [ -z "$OLD" ]; then
-              NOTES+="$app: $NEW"$'\n'
+              NOTES+="$app: $NEW"$'\\n'
             elif [ "$OLD" != "$NEW" ]; then
-              NOTES+="$app: $OLD → $NEW"$'\n'
+              NOTES+="$app: $OLD → $NEW"$'\\n'
             fi
           done
 
@@ -399,7 +426,7 @@ jobs:
               for apk in *_v*.apk; do
                 APP="${apk%%_v*}"
                 VER="$(echo "$apk" | sed -E 's/.*_v(.*)\.apk/\1/')"
-                NOTES+="$APP: $VER"$'\n'
+                NOTES+="$APP: $VER"$'\\n'
               done
             else
               NOTES="No app versions updated."
@@ -407,7 +434,7 @@ jobs:
           fi
 
           echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
-          echo "$NOTES" >> $GITHUB_ENV
+          echo -e "${NOTES//\\n/$'\n'}" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
       - name: Build release name (IST)
@@ -420,11 +447,24 @@ jobs:
         if: env.UPDATED_APPS != ''
         run: |
           declare -A LATEST
+
+          # Load old versions (if any) to keep unchanged apps
+          if [ -f latest-apk-versions.txt ]; then
+            while IFS=: read -r app ver; do
+              app=$(echo "$app" | xargs)
+              ver=$(echo "$ver" | xargs)
+              LATEST["$app"]="$ver"
+            done < latest-apk-versions.txt
+          fi
+
+          # Update LATEST with new APK versions
           for apk in *_v*.apk; do
             APP="${apk%%_v*}"
             VER="$(echo "$apk" | sed -E 's/.*_v(.*)\.apk/\1/')"
             LATEST["$APP"]="$VER"
           done
+
+          # Write merged versions back to latest-apk-versions.txt
           for app in "${!LATEST[@]}"; do
             echo "$app: ${LATEST[$app]}"
           done | sort > latest-apk-versions.txt
