@@ -1,90 +1,12 @@
-📦 <b>File name</b> – Cromite_v139.0.7258.128.apk
-    🌐 Bromite-based privacy browser
-    🆕 Version – 139.0.7258.128
-    🔗 Changelog: <a href='https://github.com/uazo/cromite/releases/latest'>Cromite</a>
-    ----
-📦 <b>File name</b> – DotGallery_v3.2.0.apk
-    📷 Jetpack Compose-based photo gallery app
-    🆕 Version – 3.2.0
-    🔗 Changelog: <a href='https://github.com/IacobIonut01/Gallery/releases/latest'>DotGallery</a>
-    ----
-📦 <b>File name</b> – DuckDuckGo_v5.244.1.apk
-    🦆 Private, tracker-blocking browser
-    🆕 Version – 5.244.1
-    🔗 Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
-    ----
-📦 <b>File name</b> – Fossify_Calculator_v1.1.0.apk
-    🧮 Open-source, privacy-friendly calculator by Fossify
-    🆕 Version – 1.1.0
-    🔗 Changelog: <a href='https://github.com/FossifyOrg/Calculator/releases/latest'>Fossify_Calculator</a>
-    ----
-📦 <b>File name</b> – Fossify_Keyboard_v1.3.0.apk
-    ⌨️ Easy keyboard for inserting all kinds of texts, special characters and numbers
-    🆕 Version – 1.3.0
-    🔗 Changelog: <a href='https://github.com/FossifyOrg/Keyboard/releases/latest'>Fossify_Keyboard</a>
-    ----
-📦 <b>File name</b> – Fossify_MusicPlayer_v1.2.1.apk
-    🎶 Modern music player by Fossify
-    🆕 Version – 1.2.1
-    🔗 Changelog: <a href='https://github.com/FossifyOrg/Music-Player/releases/latest'>Fossify_MusicPlayer</a>
-    ----
-📦 <b>File name</b> – Fossify_Notes_v1.4.0.apk
-    🗒️ Secure, privacy-focused notes app by Fossify
-    🆕 Version – 1.4.0
-    🔗 Changelog: <a href='https://github.com/FossifyOrg/Notes/releases/latest'>Fossify_Notes</a>
-    ----
-📦 <b>File name</b> – Fossify_VoiceRecorder_v1.3.3.apk
-    🎤 Simple, privacy-respecting voice recorder by Fossify
-    🆕 Version – 1.3.3
-    🔗 Changelog: <a href='https://github.com/FossifyOrg/Voice-Recorder/releases/latest'>Fossify_VoiceRecorder</a>
-    ----
-📦 <b>File name</b> – Gramophone_v1.0.17.apk
-    🎼 Minimalist, elegant music player
-    🆕 Version – 1.0.17
-    🔗 Changelog: <a href='https://github.com/FoedusProgramme/Gramophone/releases/latest'>Gramophone</a>
-    ----
-📦 <b>File name</b> – MicroG_RE_v5.12 GMS-25.31.33.apk
-    🧩 MicroG RE – Enhanced Play Services compatibility
-    🆕 Version – 5.12 GMS-25.31.33
-    🔗 Changelog: <a href='https://github.com/WSTxda/MicroG-RE/releases/latest'>MicroG_RE</a>
-    ----
-📦 <b>File name</b> – Omni_v1.3.apk
-    🛠️ Open-source all-in-one tool app which includes Compass with latitude & longitude,Spirit Level,Ruler and Strength adjustable flashlight
-    🆕 Version – 1.3
-    🔗 Changelog: <a href='https://github.com/FoedusProgramme/Omni/releases/latest'>Omni</a>
-    ----
-📦 <b>File name</b> – ReVanced_GooglePhotos_v7.41.0.793809016.apk
+📦 <b>File name</b> – ReVanced_GooglePhotos_v7.41.0.795526889.apk
     📷 Google Photos with premium/unlocked features and ad/tracker removals
-    🆕 Version – 7.41.0.793809016
-    🔗 Changelog: <a href='https://github.com/j-hc/revanced-magisk-module/releases/latest'>ReVanced_GooglePhotos</a>
+💠 Version: 7.41.0.793809016 → 7.41.0.795526889
+
+Changelog: <a href='https://github.com/j-hc/revanced-magisk-module/releases/latest'>ReVanced_GooglePhotos</a>
     ----
-📦 <b>File name</b> – ReVanced_MicroG_v0.3.1.4.240913.apk
-    🧩 MicroG for ReVanced – enables Google sign-in for patched apps
-    🆕 Version – 0.3.1.4.240913
-    🔗 Changelog: <a href='https://github.com/ReVanced/GmsCore/releases/latest'>ReVanced_MicroG</a>
-    ----
-📦 <b>File name</b> – ReVanced_YTMusic_v8.25.54.apk
-    🎵 YouTube Music with premium unlock, ad-block and advanced playback
-    🆕 Version – 8.25.54
-    🔗 Changelog: <a href='https://github.com/j-hc/revanced-magisk-module/releases/latest'>ReVanced_YTMusic</a>
-    ----
-📦 <b>File name</b> – ReVanced_YouTube_v20.13.41.apk
-    🎬 YouTube with ad-block, background play, sponsor block, premium and extra features
-    🆕 Version – 20.13.41
-    🔗 Changelog: <a href='https://github.com/j-hc/revanced-magisk-module/releases/latest'>ReVanced_YouTube</a>
-    ----
-📦 <b>File name</b> – Spotify_Revanced_v9.0.68.613.apk
+📦 <b>File name</b> – Spotify_Revanced_v9.0.72.949.apk
     🎶 Spotify MOD with no ads, premium features and audio tweaks
-    🆕 Version – 9.0.68.613
-    🔗 Changelog: <a href='https://github.com/j-hc/revanced-magisk-module/releases/latest'>Spotify_Revanced</a>
-    ----
-📦 <b>File name</b> – Symphony_v2024.12.115.apk
-    🎼 Lightweight music player for Android 9+
-    🆕 Version – 2024.12.115
-    🔗 Changelog: <a href='https://github.com/zyrouge/symphony/releases/latest'>Symphony</a>
-    ----
-📦 <b>File name</b> – XedEditor_v3.1.5.apk
-    ✏️ Simple and fast text/code editor
-    🆕 Version – 3.1.5
-    🔗 Changelog: <a href='https://github.com/Xed-Editor/Xed-Editor/releases/latest'>XedEditor</a>
+💠 Version: 9.0.68.613 → 9.0.72.949
+
+Changelog: <a href='https://github.com/j-hc/revanced-magisk-module/releases/latest'>Spotify_Revanced</a>
     ----
