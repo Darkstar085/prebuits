@@ -37,6 +37,7 @@ jobs:
       VCS_REPO: "Visual-Code-Space/Visual-Code-Space"
       WEATHERMASTER_REPO: "PranshulGG/WeatherMaster"
       XED_REPO: "Xed-Editor/Xed-Editor"
+      OMNI_REPO: "FoedusProgramme/Omni"
 
     steps:
       - name: Checkout
@@ -191,6 +192,13 @@ jobs:
           latest: true
           fileName: "*.apk"
         continue-on-error: true
+      - name: Download Omni APK
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: ${{ env.OMNI_REPO }}
+          latest: true
+          fileName: "*.apk"
+        continue-on-error: true
 
       # -- Backup previous versions file before any processing --
       - name: Backup previous versions for diff
@@ -236,6 +244,7 @@ jobs:
             ["app-release*.apk"]="VisualCodeSpace"
             ["xed-editor*.apk"]="XedEditor"
             ["Echoir*.apk"]="EchoirX"
+            ["app-release*.apk"]="Omni"
           )
 
           for pattern in "${!apps[@]}"; do
@@ -308,6 +317,7 @@ jobs:
             ["VisualCodeSpace"]="Lightweight, feature-rich Android code editor and IDE"
             ["WeatherMaster"]="Modern weather app with graphs"
             ["XedEditor"]="Simple and fast text/code editor"
+            ["Omni"]="Open-source all-in-one tool app which includes Compass with latitude & longitude,Spirit Level,Ruler and Strength adjustable flashlight"
           )
 
           declare -A app_emoji=(
@@ -333,6 +343,7 @@ jobs:
             ["VisualCodeSpace"]="💻"
             ["WeatherMaster"]="☁️"
             ["XedEditor"]="✏️"
+            ["Omni"]="🛠️"
           )
 
           declare -A app_repo=(
@@ -358,6 +369,7 @@ jobs:
             ["VisualCodeSpace"]="https://github.com/Visual-Code-Space/Visual-Code-Space/releases/latest"
             ["WeatherMaster"]="https://github.com/PranshulGG/WeatherMaster/releases/latest"
             ["XedEditor"]="https://github.com/Xed-Editor/Xed-Editor/releases/latest"
+            ["Omni"]="https://github.com/FoedusProgramme/Omni/releases/latest"
           )
 
           rm -f captions.txt
