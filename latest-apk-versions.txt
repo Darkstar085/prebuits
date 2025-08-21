@@ -1,6 +1,6 @@
 Cromite: 139.0.7258.128
 DotGallery: 3.2.0
-DuckDuckGo: 5.244.1
+DuckDuckGo: 5.245.0
 Fossify_Calculator: 1.1.0
 Fossify_Keyboard: 1.3.0
 Fossify_MusicPlayer: 1.2.1

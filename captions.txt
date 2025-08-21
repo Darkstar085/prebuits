@@ -1,12 +1,6 @@
-📦 <b>File name</b> – ReVanced_GooglePhotos_v7.41.0.795526889.apk
-    📷 Google Photos with premium/unlocked features and ad/tracker removals
-💠 Version: 7.41.0.793809016 → 7.41.0.795526889
+📦 <b>File name</b> – DuckDuckGo_v5.245.0.apk
+    🦆 Private, tracker-blocking browser
+💠 Version: 5.244.1 → 5.245.0
 
-Changelog: <a href='https://github.com/j-hc/revanced-magisk-module/releases/latest'>ReVanced_GooglePhotos</a>
-    ----
-📦 <b>File name</b> – Spotify_Revanced_v9.0.72.949.apk
-    🎶 Spotify MOD with no ads, premium features and audio tweaks
-💠 Version: 9.0.68.613 → 9.0.72.949
-
-Changelog: <a href='https://github.com/j-hc/revanced-magisk-module/releases/latest'>Spotify_Revanced</a>
+Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
     ----
