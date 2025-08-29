@@ -1,4 +1,4 @@
-Cromite: 139.0.7258.143
+Cromite: 139.0.7258.158
 DotGallery: 3.2.0
 DuckDuckGo: 5.246.0
 Fossify_Calculator: 1.1.0
