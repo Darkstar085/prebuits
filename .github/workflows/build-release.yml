@@ -54,6 +54,7 @@ jobs:
       REVANCED_MANAGER_REPO: "ReVanced/revanced-manager"
       REVANCED_REPO: "j-hc/revanced-magisk-module"
       SDMAID_REPO: "d4rken-org/sdmaid-se"
+      SYMPHONY_REPO: "zyrouge/symphony"
       TERMUX_REPO: "termux/termux-app"
       THUNDERBIRD_REPO: "thunderbird/thunderbird-android"
       VCS_REPO: "Visual-Code-Space/Visual-Code-Space"
@@ -103,7 +104,7 @@ jobs:
         run: gh release download --repo ${{ env.CONVERTERNOW_REPO }} --pattern "*app-arm64-v8a-release*.apk" || true
 
       - name: Download Cromite APK (arm64)
-        run: gh release download --repo ${{ env.CROMITE_REPO }} --pattern "arm64_ChromePublic.apk" || true
+        run: gh release download --repo ${{ env.CROMITE_REPO }} --pattern "*arm64_ChromePublic*.apk" || true
 
       - name: Download CpuInfo
         run: gh release download --repo ${{ env.CPU_INFO_REPO }} --pattern "*androidApp*.apk" || true
@@ -159,11 +160,6 @@ jobs:
       - name: Download MicroG RE APK
         run: gh release download --repo ${{ env.MICROG_RE_REPO }} --pattern "*.apk" || true
 
-      - name: Download MicroG ReVanced MicroG (signed) and Remove hw-signed variant
-        run: |
-          gh release download --repo ${{ env.MICROG_REPO }} --pattern "*signed.apk" || true
-          rm -f *hw-signed*.apk || true
-
       - name: Download MoeList
         run: gh release download --repo ${{ env.MOELIST_REPO }} --pattern "*universal*.apk" || true
 
@@ -186,14 +182,31 @@ jobs:
       - name: Download Retro Music Player
         run: gh release download --repo ${{ env.RETROMUSIC_REPO }} --pattern "*normal*.apk" || true
 
-      - name: Download ReVanced APKs
-        run: gh release download --repo ${{ env.REVANCED_REPO }} --pattern "*.apk" || true
+      - name: Download ReVanced YouTube
+        run: gh release download --repo ${{ env.REVANCED_REPO }} --pattern "youtube*all*.apk" || true
+
+      - name: Download ReVanced YT Music
+        run: gh release download --repo ${{ env.REVANCED_REPO }} --pattern "music*v8a*.apk" || true
+
+      - name: Download ReVanced Google Photos
+        run: gh release download --repo ${{ env.REVANCED_REPO }} --pattern "googlephotos*v8a*.apk" || true
+
+      - name: Download Spotify Revanced
+        run: gh release download --repo ${{ env.REVANCED_REPO }} --pattern "spotify*.apk" || true
+
+      - name: Download ReVanced MicroG
+        run: |
+          gh release download --repo ${{ env.MICROG_REPO }} --pattern "*gms*.apk" || true
+          rm -f *hw*.apk || true
 
       - name: Download ReVanced Manager APK
         run: gh release download --repo ${{ env.REVANCED_MANAGER_REPO }} --pattern "*.apk" || true
 
       - name: Download Sdmaid Cleaner
         run: gh release download --repo ${{ env.SDMAID_REPO }} --pattern "*.apk" || true
+
+      - name: Download Symphony
+        run: gh release download --repo "${{ env.SYMPHONY_REPO }}" --pattern "*.apk" || true
 
       - name: Download Thunderbird Android
         run: gh release download --repo ${{ env.THUNDERBIRD_REPO }} --pattern "*.apk" || true
@@ -207,7 +220,10 @@ jobs:
           mv app-release.apk VisualCodeSpace.apk || true
 
       - name: Download WeatherMaster APK
-        run: gh release download --repo ${{ env.WEATHERMASTER_REPO }} --pattern "*arm64-v8a*.apk" || true
+        run: gh release download --repo ${{ env.WEATHERMASTER_REPO }} --pattern "*WeatherMaster*v8a*.apk" || true
+
+      - name: Download Xed Editor
+        run: gh release download --repo ${{ env.XED_EDITOR_REPO }} --pattern "*xed*.apk" || true
 
       - name: Download YTDlnis
         run: gh release download --repo ${{ env.YTDLNIS_REPO }} --pattern "YTDLnis*universal*.apk" || true
@@ -232,47 +248,50 @@ jobs:
           fi
 
           declare -A apps=(
+            ["*aegis*.apk"]="Aegis"
             ["*Amarok*.apk"]="AmarokHider"
-            ["*Aampod*.apk"]="AntennaPod"
             ["*Arcticons*.apk"]="Arcticons"
-            ["*AmazeFileManager*.apk"]="AmazeFileManager"
-            ["*Bitwarden*.apk"]="Bitwarden"
-            ["*BreezyWeather*.apk"]="BreezyWeather"
+            ["*app-fdroid-release*.apk"]="AmazeFileManager"
+            ["*bitwarden-fdroid*.apk"]="Bitwarden"
+            ["*breezy-weather*.apk"]="BreezyWeather"
             ["Cherrygram*universal*.apk"]="Cherrygram"
             ["*app-arm64-v8a-release*.apk"]="ConverterNOW"
-            ["*CpuInfo*.apk"]="CpuInfo"
-            ["*Cromite*.apk"]="Cromite"
+            ["*androidApp*.apk"]="CpuInfo"
+            ["*arm64_ChromePublic*.apk"]="Cromite"
             ["*delta*.apk"]="DeltaIcons"
-            ["*dotgallery*arm64-v8a*.apk"]="DotGallery"
+            ["*Gallery*arm64-v8a*.apk"]="DotGallery"
             ["*duckduckgo*.apk"]="DuckDuckGo"
             ["*florisboard*.apk"]="Florisboard"
             ["Flip2DND*.apk"]="Flip2DND"
-            ["*fossify_calculator*.apk"]="Fossify_Calculator"
-            ["*fossify_keyboard*.apk"]="Fossify_Keyboard"
-            ["*fossify_musicplayer*.apk"]="Fossify_MusicPlayer"
-            ["*fossify_notes*.apk"]="Fossify_Notes"
-            ["*fossify_voicerecorder*.apk"]="Fossify_VoiceRecorder"
+            ["*calculator*.apk"]="Fossify_Calculator"
+            ["*keyboard*.apk"]="Fossify_Keyboard"
+            ["*musicplayer*.apk"]="Fossify_MusicPlayer"
+            ["*notes*.apk"]="Fossify_Notes"
+            ["*voicerecorder*.apk"]="Fossify_VoiceRecorder"
             ["*Gramophone*.apk"]="Gramophone"
             ["*iceraven*.apk"]="IceravenBrowser"
-            ["*k9mail*.apk"]="ThunderbirdAndroid"
-            ["*libretube*.apk"]="LibreTube"
+            ["*google-play*.apk"]="LocalSend"
+            ["*app-universal-release*.apk"]="LibreTube"
             ["*moelist*.apk"]="MoeList"
-            ["*microg_re*.apk"]="MicroG_RE"
-            ["*microg_signed*.apk"]="ReVanced_MicroG"
-            ["*music-revanced-*-arm64-v8a*.apk"]="ReVanced_YTMusic"
+            ["*microg_release*.apk"]="MicroG_RE"
             ["Omni.apk"]="Omni"
             ["PhonographPlus*.apk"]="PhonographPlus"
             ["Photok*.apk"]="Photok"
             ["PrismFileExplorer.apk"]="PrismFileExplorer"
+            ["*youtube*all*.apk"]="ReVanced_YouTube"
+            ["*music*v8a*.apk"]="ReVanced_YTMusic"
+            ["*googlephotos*v8a*.apk"]="ReVanced_GooglePhotos"
+            ["*spotify*.apk"]="Spotify_Revanced"
+            ["*gms*.apk"]="ReVanced_MicroG"
             ["*revanced-manager*.apk"]="RevancedManager"
-            ["*revanced_magisk*.apk"]="ReVanced"
             ["*sdmse*.apk"]="Sdmaid"
+            ["*symphony*.apk"]="Symphony"
             ["*shizuku*.apk"]="Shizuku"
-            ["*spotify-revanced-*-all*.apk"]="Spotify_Revanced"
             ["*termux*.apk"]="Termux"
+            ["*k9mail*.apk"]="ThunderbirdAndroid"
             ["*VisualCodeSpace*.apk"]="VisualCodeSpace"
-            ["WeatherMaster*.apk"]="WeatherMaster"
-            ["XedEditor*.apk"]="XedEditor"
+            ["*WeatherMaster*v8a*.apk"]="WeatherMaster"
+            ["xed*.apk"]="XedEditor"
             ["YTD*.apk"]="Ytdlnis"
           )
 
@@ -345,6 +364,7 @@ jobs:
             ["Gramophone"]="Minimalist, elegant music player"
             ["IceravenBrowser"]="Privacy-focused web browser"
             ["LibreTube"]="Open-source YouTube app focusing on privacy"
+            ["LocalSend"]="Secure, local file sharing app"
             ["MicroG_RE"]="MicroG RE - Enhanced Play Services compatibility"
             ["MoeList"]="Anime and manga tracking app"
             ["Omni"]="All-in-one tool app with Compass, Spirit Level, Ruler and Flashlight"
@@ -355,6 +375,7 @@ jobs:
             ["ReVanced_MicroG"]="MicroG for ReVanced - enables Google sign-in"
             ["ReVanced_YTMusic"]="YouTube Music with premium unlock, ad-block and advanced playback"
             ["ReVanced_YouTube"]="YouTube with ad-block, background play, sponsor block and more"
+            ["ReVancedManager"]="Manage and install ReVanced patches easily"
             ["Sdmaid"]="Powerful system cleaning tool"
             ["Shizuku"]="Advanced Android background task manager"
             ["Spotify_Revanced"]="Spotify MOD with no ads and premium features"
@@ -384,13 +405,14 @@ jobs:
             ["Florisboard"]="⌨️"
             ["Flip2DND"]="🤳"
             ["Fossify_Calculator"]="🧮"
+            ["Fossify_Keyboard"]="⌨️"
             ["Fossify_MusicPlayer"]="🎶"
             ["Fossify_Notes"]="🗒️"
             ["Fossify_VoiceRecorder"]="🎤"
-            ["Fossify_Keyboard"]="⌨️"
             ["Gramophone"]="🎼"
             ["IceravenBrowser"]="🦦"
             ["LibreTube"]="🔒"
+            ["LocalSend"]="📤"
             ["MicroG_RE"]="🧩"
             ["MoeList"]="📖"
             ["Omni"]="🛠️"
@@ -430,6 +452,7 @@ jobs:
             ["Florisboard"]="https://github.com/florisboard/florisboard/releases/latest"
             ["Flip2DND"]="https://github.com/robinsrk/flip_2_dnd/releases/latest"
             ["Fossify_Calculator"]="https://github.com/FossifyOrg/Calculator/releases/latest"
+            ["Fossify_Keyboard"]="https://github.com/FossifyOrg/Keyboard/releases/latest"
             ["Fossify_MusicPlayer"]="https://github.com/FossifyOrg/Music-Player/releases/latest"
             ["Fossify_Notes"]="https://github.com/FossifyOrg/Notes/releases/latest"
             ["Fossify_VoiceRecorder"]="https://github.com/FossifyOrg/Voice-Recorder/releases/latest"
@@ -446,6 +469,7 @@ jobs:
             ["ReVanced_MicroG"]="https://github.com/ReVanced/GmsCore/releases/latest"
             ["ReVanced_YTMusic"]="https://github.com/j-hc/revanced-magisk-module/releases/latest"
             ["ReVanced_YouTube"]="https://github.com/j-hc/revanced-magisk-module/releases/latest"
+            ["ReVancedManager"]="https://github.com/ReVanced/revanced-manager/releases/latest"
             ["Sdmaid"]="https://github.com/d4rken-org/sdmaid-se/releases/latest"
             ["Shizuku"]="https://github.com/RikkaApps/Shizuku/releases/latest"
             ["Spotify_Revanced"]="https://github.com/j-hc/revanced-magisk-module/releases/latest"
