@@ -6,7 +6,7 @@ on:
     branches: [main]
     paths-ignore: ["*.md", "*.txt"]
   schedule:
-    - cron: "0 */6 * * *" # every 6 hours
+    - cron: "0 */12 * * *" # every 12 hours
 
 concurrency:
   group: prebuilts-build-${{ github.ref }}
@@ -17,26 +17,48 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ACCESS_TOKEN: ${{ secrets.TOKEN }}
-      # Repositories for APKs
+      GH_TOKEN: ${{ secrets.TOKEN }}
+
+      AEGIS_REPO: "beemdevelopment/Aegis"
+      AMAZEFILEMANAGER_REPO: "TeamAmaze/AmazeFileManager"
+      AMAROK_HIDER_REPO: "deltazefiro/Amarok-Hider"
+      ARCTICONS_REPO: "Arcticons-Team/Arcticons"
+      BITWARDEN_REPO: "bitwarden/android"
       BREEZY_REPO: "breezy-weather/breezy-weather"
+      CHERRYGRAM_REPO: "arsLan4k1390/Cherrygram"
+      CONVERTERNOW_REPO: "ferraridamiano/ConverterNOW"
       CROMITE_REPO: "uazo/cromite"
+      CPU_INFO_REPO: "kamgurgul/cpu-info"
+      DELTAICONS_REPO: "Delta-Icons/android"
       DOTGALLERY_REPO: "IacobIonut01/Gallery"
       DUCKDUCKGO_REPO: "duckduckgo/Android"
+      FLIP2DND_REPO: "robinsrk/flip_2_dnd"
+      FLORISBOARD_REPO: "florisboard/florisboard"
       FOSSIFY_CALC_REPO: "FossifyOrg/Calculator"
+      FOSSIFY_KEYBOARD_REPO: "FossifyOrg/Keyboard"
       FOSSIFY_MUSIC_REPO: "FossifyOrg/Music-Player"
       FOSSIFY_NOTES_REPO: "FossifyOrg/Notes"
       FOSSIFY_VR_REPO: "FossifyOrg/Voice-Recorder"
       GRAMOPHONE_REPO: "FoedusProgramme/Gramophone"
-      KEYBOARD_REPO: "FossifyOrg/Keyboard"
+      ICERAVEN_REPO: "fork-maintainers/iceraven-browser"
+      LIBRETUBE_REPO: "libre-tube/LibreTube"
+      LOCAL_SEND_REPO: "localsend/localsend"
       MICROG_RE_REPO: "WSTxda/MicroG-RE"
       MICROG_REPO: "ReVanced/GmsCore"
-      PRISM_REPO: "Raival-e/Prism-File-Explorer"
-      REVANCED_REPO: "j-hc/revanced-magisk-module"
-      SYMPHONY_REPO: "zyrouge/symphony"
-      VCS_REPO: "Visual-Code-Space/Visual-Code-Space"
-      WEATHERMASTER_REPO: "PranshulGG/WeatherMaster"
-      XED_REPO: "Xed-Editor/Xed-Editor"
+      MOELIST_REPO: "axiel7/MoeList"
       OMNI_REPO: "FoedusProgramme/Omni"
+      PHONOGRAPHPLUS_REPO: "chr56/Phonograph_Plus"
+      PRISM_REPO: "Raival-e/Prism-File-Explorer"
+      RIKKAAPPS_SHIZUKU_REPO: "RikkaApps/Shizuku"
+      RETROMUSIC_REPO: "RetroMusicPlayer/RetroMusicPlayer"
+      REVANCED_MANAGER_REPO: "ReVanced/revanced-manager"
+      REVANCED_REPO: "j-hc/revanced-magisk-module"
+      SDMAID_REPO: "d4rken-org/sdmaid-se"
+      SYMPHONY_REPO: "zyrouge/symphony"
+      TERMUX_REPO: "termux/termux-app"
+      THUNDERBIRD_REPO: "thunderbird/thunderbird-android"
+      VCS_REPO: "Visual-Code-Space/Visual-Code-Space"
+      YTDLNIS_REPO: "deniscerri/ytdlnis"
 
     steps:
       - name: Checkout
@@ -45,22 +67,52 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          distribution: "temurin"
-          java-version: "17"
+          distribution: temurin
+          java-version: 17
 
-      - name: Install aapt and Github CLI
+      - name: Install aapt and GitHub CLI
         run: |
           sudo apt-get update
           sudo apt-get install -y aapt gh
 
-      # -- Download APKs using gh CLI --
-      - name: Download Breezy Weather
+      - name: Download Aegis
+        run: gh release download --repo ${{ env.AEGIS_REPO }} --pattern "*.apk" || true
+
+      - name: Download Amaze File Manager
+        run: gh release download --repo ${{ env.AMAZEFILEMANAGER_REPO }} --pattern "*app-fdroid-release*.apk" || true
+
+      - name: Download Amarok Hider
         run: |
-          gh release download --repo ${{ env.BREEZY_REPO }} --pattern "*freenet*.apk" || true
+          gh release download --repo ${{ env.AMAROK_HIDER_REPO }} --pattern "*.apk" || true
+          rm -f *foss*.apk || true
+
+      - name: Download Arcticons
+        run: gh release download --repo ${{ env.ARCTICONS_REPO }} --pattern "*dayNight*.apk" || true
+
+      - name: Download Bitwarden
+        run: gh release download --repo ${{ env.BITWARDEN_REPO }} --pattern "*bitwarden-fdroid*.apk" || true
+
+      - name: Download Breezy Weather
+        run: gh release download --repo ${{ env.BREEZY_REPO }} --pattern "*freenet*.apk" || true
+
+      - name: Download Cherrygram
+        run: |
+          gh release download --repo ${{ env.CHERRYGRAM_REPO }} --pattern "Cherrygram*universal*.apk" || true
+          rm -f *Huawei*.apk || true
+
+      - name: Download ConverterNOW
+        run: gh release download --repo ${{ env.CONVERTERNOW_REPO }} --pattern "*app-arm64-v8a-release*.apk" || true
 
       - name: Download Cromite APK (arm64)
+        run: gh release download --repo ${{ env.CROMITE_REPO }} --pattern "*arm64_ChromePublic*.apk" || true
+
+      - name: Download CpuInfo
+        run: gh release download --repo ${{ env.CPU_INFO_REPO }} --pattern "*androidApp*.apk" || true
+
+      - name: Download DeltaIcons
         run: |
-          gh release download --repo ${{ env.CROMITE_REPO }} --pattern "arm64_ChromePublic.apk" || true
+          gh release download --repo ${{ env.DELTAICONS_REPO }} --pattern "*.apk" || true
+          rm -f *foss*.apk || true
 
       - name: Download DotGallery (arm64-v8a) and Remove nomaps variant
         run: |
@@ -68,79 +120,118 @@ jobs:
           rm -f *nomaps*.apk || true
 
       - name: Download DuckDuckGo
+        run: gh release download --repo ${{ env.DUCKDUCKGO_REPO }} --pattern "*.apk" || true
+
+      - name: Download Florisboard
+        run: gh release download --repo ${{ env.FLORISBOARD_REPO }} --pattern "*stable*.apk" || true
+
+      - name: Download Flip 2 DND APK and Rename APK
         run: |
-          gh release download --repo ${{ env.DUCKDUCKGO_REPO }} --pattern "*.apk" || true
+          gh release download --repo ${{ env.FLIP2DND_REPO }} --pattern "*.apk" || true
+          mv app-release.apk Flip2DND.apk || true
 
       - name: Download Fossify Calculator
-        run: |
-          gh release download --repo ${{ env.FOSSIFY_CALC_REPO }} --pattern "*.apk" || true
+        run: gh release download --repo ${{ env.FOSSIFY_CALC_REPO }} --pattern "*.apk" || true
+
+      - name: Download Fossify Keyboard
+        run: gh release download --repo ${{ env.FOSSIFY_KEYBOARD_REPO }} --pattern "*.apk" || true
 
       - name: Download Fossify Music Player
-        run: |
-          gh release download --repo ${{ env.FOSSIFY_MUSIC_REPO }} --pattern "*.apk" || true
+        run: gh release download --repo ${{ env.FOSSIFY_MUSIC_REPO }} --pattern "*.apk" || true
 
       - name: Download Fossify Notes
-        run: |
-          gh release download --repo ${{ env.FOSSIFY_NOTES_REPO }} --pattern "*.apk" || true
+        run: gh release download --repo ${{ env.FOSSIFY_NOTES_REPO }} --pattern "*.apk" || true
 
       - name: Download Fossify Voice Recorder
-        run: |
-          gh release download --repo ${{ env.FOSSIFY_VR_REPO }} --pattern "*.apk" || true
+        run: gh release download --repo ${{ env.FOSSIFY_VR_REPO }} --pattern "*.apk" || true
 
       - name: Download Gramophone
-        run: |
-          gh release download --repo ${{ env.GRAMOPHONE_REPO }} --pattern "*.apk" || true
+        run: gh release download --repo ${{ env.GRAMOPHONE_REPO }} --pattern "*.apk" || true
 
-      - name: Download Keyboard
-        run: |
-          gh release download --repo ${{ env.KEYBOARD_REPO }} --pattern "*.apk" || true
+      - name: Download Iceraven Browser
+        run: gh release download --repo ${{ env.ICERAVEN_REPO }} --pattern "*v8a*.apk" || true
+
+      - name: Download LibreTube
+        run: gh release download --repo ${{ env.LIBRETUBE_REPO }} --pattern "*app-universal-release*.apk" || true
+
+      - name: Download LocalSend
+        run: gh release download --repo ${{ env.LOCAL_SEND_REPO }} --pattern "*google-play*.apk" || true
 
       - name: Download MicroG RE APK
-        run: |
-          gh release download --repo ${{ env.MICROG_RE_REPO }} --pattern "*.apk" || true
+        run: gh release download --repo ${{ env.MICROG_RE_REPO }} --pattern "*.apk" || true
 
-      - name: Download MicroG ReVanced MicroG (signed) and Remove hw-signed variant
+      - name: Download MoeList
+        run: gh release download --repo ${{ env.MOELIST_REPO }} --pattern "*universal*.apk" || true
+
+      - name: Download Omni APK and Rename APK
         run: |
-          gh release download --repo ${{ env.MICROG_REPO }} --pattern "*signed.apk" || true
-          rm -f *hw-signed*.apk || true 
+          gh release download --repo ${{ env.OMNI_REPO }} --pattern "*.apk" || true
+          mv app-release.apk Omni.apk || true
+
+      - name: Download Phonograph Plus
+        run: gh release download --repo ${{ env.PHONOGRAPHPLUS_REPO }} --pattern "*ModernStableRelease*.apk" || true
 
       - name: Download Prism File Explorer and Rename APK
         run: |
           gh release download --repo ${{ env.PRISM_REPO }} --pattern "*.apk" || true
           mv app-release.apk PrismFileExplorer.apk || true
 
-      - name: Download ReVanced APKs
-        run: |
-          gh release download --repo ${{ env.REVANCED_REPO }} --pattern "*.apk" || true
+      - name: Download RikkaApps Shizuku
+        run: gh release download --repo ${{ env.RIKKAAPPS_SHIZUKU_REPO }} --pattern "*.apk" || true
 
-      - name: Download Symphony APK
-        run: |
-          gh release download --repo ${{ env.SYMPHONY_REPO }} --pattern "*.apk" || true
+      - name: Download Retro Music Player
+        run: gh release download --repo ${{ env.RETROMUSIC_REPO }} --pattern "*normal*.apk" || true
 
-      - name: Download Visual Code Space and Rename APK
+      - name: Download ReVanced YouTube
+        run: gh release download --repo ${{ env.REVANCED_REPO }} --pattern "youtube*all*.apk" || true
+
+      - name: Download ReVanced YT Music
+        run: gh release download --repo ${{ env.REVANCED_REPO }} --pattern "music*v8a*.apk" || true
+
+      - name: Download ReVanced Google Photos
+        run: gh release download --repo ${{ env.REVANCED_REPO }} --pattern "googlephotos*v8a*.apk" || true
+
+      - name: Download Spotify Revanced
+        run: gh release download --repo ${{ env.REVANCED_REPO }} --pattern "spotify*.apk" || true
+
+      - name: Download ReVanced MicroG
+        run: |
+          gh release download --repo ${{ env.MICROG_REPO }} --pattern "*gms*.apk" || true
+          rm -f *hw*.apk || true
+
+      - name: Download ReVanced Manager APK
+        run: gh release download --repo ${{ env.REVANCED_MANAGER_REPO }} --pattern "*.apk" || true
+
+      - name: Download Sdmaid Cleaner
+        run: gh release download --repo ${{ env.SDMAID_REPO }} --pattern "*.apk" || true
+
+      - name: Download Symphony
+        run: gh release download --repo "${{ env.SYMPHONY_REPO }}" --pattern "*.apk" || true
+
+      - name: Download Thunderbird Android
+        run: gh release download --repo ${{ env.THUNDERBIRD_REPO }} --pattern "*.apk" || true
+
+      - name: Download Termux APK
+        run: gh release download --repo ${{ env.TERMUX_REPO }} --pattern "*universal.apk" || true
+
+      - name: Download Visual Code Space
         run: |
           gh release download --repo ${{ env.VCS_REPO }} --pattern "*.apk" || true
-          mv app-release.apk VisualCodeSpace.apk || true 
+          mv app-release.apk VisualCodeSpace.apk || true
 
       - name: Download WeatherMaster APK
-        run: |
-          gh release download --repo ${{ env.WEATHERMASTER_REPO }} --pattern "*arm64-v8a*.apk" || true
+        run: gh release download --repo ${{ env.WEATHERMASTER_REPO }} --pattern "*WeatherMaster*v8a*.apk" || true
 
       - name: Download Xed Editor
-        run: |
-          gh release download --repo ${{ env.XED_REPO }} --pattern "*.apk" || true
+        run: gh release download --repo ${{ env.XED_EDITOR_REPO }} --pattern "*xed*.apk" || true
 
-      - name: Download Omni APK and Rename APK
-        run: |
-          gh release download --repo ${{ env.OMNI_REPO }} --pattern "*.apk" || true
-          mv app-release.apk Omni.apk || true 
+      - name: Download YTDlnis
+        run: gh release download --repo ${{ env.YTDLNIS_REPO }} --pattern "YTDLnis*universal*.apk" || true
 
-      # -- Backup previous versions file before any processing --
       - name: Backup previous versions for diff
         run: |
           cp latest-apk-versions.txt old-apk-versions.txt 2>/dev/null || touch old-apk-versions.txt
 
-      # -- Version and rename APKs --
       - name: Version and rename APKs
         id: versioning
         run: |
@@ -157,28 +248,51 @@ jobs:
           fi
 
           declare -A apps=(
+            ["*aegis*.apk"]="Aegis"
+            ["*Amarok*.apk"]="AmarokHider"
+            ["*Arcticons*.apk"]="Arcticons"
+            ["*app-fdroid-release*.apk"]="AmazeFileManager"
+            ["*bitwarden-fdroid*.apk"]="Bitwarden"
+            ["*breezy-weather*.apk"]="BreezyWeather"
+            ["Cherrygram*universal*.apk"]="Cherrygram"
+            ["*app-arm64-v8a-release*.apk"]="ConverterNOW"
+            ["*androidApp*.apk"]="CpuInfo"
+            ["*arm64_ChromePublic*.apk"]="Cromite"
+            ["*delta*.apk"]="DeltaIcons"
             ["*Gallery*arm64-v8a*.apk"]="DotGallery"
-            ["duckduckgo*.apk"]="DuckDuckGo"
-            ["keyboard*.apk"]="Fossify_Keyboard"
-            ["googlephotos-revanced-*-arm64-v8a.apk"]="ReVanced_GooglePhotos"
-            ["music-revanced-*-arm64-v8a.apk"]="ReVanced_YTMusic"
-            ["spotify-revanced-*-all.apk"]="Spotify_Revanced"
-            ["youtube-revanced-*-all.apk"]="ReVanced_YouTube"
-            ["app.revanced.android.gms-*.apk"]="ReVanced_MicroG"
-            ["WeatherMaster*.arm64-v8a-Standard.apk"]="WeatherMaster"
-            ["microg*.apk"]="MicroG_RE"
-            ["arm64_ChromePublic.apk"]="Cromite"
-            ["symphony*.apk"]="Symphony"
-            ["breezyweather*.apk"]="BreezyWeather"
-            ["voicerecorder*.apk"]="Fossify_VoiceRecorder"
-            ["notes*.apk"]="Fossify_Notes"
-            ["calculator*.apk"]="Fossify_Calculator"
-            ["musicplayer*.apk"]="Fossify_MusicPlayer"
-            ["Gramophone*.apk"]="Gramophone"
-            ["PrismFileExplorer.apk"]="PrismFileExplorer"
-            ["VisualCodeSpace.apk"]="VisualCodeSpace"
-            ["xed-editor*.apk"]="XedEditor"
+            ["*duckduckgo*.apk"]="DuckDuckGo"
+            ["*florisboard*.apk"]="Florisboard"
+            ["Flip2DND*.apk"]="Flip2DND"
+            ["*calculator*.apk"]="Fossify_Calculator"
+            ["*keyboard*.apk"]="Fossify_Keyboard"
+            ["*musicplayer*.apk"]="Fossify_MusicPlayer"
+            ["*notes*.apk"]="Fossify_Notes"
+            ["*voicerecorder*.apk"]="Fossify_VoiceRecorder"
+            ["*Gramophone*.apk"]="Gramophone"
+            ["*iceraven*.apk"]="IceravenBrowser"
+            ["*google-play*.apk"]="LocalSend"
+            ["*app-universal-release*.apk"]="LibreTube"
+            ["*moelist*.apk"]="MoeList"
+            ["*microg_release*.apk"]="MicroG_RE"
             ["Omni.apk"]="Omni"
+            ["PhonographPlus*.apk"]="PhonographPlus"
+            ["Photok*.apk"]="Photok"
+            ["PrismFileExplorer.apk"]="PrismFileExplorer"
+            ["*youtube*all*.apk"]="ReVanced_YouTube"
+            ["*music*v8a*.apk"]="ReVanced_YTMusic"
+            ["*googlephotos*v8a*.apk"]="ReVanced_GooglePhotos"
+            ["*spotify*.apk"]="Spotify_Revanced"
+            ["*gms*.apk"]="ReVanced_MicroG"
+            ["*revanced-manager*.apk"]="RevancedManager"
+            ["*sdmse*.apk"]="Sdmaid"
+            ["*symphony*.apk"]="Symphony"
+            ["*shizuku*.apk"]="Shizuku"
+            ["*termux*.apk"]="Termux"
+            ["*k9mail*.apk"]="ThunderbirdAndroid"
+            ["*VisualCodeSpace*.apk"]="VisualCodeSpace"
+            ["*WeatherMaster*v8a*.apk"]="WeatherMaster"
+            ["xed*.apk"]="XedEditor"
+            ["YTD*.apk"]="Ytdlnis"
           )
 
           for pattern in "${!apps[@]}"; do
@@ -195,7 +309,6 @@ jobs:
               continue
             fi
 
-            # Do NOT delete old APKs; just rename new one
             NEW_FILE="${APP}_v${NEW_VER}.apk"
             mv "$NEW_APK" "$NEW_FILE"
             UPDATED_APPS+="$APP(v$NEW_VER) "
@@ -214,7 +327,6 @@ jobs:
           echo "No updates found. Exiting."
           exit 0
 
-      # -- Generate captions.txt --
       - name: Generate captions.txt
         if: env.UPDATED_APPS != ''
         run: |
@@ -229,78 +341,146 @@ jobs:
           fi
 
           declare -A app_desc=(
+            ["Aegis"]="Modern two-factor authentication app"
+            ["AmazeFileManager"]="Fast, customizable file manager"
+            ["AmarokHider"]="Keep Amarok music app hidden when needed"
+            ["Arcticons"]="Modern icon pack and theming app"
+            ["Bitwarden"]="Open-source password manager with cloud sync"
             ["BreezyWeather"]="Clean, customizable open-source weather app"
+            ["Cherrygram"]="Enhanced Telegram client with extra features"
+            ["ConverterNOW"]="Simple unit and currency converter"
             ["Cromite"]="Bromite-based privacy browser"
+            ["CpuInfo"]="Detailed CPU info tool"
+            ["DeltaIcons"]="Beautiful, minimal icon pack"
             ["DotGallery"]="Jetpack Compose-based photo gallery app"
             ["DuckDuckGo"]="Private, tracker-blocking browser"
+            ["Florisboard"]="Privacy-friendly Android keyboard"
+            ["Flip2DND"]="Flip your phone to toggle Do Not Disturb automatically"
             ["Fossify_Calculator"]="Open-source, privacy-friendly calculator by Fossify"
             ["Fossify_MusicPlayer"]="Modern music player by Fossify"
             ["Fossify_Notes"]="Secure, privacy-focused notes app by Fossify"
             ["Fossify_VoiceRecorder"]="Simple, privacy-respecting voice recorder by Fossify"
+            ["Fossify_Keyboard"]="Easy keyboard for inserting texts, special characters and numbers"
             ["Gramophone"]="Minimalist, elegant music player"
-            ["Fossify_Keyboard"]="Easy keyboard for inserting all kinds of texts, special characters and numbers"
+            ["IceravenBrowser"]="Privacy-focused web browser"
+            ["LibreTube"]="Open-source YouTube app focusing on privacy"
+            ["LocalSend"]="Secure, local file sharing app"
             ["MicroG_RE"]="MicroG RE - Enhanced Play Services compatibility"
+            ["MoeList"]="Anime and manga tracking app"
+            ["Omni"]="All-in-one tool app with Compass, Spirit Level, Ruler and Flashlight"
+            ["PhonographPlus"]="Enhanced music player fork"
+            ["Photok"]="Simple photo gallery app"
             ["PrismFileExplorer"]="Powerful, material design file explorer"
-            ["ReVanced_GooglePhotos"]="Google Photos with premium/unlocked features and ad/tracker removals"
-            ["ReVanced_MicroG"]="MicroG for ReVanced - enables Google sign-in for patched apps"
+            ["ReVanced_GooglePhotos"]="Google Photos with premium/unlocked features"
+            ["ReVanced_MicroG"]="MicroG for ReVanced - enables Google sign-in"
             ["ReVanced_YTMusic"]="YouTube Music with premium unlock, ad-block and advanced playback"
-            ["ReVanced_YouTube"]="YouTube with ad-block, background play, sponsor block, premium and extra features"
-            ["Spotify_Revanced"]="Spotify MOD with no ads, premium features and audio tweaks"
+            ["ReVanced_YouTube"]="YouTube with ad-block, background play, sponsor block and more"
+            ["ReVancedManager"]="Manage and install ReVanced patches easily"
+            ["Sdmaid"]="Powerful system cleaning tool"
+            ["Shizuku"]="Advanced Android background task manager"
+            ["Spotify_Revanced"]="Spotify MOD with no ads and premium features"
             ["Symphony"]="Lightweight music player for Android 9+"
+            ["Termux"]="Terminal emulator and Linux environment for Android"
+            ["ThunderbirdAndroid"]="Official Thunderbird email client for Android"
             ["VisualCodeSpace"]="Lightweight, feature-rich Android code editor and IDE"
             ["WeatherMaster"]="Modern weather app with graphs"
             ["XedEditor"]="Simple and fast text/code editor"
-            ["Omni"]="Open-source all-in-one tool app which includes Compass with latitude & longitude,Spirit Level,Ruler and Strength adjustable flashlight"
+            ["Ytdlnis"]="YouTube downloader with advanced features"
           )
 
           declare -A app_emoji=(
+            ["Aegis"]="🔐"
+            ["AmazeFileManager"]="📂"
+            ["AmarokHider"]="🙈"
+            ["Arcticons"]="🎭"
+            ["Bitwarden"]="🔑"
             ["BreezyWeather"]="🌦️"
+            ["Cherrygram"]="🍒"
+            ["ConverterNOW"]="🔄"
             ["Cromite"]="🌐"
+            ["CpuInfo"]="💻"
+            ["DeltaIcons"]="🎨"
             ["DotGallery"]="📷"
             ["DuckDuckGo"]="🦆"
+            ["Florisboard"]="⌨️"
+            ["Flip2DND"]="🤳"
             ["Fossify_Calculator"]="🧮"
+            ["Fossify_Keyboard"]="⌨️"
             ["Fossify_MusicPlayer"]="🎶"
             ["Fossify_Notes"]="🗒️"
             ["Fossify_VoiceRecorder"]="🎤"
             ["Gramophone"]="🎼"
-            ["Fossify_Keyboard"]="⌨️"
+            ["IceravenBrowser"]="🦦"
+            ["LibreTube"]="🔒"
+            ["LocalSend"]="📤"
             ["MicroG_RE"]="🧩"
+            ["MoeList"]="📖"
+            ["Omni"]="🛠️"
+            ["PhonographPlus"]="🎧"
+            ["Photok"]="🖼️"
             ["PrismFileExplorer"]="🗂️"
             ["ReVanced_GooglePhotos"]="📷"
             ["ReVanced_MicroG"]="🧩"
             ["ReVanced_YTMusic"]="🎵"
             ["ReVanced_YouTube"]="🎬"
+            ["Sdmaid"]="🧹"
+            ["Shizuku"]="🤖"
             ["Spotify_Revanced"]="🎶"
             ["Symphony"]="🎼"
+            ["Termux"]="🖥️"
+            ["ThunderbirdAndroid"]="📧"
             ["VisualCodeSpace"]="💻"
             ["WeatherMaster"]="☁️"
             ["XedEditor"]="✏️"
-            ["Omni"]="🛠️"
+            ["Ytdlnis"]="⬇️"
           )
 
           declare -A app_repo=(
+            ["Aegis"]="https://github.com/beemdevelopment/Aegis/releases/latest"
+            ["AmazeFileManager"]="https://github.com/TeamAmaze/AmazeFileManager/releases/latest"
+            ["AmarokHider"]="https://github.com/deltazefiro/Amarok-Hider/releases/latest"
+            ["Arcticons"]="https://github.com/Arcticons-Team/Arcticons/releases/latest"
+            ["Bitwarden"]="https://github.com/bitwarden/android/releases/latest"
             ["BreezyWeather"]="https://github.com/breezy-weather/breezy-weather/releases/latest"
+            ["Cherrygram"]="https://github.com/arsLan4k1390/Cherrygram/releases/latest"
+            ["ConverterNOW"]="https://github.com/ferraridamiano/ConverterNOW/releases/latest"
             ["Cromite"]="https://github.com/uazo/cromite/releases/latest"
+            ["CpuInfo"]="https://github.com/kamgurgul/cpu-info/releases/latest"
+            ["DeltaIcons"]="https://github.com/Delta-Icons/android/releases/latest"
             ["DotGallery"]="https://github.com/IacobIonut01/Gallery/releases/latest"
             ["DuckDuckGo"]="https://github.com/duckduckgo/Android/releases/latest"
+            ["Florisboard"]="https://github.com/florisboard/florisboard/releases/latest"
+            ["Flip2DND"]="https://github.com/robinsrk/flip_2_dnd/releases/latest"
             ["Fossify_Calculator"]="https://github.com/FossifyOrg/Calculator/releases/latest"
+            ["Fossify_Keyboard"]="https://github.com/FossifyOrg/Keyboard/releases/latest"
             ["Fossify_MusicPlayer"]="https://github.com/FossifyOrg/Music-Player/releases/latest"
             ["Fossify_Notes"]="https://github.com/FossifyOrg/Notes/releases/latest"
             ["Fossify_VoiceRecorder"]="https://github.com/FossifyOrg/Voice-Recorder/releases/latest"
             ["Gramophone"]="https://github.com/FoedusProgramme/Gramophone/releases/latest"
-            ["Fossify_Keyboard"]="https://github.com/FossifyOrg/Keyboard/releases/latest"
+            ["IceravenBrowser"]="https://github.com/fork-maintainers/iceraven-browser/releases/latest"
+            ["LibreTube"]="https://github.com/libre-tube/LibreTube/releases/latest"
+            ["LocalSend"]="https://github.com/localsend/localsend/releases/latest"
             ["MicroG_RE"]="https://github.com/WSTxda/MicroG-RE/releases/latest"
+            ["MoeList"]="https://github.com/axiel7/MoeList/releases/latest"
+            ["Omni"]="https://github.com/FoedusProgramme/Omni/releases/latest"
+            ["PhonographPlus"]="https://github.com/chr56/Phonograph_Plus/releases/latest"
+            ["Photok"]="https://github.com/leonlatsch/photok/releases/latest"
             ["PrismFileExplorer"]="https://github.com/Raival-e/Prism-File-Explorer/releases/latest"
             ["ReVanced_GooglePhotos"]="https://github.com/j-hc/revanced-magisk-module/releases/latest"
             ["ReVanced_MicroG"]="https://github.com/ReVanced/GmsCore/releases/latest"
             ["ReVanced_YTMusic"]="https://github.com/j-hc/revanced-magisk-module/releases/latest"
             ["ReVanced_YouTube"]="https://github.com/j-hc/revanced-magisk-module/releases/latest"
+            ["ReVancedManager"]="https://github.com/ReVanced/revanced-manager/releases/latest"
+            ["Sdmaid"]="https://github.com/d4rken-org/sdmaid-se/releases/latest"
+            ["Shizuku"]="https://github.com/RikkaApps/Shizuku/releases/latest"
             ["Spotify_Revanced"]="https://github.com/j-hc/revanced-magisk-module/releases/latest"
             ["Symphony"]="https://github.com/zyrouge/symphony/releases/latest"
+            ["Termux"]="https://github.com/termux/termux-app/releases/latest"
+            ["ThunderbirdAndroid"]="https://github.com/thunderbird/thunderbird-android/releases/latest"
             ["VisualCodeSpace"]="https://github.com/Visual-Code-Space/Visual-Code-Space/releases/latest"
             ["WeatherMaster"]="https://github.com/PranshulGG/WeatherMaster/releases/latest"
             ["XedEditor"]="https://github.com/Xed-Editor/Xed-Editor/releases/latest"
-            ["Omni"]="https://github.com/FoedusProgramme/Omni/releases/latest"
+            ["Ytdlnis"]="https://github.com/deniscerri/ytdlnis/releases/latest"
           )
 
           rm -f captions.txt
@@ -313,14 +493,13 @@ jobs:
             OLD_VER="${old_versions[$APP]:-}"
 
             if [ "$OLD_VER" = "$NEW_VER" ]; then
-              # Skip unchanged apps from captions
               continue
             fi
 
             if [ -z "$OLD_VER" ]; then
-              VERSION="💠 Version: $NEW_VER"
+              VERSION="🆕 Version: $NEW_VER"
             else
-              VERSION="💠 Version: $OLD_VER → $NEW_VER"
+              VERSION="🚀 Version: $OLD_VER → $NEW_VER"
             fi
 
             CHANGELOG="Changelog: <a href='${app_repo[$APP]}'>$APP</a>"
@@ -333,7 +512,6 @@ jobs:
               ----" >> captions.txt
           done
 
-      # -- Build release notes --
       - name: Build release notes
         if: env.UPDATED_APPS != ''
         run: |
@@ -359,9 +537,9 @@ jobs:
             OLD="${old_versions[$app]}"
             NEW="${new_versions[$app]}"
             if [ -z "$OLD" ]; then
-              NOTES+="$app: $NEW"$'\\n'
+              NOTES+="$app: $NEW"$'\n'
             elif [ "$OLD" != "$NEW" ]; then
-              NOTES+="$app: $OLD → $NEW"$'\\n'
+              NOTES+="$app: $OLD → $NEW"$'\n'
             fi
           done
 
@@ -370,7 +548,7 @@ jobs:
               for apk in *_v*.apk; do
                 APP="${apk%%_v*}"
                 VER="$(echo "$apk" | sed -E 's/.*_v(.*)\.apk/\1/')"
-                NOTES+="$APP: $VER"$'\\n'
+                NOTES+="$APP: $VER"$'\n'
               done
             else
               NOTES="No app versions updated."
@@ -392,7 +570,6 @@ jobs:
         run: |
           declare -A LATEST
 
-          # Load old versions (if any) to keep unchanged apps
           if [ -f latest-apk-versions.txt ]; then
             while IFS=: read -r app ver; do
               app=$(echo "$app" | xargs)
@@ -401,14 +578,12 @@ jobs:
             done < latest-apk-versions.txt
           fi
 
-          # Update LATEST with new APK versions
           for apk in *_v*.apk; do
             APP="${apk%%_v*}"
             VER="$(echo "$apk" | sed -E 's/.*_v(.*)\.apk/\1/')"
             LATEST["$APP"]="$VER"
           done
 
-          # Write merged versions back to latest-apk-versions.txt
           for app in "${!LATEST[@]}"; do
             echo "$app: ${LATEST[$app]}"
           done | sort > latest-apk-versions.txt
