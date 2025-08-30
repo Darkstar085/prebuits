@@ -1,6 +1,240 @@
-📦 <b>File name</b> – Cromite_v139.0.7258.158.apk
-    🌐 Bromite-based privacy browser
-💠 Version: 139.0.7258.143 → 139.0.7258.158
+📦 <b>File name</b> – Aegis_v3.4.1.apk
+    🔐 Modern two-factor authentication app
+🆕 Version: 3.4.1
 
-Changelog: <a href='https://github.com/uazo/cromite/releases/latest'>Cromite</a>
+Changelog: <a href='https://github.com/beemdevelopment/Aegis/releases/latest'>Aegis</a>
+    ----
+📦 <b>File name</b> – Amarok-v0.9.3_v0.9.3.apk
+    📦 No description available
+🆕 Version: 0.9.3
+
+Changelog: <a href=''>Amarok-v0.9.3</a>
+    ----
+📦 <b>File name</b> – AmazeFileManager_v3.10.apk
+    📂 Fast, customizable file manager
+🆕 Version: 3.10
+
+Changelog: <a href='https://github.com/TeamAmaze/AmazeFileManager/releases/latest'>AmazeFileManager</a>
+    ----
+📦 <b>File name</b> – Arcticons_v13.4.6.apk
+    🎭 Modern icon pack and theming app
+🆕 Version: 13.4.6
+
+Changelog: <a href='https://github.com/Arcticons-Team/Arcticons/releases/latest'>Arcticons</a>
+    ----
+📦 <b>File name</b> – Bitwarden_v2025.8.0.apk
+    🔑 Open-source password manager with cloud sync
+🆕 Version: 2025.8.0
+
+Changelog: <a href='https://github.com/bitwarden/android/releases/latest'>Bitwarden</a>
+    ----
+📦 <b>File name</b> – BreezyWeather_v6.0.8-beta_freenet.apk
+    🌦️ Clean, customizable open-source weather app
+🆕 Version: 6.0.8-beta_freenet
+
+Changelog: <a href='https://github.com/breezy-weather/breezy-weather/releases/latest'>BreezyWeather</a>
+    ----
+📦 <b>File name</b> – Cherrygram_v11.14.1.apk
+    🍒 Enhanced Telegram client with extra features
+🆕 Version: 11.14.1
+
+Changelog: <a href='https://github.com/arsLan4k1390/Cherrygram/releases/latest'>Cherrygram</a>
+    ----
+📦 <b>File name</b> – ConverterNOW_v4.4.0.apk
+    🔄 Simple unit and currency converter
+🆕 Version: 4.4.0
+
+Changelog: <a href='https://github.com/ferraridamiano/ConverterNOW/releases/latest'>ConverterNOW</a>
+    ----
+📦 <b>File name</b> – CpuInfo_v6.4.0.apk
+    💻 Detailed CPU info tool
+🆕 Version: 6.4.0
+
+Changelog: <a href='https://github.com/kamgurgul/cpu-info/releases/latest'>CpuInfo</a>
+    ----
+📦 <b>File name</b> – Flip2DND_v8.0.0.apk
+    🤳 Flip your phone to toggle Do Not Disturb automatically
+🆕 Version: 8.0.0
+
+Changelog: <a href='https://github.com/robinsrk/flip_2_dnd/releases/latest'>Flip2DND</a>
+    ----
+📦 <b>File name</b> – Florisboard_v0.5.0.apk
+    ⌨️ Privacy-friendly Android keyboard
+🆕 Version: 0.5.0
+
+Changelog: <a href='https://github.com/florisboard/florisboard/releases/latest'>Florisboard</a>
+    ----
+📦 <b>File name</b> – Gramophone-1.0.17-release_v1.0.17.apk
+    📦 No description available
+🆕 Version: 1.0.17
+
+Changelog: <a href=''>Gramophone-1.0.17-release</a>
+    ----
+📦 <b>File name</b> – IceravenBrowser_viceraven-2.35.0.apk
+    🦦 Privacy-focused web browser
+🆕 Version: iceraven-2.35.0
+
+Changelog: <a href='https://github.com/fork-maintainers/iceraven-browser/releases/latest'>IceravenBrowser</a>
+    ----
+📦 <b>File name</b> – LibreTube_v0.28.1.apk
+    🔒 Open-source YouTube app focusing on privacy
+🆕 Version: 0.28.1
+
+Changelog: <a href='https://github.com/libre-tube/LibreTube/releases/latest'>LibreTube</a>
+    ----
+📦 <b>File name</b> – LocalSend_v1.17.0.apk
+    📦 No description available
+🆕 Version: 1.17.0
+
+Changelog: <a href=''>LocalSend</a>
+    ----
+📦 <b>File name</b> – MoeList_v3.8.0.apk
+    📖 Anime and manga tracking app
+🆕 Version: 3.8.0
+
+Changelog: <a href='https://github.com/axiel7/MoeList/releases/latest'>MoeList</a>
+    ----
+📦 <b>File name</b> – NewPipe_v0.28.0_v0.28.0.apk
+    📺 Lightweight YouTube frontend with privacy focus
+🆕 Version: 0.28.0
+
+Changelog: <a href='https://github.com/TeamNewPipe/NewPipe/releases/latest'>NewPipe</a>
+    ----
+📦 <b>File name</b> – PhonographPlus_v1.10.1.apk
+    🎧 Enhanced music player fork
+🆕 Version: 1.10.1
+
+Changelog: <a href='https://github.com/chr56/Phonograph_Plus/releases/latest'>PhonographPlus</a>
+    ----
+📦 <b>File name</b> – PrismFileExplorer_v1.3.1.apk
+    🗂️ Powerful, material design file explorer
+🆕 Version: 1.3.1
+
+Changelog: <a href='https://github.com/Raival-e/Prism-File-Explorer/releases/latest'>PrismFileExplorer</a>
+    ----
+📦 <b>File name</b> – ReVanced_MicroGSigned_v0.3.1.4.240913.apk
+    📦 No description available
+🆕 Version: 0.3.1.4.240913
+
+Changelog: <a href=''>ReVanced_MicroGSigned</a>
+    ----
+📦 <b>File name</b> – RetroMusicPlayer_v6.5.0.apk
+    📦 No description available
+🆕 Version: 6.5.0
+
+Changelog: <a href=''>RetroMusicPlayer</a>
+    ----
+📦 <b>File name</b> – Termux_v0.118.3.apk
+    🖥️ Powerful terminal emulator and Linux environment for Android
+🆕 Version: 0.118.3
+
+Changelog: <a href='https://github.com/termux/termux-app/releases/latest'>Termux</a>
+    ----
+📦 <b>File name</b> – VisualCodeSpace_v2.0.1.apk
+    💻 Lightweight, feature-rich Android code editor and IDE
+🆕 Version: 2.0.1
+
+Changelog: <a href='https://github.com/Visual-Code-Space/Visual-Code-Space/releases/latest'>VisualCodeSpace</a>
+    ----
+📦 <b>File name</b> – Ytdlnis_v1.8.5.apk
+    ⬇️ YouTube downloader with advanced features
+🆕 Version: 1.8.5
+
+Changelog: <a href='https://github.com/deniscerri/ytdlnis/releases/latest'>Ytdlnis</a>
+    ----
+📦 <b>File name</b> – calculator-7-foss-release_v1.1.0.apk
+    📦 No description available
+🆕 Version: 1.1.0
+
+Changelog: <a href=''>calculator-7-foss-release</a>
+    ----
+📦 <b>File name</b> – delta-v2.6.0_v2.6.0.apk
+    📦 No description available
+🆕 Version: 2.6.0
+
+Changelog: <a href=''>delta-v2.6.0</a>
+    ----
+📦 <b>File name</b> – duckduckgo-5.246.0-play-release_v5.246.0.apk
+    📦 No description available
+🆕 Version: 5.246.0
+
+Changelog: <a href=''>duckduckgo-5.246.0-play-release</a>
+    ----
+📦 <b>File name</b> – eu.darken.sdmse-v1.4.15-rc0-10415000-FOSS-RELEASE_v1.4.15-rc0.apk
+    📦 No description available
+🆕 Version: 1.4.15-rc0
+
+Changelog: <a href=''>eu.darken.sdmse-v1.4.15-rc0-10415000-FOSS-RELEASE</a>
+    ----
+📦 <b>File name</b> – googlephotos-revanced-v7.41.0.795526889-arm-v7a_v7.41.0.795526889.apk
+    📦 No description available
+🆕 Version: 7.41.0.795526889
+
+Changelog: <a href=''>googlephotos-revanced-v7.41.0.795526889-arm-v7a</a>
+    ----
+📦 <b>File name</b> – googlephotos-revanced-v7.41.0.795526889-arm64-v8a_v7.41.0.795526889.apk
+    📦 No description available
+🆕 Version: 7.41.0.795526889
+
+Changelog: <a href=''>googlephotos-revanced-v7.41.0.795526889-arm64-v8a</a>
+    ----
+📦 <b>File name</b> – k9mail-11.1_v11.1.apk
+    📦 No description available
+🆕 Version: 11.1
+
+Changelog: <a href=''>k9mail-11.1</a>
+    ----
+📦 <b>File name</b> – keyboard-8-foss-release_v1.4.0.apk
+    📦 No description available
+🆕 Version: 1.4.0
+
+Changelog: <a href=''>keyboard-8-foss-release</a>
+    ----
+📦 <b>File name</b> – microg-release_v5.12 GMS-25.31.33.apk
+    📦 No description available
+🆕 Version: 5.12 GMS-25.31.33
+
+Changelog: <a href=''>microg-release</a>
+    ----
+📦 <b>File name</b> – music-revanced-v8.25.54-arm-v7a_v8.25.54.apk
+    📦 No description available
+🆕 Version: 8.25.54
+
+Changelog: <a href=''>music-revanced-v8.25.54-arm-v7a</a>
+    ----
+📦 <b>File name</b> – music-revanced-v8.25.54-arm64-v8a_v8.25.54.apk
+    📦 No description available
+🆕 Version: 8.25.54
+
+Changelog: <a href=''>music-revanced-v8.25.54-arm64-v8a</a>
+    ----
+📦 <b>File name</b> – musicplayer-5-foss-release_v1.2.2.apk
+    📦 No description available
+🆕 Version: 1.2.2
+
+Changelog: <a href=''>musicplayer-5-foss-release</a>
+    ----
+📦 <b>File name</b> – notes-8-foss-release_v1.4.0.apk
+    📦 No description available
+🆕 Version: 1.4.0
+
+Changelog: <a href=''>notes-8-foss-release</a>
+    ----
+📦 <b>File name</b> – revanced-manager-1.25.1_v1.25.1.apk
+    📦 No description available
+🆕 Version: 1.25.1
+
+Changelog: <a href=''>revanced-manager-1.25.1</a>
+    ----
+📦 <b>File name</b> – shizuku-v13.6.0.r1086.2650830c-release_v13.6.0.r1086.2650830c.apk
+    📦 No description available
+🆕 Version: 13.6.0.r1086.2650830c
+
+Changelog: <a href=''>shizuku-v13.6.0.r1086.2650830c-release</a>
+    ----
+📦 <b>File name</b> – voicerecorder-12-foss-release_v1.3.5.apk
+    📦 No description available
+🆕 Version: 1.3.5
+
+Changelog: <a href=''>voicerecorder-12-foss-release</a>
     ----
