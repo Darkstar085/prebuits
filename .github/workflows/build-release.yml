@@ -22,7 +22,6 @@ jobs:
       CROMITE_REPO: "uazo/cromite"
       DOTGALLERY_REPO: "IacobIonut01/Gallery"
       DUCKDUCKGO_REPO: "duckduckgo/Android"
-      ECHOIRX_REPO: "imjyotiraditya/EchoirX"
       FOSSIFY_CALC_REPO: "FossifyOrg/Calculator"
       FOSSIFY_MUSIC_REPO: "FossifyOrg/Music-Player"
       FOSSIFY_NOTES_REPO: "FossifyOrg/Notes"
@@ -84,13 +83,6 @@ jobs:
           repository: ${{ env.DUCKDUCKGO_REPO }}
           latest: true
           fileName: "*.apk"
-        continue-on-error: true
-      - name: Download EchoirX (Choir)
-        uses: robinraju/release-downloader@v1
-        with:
-          repository: ${{ env.ECHOIRX_REPO }}
-          latest: true
-          fileName: "*universal*.apk"
         continue-on-error: true
       - name: Download Fossify Calculator
         uses: robinraju/release-downloader@v1
@@ -157,6 +149,8 @@ jobs:
           latest: true
           fileName: "*.apk"
         continue-on-error: true
+      - name: Rename Prism APK
+        run: mv app-release.apk PrismFileExplorer.apk || true
       - name: Download ReVanced APKs
         uses: robinraju/release-downloader@v1
         with:
@@ -178,6 +172,8 @@ jobs:
           latest: true
           fileName: "*.apk"
         continue-on-error: true
+      - name: Rename Visual APK
+        run: mv app-release.apk VisualCodeSpace.apk || true
       - name: Download WeatherMaster APK
         uses: robinraju/release-downloader@v1
         with:
@@ -199,6 +195,8 @@ jobs:
           latest: true
           fileName: "*.apk"
         continue-on-error: true
+      - name: Rename Omni APK
+        run: mv app-release.apk Omni.apk || true
 
       # -- Backup previous versions file before any processing --
       - name: Backup previous versions for diff
@@ -240,11 +238,10 @@ jobs:
             ["calculator*.apk"]="Fossify_Calculator"
             ["musicplayer*.apk"]="Fossify_MusicPlayer"
             ["Gramophone*.apk"]="Gramophone"
-            ["app-release*.apk"]="PrismFileExplorer"
-            ["app-release*.apk"]="VisualCodeSpace"
+            ["PrismFileExplorer.apk"]="PrismFileExplorer"
+            ["VisualCodeSpace.apk"]="VisualCodeSpace"
             ["xed-editor*.apk"]="XedEditor"
-            ["Echoir*.apk"]="EchoirX"
-            ["app-release*.apk"]="Omni"
+            ["Omni.apk"]="Omni"
           )
 
           for pattern in "${!apps[@]}"; do
@@ -299,7 +296,6 @@ jobs:
             ["Cromite"]="Bromite-based privacy browser"
             ["DotGallery"]="Jetpack Compose-based photo gallery app"
             ["DuckDuckGo"]="Private, tracker-blocking browser"
-            ["EchoirX"]="Choir (Echo + Choir): Material You music downloader with high-quality audio support and elegant design"
             ["Fossify_Calculator"]="Open-source, privacy-friendly calculator by Fossify"
             ["Fossify_MusicPlayer"]="Modern music player by Fossify"
             ["Fossify_Notes"]="Secure, privacy-focused notes app by Fossify"
