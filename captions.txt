@@ -1,6 +1,0 @@
-📦 <b>File name</b> – Cromite_v139.0.7258.158.apk
-    🌐 Bromite-based privacy browser
-💠 Version: 139.0.7258.143 → 139.0.7258.158
-
-Changelog: <a href='https://github.com/uazo/cromite/releases/latest'>Cromite</a>
-    ----
