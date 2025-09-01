@@ -1,12 +1,6 @@
-📦 <b>File name</b> – BreezyWeather_v6.0.9-beta_freenet.apk
-    🌦️ Clean, customizable open-source weather app
-🚀 Version: 6.0.8-beta_freenet → 6.0.9-beta_freenet
+📦 <b>File name</b> – Fossify_VoiceRecorder_v1.4.0.apk
+    🎤 Simple, privacy-respecting voice recorder by Fossify
+🚀 Version: 1.3.5 → 1.4.0
 
-Changelog: <a href='https://github.com/breezy-weather/breezy-weather/releases/latest'>BreezyWeather</a>
-    ----
-📦 <b>File name</b> – DeltaIcons_v2.7.0.apk
-    🎨 Beautiful, minimal icon pack
-🚀 Version: 2.6.0 → 2.7.0
-
-Changelog: <a href='https://github.com/Delta-Icons/android/releases/latest'>DeltaIcons</a>
+Changelog: <a href='https://github.com/FossifyOrg/Voice-Recorder/releases/latest'>Fossify_VoiceRecorder</a>
     ----
