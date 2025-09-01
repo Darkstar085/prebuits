@@ -3,12 +3,12 @@ AmarokHider: 0.9.3
 AmazeFileManager: 3.10
 Arcticons: 13.4.6
 Bitwarden: 2025.8.0
-BreezyWeather: 6.0.8-beta_freenet
+BreezyWeather: 6.0.9-beta_freenet
 Cherrygram: 11.14.1
 ConverterNOW: 4.4.0
 CpuInfo: 6.4.0
 Cromite: 139.0.7258.158
-DeltaIcons: 2.6.0
+DeltaIcons: 2.7.0
 DotGallery: 3.2.0
 DuckDuckGo: 5.246.0
 Flip2DND: 8.0.0
