@@ -3,7 +3,7 @@ AmarokHider: 0.9.3
 AmazeFileManager: 3.10
 Arcticons: 13.4.6
 Bitwarden: 2025.8.0
-BreezyWeather: 6.0.9-beta_freenet
+BreezyWeather: 6.0.10-rc_freenet
 Cherrygram: 11.14.1
 ConverterNOW: 4.4.0
 CpuInfo: 6.4.0
@@ -16,7 +16,7 @@ Florisboard: 0.5.0
 Fossify_Calculator: 1.1.0
 Fossify_Keyboard: 1.4.0
 Fossify_MusicPlayer: 1.2.2
-Fossify_Notes: 1.4.0
+Fossify_Notes: 1.4.1
 Fossify_VoiceRecorder: 1.4.0
 Gramophone: 1.0.17
 IceravenBrowser: iceraven-2.35.0
