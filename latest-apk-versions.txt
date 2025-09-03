@@ -2,7 +2,7 @@ Aegis: 3.4.1
 AmarokHider: 0.9.3
 AmazeFileManager: 3.10
 Arcticons: 13.4.6
-Bitwarden: 2025.8.0
+Bitwarden: 2025.8.1
 BreezyWeather: 6.0.10-rc_freenet
 Cherrygram: 11.14.1
 ConverterNOW: 4.4.0
@@ -24,7 +24,7 @@ LibreTube: 0.28.1
 LocalSend: 1.17.0
 MoeList: 3.8.0
 Omni: 1.3
-PhonographPlus: 1.10.1
+PhonographPlus: 1.11.0
 PrismFileExplorer: 1.3.1
 ReVanced_GooglePhotos: 7.41.0.795526889
 ReVanced_MicroG: 0.3.1.4.240913

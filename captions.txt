@@ -1,12 +1,12 @@
-📦 <b>File name</b> – BreezyWeather_v6.0.10-rc_freenet.apk
-    🌦️ Clean, customizable open-source weather app
-🚀 Version: 6.0.9-beta_freenet → 6.0.10-rc_freenet
+📦 <b>File name</b> – Bitwarden_v2025.8.1.apk
+    🔑 Open-source password manager with cloud sync
+🚀 Version: 2025.8.0 → 2025.8.1
 
-Changelog: <a href='https://github.com/breezy-weather/breezy-weather/releases/latest'>BreezyWeather</a>
+Changelog: <a href='https://github.com/bitwarden/android/releases/latest'>Bitwarden</a>
     ----
-📦 <b>File name</b> – Fossify_Notes_v1.4.1.apk
-    🗒️ Secure, privacy-focused notes app by Fossify
-🚀 Version: 1.4.0 → 1.4.1
+📦 <b>File name</b> – PhonographPlus_v1.11.0.apk
+    🎧 Enhanced music player fork
+🚀 Version: 1.10.1 → 1.11.0
 
-Changelog: <a href='https://github.com/FossifyOrg/Notes/releases/latest'>Fossify_Notes</a>
+Changelog: <a href='https://github.com/chr56/Phonograph_Plus/releases/latest'>PhonographPlus</a>
     ----
