@@ -3,7 +3,7 @@ AmarokHider: 0.9.3
 AmazeFileManager: 3.10
 Arcticons: 13.4.6
 Bitwarden: 2025.8.1
-BreezyWeather: 6.0.10-rc_freenet
+BreezyWeather: 6.0.11-rc_freenet
 Cherrygram: 11.14.1
 ConverterNOW: 4.4.0
 CpuInfo: 6.4.0
@@ -36,6 +36,6 @@ Shizuku: 13.6.0.r1086.2650830c
 Spotify_Revanced: 9.0.72.949
 Symphony: 2024.12.115
 Termux: 0.118.3
-ThunderbirdAndroid: 11.1
+ThunderbirdAndroid: 12.1
 VisualCodeSpace: 2.0.1
 Ytdlnis: 1.8.5
