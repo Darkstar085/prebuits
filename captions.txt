@@ -1,12 +1,6 @@
-📦 <b>File name</b> – BreezyWeather_v6.0.11-rc_freenet.apk
-    🌦️ Clean, customizable open-source weather app
-🚀 Version: 6.0.10-rc_freenet → 6.0.11-rc_freenet
+📦 <b>File name</b> – DuckDuckGo_v5.247.0.apk
+    🦆 Private, tracker-blocking browser
+🚀 Version: 5.246.0 → 5.247.0
 
-Changelog: <a href='https://github.com/breezy-weather/breezy-weather/releases/latest'>BreezyWeather</a>
-    ----
-📦 <b>File name</b> – ThunderbirdAndroid_v12.1.apk
-    📧 Official Thunderbird email client for Android
-🚀 Version: 11.1 → 12.1
-
-Changelog: <a href='https://github.com/thunderbird/thunderbird-android/releases/latest'>ThunderbirdAndroid</a>
+Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
     ----
