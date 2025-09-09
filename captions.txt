@@ -1,18 +1,12 @@
-📦 <b>File name</b> – AmazeFileManager_v1.11.6.apk
-    📂 Fast, customizable file manager
-🚀 Version: 3.10 → 1.11.6
+📦 <b>File name</b> – *_v*.apk
+    📦 No description available
+🆕 Version: *
 
-Changelog: <a href='https://github.com/TeamAmaze/AmazeFileManager/releases/latest'>AmazeFileManager</a>
+Changelog: <a href=''>*</a>
     ----
-📦 <b>File name</b> – Fossify_MusicPlayer_v1.2.3.apk
-    🎶 Modern music player by Fossify
-🚀 Version: 1.2.2 → 1.2.3
-
-Changelog: <a href='https://github.com/FossifyOrg/Music-Player/releases/latest'>Fossify_MusicPlayer</a>
-    ----
-📦 <b>File name</b> – ABDownloadManager_vunknown.exe
+📦 <b>File name</b> – ABDownloadManager_v1.6.11.exe
     📥 Powerful download manager with multi-threading
-🆕 Version: unknown
+🚀 Version: unknown → 1.6.11
 
 Changelog: <a href='https://github.com/amir1376/ab-download-manager/releases/latest'>ABDownloadManager</a>
     ----
