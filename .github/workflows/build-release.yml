@@ -19,6 +19,8 @@ jobs:
       ACCESS_TOKEN: ${{ secrets.TOKEN }}
       GH_TOKEN: ${{ secrets.TOKEN }}
 
+      ABDOWNLOADER_REPO: "amir1376/ab-download-manager"
+      ACODE_REPO: "Acode-Foundation/Acode"
       AEGIS_REPO: "beemdevelopment/Aegis"
       AMAZEFILEMANAGER_REPO: "TeamAmaze/AmazeFileManager"
       AMAROK_HIDER_REPO: "deltazefiro/Amarok-Hider"
@@ -74,6 +76,12 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y aapt gh
+
+      - name: Download AB Download Manager
+        run: gh release download --repo ${{ env.ABDOWNLOADER_REPO }} --pattern "*windows_x64*.exe" || true
+
+      - name: Download Acode
+        run: gh release download --repo ${{ env.ACODE_REPO }} --pattern "*app-fdroid-release*.apk" || true
 
       - name: Download Aegis
         run: gh release download --repo ${{ env.AEGIS_REPO }} --pattern "*.apk" || true
@@ -232,7 +240,7 @@ jobs:
         run: |
           cp latest-apk-versions.txt old-apk-versions.txt 2>/dev/null || touch old-apk-versions.txt
 
-      - name: Version and rename APKs
+      - name: Version and rename APKs and EXE
         id: versioning
         run: |
           set -e
@@ -248,6 +256,8 @@ jobs:
           fi
 
           declare -A apps=(
+            ["*windows_x64*.exe"]="ABDownloadManager"
+            ["*app-fdroid-release*.apk"]="Acode"
             ["*aegis*.apk"]="Aegis"
             ["*Amarok*.apk"]="AmarokHider"
             ["*Arcticons*.apk"]="Arcticons"
@@ -300,15 +310,31 @@ jobs:
             APP=${apps[$pattern]}
             [ -z "$NEW_APK" ] && continue
 
+            # Skip checks for EXE; extract version from filename only
+            if [[ "$NEW_APK" == *.exe ]]; then
+              NEW_VER=$(echo "$NEW_APK" | sed -nE 's/.*_v([0-9.]+).*\.exe/\1/p')
+              [ -z "$NEW_VER" ] && NEW_VER="unknown"
+              OLD_VER="${OLD[$APP]:-}"
+              if [ -n "$OLD_VER" ] && [ "$OLD_VER" = "$NEW_VER" ]; then
+                echo "$APP unchanged (v$NEW_VER) — skipping"
+                rm -f "$NEW_APK"
+                continue
+              fi
+              NEW_FILE="${APP}_v${NEW_VER}.exe"
+              mv "$NEW_APK" "$NEW_FILE"
+              UPDATED_APPS+="$APP(v$NEW_VER) "
+              echo "Will update $APP → v$NEW_VER (was: ${OLD_VER:-none})"
+              continue
+            fi
+
+            # Regular APK version extraction
             NEW_VER=$(aapt dump badging "$NEW_APK" | grep versionName | sed -E "s/.*versionName='([^']+)'.*/\1/")
             OLD_VER="${OLD[$APP]:-}"
-
             if [ -n "$OLD_VER" ] && [ "$OLD_VER" = "$NEW_VER" ]; then
               echo "$APP unchanged (v$NEW_VER) — skipping"
               rm -f "$NEW_APK"
               continue
             fi
-
             NEW_FILE="${APP}_v${NEW_VER}.apk"
             mv "$NEW_APK" "$NEW_FILE"
             UPDATED_APPS+="$APP(v$NEW_VER) "
@@ -341,6 +367,8 @@ jobs:
           fi
 
           declare -A app_desc=(
+            ["ABDownloadManager"]="Powerful download manager with multi-threading"
+            ["Acode"]="Lightweight yet powerful code editor"
             ["Aegis"]="Modern two-factor authentication app"
             ["AmazeFileManager"]="Fast, customizable file manager"
             ["AmarokHider"]="Hide apps as your choice"
@@ -389,6 +417,8 @@ jobs:
           )
 
           declare -A app_emoji=(
+            ["ABDownloadManager"]="📥"
+            ["Acode"]="💻"
             ["Aegis"]="🔐"
             ["AmazeFileManager"]="📂"
             ["AmarokHider"]="🙈"
@@ -437,6 +467,8 @@ jobs:
           )
 
           declare -A app_repo=(
+            ["ABDownloadManager"]="https://github.com/amir1376/ab-download-manager/releases/latest"
+            ["Acode"]="https://github.com/Acode-Foundation/Acode/releases/latest"
             ["Aegis"]="https://github.com/beemdevelopment/Aegis/releases/latest"
             ["AmazeFileManager"]="https://github.com/TeamAmaze/AmazeFileManager/releases/latest"
             ["AmarokHider"]="https://github.com/deltazefiro/Amarok-Hider/releases/latest"
@@ -485,12 +517,12 @@ jobs:
           )
 
           rm -f captions.txt
-          for apkfile in *_v*.apk; do
+          for apkfile in *_v*.apk *_v*.exe; do
             FILE=$(basename "$apkfile")
             APP="${FILE%%_v*}"
             EMOJI="${app_emoji[$APP]:-📦}"
             DESC="${app_desc[$APP]:-No description available}"
-            NEW_VER=$(echo "$FILE" | sed -E 's/.*_v(.*)\.apk/\1/')
+            NEW_VER=$(echo "$FILE" | sed -E 's/.*_v(.*)\.(apk|exe)/\1/')
             OLD_VER="${old_versions[$APP]:-}"
 
             if [ "$OLD_VER" = "$NEW_VER" ]; then
@@ -527,9 +559,9 @@ jobs:
           fi
 
           declare -A new_versions
-          for apk in *_v*.apk; do
+          for apk in *_v*.apk *_v*.exe; do
             APP="${apk%%_v*}"
-            VER="$(echo "$apk" | sed -E 's/.*_v(.*)\.apk/\1/')"
+            VER="$(echo "$apk" | sed -E 's/.*_v(.*)\.(apk|exe)/\1/')"
             new_versions["$APP"]="$VER"
           done
 
@@ -545,10 +577,10 @@ jobs:
           done
 
           if [ -z "$NOTES" ]; then
-            if ls *_v*.apk 1>/dev/null 2>&1; then
-              for apk in *_v*.apk; do
+            if ls *_v*.apk *_v*.exe 1>/dev/null 2>&1; then
+              for apk in *_v*.apk *_v*.exe; do
                 APP="${apk%%_v*}"
-                VER="$(echo "$apk" | sed -E 's/.*_v(.*)\.apk/\1/')"
+                VER="$(echo "$apk" | sed -E 's/.*_v(.*)\.(apk|exe)/\1/')"
                 NOTES+="$APP: $VER"$'\n'
               done
             else
@@ -579,9 +611,9 @@ jobs:
             done < latest-apk-versions.txt
           fi
 
-          for apk in *_v*.apk; do
+          for apk in *_v*.apk *_v*.exe; do
             APP="${apk%%_v*}"
-            VER="$(echo "$apk" | sed -E 's/.*_v(.*)\.apk/\1/')"
+            VER="$(echo "$apk" | sed -E 's/.*_v(.*)\.(apk|exe)/\1/')"
             LATEST["$APP"]="$VER"
           done
 
@@ -598,6 +630,7 @@ jobs:
           body: ${{ env.RELEASE_NOTES }}
           files: |
             *_v*.apk
+            *_v*.exe
         env:
           GITHUB_TOKEN: ${{ env.ACCESS_TOKEN }}
 
