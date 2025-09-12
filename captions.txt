@@ -1,6 +1,6 @@
-📦 <b>File name</b> – ABDownloadManager_v1.6.12.exe
-    📥 Powerful download manager with multi-threading
-🚀 Version: 1.6.11 → 1.6.12
+📦 <b>File name</b> – Cromite_v140.0.7339.128.apk
+    🌐 Bromite-based privacy browser
+🚀 Version: 140.0.7339.81 → 140.0.7339.128
 
-Changelog: <a href='https://github.com/amir1376/ab-download-manager/releases/latest'>ABDownloadManager</a>
+Changelog: <a href='https://github.com/uazo/cromite/releases/latest'>Cromite</a>
     ----
