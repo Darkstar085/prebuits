@@ -27,7 +27,7 @@ LocalSend: 1.17.0
 MoeList: 3.8.0
 Omni: 1.3
 PhonographPlus: 1.11.0
-PrismFileExplorer: 1.3.1
+PrismFileExplorer: 1.3.2
 ReVanced_GooglePhotos: 7.44.0.803164237
 ReVanced_MicroG: 0.3.1.4.240913
 ReVanced_YTMusic: 8.25.54
