@@ -1,12 +1,12 @@
-📦 <b>File name</b> – ReVanced_GooglePhotos_v7.45.0.804174563.apk
-    📷 Google Photos with premium/unlocked features
-🚀 Version: 7.44.0.803164237 → 7.45.0.804174563
+📦 <b>File name</b> – Cherrygram_v12.0.1.apk
+    🍒 Enhanced Telegram client with extra features
+🚀 Version: 11.14.1 → 12.0.1
 
-Changelog: <a href='https://github.com/j-hc/revanced-magisk-module/releases/latest'>ReVanced_GooglePhotos</a>
+Changelog: <a href='https://github.com/arsLan4k1390/Cherrygram/releases/latest'>Cherrygram</a>
     ----
-📦 <b>File name</b> – ReVanced_YTMusic_v7.29.52.apk
-    🎵 YouTube Music with premium unlock, ad-block and advanced playback
-🚀 Version: 8.25.54 → 7.29.52
+📦 <b>File name</b> – ABDownloadManager_v1.6.13.exe
+    📥 Powerful download manager with multi-threading
+🚀 Version: 1.6.12 → 1.6.13
 
-Changelog: <a href='https://github.com/j-hc/revanced-magisk-module/releases/latest'>ReVanced_YTMusic</a>
+Changelog: <a href='https://github.com/amir1376/ab-download-manager/releases/latest'>ABDownloadManager</a>
     ----

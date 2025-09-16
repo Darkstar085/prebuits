@@ -1,12 +1,12 @@
 *: *
-ABDownloadManager: 1.6.12
+ABDownloadManager: 1.6.13
 Aegis: 3.4.1
 AmarokHider: 0.9.3
 AmazeFileManager: 1.11.6
 Arcticons: 13.4.6
 Bitwarden: 2025.8.1
 BreezyWeather: 6.0.11-rc_freenet
-Cherrygram: 11.14.1
+Cherrygram: 12.0.1
 ConverterNOW: 4.4.0
 CpuInfo: 6.4.0
 Cromite: 140.0.7339.128
