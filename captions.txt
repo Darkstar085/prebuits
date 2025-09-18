@@ -1,12 +1,12 @@
-📦 <b>File name</b> – Cherrygram_v12.0.1.apk
-    🍒 Enhanced Telegram client with extra features
-🚀 Version: 11.14.1 → 12.0.1
+📦 <b>File name</b> – DuckDuckGo_v5.249.0.apk
+    🦆 Private, tracker-blocking browser
+🚀 Version: 5.248.0 → 5.249.0
 
-Changelog: <a href='https://github.com/arsLan4k1390/Cherrygram/releases/latest'>Cherrygram</a>
+Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
     ----
-📦 <b>File name</b> – ABDownloadManager_v1.6.13.exe
-    📥 Powerful download manager with multi-threading
-🚀 Version: 1.6.12 → 1.6.13
+📦 <b>File name</b> – ReVanced_GooglePhotos_v7.45.0.807274941.apk
+    📷 Google Photos with premium/unlocked features
+🚀 Version: 7.45.0.804174563 → 7.45.0.807274941
 
-Changelog: <a href='https://github.com/amir1376/ab-download-manager/releases/latest'>ABDownloadManager</a>
+Changelog: <a href='https://github.com/j-hc/revanced-magisk-module/releases/latest'>ReVanced_GooglePhotos</a>
     ----
