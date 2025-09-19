@@ -4,7 +4,7 @@ Aegis: 3.4.1
 AmarokHider: 0.9.3
 AmazeFileManager: 1.11.6
 Arcticons: 13.4.6
-Bitwarden: 2025.8.1
+Bitwarden: 2025.9.0
 BreezyWeather: 6.0.11-rc_freenet
 Cherrygram: 12.0.1
 ConverterNOW: 4.4.0
