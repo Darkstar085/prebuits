@@ -33,7 +33,7 @@ ReVanced_MicroG: 0.3.1.4.240913
 ReVanced_YTMusic: 7.29.52
 ReVanced_YouTube: 20.13.41
 RevancedManager: 1.25.1
-Sdmaid: 1.4.15-rc0
+Sdmaid: 1.5.1-rc0
 Shizuku: 13.6.0.r1086.2650830c
 Spotify_Revanced: 9.0.72.949
 Symphony: 2024.12.115
