@@ -1,12 +1,12 @@
-📦 <b>File name</b> – Fossify_Keyboard_v1.5.0.apk
-    ⌨️ Easy keyboard for inserting texts, special characters and numbers
-🚀 Version: 1.4.0 → 1.5.0
+📦 <b>File name</b> – DuckDuckGo_v5.250.0.apk
+    🦆 Private, tracker-blocking browser
+🚀 Version: 5.249.0 → 5.250.0
 
-Changelog: <a href='https://github.com/FossifyOrg/Keyboard/releases/latest'>Fossify_Keyboard</a>
+Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
     ----
-📦 <b>File name</b> – Fossify_Notes_v1.4.2.apk
-    🗒️ Secure, privacy-focused notes app by Fossify
-🚀 Version: 1.4.1 → 1.4.2
+📦 <b>File name</b> – IceravenBrowser_viceraven-2.36.0.apk
+    🦦 Privacy-focused web browser
+🚀 Version: iceraven-2.35.0 → iceraven-2.36.0
 
-Changelog: <a href='https://github.com/FossifyOrg/Notes/releases/latest'>Fossify_Notes</a>
+Changelog: <a href='https://github.com/fork-maintainers/iceraven-browser/releases/latest'>IceravenBrowser</a>
     ----
