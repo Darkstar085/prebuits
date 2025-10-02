@@ -1,6 +1,6 @@
-📦 <b>File name</b> – ABDownloadManager_v1.6.14.exe
-    📥 Powerful download manager with multi-threading
-🚀 Version: 1.6.13 → 1.6.14
+📦 <b>File name</b> – DeltaIcons_v2.8.0.apk
+    🎨 Beautiful, minimal icon pack
+🚀 Version: 2.7.0 → 2.8.0
 
-Changelog: <a href='https://github.com/amir1376/ab-download-manager/releases/latest'>ABDownloadManager</a>
+Changelog: <a href='https://github.com/Delta-Icons/android/releases/latest'>DeltaIcons</a>
     ----
