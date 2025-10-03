@@ -1,6 +1,12 @@
-📦 <b>File name</b> – DeltaIcons_v2.8.0.apk
-    🎨 Beautiful, minimal icon pack
-🚀 Version: 2.7.0 → 2.8.0
+📦 <b>File name</b> – Bitwarden_v2025.9.1.apk
+    🔑 Open-source password manager with cloud sync
+🚀 Version: 2025.9.0 → 2025.9.1
 
-Changelog: <a href='https://github.com/Delta-Icons/android/releases/latest'>DeltaIcons</a>
+Changelog: <a href='https://github.com/bitwarden/android/releases/latest'>Bitwarden</a>
+    ----
+📦 <b>File name</b> – DuckDuckGo_v5.251.0.apk
+    🦆 Private, tracker-blocking browser
+🚀 Version: 5.250.1 → 5.251.0
+
+Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
     ----

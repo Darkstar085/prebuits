@@ -4,7 +4,7 @@ Aegis: 3.4.1
 AmarokHider: 0.9.3
 AmazeFileManager: 1.11.6
 Arcticons: 13.4.6
-Bitwarden: 2025.9.0
+Bitwarden: 2025.9.1
 BreezyWeather: 6.0.11-rc_freenet
 Cherrygram: 12.0.1
 ConverterNOW: 4.4.0
@@ -12,7 +12,7 @@ CpuInfo: 6.4.0
 Cromite: 140.0.7339.186
 DeltaIcons: 2.8.0
 DotGallery: 3.2.0
-DuckDuckGo: 5.250.1
+DuckDuckGo: 5.251.0
 Flip2DND: 8.0.0
 Florisboard: 0.5.1
 Fossify_Calculator: 1.1.0
