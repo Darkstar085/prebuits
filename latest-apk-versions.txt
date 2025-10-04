@@ -9,7 +9,7 @@ BreezyWeather: 6.0.11-rc_freenet
 Cherrygram: 12.0.1
 ConverterNOW: 4.4.0
 CpuInfo: 6.4.0
-Cromite: 140.0.7339.186
+Cromite: 141.0.7390.55
 DeltaIcons: 2.8.0
 DotGallery: 3.2.0
 DuckDuckGo: 5.251.1
@@ -26,7 +26,7 @@ LibreTube: 0.28.1
 LocalSend: 1.17.0
 MoeList: 3.8.0
 Omni: 1.3
-PhonographPlus: 1.11.0
+PhonographPlus: 1.11.1
 PrismFileExplorer: 1.3.2
 ReVanced_GooglePhotos: 7.47.0.810631069
 ReVanced_MicroG: 0.3.1.4.240913

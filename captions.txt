@@ -1,6 +1,12 @@
-📦 <b>File name</b> – DuckDuckGo_v5.251.1.apk
-    🦆 Private, tracker-blocking browser
-🚀 Version: 5.251.0 → 5.251.1
+📦 <b>File name</b> – Cromite_v141.0.7390.55.apk
+    🌐 Bromite-based privacy browser
+🚀 Version: 140.0.7339.186 → 141.0.7390.55
 
-Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
+Changelog: <a href='https://github.com/uazo/cromite/releases/latest'>Cromite</a>
+    ----
+📦 <b>File name</b> – PhonographPlus_v1.11.1.apk
+    🎧 Enhanced music player fork
+🚀 Version: 1.11.0 → 1.11.1
+
+Changelog: <a href='https://github.com/chr56/Phonograph_Plus/releases/latest'>PhonographPlus</a>
     ----
