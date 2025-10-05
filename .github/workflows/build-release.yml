@@ -22,7 +22,6 @@ jobs:
       ABDOWNLOADER_REPO: "amir1376/ab-download-manager"
       ACODE_REPO: "Acode-Foundation/Acode"
       AEGIS_REPO: "beemdevelopment/Aegis"
-      AMAZEFILEMANAGER_REPO: "TeamAmaze/AmazeFileManager"
       AMAROK_HIDER_REPO: "deltazefiro/Amarok-Hider"
       ARCTICONS_REPO: "Arcticons-Team/Arcticons"
       BITWARDEN_REPO: "bitwarden/android"
@@ -89,9 +88,6 @@ jobs:
       - name: Download Aegis
         run: gh release download --repo ${{ env.AEGIS_REPO }} --pattern "*.apk" || true
 
-      - name: Download Amaze File Manager
-        run: gh release download --repo ${{ env.AMAZEFILEMANAGER_REPO }} --pattern "*app-fdroid-release*.apk" || true
-
       - name: Download Amarok Hider
         run: |
           gh release download --repo ${{ env.AMAROK_HIDER_REPO }} --pattern "*.apk" || true
@@ -140,6 +136,7 @@ jobs:
         run: |
           gh release download --repo ${{ env.FLIP2DND_REPO }} --pattern "*.apk" || true
           mv app-release.apk Flip2DND.apk || true
+          rm -f app-release.apk || true
 
       - name: Download Fossify Calculator
         run: gh release download --repo ${{ env.FOSSIFY_CALC_REPO }} --pattern "*.apk" || true
@@ -172,6 +169,7 @@ jobs:
         run: |
           gh release download --repo ${{ env.LTECLEANER_REPO }} --pattern "*app-release*.apk" || true
           mv app-release.apk LTECleanerFOSS.apk || true
+          rm -f app-release.apk || true
 
       - name: Download MicroG RE APK
         run: gh release download --repo ${{ env.MICROG_RE_REPO }} --pattern "*.apk" || true
@@ -186,6 +184,7 @@ jobs:
         run: |
           gh release download --repo ${{ env.OMNI_REPO }} --pattern "*.apk" || true
           mv app-release.apk Omni.apk || true
+          rm -f app-release.apk || true
 
       - name: Download Pixelplay
         run: gh release download --repo ${{ env.PIXELPLAY_REPO }} --pattern "*PixelPlay*.apk" || true
@@ -197,6 +196,7 @@ jobs:
         run: |
           gh release download --repo ${{ env.PRISM_REPO }} --pattern "*.apk" || true
           mv app-release.apk PrismFileExplorer.apk || true
+          rm -f app-release.apk || true
 
       - name: Download RikkaApps Shizuku
         run: gh release download --repo ${{ env.RIKKAAPPS_SHIZUKU_REPO }} --pattern "*.apk" || true
@@ -240,6 +240,7 @@ jobs:
         run: |
           gh release download --repo ${{ env.VCS_REPO }} --pattern "*.apk" || true
           mv app-release.apk VisualCodeSpace.apk || true
+          rm -f app-release.apk || true
 
       - name: Download WeatherMaster APK
         run: gh release download --repo ${{ env.WEATHERMASTER_REPO }} --pattern "*WeatherMaster*v8a*.apk" || true
@@ -275,7 +276,6 @@ jobs:
             ["*aegis*.apk"]="Aegis"
             ["*Amarok*.apk"]="AmarokHider"
             ["*Arcticons*.apk"]="Arcticons"
-            ["*app-fdroid-release*.apk"]="AmazeFileManager"
             ["*bitwarden-fdroid*.apk"]="Bitwarden"
             ["*breezy-weather*.apk"]="BreezyWeather"
             ["Cherrygram*universal*.apk"]="Cherrygram"
@@ -387,7 +387,6 @@ jobs:
             ["ABDownloadManager"]="Powerful download manager with multi-threading"
             ["Acode"]="Lightweight yet powerful code editor"
             ["Aegis"]="Modern two-factor authentication app"
-            ["AmazeFileManager"]="Fast, customizable file manager"
             ["AmarokHider"]="Hide apps as your choice"
             ["Arcticons"]="Modern icon pack and theming app"
             ["Bitwarden"]="Open-source password manager with cloud sync"
@@ -440,7 +439,6 @@ jobs:
             ["ABDownloadManager"]="📥"
             ["Acode"]="💻"
             ["Aegis"]="🔐"
-            ["AmazeFileManager"]="📂"
             ["AmarokHider"]="🙈"
             ["Arcticons"]="🎭"
             ["Bitwarden"]="🔑"
@@ -493,7 +491,6 @@ jobs:
             ["ABDownloadManager"]="https://github.com/amir1376/ab-download-manager/releases/latest"
             ["Acode"]="https://github.com/Acode-Foundation/Acode/releases/latest"
             ["Aegis"]="https://github.com/beemdevelopment/Aegis/releases/latest"
-            ["AmazeFileManager"]="https://github.com/TeamAmaze/AmazeFileManager/releases/latest"
             ["AmarokHider"]="https://github.com/deltazefiro/Amarok-Hider/releases/latest"
             ["Arcticons"]="https://github.com/Arcticons-Team/Arcticons/releases/latest"
             ["Bitwarden"]="https://github.com/bitwarden/android/releases/latest"
