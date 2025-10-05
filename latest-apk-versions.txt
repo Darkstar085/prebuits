@@ -1,5 +1,6 @@
 *: *
 ABDownloadManager: 1.6.14
+Acode: 1.11.6
 Aegis: 3.4.1
 AmarokHider: 0.9.3
 AmazeFileManager: 1.11.6

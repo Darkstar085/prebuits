@@ -1,12 +1,6 @@
-📦 <b>File name</b> – LTECleanerFOSS_v5.1.0.apk
-    🧹 Clean up unnecessary files to free up space
-🆕 Version: 5.1.0
+📦 <b>File name</b> – Acode_v1.11.6.apk
+    💻 Lightweight yet powerful code editor
+🆕 Version: 1.11.6
 
-Changelog: <a href='https://github.com/MDP43140/LTECleanerFOSS/releases/latest'>LTECleanerFOSS</a>
-    ----
-📦 <b>File name</b> – Omni_v1.3.apk
-    🛠️ All-in-one tool app with Compass, Spirit Level, Ruler and Flashlight
-🚀 Version: 5.1.0 → 1.3
-
-Changelog: <a href='https://github.com/FoedusProgramme/Omni/releases/latest'>Omni</a>
+Changelog: <a href='https://github.com/Acode-Foundation/Acode/releases/latest'>Acode</a>
     ----
