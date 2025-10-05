@@ -62,6 +62,8 @@ jobs:
       TERMUX_REPO: "termux/termux-app"
       THUNDERBIRD_REPO: "thunderbird/thunderbird-android"
       VCS_REPO: "Visual-Code-Space/Visual-Code-Space"
+      WEATHERMASTER_REPO: "PranshulGG/WeatherMaster"
+      XED_EDITOR_REPO: "Xed-Editor/Xed-Editor"
       YTDLNIS_REPO: "deniscerri/ytdlnis"
 
     steps:
