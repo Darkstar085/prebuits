@@ -169,7 +169,8 @@ jobs:
         run: gh release download --repo ${{ env.LOCAL_SEND_REPO }} --pattern "*google-play*.apk" || true
 
       - name: Download LTECleanerFOSS and Rename APK
-        run: gh release download --repo ${{ env.LTECLEANER_REPO }} --pattern "*app-release*.apk" || true
+        run: |
+          gh release download --repo ${{ env.LTECLEANER_REPO }} --pattern "*app-release*.apk" || true
           mv app-release.apk LTECleanerFOSS.apk || true
 
       - name: Download MicroG RE APK
