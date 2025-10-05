@@ -25,7 +25,8 @@ IceravenBrowser: iceraven-2.36.0
 LibreTube: 0.28.1
 LocalSend: 1.17.0
 MoeList: 3.8.0
-Omni: 1.3
+Momogram: 12.0.1-0300d5e150
+Omni: 5.1.0
 PhonographPlus: 1.11.1
 PrismFileExplorer: 1.3.2
 ReVanced_GooglePhotos: 7.47.0.810631069
