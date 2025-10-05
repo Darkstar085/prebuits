@@ -45,10 +45,13 @@ jobs:
       ICERAVEN_REPO: "fork-maintainers/iceraven-browser"
       LIBRETUBE_REPO: "libre-tube/LibreTube"
       LOCAL_SEND_REPO: "localsend/localsend"
+      LTECLEANER_REPO: "MDP43140/LTECleanerFOSS"
       MICROG_RE_REPO: "WSTxda/MicroG-RE"
       MICROG_REPO: "ReVanced/GmsCore"
       MOELIST_REPO: "axiel7/MoeList"
+      MOMOGRAM_REPO: "dic1911/Momogram"
       OMNI_REPO: "FoedusProgramme/Omni"
+      PIXELPLAY_REPO: "theovilardo/PixelPlay"
       PHONOGRAPHPLUS_REPO: "chr56/Phonograph_Plus"
       PRISM_REPO: "Raival-e/Prism-File-Explorer"
       RIKKAAPPS_SHIZUKU_REPO: "RikkaApps/Shizuku"
@@ -165,16 +168,26 @@ jobs:
       - name: Download LocalSend
         run: gh release download --repo ${{ env.LOCAL_SEND_REPO }} --pattern "*google-play*.apk" || true
 
+      - name: Download LTECleanerFOSS and Rename APK
+        run: gh release download --repo ${{ env.LTECLEANER_REPO }} --pattern "*app-release*.apk" || true
+          mv app-release.apk LTECleanerFOSS.apk || true
+
       - name: Download MicroG RE APK
         run: gh release download --repo ${{ env.MICROG_RE_REPO }} --pattern "*.apk" || true
 
       - name: Download MoeList
         run: gh release download --repo ${{ env.MOELIST_REPO }} --pattern "*universal*.apk" || true
 
+      - name: Download Momogram
+        run: gh release download --repo ${{ env.MOMOGRAM_REPO }} --pattern "*arm64-v8a*.apk" || true
+
       - name: Download Omni APK and Rename APK
         run: |
           gh release download --repo ${{ env.OMNI_REPO }} --pattern "*.apk" || true
           mv app-release.apk Omni.apk || true
+
+      - name: Download Pixelplay
+        run: gh release download --repo ${{ env.PIXELPLAY_REPO }} --pattern "*PixelPlay*.apk" || true
 
       - name: Download Phonograph Plus
         run: gh release download --repo ${{ env.PHONOGRAPHPLUS_REPO }} --pattern "*ModernStableRelease*.apk" || true
@@ -282,9 +295,12 @@ jobs:
             ["*iceraven*.apk"]="IceravenBrowser"
             ["*google-play*.apk"]="LocalSend"
             ["*app-universal-release*.apk"]="LibreTube"
+            ["LTECleanerFOSS.apk"]="LTECleanerFOSS"
             ["*moelist*.apk"]="MoeList"
             ["*microg_release*.apk"]="MicroG_RE"
+            ["*Momo*v8a*.apk"]="Momogram"
             ["Omni.apk"]="Omni"
+            ["*PixelPlay*.apk"]="Pixelplay"
             ["PhonographPlus*.apk"]="PhonographPlus"
             ["Photok*.apk"]="Photok"
             ["PrismFileExplorer.apk"]="PrismFileExplorer"
@@ -393,9 +409,12 @@ jobs:
             ["IceravenBrowser"]="Privacy-focused web browser"
             ["LibreTube"]="Open-source YouTube app focusing on privacy"
             ["LocalSend"]="Secure, local file sharing app"
+            ["LTECleanerFOSS"]="Clean up unnecessary files to free up space"
             ["MicroG_RE"]="MicroG RE - Enhanced Play Services compatibility"
             ["MoeList"]="Anime and manga tracking app"
+            ["Momogram"]="Telegram client with privacy and customization features"
             ["Omni"]="All-in-one tool app with Compass, Spirit Level, Ruler and Flashlight"
+            ["Pixelplay"]="Lightweight music player with Material You design"
             ["PhonographPlus"]="Enhanced music player fork"
             ["Photok"]="Simple photo gallery app"
             ["PrismFileExplorer"]="Powerful, material design file explorer"
@@ -443,9 +462,12 @@ jobs:
             ["IceravenBrowser"]="🦦"
             ["LibreTube"]="🔒"
             ["LocalSend"]="📤"
+            ["LTECleanerFOSS"]="🧹"
             ["MicroG_RE"]="🧩"
             ["MoeList"]="📖"
+            ["Momogram"]="📱"
             ["Omni"]="🛠️"
+            ["Pixelplay"]="🎵"
             ["PhonographPlus"]="🎧"
             ["Photok"]="🖼️"
             ["PrismFileExplorer"]="🗂️"
@@ -493,9 +515,12 @@ jobs:
             ["IceravenBrowser"]="https://github.com/fork-maintainers/iceraven-browser/releases/latest"
             ["LibreTube"]="https://github.com/libre-tube/LibreTube/releases/latest"
             ["LocalSend"]="https://github.com/localsend/localsend/releases/latest"
+            ["LTECleanerFOSS"]="https://github.com/MDP43140/LTECleanerFOSS/releases/latest"
             ["MicroG_RE"]="https://github.com/WSTxda/MicroG-RE/releases/latest"
             ["MoeList"]="https://github.com/axiel7/MoeList/releases/latest"
+            ["Momogram"]="https://github.com/dic1911/Momogram/releases/latest"
             ["Omni"]="https://github.com/FoedusProgramme/Omni/releases/latest"
+            ["Pixelplay"]="https://github.com/theovilardo/PixelPlay/releases/latest"
             ["PhonographPlus"]="https://github.com/chr56/Phonograph_Plus/releases/latest"
             ["Photok"]="https://github.com/leonlatsch/photok/releases/latest"
             ["PrismFileExplorer"]="https://github.com/Raival-e/Prism-File-Explorer/releases/latest"
