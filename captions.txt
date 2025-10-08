@@ -1,12 +1,6 @@
-📦 <b>File name</b> – WeatherMaster_v2.6.4.apk
-    ☁️ Modern weather app with graphs
-🆕 Version: 2.6.4
+📦 <b>File name</b> – DuckDuckGo_v5.252.0.apk
+    🦆 Private, tracker-blocking browser
+🚀 Version: 5.251.1 → 5.252.0
 
-Changelog: <a href='https://github.com/PranshulGG/WeatherMaster/releases/latest'>WeatherMaster</a>
-    ----
-📦 <b>File name</b> – XedEditor_v3.1.9.apk
-    ✏️ Simple and fast text/code editor
-🆕 Version: 3.1.9
-
-Changelog: <a href='https://github.com/Xed-Editor/Xed-Editor/releases/latest'>XedEditor</a>
+Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
     ----
