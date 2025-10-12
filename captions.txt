@@ -1,18 +1,6 @@
-📦 <b>File name</b> – Cromite_v141.0.7390.70.apk
-    🌐 Bromite-based privacy browser
-🚀 Version: 141.0.7390.55 → 141.0.7390.70
+📦 <b>File name</b> – DotGallery_v4.0.0.apk
+    📷 Jetpack Compose-based photo gallery app
+🚀 Version: 3.2.0 → 4.0.0
 
-Changelog: <a href='https://github.com/uazo/cromite/releases/latest'>Cromite</a>
-    ----
-📦 <b>File name</b> – Fossify_Notes_v1.5.0.apk
-    🗒️ Secure, privacy-focused notes app by Fossify
-🚀 Version: 1.4.2 → 1.5.0
-
-Changelog: <a href='https://github.com/FossifyOrg/Notes/releases/latest'>Fossify_Notes</a>
-    ----
-📦 <b>File name</b> – Pixelplay_v0.2.0-beta.apk
-    🎵 Lightweight music player with Material You design
-🆕 Version: 0.2.0-beta
-
-Changelog: <a href='https://github.com/theovilardo/PixelPlay/releases/latest'>Pixelplay</a>
+Changelog: <a href='https://github.com/IacobIonut01/Gallery/releases/latest'>DotGallery</a>
     ----

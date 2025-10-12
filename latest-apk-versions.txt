@@ -12,7 +12,7 @@ ConverterNOW: 4.4.0
 CpuInfo: 6.4.0
 Cromite: 141.0.7390.70
 DeltaIcons: 2.8.0
-DotGallery: 3.2.0
+DotGallery: 4.0.0
 DuckDuckGo: 5.252.0
 Flip2DND: 8.0.0
 Florisboard: 0.5.1
