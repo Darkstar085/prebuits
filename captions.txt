@@ -1,6 +1,6 @@
-📦 <b>File name</b> – Ytdlnis_v1.8.6.apk
-    ⬇️ YouTube downloader with advanced features
-🚀 Version: 1.8.5 → 1.8.6
+📦 <b>File name</b> – ABDownloadManager_v1.7.0.exe
+    📥 Powerful download manager with multi-threading
+🚀 Version: 1.6.14 → 1.7.0
 
-Changelog: <a href='https://github.com/deniscerri/ytdlnis/releases/latest'>Ytdlnis</a>
+Changelog: <a href='https://github.com/amir1376/ab-download-manager/releases/latest'>ABDownloadManager</a>
     ----
