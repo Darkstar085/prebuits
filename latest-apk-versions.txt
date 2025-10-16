@@ -27,7 +27,7 @@ LTECleanerFOSS: 5.1.0
 LibreTube: 0.28.1
 LocalSend: 1.17.0
 MoeList: 3.8.0
-Momogram: 12.0.1-0300d5e150
+Momogram: 12.0.1-651cab6201
 Omni: 1.3
 PhonographPlus: 1.11.1
 Pixelplay: 0.2.0-beta
