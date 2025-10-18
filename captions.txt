@@ -1,12 +1,6 @@
-📦 <b>File name</b> – Bitwarden_v2025.10.0.apk
-    🔑 Open-source password manager with cloud sync
-🚀 Version: 2025.9.1 → 2025.10.0
+📦 <b>File name</b> – Cromite_v141.0.7390.111.apk
+    🌐 Bromite-based privacy browser
+🚀 Version: 141.0.7390.70 → 141.0.7390.111
 
-Changelog: <a href='https://github.com/bitwarden/android/releases/latest'>Bitwarden</a>
-    ----
-📦 <b>File name</b> – DuckDuckGo_v5.253.0.apk
-    🦆 Private, tracker-blocking browser
-🚀 Version: 5.252.0 → 5.253.0
-
-Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
+Changelog: <a href='https://github.com/uazo/cromite/releases/latest'>Cromite</a>
     ----
