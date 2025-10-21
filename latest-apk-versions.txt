@@ -42,7 +42,7 @@ Shizuku: 13.6.0.r1086.2650830c
 Spotify_Revanced: 9.0.72.949
 Symphony: 2024.12.115
 Termux: 0.118.3
-ThunderbirdAndroid: 12.1
+ThunderbirdAndroid: 13.0
 VisualCodeSpace: 2.0.1
 WeatherMaster: 2.6.4
 XedEditor: 3.2.1
