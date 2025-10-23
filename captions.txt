@@ -1,6 +1,6 @@
-📦 <b>File name</b> – ThunderbirdAndroid_v13.0.apk
-    📧 Official Thunderbird email client for Android
-🚀 Version: 12.1 → 13.0
+📦 <b>File name</b> – DuckDuckGo_v5.253.1.apk
+    🦆 Private, tracker-blocking browser
+🚀 Version: 5.253.0 → 5.253.1
 
-Changelog: <a href='https://github.com/thunderbird/thunderbird-android/releases/latest'>ThunderbirdAndroid</a>
+Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
     ----
