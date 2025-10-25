@@ -13,7 +13,7 @@ CpuInfo: 6.4.0
 Cromite: 141.0.7390.127
 DeltaIcons: 2.8.0
 DotGallery: 4.0.0
-DuckDuckGo: 5.254.0
+DuckDuckGo: 5.254.1
 Flip2DND: 8.0.0
 Florisboard: 0.5.1
 Fossify_Calculator: 1.1.0
@@ -32,7 +32,7 @@ Omni: 1.3
 PhonographPlus: 1.11.1
 Pixelplay: 0.2.0-beta
 PrismFileExplorer: 1.3.2
-ReVanced_GooglePhotos: 7.49.0.816946145
+ReVanced_GooglePhotos: 7.51.0.822217012
 ReVanced_MicroG: 0.3.1.4.240913
 ReVanced_YTMusic: 8.10.52
 ReVanced_YouTube: 20.14.43
