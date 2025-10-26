@@ -24,7 +24,7 @@ Fossify_VoiceRecorder: 1.4.0
 Gramophone: 1.0.17
 IceravenBrowser: iceraven-2.37.0
 LTECleanerFOSS: 5.1.0
-LibreTube: 0.28.1
+LibreTube: 0.29.0
 LocalSend: 1.17.0
 MoeList: 3.8.0
 Momogram: 12.0.1-651cab6201
