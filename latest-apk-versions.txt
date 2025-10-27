@@ -7,7 +7,7 @@ AmazeFileManager: 1.11.6
 Arcticons: 13.4.6
 Bitwarden: 2025.10.0
 BreezyWeather: 6.0.11-rc_freenet
-Cherrygram: 12.0.1
+Cherrygram: 12.1.1
 ConverterNOW: 4.4.0
 CpuInfo: 6.4.0
 Cromite: 141.0.7390.127

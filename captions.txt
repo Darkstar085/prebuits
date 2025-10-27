@@ -1,6 +1,6 @@
-📦 <b>File name</b> – LibreTube_v0.29.0.apk
-    🔒 Open-source YouTube app focusing on privacy
-🚀 Version: 0.28.1 → 0.29.0
+📦 <b>File name</b> – Cherrygram_v12.1.1.apk
+    🍒 Enhanced Telegram client with extra features
+🚀 Version: 12.0.1 → 12.1.1
 
-Changelog: <a href='https://github.com/libre-tube/LibreTube/releases/latest'>LibreTube</a>
+Changelog: <a href='https://github.com/arsLan4k1390/Cherrygram/releases/latest'>Cherrygram</a>
     ----
