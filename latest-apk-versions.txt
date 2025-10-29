@@ -30,7 +30,7 @@ MoeList: 3.8.0
 Momogram: 12.0.1-651cab6201
 Omni: 1.3
 PhonographPlus: 1.11.1
-Pixelplay: 0.2.0-beta
+Pixelplay: 0.3.0-beta
 PrismFileExplorer: 1.3.2
 ReVanced_GooglePhotos: 7.51.0.822217012
 ReVanced_MicroG: 0.3.1.4.240913
