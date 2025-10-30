@@ -16,11 +16,11 @@ DotGallery: 4.0.0
 DuckDuckGo: 5.254.1
 Flip2DND: 8.0.0
 Florisboard: 0.5.1
-Fossify_Calculator: 1.1.0
-Fossify_Keyboard: 1.5.0
-Fossify_MusicPlayer: 1.4.0
-Fossify_Notes: 1.5.0
-Fossify_VoiceRecorder: 1.4.0
+Fossify_Calculator: 1.2.0
+Fossify_Keyboard: 1.6.0
+Fossify_MusicPlayer: 1.5.0
+Fossify_Notes: 1.6.0
+Fossify_VoiceRecorder: 1.5.0
 Gramophone: 1.0.17
 IceravenBrowser: iceraven-2.37.0
 LTECleanerFOSS: 5.1.0
