@@ -1,30 +1,6 @@
-📦 <b>File name</b> – Fossify_Calculator_v1.2.0.apk
-    🧮 Open-source, privacy-friendly calculator by Fossify
-🚀 Version: 1.1.0 → 1.2.0
+📦 <b>File name</b> – Cromite_v142.0.7444.60.apk
+    🌐 Bromite-based privacy browser
+🚀 Version: 141.0.7390.127 → 142.0.7444.60
 
-Changelog: <a href='https://github.com/FossifyOrg/Calculator/releases/latest'>Fossify_Calculator</a>
-    ----
-📦 <b>File name</b> – Fossify_Keyboard_v1.6.0.apk
-    ⌨️ Easy keyboard for inserting texts, special characters and numbers
-🚀 Version: 1.5.0 → 1.6.0
-
-Changelog: <a href='https://github.com/FossifyOrg/Keyboard/releases/latest'>Fossify_Keyboard</a>
-    ----
-📦 <b>File name</b> – Fossify_MusicPlayer_v1.5.0.apk
-    🎶 Modern music player by Fossify
-🚀 Version: 1.4.0 → 1.5.0
-
-Changelog: <a href='https://github.com/FossifyOrg/Music-Player/releases/latest'>Fossify_MusicPlayer</a>
-    ----
-📦 <b>File name</b> – Fossify_Notes_v1.6.0.apk
-    🗒️ Secure, privacy-focused notes app by Fossify
-🚀 Version: 1.5.0 → 1.6.0
-
-Changelog: <a href='https://github.com/FossifyOrg/Notes/releases/latest'>Fossify_Notes</a>
-    ----
-📦 <b>File name</b> – Fossify_VoiceRecorder_v1.5.0.apk
-    🎤 Simple, privacy-respecting voice recorder by Fossify
-🚀 Version: 1.4.0 → 1.5.0
-
-Changelog: <a href='https://github.com/FossifyOrg/Voice-Recorder/releases/latest'>Fossify_VoiceRecorder</a>
+Changelog: <a href='https://github.com/uazo/cromite/releases/latest'>Cromite</a>
     ----
