@@ -1,6 +1,6 @@
-📦 <b>File name</b> – Cromite_v142.0.7444.60.apk
-    🌐 Bromite-based privacy browser
-🚀 Version: 141.0.7390.127 → 142.0.7444.60
+📦 <b>File name</b> – XedEditor_v3.2.3.apk
+    ✏️ Simple and fast text/code editor
+🚀 Version: 3.2.1 → 3.2.3
 
-Changelog: <a href='https://github.com/uazo/cromite/releases/latest'>Cromite</a>
+Changelog: <a href='https://github.com/Xed-Editor/Xed-Editor/releases/latest'>XedEditor</a>
     ----
