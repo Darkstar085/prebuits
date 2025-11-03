@@ -1,12 +1,6 @@
-📦 <b>File name</b> – DeltaIcons_v2.9.0.apk
-    🎨 Beautiful, minimal icon pack
-🚀 Version: 2.8.0 → 2.9.0
+📦 <b>File name</b> – XedEditor_v3.2.4.apk
+    ✏️ Simple and fast text/code editor
+🚀 Version: 3.2.3 → 3.2.4
 
-Changelog: <a href='https://github.com/Delta-Icons/android/releases/latest'>DeltaIcons</a>
-    ----
-📦 <b>File name</b> – ReVanced_GooglePhotos_v7.52.0.825653635.apk
-    📷 Google Photos with premium/unlocked features
-🚀 Version: 7.51.0.822217012 → 7.52.0.825653635
-
-Changelog: <a href='https://github.com/j-hc/revanced-magisk-module/releases/latest'>ReVanced_GooglePhotos</a>
+Changelog: <a href='https://github.com/Xed-Editor/Xed-Editor/releases/latest'>XedEditor</a>
     ----

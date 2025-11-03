@@ -45,5 +45,5 @@ Termux: 0.118.3
 ThunderbirdAndroid: 13.0
 VisualCodeSpace: 2.0.1
 WeatherMaster: 2.6.5
-XedEditor: 3.2.3
+XedEditor: 3.2.4
 Ytdlnis: 1.8.6
