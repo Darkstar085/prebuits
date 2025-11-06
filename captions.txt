@@ -1,6 +1,6 @@
-📦 <b>File name</b> – XedEditor_v3.2.4.apk
-    ✏️ Simple and fast text/code editor
-🚀 Version: 3.2.3 → 3.2.4
+📦 <b>File name</b> – Fossify_MusicPlayer_v1.5.1.apk
+    🎶 Modern music player by Fossify
+🚀 Version: 1.5.0 → 1.5.1
 
-Changelog: <a href='https://github.com/Xed-Editor/Xed-Editor/releases/latest'>XedEditor</a>
+Changelog: <a href='https://github.com/FossifyOrg/Music-Player/releases/latest'>Fossify_MusicPlayer</a>
     ----
