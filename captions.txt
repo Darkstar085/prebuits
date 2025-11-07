@@ -1,6 +1,6 @@
-📦 <b>File name</b> – Flip2DND_v8.0.1.apk
-    🤳 Flip your phone to toggle Do Not Disturb automatically
-🚀 Version: 8.0.0 → 8.0.1
+📦 <b>File name</b> – DuckDuckGo_v5.256.0.apk
+    🦆 Private, tracker-blocking browser
+🚀 Version: 5.255.0 → 5.256.0
 
-Changelog: <a href='https://github.com/robinsrk/flip_2_dnd/releases/latest'>Flip2DND</a>
+Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
     ----
