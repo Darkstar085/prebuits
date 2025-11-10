@@ -1,6 +1,18 @@
-📦 <b>File name</b> – Cromite_v142.0.7444.138.apk
-    🌐 Bromite-based privacy browser
-🚀 Version: 142.0.7444.60 → 142.0.7444.138
+📦 <b>File name</b> – Fossify_MusicPlayer_v1.6.0.apk
+    🎶 Modern music player by Fossify
+🚀 Version: 1.5.1 → 1.6.0
 
-Changelog: <a href='https://github.com/uazo/cromite/releases/latest'>Cromite</a>
+Changelog: <a href='https://github.com/FossifyOrg/Music-Player/releases/latest'>Fossify_MusicPlayer</a>
+    ----
+📦 <b>File name</b> – Fossify_VoiceRecorder_v1.5.1.apk
+    🎤 Simple, privacy-respecting voice recorder by Fossify
+🚀 Version: 1.5.0 → 1.5.1
+
+Changelog: <a href='https://github.com/FossifyOrg/Voice-Recorder/releases/latest'>Fossify_VoiceRecorder</a>
+    ----
+📦 <b>File name</b> – LibreTube_v0.29.1.apk
+    🔒 Open-source YouTube app focusing on privacy
+🚀 Version: 0.29.0 → 0.29.1
+
+Changelog: <a href='https://github.com/libre-tube/LibreTube/releases/latest'>LibreTube</a>
     ----
