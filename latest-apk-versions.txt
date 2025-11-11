@@ -6,7 +6,7 @@ AmarokHider: 0.9.3
 AmazeFileManager: 1.11.6
 Arcticons: 13.4.6
 Bitwarden: 2025.10.1
-BreezyWeather: 6.0.11-rc_freenet
+BreezyWeather: 6.0.12_freenet
 Cherrygram: 12.1.1
 ConverterNOW: 4.4.0
 CpuInfo: 6.4.0

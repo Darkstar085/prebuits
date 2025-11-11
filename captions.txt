@@ -1,12 +1,6 @@
-📦 <b>File name</b> – ReVanced_GooglePhotos_v7.53.0.827222094.apk
-    📷 Google Photos with premium/unlocked features
-🚀 Version: 7.52.0.825653635 → 7.53.0.827222094
+📦 <b>File name</b> – BreezyWeather_v6.0.12_freenet.apk
+    🌦️ Clean, customizable open-source weather app
+🚀 Version: 6.0.11-rc_freenet → 6.0.12_freenet
 
-Changelog: <a href='https://github.com/j-hc/revanced-magisk-module/releases/latest'>ReVanced_GooglePhotos</a>
-    ----
-📦 <b>File name</b> – Sdmaid_v1.5.3-rc0.apk
-    🧹 Powerful system cleaning tool
-🚀 Version: 1.5.2-rc0 → 1.5.3-rc0
-
-Changelog: <a href='https://github.com/d4rken-org/sdmaid-se/releases/latest'>Sdmaid</a>
+Changelog: <a href='https://github.com/breezy-weather/breezy-weather/releases/latest'>BreezyWeather</a>
     ----
