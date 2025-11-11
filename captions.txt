@@ -1,18 +1,12 @@
-📦 <b>File name</b> – Fossify_MusicPlayer_v1.6.0.apk
-    🎶 Modern music player by Fossify
-🚀 Version: 1.5.1 → 1.6.0
+📦 <b>File name</b> – ReVanced_GooglePhotos_v7.53.0.827222094.apk
+    📷 Google Photos with premium/unlocked features
+🚀 Version: 7.52.0.825653635 → 7.53.0.827222094
 
-Changelog: <a href='https://github.com/FossifyOrg/Music-Player/releases/latest'>Fossify_MusicPlayer</a>
+Changelog: <a href='https://github.com/j-hc/revanced-magisk-module/releases/latest'>ReVanced_GooglePhotos</a>
     ----
-📦 <b>File name</b> – Fossify_VoiceRecorder_v1.5.1.apk
-    🎤 Simple, privacy-respecting voice recorder by Fossify
-🚀 Version: 1.5.0 → 1.5.1
+📦 <b>File name</b> – Sdmaid_v1.5.3-rc0.apk
+    🧹 Powerful system cleaning tool
+🚀 Version: 1.5.2-rc0 → 1.5.3-rc0
 
-Changelog: <a href='https://github.com/FossifyOrg/Voice-Recorder/releases/latest'>Fossify_VoiceRecorder</a>
-    ----
-📦 <b>File name</b> – LibreTube_v0.29.1.apk
-    🔒 Open-source YouTube app focusing on privacy
-🚀 Version: 0.29.0 → 0.29.1
-
-Changelog: <a href='https://github.com/libre-tube/LibreTube/releases/latest'>LibreTube</a>
+Changelog: <a href='https://github.com/d4rken-org/sdmaid-se/releases/latest'>Sdmaid</a>
     ----
