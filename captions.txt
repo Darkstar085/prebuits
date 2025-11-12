@@ -1,6 +1,6 @@
-📦 <b>File name</b> – BreezyWeather_v6.0.12_freenet.apk
-    🌦️ Clean, customizable open-source weather app
-🚀 Version: 6.0.11-rc_freenet → 6.0.12_freenet
+📦 <b>File name</b> – Sdmaid_v1.5.4-rc0.apk
+    🧹 Powerful system cleaning tool
+🚀 Version: 1.5.3-rc0 → 1.5.4-rc0
 
-Changelog: <a href='https://github.com/breezy-weather/breezy-weather/releases/latest'>BreezyWeather</a>
+Changelog: <a href='https://github.com/d4rken-org/sdmaid-se/releases/latest'>Sdmaid</a>
     ----
