@@ -1,6 +1,6 @@
-📦 <b>File name</b> – Sdmaid_v1.5.4-rc0.apk
-    🧹 Powerful system cleaning tool
-🚀 Version: 1.5.3-rc0 → 1.5.4-rc0
+📦 <b>File name</b> – DuckDuckGo_v5.257.0.apk
+    🦆 Private, tracker-blocking browser
+🚀 Version: 5.256.0 → 5.257.0
 
-Changelog: <a href='https://github.com/d4rken-org/sdmaid-se/releases/latest'>Sdmaid</a>
+Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
     ----
