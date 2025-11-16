@@ -12,7 +12,7 @@ ConverterNOW: 4.4.0
 CpuInfo: 6.4.0
 Cromite: 142.0.7444.138
 DeltaIcons: 2.9.0
-DotGallery: 4.0.0
+DotGallery: 4.0.1
 DuckDuckGo: 5.257.0
 Flip2DND: 8.0.1
 Florisboard: 0.5.1
@@ -46,4 +46,4 @@ ThunderbirdAndroid: 13.0
 VisualCodeSpace: 2.0.1
 WeatherMaster: 2.6.5
 XedEditor: 3.2.4
-Ytdlnis: 1.8.6
+Ytdlnis: 1.8.7
