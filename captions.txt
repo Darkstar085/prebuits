@@ -1,12 +1,6 @@
-📦 <b>File name</b> – DotGallery_v4.0.1.apk
-    📷 Jetpack Compose-based photo gallery app
-🚀 Version: 4.0.0 → 4.0.1
+📦 <b>File name</b> – IceravenBrowser_viceraven-2.38.0.apk
+    🦦 Privacy-focused web browser
+🚀 Version: iceraven-2.37.0 → iceraven-2.38.0
 
-Changelog: <a href='https://github.com/IacobIonut01/Gallery/releases/latest'>DotGallery</a>
-    ----
-📦 <b>File name</b> – Ytdlnis_v1.8.7.apk
-    ⬇️ YouTube downloader with advanced features
-🚀 Version: 1.8.6 → 1.8.7
-
-Changelog: <a href='https://github.com/deniscerri/ytdlnis/releases/latest'>Ytdlnis</a>
+Changelog: <a href='https://github.com/fork-maintainers/iceraven-browser/releases/latest'>IceravenBrowser</a>
     ----

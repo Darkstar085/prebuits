@@ -22,7 +22,7 @@ Fossify_MusicPlayer: 1.6.0
 Fossify_Notes: 1.6.0
 Fossify_VoiceRecorder: 1.5.1
 Gramophone: 1.0.17
-IceravenBrowser: iceraven-2.37.0
+IceravenBrowser: iceraven-2.38.0
 LTECleanerFOSS: 5.1.0
 LibreTube: 0.29.1
 LocalSend: 1.17.0
