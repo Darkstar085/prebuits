@@ -1,6 +1,12 @@
-📦 <b>File name</b> – IceravenBrowser_viceraven-2.38.0.apk
-    🦦 Privacy-focused web browser
-🚀 Version: iceraven-2.37.0 → iceraven-2.38.0
+📦 <b>File name</b> – DuckDuckGo_v5.257.1.apk
+    🦆 Private, tracker-blocking browser
+🚀 Version: 5.257.0 → 5.257.1
 
-Changelog: <a href='https://github.com/fork-maintainers/iceraven-browser/releases/latest'>IceravenBrowser</a>
+Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
+    ----
+📦 <b>File name</b> – Momogram_v12.1.1-491b00f927.apk
+    📱 Telegram client with privacy and customization features
+🚀 Version: 12.0.1-651cab6201 → 12.1.1-491b00f927
+
+Changelog: <a href='https://github.com/dic1911/Momogram/releases/latest'>Momogram</a>
     ----

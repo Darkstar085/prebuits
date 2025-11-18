@@ -13,7 +13,7 @@ CpuInfo: 6.4.0
 Cromite: 142.0.7444.138
 DeltaIcons: 2.9.0
 DotGallery: 4.0.1
-DuckDuckGo: 5.257.0
+DuckDuckGo: 5.257.1
 Flip2DND: 8.0.1
 Florisboard: 0.5.1
 Fossify_Calculator: 1.2.0
@@ -27,7 +27,7 @@ LTECleanerFOSS: 5.1.0
 LibreTube: 0.29.1
 LocalSend: 1.17.0
 MoeList: 3.8.0
-Momogram: 12.0.1-651cab6201
+Momogram: 12.1.1-491b00f927
 Omni: 1.3
 PhonographPlus: 1.11.1
 Pixelplay: 0.3.0-beta
