@@ -45,10 +45,12 @@ jobs:
       LIBRETUBE_REPO: "libre-tube/LibreTube"
       LOCAL_SEND_REPO: "localsend/localsend"
       LTECLEANER_REPO: "MDP43140/LTECleanerFOSS"
+      MAGISK_REPO: "topjohnwu/Magisk"
       MICROG_RE_REPO: "WSTxda/MicroG-RE"
       MICROG_REPO: "ReVanced/GmsCore"
       MOELIST_REPO: "axiel7/MoeList"
       MOMOGRAM_REPO: "dic1911/Momogram"
+      NEKOGRAM_REPO: "Nekogram/Nekogram"
       OMNI_REPO: "FoedusProgramme/Omni"
       PIXELPLAY_REPO: "theovilardo/PixelPlay"
       PHONOGRAPHPLUS_REPO: "chr56/Phonograph_Plus"
@@ -58,6 +60,7 @@ jobs:
       REVANCED_MANAGER_REPO: "ReVanced/revanced-manager"
       REVANCED_REPO: "j-hc/revanced-magisk-module"
       SDMAID_REPO: "d4rken-org/sdmaid-se"
+      SIMP_MUSIC_REPO: "maxrave-dev/SimpMusic"
       SYMPHONY_REPO: "zyrouge/symphony"
       TERMUX_REPO: "termux/termux-app"
       THUNDERBIRD_REPO: "thunderbird/thunderbird-android"
@@ -173,6 +176,9 @@ jobs:
           mv app-release.apk LTECleanerFOSS.apk || true
           rm -f app-release.apk || true
 
+      - name: Download Magisk APK
+        run: gh release download --repo ${{ env.MAGISK_REPO }} --pattern "*.apk" || true
+
       - name: Download MicroG RE APK
         run: gh release download --repo ${{ env.MICROG_RE_REPO }} --pattern "*.apk" || true
 
@@ -181,6 +187,9 @@ jobs:
 
       - name: Download Momogram
         run: gh release download --repo ${{ env.MOMOGRAM_REPO }} --pattern "*arm64-v8a*.apk" || true
+
+      - name: Download Nekogram
+        run: gh release download --repo ${{ env.NEKOGRAM_REPO }} --pattern "*universal*.apk" || true
 
       - name: Download Omni APK and Rename APK
         run: |
@@ -228,6 +237,9 @@ jobs:
 
       - name: Download Sdmaid Cleaner
         run: gh release download --repo ${{ env.SDMAID_REPO }} --pattern "*.apk" || true
+
+      - name: Download Simp Music
+        run: gh release download --repo ${{ env.SIMP_MUSIC_REPO }} --pattern "foss*universal*.apk" || true
 
       - name: Download Symphony
         run: gh release download --repo "${{ env.SYMPHONY_REPO }}" --pattern "*.apk" || true
@@ -299,9 +311,11 @@ jobs:
             ["*google-play*.apk"]="LocalSend"
             ["*app-universal-release*.apk"]="LibreTube"
             ["LTECleanerFOSS.apk"]="LTECleanerFOSS"
+            ["*Magisk*.apk"]="Magisk"
             ["*moelist*.apk"]="MoeList"
             ["*microg_release*.apk"]="MicroG_RE"
             ["*Momo*v8a*.apk"]="Momogram"
+            ["*Nekogram*universal*.apk"]="Nekogram"
             ["Omni.apk"]="Omni"
             ["*PixelPlay*.apk"]="Pixelplay"
             ["PhonographPlus*.apk"]="PhonographPlus"
@@ -314,6 +328,7 @@ jobs:
             ["*gms*.apk"]="ReVanced_MicroG"
             ["*revanced-manager*.apk"]="RevancedManager"
             ["*sdmse*.apk"]="Sdmaid"
+            ["simp*foss*universal*.apk"]="Simp_Music"
             ["*symphony*.apk"]="Symphony"
             ["*shizuku*.apk"]="Shizuku"
             ["*termux*.apk"]="Termux"
@@ -412,9 +427,11 @@ jobs:
             ["LibreTube"]="Open-source YouTube app focusing on privacy"
             ["LocalSend"]="Secure, local file sharing app"
             ["LTECleanerFOSS"]="Clean up unnecessary files to free up space"
+            ["Magisk"]="Powerful systemless rooting solution"
             ["MicroG_RE"]="MicroG RE - Enhanced Play Services compatibility"
             ["MoeList"]="Anime and manga tracking app"
             ["Momogram"]="Telegram client with privacy and customization features"
+            ["Nekogram"]="Feature-rich Telegram client with enhanced privacy"
             ["Omni"]="All-in-one tool app with Compass, Spirit Level, Ruler and Flashlight"
             ["Pixelplay"]="Lightweight music player with Material You design"
             ["PhonographPlus"]="Enhanced music player fork"
@@ -427,6 +444,7 @@ jobs:
             ["ReVancedManager"]="Manage and install ReVanced patches easily"
             ["Sdmaid"]="Powerful system cleaning tool"
             ["Shizuku"]="Use system APIs directly with adb/root privileges from normal apps"
+            ["Simp_Music"]="Lightweight YT music player with Material You support"
             ["Spotify_Revanced"]="Spotify MOD with no ads and premium features"
             ["Symphony"]="Lightweight music player for Android 9+"
             ["Termux"]="Terminal emulator and Linux environment for Android"
@@ -464,9 +482,11 @@ jobs:
             ["LibreTube"]="🔒"
             ["LocalSend"]="📤"
             ["LTECleanerFOSS"]="🧹"
+            ["Magisk"]="🪄"
             ["MicroG_RE"]="🧩"
             ["MoeList"]="📖"
             ["Momogram"]="📱"
+            ["Nekogram"]="🐱"
             ["Omni"]="🛠️"
             ["Pixelplay"]="🎵"
             ["PhonographPlus"]="🎧"
@@ -479,6 +499,7 @@ jobs:
             ["ReVanced_YouTube"]="🎬"
             ["Sdmaid"]="🧹"
             ["Shizuku"]="🤖"
+            ["Simp_Music"]="🎵"
             ["Spotify_Revanced"]="🎶"
             ["Symphony"]="🎼"
             ["Termux"]="🖥️"
@@ -516,9 +537,11 @@ jobs:
             ["LibreTube"]="https://github.com/libre-tube/LibreTube/releases/latest"
             ["LocalSend"]="https://github.com/localsend/localsend/releases/latest"
             ["LTECleanerFOSS"]="https://github.com/MDP43140/LTECleanerFOSS/releases/latest"
+            ["Magisk"]="https://github.com/topjohnwu/Magisk/releases/latest"
             ["MicroG_RE"]="https://github.com/WSTxda/MicroG-RE/releases/latest"
             ["MoeList"]="https://github.com/axiel7/MoeList/releases/latest"
             ["Momogram"]="https://github.com/dic1911/Momogram/releases/latest"
+            ["Nekogram"]="https://github.com/Nekogram/Nekogram/releases/latest"
             ["Omni"]="https://github.com/FoedusProgramme/Omni/releases/latest"
             ["Pixelplay"]="https://github.com/theovilardo/PixelPlay/releases/latest"
             ["PhonographPlus"]="https://github.com/chr56/Phonograph_Plus/releases/latest"
@@ -531,6 +554,7 @@ jobs:
             ["ReVancedManager"]="https://github.com/ReVanced/revanced-manager/releases/latest"
             ["Sdmaid"]="https://github.com/d4rken-org/sdmaid-se/releases/latest"
             ["Shizuku"]="https://github.com/RikkaApps/Shizuku/releases/latest"
+            ["Simp_Music"]="https://github.com/maxrave-dev/SimpMusic/releases/latest"
             ["Spotify_Revanced"]="https://github.com/j-hc/revanced-magisk-module/releases/latest"
             ["Symphony"]="https://github.com/zyrouge/symphony/releases/latest"
             ["Termux"]="https://github.com/termux/termux-app/releases/latest"
