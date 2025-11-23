@@ -13,6 +13,7 @@ jobs:
   send-telegram:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
+
     env:
       TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
       TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -28,31 +29,21 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y python3 python3-pip jq
-          pip3 install telethon
+          pip3 install pyrogram tgcrypto
 
-      # -- Determine release tag --
       - name: Determine release tag
-        id: tag
         run: echo "TAG=prebuilts-${{ github.event.workflow_run.id }}" >> $GITHUB_ENV
 
-      # -- Fetch release assets --
       - name: Get release assets
-        id: assets
         run: |
           url="https://api.github.com/repos/${{ github.repository }}/releases/tags/${TAG}"
           resp=$(curl -s -H "Accept: application/vnd.github+json" "$url" || true)
 
-          if [ -z "$resp" ] || echo "$resp" | grep -q '"Not Found"'; then
-            echo "✅ No release found. Exiting."
-            exit 0
-          fi
+          if [ -z "$resp" ] || echo "$resp" | grep -q '"Not Found"'; then exit 0; fi
 
           echo "$resp" | jq -r '.assets[] | select(.name|test("_v.*\\.(apk|exe)$")) | [.name, .browser_download_url] | @tsv' > urls.tsv
 
-          if [ ! -s urls.tsv ]; then
-            echo "✅ No APPs found. Exiting."
-            exit 0
-          fi
+          if [ ! -s urls.tsv ]; then exit 0; fi
 
       - name: Download APPs
         if: success() && hashFiles('urls.tsv') != ''
@@ -62,83 +53,124 @@ jobs:
             curl -L -o "dl/$name" "$url"
           done < urls.tsv
 
-      - name: Upload APPs to Telegram
+      - name: Upload to Telegram
         if: success() && hashFiles('dl/*') != ''
         run: |
           python3 - <<'PY'
-          import os, glob, subprocess, re, asyncio
-          from asyncio import Semaphore
-          from telethon import TelegramClient
-          from telethon.sessions import StringSession
+import os
+import glob
+import re
+import asyncio
+import subprocess
+from asyncio import Semaphore
+from pyrogram import Client
+from pyrogram.errors import FloodWait, RPCError
 
-          api_id = int(os.environ['API_ID'])
-          api_hash = os.environ['API_HASH']
-          session = os.environ['SESSION']
-          bot_token = os.environ['TELEGRAM_TOKEN']
-          chat_id = os.environ['TELEGRAM_CHAT_ID']
-          if chat_id.lstrip('-').isdigit():
-              chat = int(chat_id)
-          else:
-              chat = chat_id
+CHUNK_SIZE = 1024 * 1024
+PARALLEL_UPLOADS = 4
+RETRIES = 5
+RETRY_DELAY = 5
 
-          def normalize_name(name):
-              base = re.split(r'_v|-v', name, maxsplit=1)[0]
-              base = re.sub(r'[ .-]+', '', base.lower())
-              return base
+api_id = int(os.environ['API_ID'])
+api_hash = os.environ['API_HASH']
+session = os.environ['SESSION']
+bot_token = os.environ['TELEGRAM_TOKEN']
+chat_id = os.environ['TELEGRAM_CHAT_ID']
 
-          captions = {}
-          with open('captions.txt', encoding='utf-8') as f:
-              blocks = f.read().strip().split('----')
-              for block in blocks:
-                  block = block.strip()
-                  if not block:
-                      continue
-                  lines = block.splitlines()
-                  match = re.search(r'File name</b> – ([^\n]+)', lines[0])
-                  if match:
-                      filename = match.group(1)
-                      caption_without_file = "\n".join(lines[1:]).strip()
-                      captions[normalize_name(filename)] = caption_without_file
+chat = int(chat_id) if chat_id.lstrip("-").isdigit() else chat_id
 
-          files = sorted(glob.glob('dl/*.apk') + glob.glob('dl/*.exe'))
-          if not files:
-              raise SystemExit(0)
+def normalize_name(name):
+    base = re.split(r'_v|-v', name, maxsplit=1)[0]
+    return re.sub(r'[ .-]+', '', base.lower())
 
-          def find_caption(captions, filename):
-              norm = normalize_name(filename)
-              if norm in captions:
-                  return captions[norm]
-              for key in captions.keys():
-                  if norm.startswith(key) or key.startswith(norm):
-                      return captions[key]
-              return ""
+captions = {}
+if os.path.exists("captions.txt"):
+    with open("captions.txt", encoding="utf-8") as f:
+        blocks = f.read().strip().split("----")
+        for block in blocks:
+            block = block.strip()
+            if not block:
+                continue
+            lines = block.splitlines()
+            m = re.search(r"File name</b> – ([^\n]+)", lines[0])
+            if m:
+                key = normalize_name(m.group(1))
+                captions[key] = "\n".join(lines[1:])
 
-          # Send small files (<= 48MB) via Bot API
-          for f in [x for x in files if os.path.getsize(x) <= 48 * 1024 * 1024]:
-              base = os.path.basename(f)
-              cap = find_caption(captions, base)
-              subprocess.run([
-                  "curl", "-s", "-X", "POST", f"https://api.telegram.org/bot{bot_token}/sendDocument",
-                  "-F", f"chat_id={chat_id}",
-                  "-F", f"document=@{f}",
-                  "-F", f"caption={cap}",
-                  "-F", "parse_mode=HTML"
-              ], check=False)
+def find_caption(filename):
+    norm = normalize_name(filename)
+    if norm in captions:
+        return captions[norm]
+    for key in captions:
+        if norm.startswith(key) or key.startswith(norm):
+            return captions[key]
+    return ""
 
-          # Send large files (> 48MB) via Telethon
-          large_files = [x for x in files if os.path.getsize(x) > 48 * 1024 * 1024]
-          if large_files:
-              sem = Semaphore(2)
+files = sorted(glob.glob("dl/*.apk") + glob.glob("dl/*.exe"))
+if not files:
+    raise SystemExit(0)
 
-              async def send_one(client, filepath):
-                  async with sem:
-                      base = os.path.basename(filepath)
-                      caption = find_caption(captions, base)[:1024]
-                      await client.send_file(chat, filepath, force_document=True, caption=caption, parse_mode="html")
+small_files = [f for f in files if os.path.getsize(f) <= 48 * 1024 * 1024]
+large_files = [f for f in files if os.path.getsize(f) > 48 * 1024 * 1024]
 
-              async def main():
-                  async with TelegramClient(StringSession(session), api_id, api_hash) as client:
-                      await asyncio.gather(*(send_one(client, f) for f in large_files))
+for f in small_files:
+    base = os.path.basename(f)
+    cap = find_caption(base)
+    print(f"Uploading SMALL file via Bot API: {base}")
+    subprocess.run([
+        "curl", "-s", "-X", "POST",
+        f"https://api.telegram.org/bot{bot_token}/sendDocument",
+        "-F", f"chat_id={chat_id}",
+        "-F", f"document=@{f}",
+        "-F", f"caption={cap}",
+        "-F", "parse_mode=HTML"
+    ], check=False)
 
-              asyncio.run(main())
-          PY
+def progress(current, total, filename):
+    percent = (current / total) * 100
+    print(f"[+] Uploading {filename}: {percent:.2f}% ({current}/{total})")
+
+async def upload_large(app, file_path, sem):
+    async with sem:
+        name = os.path.basename(file_path)
+        caption = find_caption(name)[:1024]
+        attempt = 1
+        while attempt <= RETRIES:
+            try:
+                print(f"Uploading LARGE file: {name} (Attempt {attempt})")
+                await app.send_document(
+                    chat_id,
+                    document=file_path,
+                    caption=caption,
+                    file_name=name,
+                    force_document=True,
+                    progress=progress,
+                    progress_args=(name,)
+                )
+                print(f"Done: {name}")
+                return
+            except FloodWait as e:
+                print(f"FloodWait {e.value}s on {name}")
+                await asyncio.sleep(e.value)
+            except Exception as e:
+                print(f"Error uploading {name}: {e}")
+                await asyncio.sleep(RETRY_DELAY)
+            attempt += 1
+        print(f"FAILED: {name}")
+
+async def main():
+    if not large_files:
+        return
+    sem = Semaphore(PARALLEL_UPLOADS)
+    async with Client(
+        "tg_session",
+        api_id=api_id,
+        api_hash=api_hash,
+        session_string=session,
+        max_upload_chunk_size=CHUNK_SIZE,
+        workers=16
+    ) as app:
+        await asyncio.gather(*(upload_large(app, f, sem) for f in large_files))
+
+asyncio.run(main())
+PY
