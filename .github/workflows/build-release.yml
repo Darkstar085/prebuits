@@ -239,7 +239,7 @@ jobs:
         run: gh release download --repo ${{ env.SDMAID_REPO }} --pattern "*.apk" || true
 
       - name: Download Simp Music
-        run: gh release download --repo ${{ env.SIMP_MUSIC_REPO }} --pattern "foss*universal*.apk" || true
+        run: gh release download --repo ${{ env.SIMP_MUSIC_REPO }} --pattern "*foss*universal*.apk" || true
 
       - name: Download Symphony
         run: gh release download --repo "${{ env.SYMPHONY_REPO }}" --pattern "*.apk" || true
@@ -328,7 +328,7 @@ jobs:
             ["*gms*.apk"]="ReVanced_MicroG"
             ["*revanced-manager*.apk"]="RevancedManager"
             ["*sdmse*.apk"]="Sdmaid"
-            ["simp*foss*universal*.apk"]="Simp_Music"
+            ["SimpMusic*.apk"]="SimpMusic"
             ["*symphony*.apk"]="Symphony"
             ["*shizuku*.apk"]="Shizuku"
             ["*termux*.apk"]="Termux"
@@ -444,7 +444,7 @@ jobs:
             ["ReVancedManager"]="Manage and install ReVanced patches easily"
             ["Sdmaid"]="Powerful system cleaning tool"
             ["Shizuku"]="Use system APIs directly with adb/root privileges from normal apps"
-            ["Simp_Music"]="Lightweight YT music player with Material You support"
+            ["SimpMusic"]="Lightweight YT music player with Material You support"
             ["Spotify_Revanced"]="Spotify MOD with no ads and premium features"
             ["Symphony"]="Lightweight music player for Android 9+"
             ["Termux"]="Terminal emulator and Linux environment for Android"
@@ -499,7 +499,7 @@ jobs:
             ["ReVanced_YouTube"]="🎬"
             ["Sdmaid"]="🧹"
             ["Shizuku"]="🤖"
-            ["Simp_Music"]="🎵"
+            ["SimpMusic"]="🎵"
             ["Spotify_Revanced"]="🎶"
             ["Symphony"]="🎼"
             ["Termux"]="🖥️"
@@ -554,7 +554,7 @@ jobs:
             ["ReVancedManager"]="https://github.com/ReVanced/revanced-manager/releases/latest"
             ["Sdmaid"]="https://github.com/d4rken-org/sdmaid-se/releases/latest"
             ["Shizuku"]="https://github.com/RikkaApps/Shizuku/releases/latest"
-            ["Simp_Music"]="https://github.com/maxrave-dev/SimpMusic/releases/latest"
+            ["SimpMusic"]="https://github.com/maxrave-dev/SimpMusic/releases/latest"
             ["Spotify_Revanced"]="https://github.com/j-hc/revanced-magisk-module/releases/latest"
             ["Symphony"]="https://github.com/zyrouge/symphony/releases/latest"
             ["Termux"]="https://github.com/termux/termux-app/releases/latest"
