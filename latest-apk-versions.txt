@@ -26,8 +26,10 @@ IceravenBrowser: iceraven-2.38.0
 LTECleanerFOSS: 5.1.0
 LibreTube: 0.29.1
 LocalSend: 1.17.0
+Magisk: 29.0
 MoeList: 3.8.0
 Momogram: 12.1.1-491b00f927
+Nekogram: 12.2.3
 Omni: 1.3
 PhonographPlus: 1.11.1
 Pixelplay: 0.3.0-beta
@@ -39,6 +41,7 @@ ReVanced_YouTube: 20.14.43
 RevancedManager: 1.25.1
 Sdmaid: 1.5.4-rc0
 Shizuku: 13.6.0.r1086.2650830c
+SimpMusic: 0.2.21
 Spotify_Revanced: 9.0.72.949
 Symphony: 2024.12.115
 Termux: 0.118.3
