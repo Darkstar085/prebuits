@@ -26,8 +26,10 @@ IceravenBrowser: iceraven-2.38.0
 LTECleanerFOSS: 5.1.0
 LibreTube: 0.29.1
 LocalSend: 1.17.0
+Magisk: 29.0
 MoeList: 3.8.0
 Momogram: 12.1.1-491b00f927
+Nekogram: 12.2.3
 Omni: 1.3
 PhonographPlus: 1.11.1
 Pixelplay: 0.3.0-beta

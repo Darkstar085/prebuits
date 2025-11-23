@@ -1,6 +1,12 @@
-📦 <b>File name</b> – DotGallery_v4.0.2.apk
-    📷 Jetpack Compose-based photo gallery app
-🚀 Version: 4.0.1 → 4.0.2
+📦 <b>File name</b> – Magisk_v29.0.apk
+    🪄 Powerful systemless rooting solution
+🆕 Version: 29.0
 
-Changelog: <a href='https://github.com/IacobIonut01/Gallery/releases/latest'>DotGallery</a>
+Changelog: <a href='https://github.com/topjohnwu/Magisk/releases/latest'>Magisk</a>
+    ----
+📦 <b>File name</b> – Nekogram_v12.2.3.apk
+    🐱 Feature-rich Telegram client with enhanced privacy
+🆕 Version: 12.2.3
+
+Changelog: <a href='https://github.com/Nekogram/Nekogram/releases/latest'>Nekogram</a>
     ----
