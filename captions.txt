@@ -1,18 +1,6 @@
-📦 <b>File name</b> – Magisk_v29.0.apk
-    🪄 Powerful systemless rooting solution
-🆕 Version: 29.0
+📦 <b>File name</b> – ConverterNOW_v4.5.0.apk
+    🔄 Simple unit and currency converter
+🚀 Version: 4.4.0 → 4.5.0
 
-Changelog: <a href='https://github.com/topjohnwu/Magisk/releases/latest'>Magisk</a>
-    ----
-📦 <b>File name</b> – Nekogram_v12.2.3.apk
-    🐱 Feature-rich Telegram client with enhanced privacy
-🆕 Version: 12.2.3
-
-Changelog: <a href='https://github.com/Nekogram/Nekogram/releases/latest'>Nekogram</a>
-    ----
-📦 <b>File name</b> – SimpMusic_v0.2.21.apk
-    🎵 Lightweight YT music player with Material You support
-🆕 Version: 0.2.21
-
-Changelog: <a href='https://github.com/maxrave-dev/SimpMusic/releases/latest'>SimpMusic</a>
+Changelog: <a href='https://github.com/ferraridamiano/ConverterNOW/releases/latest'>ConverterNOW</a>
     ----
