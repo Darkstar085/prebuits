@@ -1,6 +1,6 @@
-📦 <b>File name</b> – ConverterNOW_v4.5.0.apk
-    🔄 Simple unit and currency converter
-🚀 Version: 4.4.0 → 4.5.0
+📦 <b>File name</b> – DuckDuckGo_v5.258.0.apk
+    🦆 Private, tracker-blocking browser
+🚀 Version: 5.257.1 → 5.258.0
 
-Changelog: <a href='https://github.com/ferraridamiano/ConverterNOW/releases/latest'>ConverterNOW</a>
+Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
     ----
