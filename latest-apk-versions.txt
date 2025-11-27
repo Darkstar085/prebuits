@@ -2,7 +2,7 @@
 ABDownloadManager: 1.7.1
 Acode: 1.11.6
 Aegis: 3.4.1
-AmarokHider: 0.9.3
+AmarokHider: 0.10.0
 AmazeFileManager: 1.11.6
 Arcticons: 13.4.6
 Bitwarden: 2025.11.0
@@ -31,7 +31,7 @@ MoeList: 3.8.0
 Momogram: 12.1.1-491b00f927
 Nekogram: 12.2.3
 Omni: 1.3
-PhonographPlus: 1.11.1
+PhonographPlus: 1.11.2
 Pixelplay: 0.3.0-beta
 PrismFileExplorer: 1.3.2
 ReVanced_GooglePhotos: 7.53.0.827222094

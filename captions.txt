@@ -1,6 +1,12 @@
-📦 <b>File name</b> – DuckDuckGo_v5.258.0.apk
-    🦆 Private, tracker-blocking browser
-🚀 Version: 5.257.1 → 5.258.0
+📦 <b>File name</b> – AmarokHider_v0.10.0.apk
+    🙈 Hide apps as your choice
+🚀 Version: 0.9.3 → 0.10.0
 
-Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
+Changelog: <a href='https://github.com/deltazefiro/Amarok-Hider/releases/latest'>AmarokHider</a>
+    ----
+📦 <b>File name</b> – PhonographPlus_v1.11.2.apk
+    🎧 Enhanced music player fork
+🚀 Version: 1.11.1 → 1.11.2
+
+Changelog: <a href='https://github.com/chr56/Phonograph_Plus/releases/latest'>PhonographPlus</a>
     ----
