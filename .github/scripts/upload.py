@@ -29,6 +29,7 @@ def normalize_name(name):
     base = re.split(r"_v|-v", name, maxsplit=1)[0]
     return re.sub(r"[ .-]+", "", base.lower())
 
+
 captions = {}
 
 if os.path.exists("captions.txt"):
@@ -91,7 +92,14 @@ async def upload_large(client, filepath, sem):
         for attempt in range(1, RETRIES + 1):
             try:
                 print(f"Uploading LARGE file: {name} (Attempt {attempt}/{RETRIES})")
-                await client.send_file(chat, filepath, caption=caption, force_document=True)
+                await client.send_file(
+                    chat,
+                    filepath,
+                    caption=caption,
+                    force_document=True,
+                    parse_mode="html"
+                )
+
                 print(f"Uploaded: {name}")
                 return
 
