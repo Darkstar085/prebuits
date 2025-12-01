@@ -11,7 +11,7 @@ Cherrygram: 12.1.1
 ConverterNOW: 4.5.0
 CpuInfo: 6.4.0
 Cromite: 142.0.7444.176
-DeltaIcons: 2.9.0
+DeltaIcons: 2.10.0
 DotGallery: 4.0.2
 DuckDuckGo: 5.259.1
 Flip2DND: 8.0.1
@@ -41,7 +41,7 @@ ReVanced_YouTube: 20.14.43
 RevancedManager: 1.25.1
 Sdmaid: 1.5.4-rc0
 Shizuku: 13.6.0.r1086.2650830c
-SimpMusic: 0.2.21
+SimpMusic: 1.0.0
 Spotify_Revanced: 9.0.72.949
 Symphony: 2024.12.115
 Termux: 0.118.3
