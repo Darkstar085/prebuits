@@ -1,12 +1,12 @@
-📦 <b>File name</b> – DeltaIcons_v2.10.0.apk
-    🎨 Beautiful, minimal icon pack
-🚀 Version: 2.9.0 → 2.10.0
+📦 <b>File name</b> – Arcticons_v13.7.5.apk
+    🎭 Modern icon pack and theming app
+🚀 Version: 13.4.6 → 13.7.5
 
-Changelog: <a href='https://github.com/Delta-Icons/android/releases/latest'>DeltaIcons</a>
+Changelog: <a href='https://github.com/Arcticons-Team/Arcticons/releases/latest'>Arcticons</a>
     ----
-📦 <b>File name</b> – SimpMusic_v1.0.0.apk
-    🎵 Lightweight YT music player with Material You support
-🚀 Version: 0.2.21 → 1.0.0
+📦 <b>File name</b> – Magisk_v30.6.apk
+    🪄 Powerful systemless rooting solution
+🚀 Version: 29.0 → 30.6
 
-Changelog: <a href='https://github.com/maxrave-dev/SimpMusic/releases/latest'>SimpMusic</a>
+Changelog: <a href='https://github.com/topjohnwu/Magisk/releases/latest'>Magisk</a>
     ----

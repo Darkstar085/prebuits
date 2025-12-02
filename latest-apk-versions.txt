@@ -4,7 +4,7 @@ Acode: 1.11.6
 Aegis: 3.4.1
 AmarokHider: 0.10.0
 AmazeFileManager: 1.11.6
-Arcticons: 13.4.6
+Arcticons: 13.7.5
 Bitwarden: 2025.11.0
 BreezyWeather: 6.0.12_freenet
 Cherrygram: 12.1.1
@@ -26,7 +26,7 @@ IceravenBrowser: iceraven-2.38.0
 LTECleanerFOSS: 5.1.0
 LibreTube: 0.29.1
 LocalSend: 1.17.0
-Magisk: 29.0
+Magisk: 30.6
 MoeList: 3.8.0
 Momogram: 12.2.3-5e20d5a5d6
 Nekogram: 12.2.3
