@@ -1,18 +1,12 @@
-📦 <b>File name</b> – Cherrygram_v12.2.3.apk
-    🍒 Enhanced Telegram client with extra features
-🚀 Version: 12.1.1 → 12.2.3
+📦 <b>File name</b> – Bitwarden_v2025.11.1.apk
+    🔑 Open-source password manager with cloud sync
+🚀 Version: 2025.11.0 → 2025.11.1
 
-Changelog: <a href='https://github.com/arsLan4k1390/Cherrygram/releases/latest'>Cherrygram</a>
+Changelog: <a href='https://github.com/bitwarden/android/releases/latest'>Bitwarden</a>
     ----
-📦 <b>File name</b> – Cromite_v143.0.7499.40.apk
-    🌐 Bromite-based privacy browser
-🚀 Version: 142.0.7444.176 → 143.0.7499.40
+📦 <b>File name</b> – WeatherMaster_v2.6.6.apk
+    ☁️ Modern weather app with graphs
+🚀 Version: 2.6.5 → 2.6.6
 
-Changelog: <a href='https://github.com/uazo/cromite/releases/latest'>Cromite</a>
-    ----
-📦 <b>File name</b> – Sdmaid_v1.5.5-rc0.apk
-    🧹 Powerful system cleaning tool
-🚀 Version: 1.5.4-rc0 → 1.5.5-rc0
-
-Changelog: <a href='https://github.com/d4rken-org/sdmaid-se/releases/latest'>Sdmaid</a>
+Changelog: <a href='https://github.com/PranshulGG/WeatherMaster/releases/latest'>WeatherMaster</a>
     ----
