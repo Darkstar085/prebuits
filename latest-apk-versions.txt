@@ -14,7 +14,7 @@ Cromite: 143.0.7499.40
 DeltaIcons: 2.10.0
 DotGallery: 4.0.2
 DuckDuckGo: 5.259.2
-Flip2DND: 8.0.1
+Flip2DND: 9.0.0
 Florisboard: 0.5.2
 Fossify_Calculator: 1.2.0
 Fossify_Keyboard: 1.6.0
