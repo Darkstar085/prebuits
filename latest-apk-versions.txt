@@ -29,7 +29,7 @@ LocalSend: 1.17.0
 Magisk: 30.6
 MoeList: 3.8.0
 Momogram: 12.2.3-a4da798043
-Nekogram: 12.2.3
+Nekogram: 12.2.10
 Omni: 1.3
 PhonographPlus: 1.11.2
 Pixelplay: 0.3.0-beta
@@ -39,7 +39,7 @@ ReVanced_MicroG: 0.3.1.4.240913
 ReVanced_YTMusic: 8.10.52
 ReVanced_YouTube: 20.14.43
 RevancedManager: 1.25.1
-Sdmaid: 1.5.5-rc0
+Sdmaid: 1.5.6-rc0
 Shizuku: 13.6.0.r1086.2650830c
 SimpMusic: 1.0.0
 Spotify_Revanced: 9.0.72.949
