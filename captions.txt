@@ -1,12 +1,6 @@
-📦 <b>File name</b> – Nekogram_v12.2.10.apk
-    🐱 Feature-rich Telegram client with enhanced privacy
-🚀 Version: 12.2.3 → 12.2.10
+📦 <b>File name</b> – DuckDuckGo_v5.260.3.apk
+    🦆 Private, tracker-blocking browser
+🚀 Version: 5.259.2 → 5.260.3
 
-Changelog: <a href='https://github.com/Nekogram/Nekogram/releases/latest'>Nekogram</a>
-    ----
-📦 <b>File name</b> – Sdmaid_v1.5.6-rc0.apk
-    🧹 Powerful system cleaning tool
-🚀 Version: 1.5.5-rc0 → 1.5.6-rc0
-
-Changelog: <a href='https://github.com/d4rken-org/sdmaid-se/releases/latest'>Sdmaid</a>
+Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
     ----
