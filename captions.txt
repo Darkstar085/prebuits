@@ -1,6 +1,12 @@
-📦 <b>File name</b> – DuckDuckGo_v5.260.3.apk
-    🦆 Private, tracker-blocking browser
-🚀 Version: 5.259.2 → 5.260.3
+📦 <b>File name</b> – Bitwarden_v2025.12.0.apk
+    🔑 Open-source password manager with cloud sync
+🚀 Version: 2025.11.1 → 2025.12.0
 
-Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
+Changelog: <a href='https://github.com/bitwarden/android/releases/latest'>Bitwarden</a>
+    ----
+📦 <b>File name</b> – XedEditor_v3.2.5.apk
+    ✏️ Simple and fast text/code editor
+🚀 Version: 3.2.4 → 3.2.5
+
+Changelog: <a href='https://github.com/Xed-Editor/Xed-Editor/releases/latest'>XedEditor</a>
     ----

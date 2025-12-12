@@ -5,7 +5,7 @@ Aegis: 3.4.1
 AmarokHider: 0.10.0
 AmazeFileManager: 1.11.6
 Arcticons: 13.7.5
-Bitwarden: 2025.11.1
+Bitwarden: 2025.12.0
 BreezyWeather: 6.0.12_freenet
 Cherrygram: 12.2.3
 ConverterNOW: 4.5.0
@@ -48,5 +48,5 @@ Termux: 0.118.3
 ThunderbirdAndroid: 13.0
 VisualCodeSpace: 2.0.1
 WeatherMaster: 2.6.6
-XedEditor: 3.2.4
+XedEditor: 3.2.5
 Ytdlnis: 1.8.7
