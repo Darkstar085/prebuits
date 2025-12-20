@@ -1,5 +1,5 @@
 *: *
-ABDownloadManager: 1.7.1
+ABDownloadManager: 1.8.0
 Acode: 1.11.6
 Aegis: 3.4.1
 AmarokHider: 0.10.0
