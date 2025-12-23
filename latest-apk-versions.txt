@@ -4,7 +4,7 @@ Acode: 1.11.6
 Aegis: 3.4.1
 AmarokHider: 0.10.0
 AmazeFileManager: 1.11.6
-Arcticons: 13.7.5
+Arcticons: 14.0.0
 Bitwarden: 2025.12.0
 BreezyWeather: 6.0.12_freenet
 Cherrygram: 12.2.3
