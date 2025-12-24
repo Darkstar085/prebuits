@@ -1,5 +1,5 @@
 *: *
-ABDownloadManager: 1.8.1
+ABDownloadManager: 1.8.2
 Acode: 1.11.6
 Aegis: 3.4.1
 AmarokHider: 0.10.0
@@ -41,7 +41,7 @@ ReVanced_YouTube: 20.14.43
 RevancedManager: 1.25.1
 Sdmaid: 1.5.7-rc0
 Shizuku: 13.6.0.r1086.2650830c
-SimpMusic: 1.0.0
+SimpMusic: 1.0.1-hf
 Spotify_Revanced: 9.0.72.949
 Symphony: 2024.12.115
 Termux: 0.118.3
