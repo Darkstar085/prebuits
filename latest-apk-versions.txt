@@ -28,7 +28,7 @@ LibreTube: 0.29.1
 LocalSend: 1.17.0
 Magisk: 30.6
 MoeList: 3.8.0
-Momogram: 12.2.3-a4da798043
+Momogram: 12.2.10-659d594b1b
 Nekogram: 12.2.10
 Omni: 1.3
 PhonographPlus: 1.11.3
