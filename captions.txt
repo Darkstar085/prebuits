@@ -1,6 +1,6 @@
-📦 <b>File name</b> – Momogram_v12.2.10-659d594b1b.apk
-    📱 Telegram client with privacy and customization features
-🚀 Version: 12.2.3-a4da798043 → 12.2.10-659d594b1b
+📦 <b>File name</b> – Fossify_Keyboard_v1.8.0.apk
+    ⌨️ Easy keyboard for inserting texts, special characters and numbers
+🚀 Version: 1.7.0 → 1.8.0
 
-Changelog: <a href='https://github.com/dic1911/Momogram/releases/latest'>Momogram</a>
+Changelog: <a href='https://github.com/FossifyOrg/Keyboard/releases/latest'>Fossify_Keyboard</a>
     ----
