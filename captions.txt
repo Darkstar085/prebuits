@@ -1,18 +1,18 @@
-📦 <b>File name</b> – Cherrygram_v12.2.10.apk
-    🍒 Enhanced Telegram client with extra features
-🚀 Version: 12.2.3 → 12.2.10
+📦 <b>File name</b> – DeltaIcons_v2.11.0.apk
+    🎨 Beautiful, minimal icon pack
+🚀 Version: 2.10.0 → 2.11.0
 
-Changelog: <a href='https://github.com/arsLan4k1390/Cherrygram/releases/latest'>Cherrygram</a>
+Changelog: <a href='https://github.com/Delta-Icons/android/releases/latest'>DeltaIcons</a>
     ----
-📦 <b>File name</b> – Nekogram_v12.2.10S.apk
-    🐱 Feature-rich Telegram client with enhanced privacy
-🚀 Version: 12.2.10 → 12.2.10S
-
-Changelog: <a href='https://github.com/Nekogram/Nekogram/releases/latest'>Nekogram</a>
-    ----
-📦 <b>File name</b> – XedEditor_v3.2.4.apk
+📦 <b>File name</b> – XedEditor_v3.2.6.apk
     ✏️ Simple and fast text/code editor
-🚀 Version: 3.2.5 → 3.2.4
+🚀 Version: 3.2.4 → 3.2.6
 
 Changelog: <a href='https://github.com/Xed-Editor/Xed-Editor/releases/latest'>XedEditor</a>
+    ----
+📦 <b>File name</b> – ABDownloadManager_v1.8.4.exe
+    📥 Powerful download manager with multi-threading
+🚀 Version: 1.8.3 → 1.8.4
+
+Changelog: <a href='https://github.com/amir1376/ab-download-manager/releases/latest'>ABDownloadManager</a>
     ----
