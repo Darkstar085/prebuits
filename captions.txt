@@ -1,6 +1,6 @@
-📦 <b>File name</b> – Ytdlnis_v1.8.7.1.apk
+📦 <b>File name</b> – Ytdlnis_v1.8.7.2.apk
     ⬇️ YouTube downloader with advanced features
-🚀 Version: 1.8.7 → 1.8.7.1
+🚀 Version: 1.8.7.1 → 1.8.7.2
 
 Changelog: <a href='https://github.com/deniscerri/ytdlnis/releases/latest'>Ytdlnis</a>
     ----

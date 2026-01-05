@@ -49,4 +49,4 @@ ThunderbirdAndroid: 13.0
 VisualCodeSpace: 2.0.1
 WeatherMaster: 2.6.6
 XedEditor: 3.2.6
-Ytdlnis: 1.8.7.1
+Ytdlnis: 1.8.7.2
