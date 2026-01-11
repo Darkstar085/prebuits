@@ -1,12 +1,6 @@
-📦 <b>File name</b> – DuckDuckGo_v5.261.0.apk
-    🦆 Private, tracker-blocking browser
-🚀 Version: 5.260.3 → 5.261.0
+📦 <b>File name</b> – Flip2DND_v9.0.1.apk
+    🤳 Flip your phone to toggle Do Not Disturb automatically
+🚀 Version: 9.0.0 → 9.0.1
 
-Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
-    ----
-📦 <b>File name</b> – ThunderbirdAndroid_v15.0.apk
-    📧 Official Thunderbird email client for Android
-🚀 Version: 13.0 → 15.0
-
-Changelog: <a href='https://github.com/thunderbird/thunderbird-android/releases/latest'>ThunderbirdAndroid</a>
+Changelog: <a href='https://github.com/robinsrk/flip_2_dnd/releases/latest'>Flip2DND</a>
     ----
