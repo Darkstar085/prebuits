@@ -28,8 +28,8 @@ LibreTube: 0.29.1
 LocalSend: 1.17.0
 Magisk: 30.6
 MoeList: 3.8.0
-Momogram: 12.2.10-659d594b1b
-Nekogram: 12.2.10S
+Momogram: 12.2.10-c86b747287
+Nekogram: 12.3.1
 Omni: 1.3
 PhonographPlus: 1.11.3
 Pixelplay: 0.5.0-beta
