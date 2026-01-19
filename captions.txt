@@ -1,12 +1,6 @@
-📦 <b>File name</b> – Momogram_v12.2.10-c86b747287.apk
-    📱 Telegram client with privacy and customization features
-🚀 Version: 12.2.10-659d594b1b → 12.2.10-c86b747287
+📦 <b>File name</b> – Flip2DND_v9.0.3.apk
+    🤳 Flip your phone to toggle Do Not Disturb automatically
+🚀 Version: 9.0.1 → 9.0.3
 
-Changelog: <a href='https://github.com/dic1911/Momogram/releases/latest'>Momogram</a>
-    ----
-📦 <b>File name</b> – Nekogram_v12.3.1.apk
-    🐱 Feature-rich Telegram client with enhanced privacy
-🚀 Version: 12.2.10S → 12.3.1
-
-Changelog: <a href='https://github.com/Nekogram/Nekogram/releases/latest'>Nekogram</a>
+Changelog: <a href='https://github.com/robinsrk/flip_2_dnd/releases/latest'>Flip2DND</a>
     ----
