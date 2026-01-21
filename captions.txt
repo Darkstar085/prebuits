@@ -1,6 +1,24 @@
-📦 <b>File name</b> – ReVanced_GooglePhotos_v7.59.0.856624550.apk
-    📷 Google Photos with premium/unlocked features
-🚀 Version: 7.57.0.843750501 → 7.59.0.856624550
+📦 <b>File name</b> – Cromite_v144.0.7559.76.apk
+    🌐 Bromite-based privacy browser
+🚀 Version: 143.0.7499.110 → 144.0.7559.76
 
-Changelog: <a href='https://github.com/j-hc/revanced-magisk-module/releases/latest'>ReVanced_GooglePhotos</a>
+Changelog: <a href='https://github.com/uazo/cromite/releases/latest'>Cromite</a>
+    ----
+📦 <b>File name</b> – DuckDuckGo_v5.263.1.apk
+    🦆 Private, tracker-blocking browser
+🚀 Version: 5.262.0 → 5.263.1
+
+Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
+    ----
+📦 <b>File name</b> – IceravenBrowser_viceraven-2.40.0.apk
+    🦦 Privacy-focused web browser
+🚀 Version: iceraven-2.39.0 → iceraven-2.40.0
+
+Changelog: <a href='https://github.com/fork-maintainers/iceraven-browser/releases/latest'>IceravenBrowser</a>
+    ----
+📦 <b>File name</b> – SimpMusic_v1.0.2.apk
+    🎵 Lightweight YT music player with Material You support
+🚀 Version: 1.0.1-hf → 1.0.2
+
+Changelog: <a href='https://github.com/maxrave-dev/SimpMusic/releases/latest'>SimpMusic</a>
     ----
