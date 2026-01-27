@@ -10,10 +10,10 @@ BreezyWeather: 6.0.12_freenet
 Cherrygram: 12.2.10
 ConverterNOW: 4.5.0
 CpuInfo: 6.4.0
-Cromite: 144.0.7559.76
+Cromite: 144.0.7559.97
 DeltaIcons: 2.11.0
 DotGallery: 4.0.2
-DuckDuckGo: 5.263.3
+DuckDuckGo: 5.264.0
 Flip2DND: 9.0.3
 Florisboard: 0.5.2
 Fossify_Calculator: 1.3.0

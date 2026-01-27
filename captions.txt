@@ -1,6 +1,12 @@
-📦 <b>File name</b> – DuckDuckGo_v5.263.3.apk
+📦 <b>File name</b> – Cromite_v144.0.7559.97.apk
+    🌐 Bromite-based privacy browser
+🚀 Version: 144.0.7559.76 → 144.0.7559.97
+
+Changelog: <a href='https://github.com/uazo/cromite/releases/latest'>Cromite</a>
+    ----
+📦 <b>File name</b> – DuckDuckGo_v5.264.0.apk
     🦆 Private, tracker-blocking browser
-🚀 Version: 5.263.2 → 5.263.3
+🚀 Version: 5.263.3 → 5.264.0
 
 Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
     ----
