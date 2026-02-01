@@ -1,30 +1,6 @@
-📦 <b>File name</b> – Fossify_Calculator_v1.4.0.apk
-    🧮 Open-source, privacy-friendly calculator by Fossify
-🚀 Version: 1.3.0 → 1.4.0
+📦 <b>File name</b> – Flip2DND_v10.0.0-free.apk
+    🤳 Flip your phone to toggle Do Not Disturb automatically
+🚀 Version: 9.0.4 → 10.0.0-free
 
-Changelog: <a href='https://github.com/FossifyOrg/Calculator/releases/latest'>Fossify_Calculator</a>
-    ----
-📦 <b>File name</b> – Fossify_Keyboard_v1.9.0.apk
-    ⌨️ Easy keyboard for inserting texts, special characters and numbers
-🚀 Version: 1.8.0 → 1.9.0
-
-Changelog: <a href='https://github.com/FossifyOrg/Keyboard/releases/latest'>Fossify_Keyboard</a>
-    ----
-📦 <b>File name</b> – Fossify_MusicPlayer_v1.8.0.apk
-    🎶 Modern music player by Fossify
-🚀 Version: 1.7.0 → 1.8.0
-
-Changelog: <a href='https://github.com/FossifyOrg/Music-Player/releases/latest'>Fossify_MusicPlayer</a>
-    ----
-📦 <b>File name</b> – Fossify_Notes_v1.7.0.apk
-    🗒️ Secure, privacy-focused notes app by Fossify
-🚀 Version: 1.6.0 → 1.7.0
-
-Changelog: <a href='https://github.com/FossifyOrg/Notes/releases/latest'>Fossify_Notes</a>
-    ----
-📦 <b>File name</b> – Fossify_VoiceRecorder_v1.7.0.apk
-    🎤 Simple, privacy-respecting voice recorder by Fossify
-🚀 Version: 1.6.0 → 1.7.0
-
-Changelog: <a href='https://github.com/FossifyOrg/Voice-Recorder/releases/latest'>Fossify_VoiceRecorder</a>
+Changelog: <a href='https://github.com/robinsrk/flip_2_dnd/releases/latest'>Flip2DND</a>
     ----
