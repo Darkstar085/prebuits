@@ -1,6 +1,18 @@
-📦 <b>File name</b> – Flip2DND_v10.0.0-free.apk
-    🤳 Flip your phone to toggle Do Not Disturb automatically
-🚀 Version: 9.0.4 → 10.0.0-free
+📦 <b>File name</b> – BreezyWeather_v6.1.1_freenet.apk
+    🌦️ Clean, customizable open-source weather app
+🚀 Version: 6.0.12_freenet → 6.1.1_freenet
 
-Changelog: <a href='https://github.com/robinsrk/flip_2_dnd/releases/latest'>Flip2DND</a>
+Changelog: <a href='https://github.com/breezy-weather/breezy-weather/releases/latest'>BreezyWeather</a>
+    ----
+📦 <b>File name</b> – DeltaIcons_v2.12.0.apk
+    🎨 Beautiful, minimal icon pack
+🚀 Version: 2.11.0 → 2.12.0
+
+Changelog: <a href='https://github.com/Delta-Icons/android/releases/latest'>DeltaIcons</a>
+    ----
+📦 <b>File name</b> – SimpMusic_v1.0.3.apk
+    🎵 Lightweight YT music player with Material You support
+🚀 Version: 1.0.2 → 1.0.3
+
+Changelog: <a href='https://github.com/maxrave-dev/SimpMusic/releases/latest'>SimpMusic</a>
     ----

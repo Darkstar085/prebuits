@@ -6,12 +6,12 @@ AmarokHider: 0.10.0
 AmazeFileManager: 1.11.6
 Arcticons: 14.0.0
 Bitwarden: 2026.1.0
-BreezyWeather: 6.0.12_freenet
+BreezyWeather: 6.1.1_freenet
 Cherrygram: 12.2.10
 ConverterNOW: 4.5.0
 CpuInfo: 6.4.0
 Cromite: 144.0.7559.97
-DeltaIcons: 2.11.0
+DeltaIcons: 2.12.0
 DotGallery: 4.0.2
 DuckDuckGo: 5.264.1
 Flip2DND: 10.0.0-free
@@ -41,7 +41,7 @@ ReVanced_YouTube: 20.14.43
 RevancedManager: 1.25.1
 Sdmaid: 1.5.7-rc0
 Shizuku: 13.6.0.r1086.2650830c
-SimpMusic: 1.0.2
+SimpMusic: 1.0.3
 Spotify_Revanced: 9.0.72.949
 Symphony: 2024.12.115
 Termux: 0.118.3
