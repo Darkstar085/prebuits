@@ -13,11 +13,11 @@ CpuInfo: 6.4.0
 Cromite: 144.0.7559.97
 DeltaIcons: 2.12.0
 DotGallery: 4.0.2
-DuckDuckGo: 5.264.1
-Flip2DND: 10.0.0-free
+DuckDuckGo: 5.265.0
+Flip2DND: 10.1.0-free
 Florisboard: 0.5.2
 Fossify_Calculator: 1.4.0
-Fossify_Keyboard: 1.9.0
+Fossify_Keyboard: 1.9.1
 Fossify_MusicPlayer: 1.8.0
 Fossify_Notes: 1.7.0
 Fossify_VoiceRecorder: 1.7.0
@@ -45,7 +45,7 @@ SimpMusic: 1.0.3
 Spotify_Revanced: 9.0.72.949
 Symphony: 2024.12.115
 Termux: 0.118.3
-ThunderbirdAndroid: 15.0
+ThunderbirdAndroid: 16.0
 VisualCodeSpace: 2.0.1
 WeatherMaster: 2.7.0
 XedEditor: 3.2.6
