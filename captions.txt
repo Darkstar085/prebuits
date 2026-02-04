@@ -1,24 +1,6 @@
-📦 <b>File name</b> – DuckDuckGo_v5.265.0.apk
-    🦆 Private, tracker-blocking browser
-🚀 Version: 5.264.1 → 5.265.0
+📦 <b>File name</b> – Arcticons_v14.2.4.apk
+    🎭 Modern icon pack and theming app
+🚀 Version: 14.0.0 → 14.2.4
 
-Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
-    ----
-📦 <b>File name</b> – Flip2DND_v10.1.0-free.apk
-    🤳 Flip your phone to toggle Do Not Disturb automatically
-🚀 Version: 10.0.0-free → 10.1.0-free
-
-Changelog: <a href='https://github.com/robinsrk/flip_2_dnd/releases/latest'>Flip2DND</a>
-    ----
-📦 <b>File name</b> – Fossify_Keyboard_v1.9.1.apk
-    ⌨️ Easy keyboard for inserting texts, special characters and numbers
-🚀 Version: 1.9.0 → 1.9.1
-
-Changelog: <a href='https://github.com/FossifyOrg/Keyboard/releases/latest'>Fossify_Keyboard</a>
-    ----
-📦 <b>File name</b> – ThunderbirdAndroid_v16.0.apk
-    📧 Official Thunderbird email client for Android
-🚀 Version: 15.0 → 16.0
-
-Changelog: <a href='https://github.com/thunderbird/thunderbird-android/releases/latest'>ThunderbirdAndroid</a>
+Changelog: <a href='https://github.com/Arcticons-Team/Arcticons/releases/latest'>Arcticons</a>
     ----
