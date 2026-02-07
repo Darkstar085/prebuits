@@ -1,5 +1,5 @@
 *: *
-ABDownloadManager: 1.8.4
+ABDownloadManager: 1.8.5
 Acode: 1.11.6
 Aegis: 3.4.1
 AmarokHider: 0.10.0
@@ -13,8 +13,8 @@ CpuInfo: 6.4.0
 Cromite: 144.0.7559.97
 DeltaIcons: 2.12.0
 DotGallery: 4.0.2
-DuckDuckGo: 5.265.0
-Flip2DND: 10.1.1-free
+DuckDuckGo: 5.266.0
+Flip2DND: 10.1.2-free
 Florisboard: 0.5.2
 Fossify_Calculator: 1.4.0
 Fossify_Keyboard: 1.9.1
