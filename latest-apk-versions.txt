@@ -45,7 +45,7 @@ SimpMusic: 1.0.3
 Spotify_Revanced: 9.0.72.949
 Symphony: 2024.12.115
 Termux: 0.118.3
-ThunderbirdAndroid: 16.0
+ThunderbirdAndroid: 16.1
 VisualCodeSpace: 2.0.1
 WeatherMaster: 2.7.0
 XedEditor: 3.2.6
