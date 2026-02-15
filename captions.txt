@@ -1,18 +1,6 @@
-📦 <b>File name</b> – BreezyWeather_v6.1.3_freenet.apk
-    🌦️ Clean, customizable open-source weather app
-🚀 Version: 6.1.1_freenet → 6.1.3_freenet
+📦 <b>File name</b> – Flip2DND_v10.1.5-free.apk
+    🤳 Flip your phone to toggle Do Not Disturb automatically
+🚀 Version: 10.1.4-free → 10.1.5-free
 
-Changelog: <a href='https://github.com/breezy-weather/breezy-weather/releases/latest'>BreezyWeather</a>
-    ----
-📦 <b>File name</b> – DuckDuckGo_v5.267.0.apk
-    🦆 Private, tracker-blocking browser
-🚀 Version: 5.266.0 → 5.267.0
-
-Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
-    ----
-📦 <b>File name</b> – ABDownloadManager_v1.8.6.exe
-    📥 Powerful download manager with multi-threading
-🚀 Version: 1.8.5 → 1.8.6
-
-Changelog: <a href='https://github.com/amir1376/ab-download-manager/releases/latest'>ABDownloadManager</a>
+Changelog: <a href='https://github.com/robinsrk/flip_2_dnd/releases/latest'>Flip2DND</a>
     ----
