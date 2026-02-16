@@ -4,7 +4,7 @@ Acode: 1.11.6
 Aegis: 3.4.1
 AmarokHider: 0.10.0
 AmazeFileManager: 1.11.6
-Arcticons: 14.2.4
+Arcticons: 14.3.3
 Bitwarden: 2026.1.1
 BreezyWeather: 6.1.3_freenet
 Cherrygram: 12.2.10
@@ -35,7 +35,7 @@ PhonographPlus: 1.11.5
 Pixelplay: 0.5.0-beta
 PrismFileExplorer: 1.3.2
 ReVanced_GooglePhotos: 7.59.0.856624550
-ReVanced_MicroG: 0.3.1.4.240913
+ReVanced_MicroG: 0.3.13.2.250932
 ReVanced_YTMusic: 8.10.52
 ReVanced_YouTube: 20.14.43
 RevancedManager: 1.25.1

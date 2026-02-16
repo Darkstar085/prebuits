@@ -1,6 +1,12 @@
-📦 <b>File name</b> – Flip2DND_v10.1.5-free.apk
-    🤳 Flip your phone to toggle Do Not Disturb automatically
-🚀 Version: 10.1.4-free → 10.1.5-free
+📦 <b>File name</b> – Arcticons_v14.3.3.apk
+    🎭 Modern icon pack and theming app
+🚀 Version: 14.2.4 → 14.3.3
 
-Changelog: <a href='https://github.com/robinsrk/flip_2_dnd/releases/latest'>Flip2DND</a>
+Changelog: <a href='https://github.com/Arcticons-Team/Arcticons/releases/latest'>Arcticons</a>
+    ----
+📦 <b>File name</b> – ReVanced_MicroG_v0.3.13.2.250932.apk
+    🧩 MicroG for ReVanced - enables Google sign-in
+🚀 Version: 0.3.1.4.240913 → 0.3.13.2.250932
+
+Changelog: <a href='https://github.com/ReVanced/GmsCore/releases/latest'>ReVanced_MicroG</a>
     ----
