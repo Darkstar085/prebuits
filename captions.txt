@@ -1,24 +1,12 @@
-📦 <b>File name</b> – Flip2DND_v10.1.7-free.apk
+📦 <b>File name</b> – Flip2DND_v10.1.8-free.apk
     🤳 Flip your phone to toggle Do Not Disturb automatically
-🚀 Version: 10.1.5-free → 10.1.7-free
+🚀 Version: 10.1.7-free → 10.1.8-free
 
 Changelog: <a href='https://github.com/robinsrk/flip_2_dnd/releases/latest'>Flip2DND</a>
     ----
-📦 <b>File name</b> – Fossify_MusicPlayer_v1.8.1.apk
-    🎶 Modern music player by Fossify
-🚀 Version: 1.8.0 → 1.8.1
+📦 <b>File name</b> – ReVanced_YouTube_v20.40.45.apk
+    🎬 YouTube with ad-block, background play, sponsor block and more
+🚀 Version: 20.14.43 → 20.40.45
 
-Changelog: <a href='https://github.com/FossifyOrg/Music-Player/releases/latest'>Fossify_MusicPlayer</a>
-    ----
-📦 <b>File name</b> – Fossify_VoiceRecorder_v1.7.1.apk
-    🎤 Simple, privacy-respecting voice recorder by Fossify
-🚀 Version: 1.7.0 → 1.7.1
-
-Changelog: <a href='https://github.com/FossifyOrg/Voice-Recorder/releases/latest'>Fossify_VoiceRecorder</a>
-    ----
-📦 <b>File name</b> – Nekogram_v12.4.1.apk
-    🐱 Feature-rich Telegram client with enhanced privacy
-🚀 Version: 12.3.1 → 12.4.1
-
-Changelog: <a href='https://github.com/Nekogram/Nekogram/releases/latest'>Nekogram</a>
+Changelog: <a href='https://github.com/j-hc/revanced-magisk-module/releases/latest'>ReVanced_YouTube</a>
     ----
