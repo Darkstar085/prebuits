@@ -1,12 +1,18 @@
-📦 <b>File name</b> – Momogram_v12.3.1-58ac5cd3e1.apk
-    📱 Telegram client with privacy and customization features
-🚀 Version: 12.2.10-c86b747287 → 12.3.1-58ac5cd3e1
+📦 <b>File name</b> – Cromite_v145.0.7632.76.apk
+    🌐 Bromite-based privacy browser
+🚀 Version: 145.0.7632.46 → 145.0.7632.76
 
-Changelog: <a href='https://github.com/dic1911/Momogram/releases/latest'>Momogram</a>
+Changelog: <a href='https://github.com/uazo/cromite/releases/latest'>Cromite</a>
     ----
-📦 <b>File name</b> – XedEditor_v3.2.7.apk
-    ✏️ Simple and fast text/code editor
-🚀 Version: 3.2.6 → 3.2.7
+📦 <b>File name</b> – DuckDuckGo_v5.268.1.apk
+    🦆 Private, tracker-blocking browser
+🚀 Version: 5.267.0 → 5.268.1
 
-Changelog: <a href='https://github.com/Xed-Editor/Xed-Editor/releases/latest'>XedEditor</a>
+Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
+    ----
+📦 <b>File name</b> – ABDownloadManager_v1.8.7.exe
+    📥 Powerful download manager with multi-threading
+🚀 Version: 1.8.6 → 1.8.7
+
+Changelog: <a href='https://github.com/amir1376/ab-download-manager/releases/latest'>ABDownloadManager</a>
     ----
