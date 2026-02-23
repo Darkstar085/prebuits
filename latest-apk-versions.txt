@@ -7,14 +7,14 @@ AmazeFileManager: 1.11.6
 Arcticons: 14.3.3
 Bitwarden: 2026.1.1
 BreezyWeather: 6.1.3_freenet
-Cherrygram: 12.2.10
+Cherrygram: 12.4.1
 ConverterNOW: 4.5.0
 CpuInfo: 6.4.0
 Cromite: 145.0.7632.76
 DeltaIcons: 2.12.0
 DotGallery: 4.0.2
 DuckDuckGo: 5.268.1
-Flip2DND: 11.0.0-free
+Flip2DND: 11.0.1-free
 Florisboard: 0.5.2
 Fossify_Calculator: 1.4.0
 Fossify_Keyboard: 1.9.1
