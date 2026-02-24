@@ -14,7 +14,7 @@ Cromite: 145.0.7632.76
 DeltaIcons: 2.12.0
 DotGallery: 4.0.2
 DuckDuckGo: 5.268.1
-Flip2DND: 11.0.1-free
+Flip2DND: 11.0.2-free
 Florisboard: 0.5.2
 Fossify_Calculator: 1.4.0
 Fossify_Keyboard: 1.9.1
@@ -26,7 +26,7 @@ IceravenBrowser: iceraven-2.40.0
 LTECleanerFOSS: 5.1.0
 LibreTube: 0.29.1
 LocalSend: 1.17.0
-Magisk: 30.6
+Magisk: 30.7
 MoeList: 3.8.0
 Momogram: 12.3.1-58ac5cd3e1
 Nekogram: 12.4.1
