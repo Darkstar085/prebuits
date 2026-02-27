@@ -47,6 +47,6 @@ Symphony: 2024.12.115
 Termux: 0.118.3
 ThunderbirdAndroid: 16.1
 VisualCodeSpace: 2.0.1
-WeatherMaster: 2.7.0
+WeatherMaster: 2.7.1
 XedEditor: 3.2.7
 Ytdlnis: 1.8.7.2
