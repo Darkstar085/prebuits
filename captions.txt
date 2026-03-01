@@ -1,12 +1,6 @@
-📦 <b>File name</b> – Flip2DND_v11.1.2-free.apk
-    🤳 Flip your phone to toggle Do Not Disturb automatically
-🚀 Version: 11.1.1-free → 11.1.2-free
+📦 <b>File name</b> – ConverterNOW_v4.6.0.apk
+    🔄 Simple unit and currency converter
+🚀 Version: 4.5.0 → 4.6.0
 
-Changelog: <a href='https://github.com/robinsrk/flip_2_dnd/releases/latest'>Flip2DND</a>
-    ----
-📦 <b>File name</b> – SimpMusic_v1.0.4.apk
-    🎵 Lightweight YT music player with Material You support
-🚀 Version: 1.0.3 → 1.0.4
-
-Changelog: <a href='https://github.com/maxrave-dev/SimpMusic/releases/latest'>SimpMusic</a>
+Changelog: <a href='https://github.com/ferraridamiano/ConverterNOW/releases/latest'>ConverterNOW</a>
     ----

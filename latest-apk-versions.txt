@@ -8,7 +8,7 @@ Arcticons: 14.3.3
 Bitwarden: 2026.1.1
 BreezyWeather: 6.1.3_freenet
 Cherrygram: 12.4.1
-ConverterNOW: 4.5.0
+ConverterNOW: 4.6.0
 CpuInfo: 6.4.0
 Cromite: 145.0.7632.76
 DeltaIcons: 2.12.0
