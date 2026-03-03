@@ -1,12 +1,6 @@
-📦 <b>File name</b> – Flip2DND_v12.0.1-free.apk
-    🤳 Flip your phone to toggle Do Not Disturb automatically
-🚀 Version: 11.1.2-free → 12.0.1-free
+📦 <b>File name</b> – Cromite_v145.0.7632.120.apk
+    🌐 Bromite-based privacy browser
+🚀 Version: 145.0.7632.76 → 145.0.7632.120
 
-Changelog: <a href='https://github.com/robinsrk/flip_2_dnd/releases/latest'>Flip2DND</a>
-    ----
-📦 <b>File name</b> – IceravenBrowser_viceraven-2.41.2.apk
-    🦦 Privacy-focused web browser
-🚀 Version: iceraven-2.40.0 → iceraven-2.41.2
-
-Changelog: <a href='https://github.com/fork-maintainers/iceraven-browser/releases/latest'>IceravenBrowser</a>
+Changelog: <a href='https://github.com/uazo/cromite/releases/latest'>Cromite</a>
     ----
