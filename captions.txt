@@ -1,18 +1,12 @@
-📦 <b>File name</b> – CpuInfo_v6.5.0.apk
-    💻 Detailed CPU info tool
-🚀 Version: 6.4.0 → 6.5.0
-
-Changelog: <a href='https://github.com/kamgurgul/cpu-info/releases/latest'>CpuInfo</a>
-    ----
-📦 <b>File name</b> – DuckDuckGo_v5.270.0.apk
+📦 <b>File name</b> – DuckDuckGo_v5.270.1.apk
     🦆 Private, tracker-blocking browser
-🚀 Version: 5.269.0 → 5.270.0
+🚀 Version: 5.270.0 → 5.270.1
 
 Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
     ----
-📦 <b>File name</b> – Sdmaid_v1.6.3-rc0.apk
-    🧹 Powerful system cleaning tool
-🚀 Version: 1.6.2-rc1 → 1.6.3-rc0
+📦 <b>File name</b> – Flip2DND_v12.0.2-free.apk
+    🤳 Flip your phone to toggle Do Not Disturb automatically
+🚀 Version: 12.0.1-free → 12.0.2-free
 
-Changelog: <a href='https://github.com/d4rken-org/sdmaid-se/releases/latest'>Sdmaid</a>
+Changelog: <a href='https://github.com/robinsrk/flip_2_dnd/releases/latest'>Flip2DND</a>
     ----

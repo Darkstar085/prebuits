@@ -13,8 +13,8 @@ CpuInfo: 6.5.0
 Cromite: 145.0.7632.120
 DeltaIcons: 2.12.0
 DotGallery: 4.0.2
-DuckDuckGo: 5.270.0
-Flip2DND: 12.0.1-free
+DuckDuckGo: 5.270.1
+Flip2DND: 12.0.2-free
 Florisboard: 0.5.2
 Fossify_Calculator: 1.4.0
 Fossify_Keyboard: 1.9.1
