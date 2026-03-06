@@ -1,12 +1,6 @@
-📦 <b>File name</b> – DuckDuckGo_v5.270.1.apk
-    🦆 Private, tracker-blocking browser
-🚀 Version: 5.270.0 → 5.270.1
-
-Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
-    ----
-📦 <b>File name</b> – Flip2DND_v12.0.2-free.apk
+📦 <b>File name</b> – Flip2DND_v12.0.3-free.apk
     🤳 Flip your phone to toggle Do Not Disturb automatically
-🚀 Version: 12.0.1-free → 12.0.2-free
+🚀 Version: 12.0.2-free → 12.0.3-free
 
 Changelog: <a href='https://github.com/robinsrk/flip_2_dnd/releases/latest'>Flip2DND</a>
     ----
