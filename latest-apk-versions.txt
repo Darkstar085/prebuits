@@ -13,7 +13,7 @@ CpuInfo: 6.5.0
 Cromite: 145.0.7632.120
 DeltaIcons: 2.13.0
 DotGallery: 4.0.2
-DuckDuckGo: 5.270.2
+DuckDuckGo: 5.271.0
 Flip2DND: 12.0.3-free
 Florisboard: 0.5.2
 Fossify_Calculator: 1.4.0
@@ -28,10 +28,10 @@ LibreTube: 0.29.1
 LocalSend: 1.17.0
 Magisk: 30.7
 MoeList: 3.8.0
-Momogram: 12.3.1-58ac5cd3e1
-Nekogram: 12.4.1
+Momogram: 12.4.1-35d17b4b81
+Nekogram: 12.5.1
 Omni: 1.3
-PhonographPlus: 1.11.5
+PhonographPlus: 1.12.0
 Pixelplay: 0.5.0-beta
 PrismFileExplorer: 1.3.2
 ReVanced_GooglePhotos: 7.59.0.856624550
