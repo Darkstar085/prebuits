@@ -1,36 +1,36 @@
-📦 <b>File name</b> – Arcticons_v14.5.5.apk
-    🎭 Modern icon pack and theming app
-🚀 Version: 14.3.3 → 14.5.5
+📦 <b>File name</b> – CpuInfo_v6.6.0.apk
+    💻 Detailed CPU info tool
+🚀 Version: 6.5.0 → 6.6.0
 
-Changelog: <a href='https://github.com/Arcticons-Team/Arcticons/releases/latest'>Arcticons</a>
+Changelog: <a href='https://github.com/kamgurgul/cpu-info/releases/latest'>CpuInfo</a>
     ----
-📦 <b>File name</b> – ReVanced_GooglePhotos_v7.67.0.882706237.apk
-    📷 Google Photos with premium/unlocked features
-🚀 Version: 7.59.0.856624550 → 7.67.0.882706237
+📦 <b>File name</b> – DuckDuckGo_v5.272.0.apk
+    🦆 Private, tracker-blocking browser
+🚀 Version: 5.271.0 → 5.272.0
 
-Changelog: <a href='https://github.com/j-hc/revanced-magisk-module/releases/latest'>ReVanced_GooglePhotos</a>
+Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
     ----
-📦 <b>File name</b> – ReVanced_YTMusic_v8.40.54.apk
+📦 <b>File name</b> – Flip2DND_v12.0.7-free.apk
+    🤳 Flip your phone to toggle Do Not Disturb automatically
+🚀 Version: 12.0.6-free → 12.0.7-free
+
+Changelog: <a href='https://github.com/robinsrk/flip_2_dnd/releases/latest'>Flip2DND</a>
+    ----
+📦 <b>File name</b> – ReVanced_YTMusic_v8.44.54.apk
     🎵 YouTube Music with premium unlock, ad-block and advanced playback
-🚀 Version: 8.44.54 → 8.40.54
+🚀 Version: 8.40.54 → 8.44.54
 
 Changelog: <a href='https://github.com/j-hc/revanced-magisk-module/releases/latest'>ReVanced_YTMusic</a>
     ----
-📦 <b>File name</b> – ReVanced_YouTube_v20.40.45.apk
+📦 <b>File name</b> – ReVanced_YouTube_v20.44.38.apk
     🎬 YouTube with ad-block, background play, sponsor block and more
-🚀 Version: 20.44.38 → 20.40.45
+🚀 Version: 20.40.45 → 20.44.38
 
 Changelog: <a href='https://github.com/j-hc/revanced-magisk-module/releases/latest'>ReVanced_YouTube</a>
     ----
-📦 <b>File name</b> – RevancedManager_v2.1.0.apk
-    🛠️ No description available
-🚀 Version: 2.0.0 → 2.1.0
+📦 <b>File name</b> – ThunderbirdAndroid_v17.0.apk
+    📧 Official Thunderbird email client for Android
+🚀 Version: 16.1 → 17.0
 
-Changelog: <a href=''>RevancedManager</a>
-    ----
-📦 <b>File name</b> – SimpMusic_v1.1.0.apk
-    🎵 Lightweight YT music player with Material You support
-🚀 Version: 1.0.4 → 1.1.0
-
-Changelog: <a href='https://github.com/maxrave-dev/SimpMusic/releases/latest'>SimpMusic</a>
+Changelog: <a href='https://github.com/thunderbird/thunderbird-android/releases/latest'>ThunderbirdAndroid</a>
     ----
