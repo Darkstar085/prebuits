@@ -1,18 +1,24 @@
-📦 <b>File name</b> – Bitwarden_v2026.3.0.apk
-    🔑 Open-source password manager with cloud sync
-🚀 Version: 2026.2.1 → 2026.3.0
+📦 <b>File name</b> – ReVanced_YTMusic_v8.44.54.apk
+    🎵 YouTube Music with premium unlock, ad-block and advanced playback
+🚀 Version: 8.40.54 → 8.44.54
 
-Changelog: <a href='https://github.com/bitwarden/android/releases/latest'>Bitwarden</a>
+Changelog: <a href='https://github.com/j-hc/revanced-magisk-module/releases/latest'>ReVanced_YTMusic</a>
     ----
-📦 <b>File name</b> – RevancedManager_v2.2.3.apk
+📦 <b>File name</b> – ReVanced_YouTube_v20.45.36.apk
+    🎬 YouTube with ad-block, background play, sponsor block and more
+🚀 Version: 20.40.45 → 20.45.36
+
+Changelog: <a href='https://github.com/j-hc/revanced-magisk-module/releases/latest'>ReVanced_YouTube</a>
+    ----
+📦 <b>File name</b> – RevancedManager_v2.3.0.apk
     🛠️ No description available
-🚀 Version: 2.2.2 → 2.2.3
+🚀 Version: 2.2.3 → 2.3.0
 
 Changelog: <a href=''>RevancedManager</a>
     ----
-📦 <b>File name</b> – Sdmaid_v1.6.5-rc0.apk
-    🧹 Powerful system cleaning tool
-🚀 Version: 1.6.4-rc0 → 1.6.5-rc0
+📦 <b>File name</b> – SimpMusic_v1.1.1.apk
+    🎵 Lightweight YT music player with Material You support
+🚀 Version: 1.1.0 → 1.1.1
 
-Changelog: <a href='https://github.com/d4rken-org/sdmaid-se/releases/latest'>Sdmaid</a>
+Changelog: <a href='https://github.com/maxrave-dev/SimpMusic/releases/latest'>SimpMusic</a>
     ----
