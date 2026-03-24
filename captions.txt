@@ -1,6 +1,6 @@
-📦 <b>File name</b> – RevancedManager_v2.4.0.apk
-    🛠️ No description available
-🚀 Version: 2.3.0 → 2.4.0
+📦 <b>File name</b> – DuckDuckGo_v5.273.0.apk
+    🦆 Private, tracker-blocking browser
+🚀 Version: 5.272.0 → 5.273.0
 
-Changelog: <a href=''>RevancedManager</a>
+Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
     ----
