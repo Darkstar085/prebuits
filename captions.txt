@@ -1,6 +1,6 @@
-📦 <b>File name</b> – RevancedManager_v2.5.1.apk
-    🛠️ No description available
-🚀 Version: 2.4.0 → 2.5.1
+📦 <b>File name</b> – IceravenBrowser_viceraven-2.42.1.apk
+    🦦 Privacy-focused web browser
+🚀 Version: iceraven-2.41.3 → iceraven-2.42.1
 
-Changelog: <a href=''>RevancedManager</a>
+Changelog: <a href='https://github.com/fork-maintainers/iceraven-browser/releases/latest'>IceravenBrowser</a>
     ----
