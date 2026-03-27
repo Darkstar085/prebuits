@@ -1,6 +1,12 @@
-📦 <b>File name</b> – IceravenBrowser_viceraven-2.42.1.apk
-    🦦 Privacy-focused web browser
-🚀 Version: iceraven-2.41.3 → iceraven-2.42.1
+📦 <b>File name</b> – CpuInfo_v6.6.2.apk
+    💻 Detailed CPU info tool
+🚀 Version: 6.6.0 → 6.6.2
 
-Changelog: <a href='https://github.com/fork-maintainers/iceraven-browser/releases/latest'>IceravenBrowser</a>
+Changelog: <a href='https://github.com/kamgurgul/cpu-info/releases/latest'>CpuInfo</a>
+    ----
+📦 <b>File name</b> – PhonographPlus_v1.12.1.apk
+    🎧 Enhanced music player fork
+🚀 Version: 1.12.0 → 1.12.1
+
+Changelog: <a href='https://github.com/chr56/Phonograph_Plus/releases/latest'>PhonographPlus</a>
     ----
