@@ -1,12 +1,6 @@
-📦 <b>File name</b> – CpuInfo_v6.6.2.apk
-    💻 Detailed CPU info tool
-🚀 Version: 6.6.0 → 6.6.2
+📦 <b>File name</b> – DuckDuckGo_v5.274.0.apk
+    🦆 Private, tracker-blocking browser
+🚀 Version: 5.273.0 → 5.274.0
 
-Changelog: <a href='https://github.com/kamgurgul/cpu-info/releases/latest'>CpuInfo</a>
-    ----
-📦 <b>File name</b> – PhonographPlus_v1.12.1.apk
-    🎧 Enhanced music player fork
-🚀 Version: 1.12.0 → 1.12.1
-
-Changelog: <a href='https://github.com/chr56/Phonograph_Plus/releases/latest'>PhonographPlus</a>
+Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
     ----
