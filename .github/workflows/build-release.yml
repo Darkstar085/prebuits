@@ -48,7 +48,7 @@ jobs:
       LTECLEANER_REPO: "MDP43140/LTECleanerFOSS"
       MAGISK_REPO: "topjohnwu/Magisk"
       MICROG_RE_REPO: "WSTxda/MicroG-RE"
-      MICROG_REPO: "ReVanced/GmsCore"
+      MICROG_REPO: "MorpheApp/MicroG-RE"
       MOELIST_REPO: "axiel7/MoeList"
       MOMOGRAM_REPO: "dic1911/Momogram"
       NEKOGRAM_REPO: "Nekogram/Nekogram"
@@ -60,8 +60,8 @@ jobs:
       QDM_REPO: "PBhadoo/QDM"
       RIKKAAPPS_SHIZUKU_REPO: "RikkaApps/Shizuku"
       RETROMUSIC_REPO: "RetroMusicPlayer/RetroMusicPlayer"
-      REVANCED_MANAGER_REPO: "ReVanced/revanced-manager"
-      REVANCED_REPO: "j-hc/revanced-magisk-module"
+      MORPHE_MANAGER_REPO: "MorpheApp/morphe-manager"
+      MORPHE_REPO: "j-hc/revanced-magisk-module"
       SDMAID_REPO: "d4rken-org/sdmaid-se"
       SIMP_MUSIC_REPO: "maxrave-dev/SimpMusic"
       SYMPHONY_REPO: "zyrouge/symphony"
@@ -227,25 +227,21 @@ jobs:
       - name: Download Retro Music Player
         run: gh release download --repo ${{ env.RETROMUSIC_REPO }} --pattern "*normal*.apk" || true
 
-      - name: Download ReVanced YouTube
-        run: gh release download --repo ${{ env.REVANCED_REPO }} --pattern "youtube*all*.apk" || true
+      - name: Download Morphe YouTube
+        run: gh release download --repo ${{ env.MORPHE_REPO }} --pattern "youtube*all*.apk" || true
 
-      - name: Download ReVanced YT Music
-        run: gh release download --repo ${{ env.REVANCED_REPO }} --pattern "music*v8a*.apk" || true
+      - name: Download Morphe YT Music
+        run: gh release download --repo ${{ env.MORPHE_REPO }} --pattern "music*v8a*.apk" || true
 
-      - name: Download ReVanced Google Photos
-        run: gh release download --repo ${{ env.REVANCED_REPO }} --pattern "googlephotos*v8a*.apk" || true
+      - name: Download Morphe Google Photos
+        run: gh release download --repo ${{ env.MORPHE_REPO }} --pattern "googlephotos*v8a*.apk" || true
 
-      - name: Download Spotify Revanced
-        run: gh release download --repo ${{ env.REVANCED_REPO }} --pattern "spotify*.apk" || true
-
-      - name: Download ReVanced MicroG
+      - name: Download Morphe MicroG
         run: |
-          gh release download --repo ${{ env.MICROG_REPO }} --pattern "*gms*.apk" || true
-          rm -f *hw*.apk || true
+          gh release download --repo ${{ env.MICROG_REPO }} --pattern "*microg*.apk" || true
 
-      - name: Download ReVanced Manager APK
-        run: gh release download --repo ${{ env.REVANCED_MANAGER_REPO }} --pattern "*.apk" || true
+      - name: Download Morphe Manager APK
+        run: gh release download --repo ${{ env.MORPHE_MANAGER_REPO }} --pattern "*.apk" || true
 
       - name: Download Sdmaid Cleaner
         run: gh release download --repo ${{ env.SDMAID_REPO }} --pattern "*.apk" || true
@@ -335,13 +331,12 @@ jobs:
             ["PhonographPlus*.apk"]="PhonographPlus"
             ["Photok*.apk"]="Photok"
             ["PrismFileExplorer.apk"]="PrismFileExplorer"
-            ["Quantum*.exe"]="Quantum Download Manager"
-            ["*youtube*all*.apk"]="ReVanced_YouTube"
-            ["*music*v8a*.apk"]="ReVanced_YTMusic"
-            ["*googlephotos*v8a*.apk"]="ReVanced_GooglePhotos"
-            ["*spotify*.apk"]="Spotify_Revanced"
-            ["*gms*.apk"]="ReVanced_MicroG"
-            ["*revanced-manager*.apk"]="ReVancedManager"
+            ["Quantum*.exe"]="Quantum_Download_Manager"
+            ["*youtube*all*.apk"]="Morphe_YouTube"
+            ["*music*v8a*.apk"]="Morphe_YTMusic"
+            ["*googlephotos*v8a*.apk"]="Morphe_GooglePhotos"
+            ["*microg*.apk"]="Morphe_MicroG"
+            ["*morphe-manager*.apk"]="Morphe_Manager"
             ["*sdmse*.apk"]="Sdmaid"
             ["SimpMusic*.apk"]="SimpMusic"
             ["*symphony*.apk"]="Symphony"
@@ -452,15 +447,14 @@ jobs:
             ["PhonographPlus"]="Enhanced music player fork"
             ["Photok"]="Simple photo gallery app"
             ["PrismFileExplorer"]="Powerful, material design file explorer"
-            ["ReVanced_GooglePhotos"]="Google Photos with premium/unlocked features"
-            ["ReVanced_MicroG"]="MicroG for ReVanced - enables Google sign-in"
-            ["ReVanced_YTMusic"]="YouTube Music with premium unlock, ad-block and advanced playback"
-            ["ReVanced_YouTube"]="YouTube with ad-block, background play, sponsor block and more"
-            ["ReVancedManager"]="Manage and install ReVanced patches easily"
+            ["Morphe_GooglePhotos"]="Google Photos with premium/unlocked features"
+            ["Morphe_MicroG"]="MicroG for Morphe - enables Google sign-in"
+            ["Morphe_YTMusic"]="YouTube Music with premium unlock, ad-block and advanced playback"
+            ["Morphe_YouTube"]="YouTube with ad-block, background play, sponsor block and more"
+            ["Morphe_Manager"]="Manage and install Morphe patches easily"
             ["Sdmaid"]="Powerful system cleaning tool"
             ["Shizuku"]="Use system APIs directly with adb/root privileges from normal apps"
             ["SimpMusic"]="Lightweight YT music player with Material You support"
-            ["Spotify_Revanced"]="Spotify MOD with no ads and premium features"
             ["Symphony"]="Lightweight music player for Android 9+"
             ["Termux"]="Terminal emulator and Linux environment for Android"
             ["ThunderbirdAndroid"]="Official Thunderbird email client for Android"
@@ -470,7 +464,7 @@ jobs:
             ["Ytdlnis"]="YouTube downloader with advanced features"
             ["ImageToolbox"]="All-in-one image editing and viewing app"
             ["OuterTune"]="A Material 3 YouTube Music client & local music player for Android"
-            ["Quantum Download Manager"]="A modern, open-source download manager for Windows"
+            ["Quantum_Download_Manager"]="A modern, open-source download manager for Windows"
 
           )
 
@@ -511,15 +505,14 @@ jobs:
             ["PhonographPlus"]="🎧"
             ["Photok"]="🖼️"
             ["PrismFileExplorer"]="🗂️"
-            ["ReVanced_GooglePhotos"]="📷"
-            ["RevancedManager"]="🛠️"
-            ["ReVanced_MicroG"]="🧩"
-            ["ReVanced_YTMusic"]="🎵"
-            ["ReVanced_YouTube"]="🎬"
+            ["Morphe_GooglePhotos"]="📷"
+            ["Morphe_Manager"]="🛠️"
+            ["Morphe_MicroG"]="🧩"
+            ["Morphe_YTMusic"]="🎵"
+            ["Morphe_YouTube"]="🎬"
             ["Sdmaid"]="🧹"
             ["Shizuku"]="🤖"
             ["SimpMusic"]="🎵"
-            ["Spotify_Revanced"]="🎶"
             ["Symphony"]="🎼"
             ["Termux"]="🖥️"
             ["ThunderbirdAndroid"]="📧"
@@ -529,7 +522,7 @@ jobs:
             ["Ytdlnis"]="⬇️"
             ["ImageToolbox"]="🖼️"
             ["OuterTune"]="🎧"
-            ["Quantum Download Manager"]="📥"
+            ["Quantum_Download_Manager"]="📥"
           )
 
           declare -A app_repo=(
@@ -569,15 +562,14 @@ jobs:
             ["PhonographPlus"]="https://github.com/chr56/Phonograph_Plus/releases/latest"
             ["Photok"]="https://github.com/leonlatsch/photok/releases/latest"
             ["PrismFileExplorer"]="https://github.com/Raival-e/Prism-File-Explorer/releases/latest"
-            ["ReVanced_GooglePhotos"]="https://github.com/j-hc/revanced-magisk-module/releases/latest"
-            ["ReVanced_MicroG"]="https://github.com/ReVanced/GmsCore/releases/latest"
-            ["ReVanced_YTMusic"]="https://github.com/j-hc/revanced-magisk-module/releases/latest"
-            ["ReVanced_YouTube"]="https://github.com/j-hc/revanced-magisk-module/releases/latest"
-            ["ReVancedManager"]="https://github.com/ReVanced/revanced-manager/releases/latest"
+            ["Morphe_GooglePhotos"]="https://github.com/MorpheApp/morphe-patches/releases/latest"
+            ["Morphe_MicroG"]="https://github.com/MorpheApp/MicroG-RE/releases/latest"
+            ["Morphe_YTMusic"]="https://github.com/MorpheApp/morphe-patches/releases/latest"
+            ["Morphe_YouTube"]="https://github.com/MorpheApp/morphe-patches/releases/latest"
+            ["Morphe_Manager"]="https://github.com/MorpheApp/morphe-manager/releases/latest"
             ["Sdmaid"]="https://github.com/d4rken-org/sdmaid-se/releases/latest"
             ["Shizuku"]="https://github.com/RikkaApps/Shizuku/releases/latest"
             ["SimpMusic"]="https://github.com/maxrave-dev/SimpMusic/releases/latest"
-            ["Spotify_Revanced"]="https://github.com/j-hc/revanced-magisk-module/releases/latest"
             ["Symphony"]="https://github.com/zyrouge/symphony/releases/latest"
             ["Termux"]="https://github.com/termux/termux-app/releases/latest"
             ["ThunderbirdAndroid"]="https://github.com/thunderbird/thunderbird-android/releases/latest"
@@ -587,7 +579,7 @@ jobs:
             ["Ytdlnis"]="https://github.com/deniscerri/ytdlnis/releases/latest"
             ["ImageToolbox"]="https://github.com/T8RIN/ImageToolbox/releases/latest"
             ["OuterTune"]="https://github.com/OuterTune/OuterTune/releases/latest"
-            ["Quantum Download Manager"]="https://github.com/PBhadoo/QDM/releases/latest"
+            ["Quantum_Download_Manager"]="https://github.com/PBhadoo/QDM/releases/latest"
           )
 
           rm -f captions.txt
