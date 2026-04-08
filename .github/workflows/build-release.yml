@@ -1,24 +1,20 @@
 name: Build and Release
-
 on:
   workflow_dispatch:
   push:
     branches: [main]
     paths-ignore: ["*.md", "*.txt"]
   schedule:
-    - cron: "30 3 * * *"
-
+  - cron: "0 0 * * *"
 concurrency:
   group: prebuilts-build-${{ github.ref }}
   cancel-in-progress: true
-
 jobs:
   build-release:
     runs-on: ubuntu-latest
     env:
       ACCESS_TOKEN: ${{ secrets.TOKEN }}
       GH_TOKEN: ${{ secrets.TOKEN }}
-
       ABDOWNLOADER_REPO: "amir1376/ab-download-manager"
       ACODE_REPO: "Acode-Foundation/Acode"
       AEGIS_REPO: "beemdevelopment/Aegis"
@@ -71,212 +67,176 @@ jobs:
       WEATHERMASTER_REPO: "PranshulGG/WeatherMaster"
       XED_EDITOR_REPO: "Xed-Editor/Xed-Editor"
       YTDLNIS_REPO: "deniscerri/ytdlnis"
-
     steps:
       - name: Checkout
         uses: actions/checkout@v5
-
       - name: Set up JDK 17
         uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 17
-
       - name: Install aapt and GitHub CLI
         run: |
           sudo apt-get update
           sudo apt-get install -y aapt gh
+      - name: Weekly random day gate
+        run: |
+          WEEK=$(date +%Y-%U)
 
+          if [ -f .run_week ]; then
+          STORED_WEEK=$(cut -d: -f1 .run_week)
+          STORED_DAY=$(cut -d: -f2 .run_week)
+          fi
+
+          if [ "$STORED_WEEK" != "$WEEK" ]; then
+          STORED_DAY=$((RANDOM % 7))
+          echo "$WEEK:$STORED_DAY" > .run_week
+          echo "Random run day this week: $STORED_DAY"
+          else
+          echo "Using stored day: $STORED_DAY"
+          fi
+
+          TODAY=$(date +%w)
+
+          if [ "$TODAY" != "$STORED_DAY" ]; then
+          echo "Not today's random day → exiting"
+          exit 0
+          fi
       - name: Download AB Download Manager
         run: gh release download --repo ${{ env.ABDOWNLOADER_REPO }} --pattern "*windows_x64*.exe" || true
-
       - name: Download Acode
         run: gh release download --repo ${{ env.ACODE_REPO }} --pattern "*app-fdroid-release*.apk" || true
-
       - name: Download Aegis
         run: gh release download --repo ${{ env.AEGIS_REPO }} --pattern "*.apk" || true
-
       - name: Download Amarok Hider
         run: |
           gh release download --repo ${{ env.AMAROK_HIDER_REPO }} --pattern "*.apk" || true
           rm -f *foss*.apk || true
-
       - name: Download Arcticons
         run: gh release download --repo ${{ env.ARCTICONS_REPO }} --pattern "*dayNight*.apk" || true
-
       - name: Download Bitwarden
         run: gh release download --repo ${{ env.BITWARDEN_REPO }} --pattern "*bitwarden-fdroid*.apk" || true
-
       - name: Download Breezy Weather
         run: gh release download --repo ${{ env.BREEZY_REPO }} --pattern "*freenet*.apk" || true
-
       - name: Download Cherrygram
         run: |
           gh release download --repo ${{ env.CHERRYGRAM_REPO }} --pattern "Cherrygram*universal*.apk" || true
           rm -f *Huawei*.apk || true
-
       - name: Download ConverterNOW
         run: gh release download --repo ${{ env.CONVERTERNOW_REPO }} --pattern "*app-arm64-v8a-release*.apk" || true
-
       - name: Download Cromite APK (arm64)
         run: gh release download --repo ${{ env.CROMITE_REPO }} --pattern "*arm64_ChromePublic*.apk" || true
-
       - name: Download CpuInfo
         run: gh release download --repo ${{ env.CPU_INFO_REPO }} --pattern "*androidApp*.apk" || true
-
       - name: Download DeltaIcons
         run: |
           gh release download --repo ${{ env.DELTAICONS_REPO }} --pattern "*.apk" || true
           rm -f *foss*.apk || true
-
       - name: Download DotGallery (arm64-v8a) and Remove nomaps variant
         run: |
           gh release download --repo ${{ env.DOTGALLERY_REPO }} --pattern "*arm64-v8a*.apk" || true
           rm -f *nomaps*.apk || true
-
       - name: Download DuckDuckGo
         run: gh release download --repo ${{ env.DUCKDUCKGO_REPO }} --pattern "*.apk" || true
-
       - name: Download Florisboard
         run: gh release download --repo ${{ env.FLORISBOARD_REPO }} --pattern "*stable*.apk" || true
-
       - name: Download Flip 2 DND APK and Rename APK
         run: |
           gh release download --repo ${{ env.FLIP2DND_REPO }} --pattern "*.apk" || true
           mv app-release.apk Flip2DND.apk || true
           rm -f app-release.apk || true
-
       - name: Download Fossify Calculator
         run: gh release download --repo ${{ env.FOSSIFY_CALC_REPO }} --pattern "*.apk" || true
-
       - name: Download Fossify Keyboard
         run: gh release download --repo ${{ env.FOSSIFY_KEYBOARD_REPO }} --pattern "*.apk" || true
-
       - name: Download Fossify Music Player
         run: gh release download --repo ${{ env.FOSSIFY_MUSIC_REPO }} --pattern "*.apk" || true
-
       - name: Download Fossify Notes
         run: gh release download --repo ${{ env.FOSSIFY_NOTES_REPO }} --pattern "*.apk" || true
-
       - name: Download Fossify Voice Recorder
         run: gh release download --repo ${{ env.FOSSIFY_VR_REPO }} --pattern "*.apk" || true
-
       - name: Download Gramophone
         run: gh release download --repo ${{ env.GRAMOPHONE_REPO }} --pattern "*.apk" || true
-
       - name: Download Iceraven Browser
         run: gh release download --repo ${{ env.ICERAVEN_REPO }} --pattern "*v8a*.apk" || true
-
       - name: Download ImageToolbox
         run: gh release download --repo ${{ env.IMAGETOOLBOX_REPO }} --pattern "*v8a*.apk" || true
-
       - name: Download LibreTube
         run: gh release download --repo ${{ env.LIBRETUBE_REPO }} --pattern "*app-universal-release*.apk" || true
-
       - name: Download LocalSend
         run: gh release download --repo ${{ env.LOCAL_SEND_REPO }} --pattern "*google-play*.apk" || true
-
       - name: Download LTECleanerFOSS and Rename APK
         run: |
           gh release download --repo ${{ env.LTECLEANER_REPO }} --pattern "*app-release*.apk" || true
           mv app-release.apk LTECleanerFOSS.apk || true
           rm -f app-release.apk || true
-
       - name: Download Magisk APK
         run: gh release download --repo ${{ env.MAGISK_REPO }} --pattern "*.apk" || true
-
       - name: Download MicroG RE APK
         run: gh release download --repo ${{ env.MICROG_RE_REPO }} --pattern "*.apk" || true
-
       - name: Download MoeList
         run: gh release download --repo ${{ env.MOELIST_REPO }} --pattern "*universal*.apk" || true
-
       - name: Download Momogram
         run: gh release download --repo ${{ env.MOMOGRAM_REPO }} --pattern "*arm64-v8a*.apk" || true
-
       - name: Download Nekogram
         run: gh release download --repo ${{ env.NEKOGRAM_REPO }} --pattern "*universal*.apk" || true
-
       - name: Download Omni APK and Rename APK
         run: |
           gh release download --repo ${{ env.OMNI_REPO }} --pattern "*.apk" || true
           mv app-release.apk Omni.apk || true
           rm -f app-release.apk || true
-
       - name: Download OuterTune
         run: gh release download --repo ${{ env.OUTERTUNE_REPO }} --pattern "*core*.apk" || true
-
       - name: Download Pixelplay
         run: gh release download --repo ${{ env.PIXELPLAY_REPO }} --pattern "*PixelPlay*.apk" || true
-
       - name: Download Phonograph Plus
         run: gh release download --repo ${{ env.PHONOGRAPHPLUS_REPO }} --pattern "*ModernStableRelease*.apk" || true
-
       - name: Download Prism File Explorer and Rename APK
         run: |
           gh release download --repo ${{ env.PRISM_REPO }} --pattern "*.apk" || true
           mv app-release.apk PrismFileExplorer.apk || true
           rm -f app-release.apk || true
-
       - name: Download QDM
         run: gh release download --repo ${{ env.QDM_REPO }} --pattern "*.exe" || true
-
       - name: Download RikkaApps Shizuku
         run: gh release download --repo ${{ env.RIKKAAPPS_SHIZUKU_REPO }} --pattern "*.apk" || true
-
       - name: Download Retro Music Player
         run: gh release download --repo ${{ env.RETROMUSIC_REPO }} --pattern "*normal*.apk" || true
-
       - name: Download Morphe YouTube
         run: gh release download --repo ${{ env.MORPHE_REPO }} --pattern "youtube*all*.apk" || true
-
       - name: Download Morphe YT Music
         run: gh release download --repo ${{ env.MORPHE_REPO }} --pattern "music*v8a*.apk" || true
-
       - name: Download Morphe Google Photos
         run: gh release download --repo ${{ env.MORPHE_REPO }} --pattern "googlephotos*v8a*.apk" || true
-
       - name: Download Morphe MicroG
         run: |
           gh release download --repo ${{ env.MICROG_REPO }} --pattern "*microg*.apk" || true
-
       - name: Download Morphe Manager APK
         run: gh release download --repo ${{ env.MORPHE_MANAGER_REPO }} --pattern "*.apk" || true
-
       - name: Download Sdmaid Cleaner
         run: gh release download --repo ${{ env.SDMAID_REPO }} --pattern "*.apk" || true
-
       - name: Download Simp Music
         run: gh release download --repo ${{ env.SIMP_MUSIC_REPO }} --pattern "*foss*universal*.apk" || true
-
       - name: Download Symphony
         run: gh release download --repo "${{ env.SYMPHONY_REPO }}" --pattern "*.apk" || true
-
       - name: Download Thunderbird Android
         run: gh release download --repo ${{ env.THUNDERBIRD_REPO }} --pattern "*.apk" || true
-
       - name: Download Termux APK
         run: gh release download --repo ${{ env.TERMUX_REPO }} --pattern "*universal.apk" || true
-
       - name: Download Visual Code Space
         run: |
           gh release download --repo ${{ env.VCS_REPO }} --pattern "*.apk" || true
           mv app-release.apk VisualCodeSpace.apk || true
           rm -f app-release.apk || true
-
       - name: Download WeatherMaster APK
         run: gh release download --repo ${{ env.WEATHERMASTER_REPO }} --pattern "*WeatherMaster*v8a*.apk" || true
-
       - name: Download Xed Editor
         run: gh release download --repo ${{ env.XED_EDITOR_REPO }} --pattern "*xed*.apk" || true
-
       - name: Download YTDlnis
         run: gh release download --repo ${{ env.YTDLNIS_REPO }} --pattern "YTDLnis*universal*.apk" || true
-
       - name: Backup previous versions for diff
         run: |
           cp latest-apk-versions.txt old-apk-versions.txt 2>/dev/null || touch old-apk-versions.txt
-
       - name: Version and rename APKs and EXE
         id: versioning
         run: |
@@ -390,13 +350,11 @@ jobs:
           else
             echo "UPDATED_APPS=" >> $GITHUB_ENV
           fi
-
       - name: Stop if no updates
         if: env.UPDATED_APPS == ''
         run: |
           echo "No updates found. Exiting."
           exit 0
-
       - name: Generate captions.txt
         if: env.UPDATED_APPS != ''
         run: |
@@ -610,7 +568,6 @@ jobs:
           ${CHANGELOG}
               ----" >> captions.txt
           done
-
       - name: Build release notes
         if: env.UPDATED_APPS != ''
         run: |
@@ -657,13 +614,11 @@ jobs:
           echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
           echo -e "${NOTES//\\n/$'\n'}" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
-
       - name: Build release name (IST)
         if: env.UPDATED_APPS != ''
         run: |
           export TZ=Asia/Kolkata
           echo "REL_NAME=Prebuilts Update - $(date +'%Y-%m-%d %H:%M %Z')" >> $GITHUB_ENV
-
       - name: Write latest versions
         if: env.UPDATED_APPS != ''
         run: |
@@ -686,7 +641,6 @@ jobs:
           for app in "${!LATEST[@]}"; do
             echo "$app: ${LATEST[$app]}"
           done | sort > latest-apk-versions.txt
-
       - name: Create release
         if: env.UPDATED_APPS != ''
         uses: softprops/action-gh-release@v2
@@ -699,7 +653,6 @@ jobs:
             *_v*.exe
         env:
           GITHUB_TOKEN: ${{ env.ACCESS_TOKEN }}
-
       - name: Commit latest versions and captions
         if: env.UPDATED_APPS != ''
         env:
@@ -707,6 +660,6 @@ jobs:
         run: |
           git config --local user.email "sipunkumar85@gmail.com"
           git config --local user.name "S I P U N"
-          git add latest-apk-versions.txt captions.txt
+          git add latest-apk-versions.txt captions.txt .run_week
           git commit -m "Update APK versions and Telegram captions [ci skip]" || echo "No changes to commit"
           git push origin main
