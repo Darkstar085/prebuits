@@ -1,24 +1,30 @@
-📦 <b>File name</b> – ImageToolbox_v3.7.1.apk
-    🖼️ All-in-one image editing and viewing app
-🆕 Version: 3.7.1
+📦 <b>File name</b> – Morphe_Manager_v1.13.1.apk
+    🛠️ Manage and install Morphe patches easily
+🆕 Version: 1.13.1
 
-Changelog: <a href='https://github.com/T8RIN/ImageToolbox/releases/latest'>ImageToolbox</a>
+Changelog: <a href='https://github.com/MorpheApp/morphe-manager/releases/latest'>Morphe_Manager</a>
     ----
-📦 <b>File name</b> – OuterTune_v0.10.1.apk
-    🎧 A Material 3 YouTube Music client & local music player for Android
-🆕 Version: 0.10.1
+📦 <b>File name</b> – Morphe_MicroG_v6.1.1.apk
+    🧩 MicroG for Morphe - enables Google sign-in
+🆕 Version: 6.1.1
 
-Changelog: <a href='https://github.com/OuterTune/OuterTune/releases/latest'>OuterTune</a>
+Changelog: <a href='https://github.com/MorpheApp/MicroG-RE/releases/latest'>Morphe_MicroG</a>
     ----
-📦 <b>File name</b> – ReVancedManager_v2.5.1.apk
-    📦 Manage and install ReVanced patches easily
-🆕 Version: 2.5.1
+📦 <b>File name</b> – Morphe_YTMusic_v8.44.54.apk
+    🎵 YouTube Music with premium unlock, ad-block and advanced playback
+🆕 Version: 8.44.54
 
-Changelog: <a href='https://github.com/ReVanced/revanced-manager/releases/latest'>ReVancedManager</a>
+Changelog: <a href='https://github.com/MorpheApp/morphe-patches/releases/latest'>Morphe_YTMusic</a>
     ----
-📦 <b>File name</b> – Quantum Download Manager_v1.0.3.exe
+📦 <b>File name</b> – Morphe_YouTube_v20.45.36.apk
+    🎬 YouTube with ad-block, background play, sponsor block and more
+🆕 Version: 20.45.36
+
+Changelog: <a href='https://github.com/MorpheApp/morphe-patches/releases/latest'>Morphe_YouTube</a>
+    ----
+📦 <b>File name</b> – Quantum_Download_Manager_v1.0.3.exe
     📥 A modern, open-source download manager for Windows
 🆕 Version: 1.0.3
 
-Changelog: <a href='https://github.com/PBhadoo/QDM/releases/latest'>Quantum Download Manager</a>
+Changelog: <a href='https://github.com/PBhadoo/QDM/releases/latest'>Quantum_Download_Manager</a>
     ----
