@@ -42,6 +42,7 @@ jobs:
       FOSSIFY_VR_REPO: "FossifyOrg/Voice-Recorder"
       GRAMOPHONE_REPO: "FoedusProgramme/Gramophone"
       ICERAVEN_REPO: "fork-maintainers/iceraven-browser"
+      IMAGETOOLBOX_REPO: "T8RIN/ImageToolbox"
       LIBRETUBE_REPO: "libre-tube/LibreTube"
       LOCAL_SEND_REPO: "localsend/localsend"
       LTECLEANER_REPO: "MDP43140/LTECleanerFOSS"
@@ -52,9 +53,11 @@ jobs:
       MOMOGRAM_REPO: "dic1911/Momogram"
       NEKOGRAM_REPO: "Nekogram/Nekogram"
       OMNI_REPO: "FoedusProgramme/Omni"
+      OUTERTUNE_REPO: "OuterTune/OuterTune"
       PIXELPLAY_REPO: "theovilardo/PixelPlay"
       PHONOGRAPHPLUS_REPO: "chr56/Phonograph_Plus"
       PRISM_REPO: "Raival-e/Prism-File-Explorer"
+      QDM_REPO: "PBhadoo/QDM"
       RIKKAAPPS_SHIZUKU_REPO: "RikkaApps/Shizuku"
       RETROMUSIC_REPO: "RetroMusicPlayer/RetroMusicPlayer"
       REVANCED_MANAGER_REPO: "ReVanced/revanced-manager"
@@ -164,6 +167,9 @@ jobs:
       - name: Download Iceraven Browser
         run: gh release download --repo ${{ env.ICERAVEN_REPO }} --pattern "*v8a*.apk" || true
 
+      - name: Download ImageToolbox
+        run: gh release download --repo ${{ env.IMAGETOOLBOX_REPO }} --pattern "*v8a*.apk" || true
+
       - name: Download LibreTube
         run: gh release download --repo ${{ env.LIBRETUBE_REPO }} --pattern "*app-universal-release*.apk" || true
 
@@ -197,6 +203,9 @@ jobs:
           mv app-release.apk Omni.apk || true
           rm -f app-release.apk || true
 
+      - name: Download OuterTune
+        run: gh release download --repo ${{ env.OUTERTUNE_REPO }} --pattern "*core*.apk" || true
+
       - name: Download Pixelplay
         run: gh release download --repo ${{ env.PIXELPLAY_REPO }} --pattern "*PixelPlay*.apk" || true
 
@@ -208,6 +217,9 @@ jobs:
           gh release download --repo ${{ env.PRISM_REPO }} --pattern "*.apk" || true
           mv app-release.apk PrismFileExplorer.apk || true
           rm -f app-release.apk || true
+
+      - name: Download QDM
+        run: gh release download --repo ${{ env.QDM_REPO }} --pattern "*.exe" || true
 
       - name: Download RikkaApps Shizuku
         run: gh release download --repo ${{ env.RIKKAAPPS_SHIZUKU_REPO }} --pattern "*.apk" || true
@@ -308,6 +320,7 @@ jobs:
             ["*voicerecorder*.apk"]="Fossify_VoiceRecorder"
             ["*Gramophone*.apk"]="Gramophone"
             ["*iceraven*.apk"]="IceravenBrowser"
+            ["*image-toolbox*.apk"]="ImageToolbox"
             ["*google-play*.apk"]="LocalSend"
             ["*app-universal-release*.apk"]="LibreTube"
             ["LTECleanerFOSS.apk"]="LTECleanerFOSS"
@@ -317,16 +330,18 @@ jobs:
             ["*Momo*v8a*.apk"]="Momogram"
             ["*Nekogram*universal*.apk"]="Nekogram"
             ["Omni.apk"]="Omni"
+            ["*OuterTune*.apk"]="OuterTune"
             ["*PixelPlay*.apk"]="Pixelplay"
             ["PhonographPlus*.apk"]="PhonographPlus"
             ["Photok*.apk"]="Photok"
             ["PrismFileExplorer.apk"]="PrismFileExplorer"
+            ["Quantum*.exe"]="Quantum Download Manager"
             ["*youtube*all*.apk"]="ReVanced_YouTube"
             ["*music*v8a*.apk"]="ReVanced_YTMusic"
             ["*googlephotos*v8a*.apk"]="ReVanced_GooglePhotos"
             ["*spotify*.apk"]="Spotify_Revanced"
             ["*gms*.apk"]="ReVanced_MicroG"
-            ["*revanced-manager*.apk"]="RevancedManager"
+            ["*revanced-manager*.apk"]="ReVancedManager"
             ["*sdmse*.apk"]="Sdmaid"
             ["SimpMusic*.apk"]="SimpMusic"
             ["*symphony*.apk"]="Symphony"
@@ -453,6 +468,10 @@ jobs:
             ["WeatherMaster"]="Modern weather app with graphs"
             ["XedEditor"]="Simple and fast text/code editor"
             ["Ytdlnis"]="YouTube downloader with advanced features"
+            ["ImageToolbox"]="All-in-one image editing and viewing app"
+            ["OuterTune"]="A Material 3 YouTube Music client & local music player for Android"
+            ["Quantum Download Manager"]="A modern, open-source download manager for Windows"
+
           )
 
           declare -A app_emoji=(
@@ -508,6 +527,9 @@ jobs:
             ["WeatherMaster"]="☁️"
             ["XedEditor"]="✏️"
             ["Ytdlnis"]="⬇️"
+            ["ImageToolbox"]="🖼️"
+            ["OuterTune"]="🎧"
+            ["Quantum Download Manager"]="📥"
           )
 
           declare -A app_repo=(
@@ -563,6 +585,9 @@ jobs:
             ["WeatherMaster"]="https://github.com/PranshulGG/WeatherMaster/releases/latest"
             ["XedEditor"]="https://github.com/Xed-Editor/Xed-Editor/releases/latest"
             ["Ytdlnis"]="https://github.com/deniscerri/ytdlnis/releases/latest"
+            ["ImageToolbox"]="https://github.com/T8RIN/ImageToolbox/releases/latest"
+            ["OuterTune"]="https://github.com/OuterTune/OuterTune/releases/latest"
+            ["Quantum Download Manager"]="https://github.com/PBhadoo/QDM/releases/latest"
           )
 
           rm -f captions.txt
