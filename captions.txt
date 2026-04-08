@@ -1,6 +1,6 @@
-📦 <b>File name</b> – Momogram_v12.5.1-61a2238ad0.apk
-    📱 Telegram client with privacy and customization features
-🚀 Version: 12.4.1-35d17b4b81 → 12.5.1-61a2238ad0
+📦 <b>File name</b> – DuckDuckGo_v5.275.0.apk
+    🦆 Private, tracker-blocking browser
+🚀 Version: 5.274.2 → 5.275.0
 
-Changelog: <a href='https://github.com/dic1911/Momogram/releases/latest'>Momogram</a>
+Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
     ----
