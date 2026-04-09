@@ -13,7 +13,7 @@ CpuInfo: 6.6.2
 Cromite: 145.0.7632.120
 DeltaIcons: 2.14.0
 DotGallery: 4.0.2
-DuckDuckGo: 5.275.0
+DuckDuckGo: 5.275.1
 Flip2DND: 12.0.9-free
 Florisboard: 0.5.2
 Fossify_Calculator: 1.4.0
@@ -30,7 +30,7 @@ LocalSend: 1.17.0
 Magisk: 30.7
 MoeList: 3.8.0
 Momogram: 12.5.1-61a2238ad0
-Morphe_Manager: 1.13.1
+Morphe_Manager: 1.14.0
 Morphe_MicroG: 6.1.1
 Morphe_YTMusic: 8.44.54
 Morphe_YouTube: 20.45.36
