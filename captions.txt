@@ -1,6 +1,18 @@
-📦 <b>File name</b> – Cromite_v147.0.7727.56.apk
-    🌐 Bromite-based privacy browser
-🚀 Version: 145.0.7632.120 → 147.0.7727.56
+📦 <b>File name</b> – Cherrygram_v12.6.4.apk
+    🍒 Enhanced Telegram client with extra features
+🚀 Version: 12.5.1 → 12.6.4
 
-Changelog: <a href='https://github.com/uazo/cromite/releases/latest'>Cromite</a>
+Changelog: <a href='https://github.com/arsLan4k1390/Cherrygram/releases/latest'>Cherrygram</a>
+    ----
+📦 <b>File name</b> – DotGallery_v4.1.0.apk
+    📷 Jetpack Compose-based photo gallery app
+🚀 Version: 4.0.2 → 4.1.0
+
+Changelog: <a href='https://github.com/IacobIonut01/Gallery/releases/latest'>DotGallery</a>
+    ----
+📦 <b>File name</b> – Nekogram_v12.6.4.apk
+    🐱 Feature-rich Telegram client with enhanced privacy
+🚀 Version: 12.5.2 → 12.6.4
+
+Changelog: <a href='https://github.com/Nekogram/Nekogram/releases/latest'>Nekogram</a>
     ----

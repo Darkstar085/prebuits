@@ -7,12 +7,12 @@ AmazeFileManager: 1.11.6
 Arcticons: 14.5.5
 Bitwarden: 2026.3.1
 BreezyWeather: 6.1.3_freenet
-Cherrygram: 12.5.1
+Cherrygram: 12.6.4
 ConverterNOW: 4.6.0
 CpuInfo: 6.6.2
 Cromite: 147.0.7727.56
 DeltaIcons: 2.14.0
-DotGallery: 4.0.2
+DotGallery: 4.1.0
 DuckDuckGo: 5.275.1
 Flip2DND: 12.0.9-free
 Florisboard: 0.5.2
@@ -34,7 +34,7 @@ Morphe_Manager: 1.14.0
 Morphe_MicroG: 6.1.1
 Morphe_YTMusic: 8.44.54
 Morphe_YouTube: 20.45.36
-Nekogram: 12.5.2
+Nekogram: 12.6.4
 Omni: 1.3
 OuterTune: 0.10.1
 PhonographPlus: 1.12.1
