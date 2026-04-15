@@ -29,9 +29,9 @@ LibreTube: 0.29.1
 LocalSend: 1.17.0
 Magisk: 30.7
 MoeList: 3.8.0
-Momogram: 12.5.1-61a2238ad0
+Momogram: 12.6.4-006a5be2b4
 Morphe_Manager: 1.14.0
-Morphe_MicroG: 6.1.1
+Morphe_MicroG: 6.1.2
 Morphe_YTMusic: 8.44.54
 Morphe_YouTube: 20.45.36
 Nekogram: 12.6.4
@@ -48,7 +48,7 @@ ReVanced_MicroG: 0.3.13.2.250932
 ReVanced_YTMusic: 8.44.54
 ReVanced_YouTube: 20.45.36
 RevancedManager: 2.5.1
-Sdmaid: 1.7.0-rc0
+Sdmaid: 1.7.1-rc0
 Shizuku: 13.6.0.r1086.2650830c
 SimpMusic: 1.1.1
 Spotify_Revanced: 9.0.72.949
