@@ -1,18 +1,6 @@
-📦 <b>File name</b> – Momogram_v12.6.4-006a5be2b4.apk
+📦 <b>File name</b> – Momogram_v12.6.4-a13c5e1229.apk
     📱 Telegram client with privacy and customization features
-🚀 Version: 12.5.1-61a2238ad0 → 12.6.4-006a5be2b4
+🚀 Version: 12.6.4-006a5be2b4 → 12.6.4-a13c5e1229
 
 Changelog: <a href='https://github.com/dic1911/Momogram/releases/latest'>Momogram</a>
-    ----
-📦 <b>File name</b> – Morphe_MicroG_v6.1.2.apk
-    🧩 MicroG for Morphe - enables Google sign-in
-🚀 Version: 6.1.1 → 6.1.2
-
-Changelog: <a href='https://github.com/MorpheApp/MicroG-RE/releases/latest'>Morphe_MicroG</a>
-    ----
-📦 <b>File name</b> – Sdmaid_v1.7.1-rc0.apk
-    🧹 Powerful system cleaning tool
-🚀 Version: 1.7.0-rc0 → 1.7.1-rc0
-
-Changelog: <a href='https://github.com/d4rken-org/sdmaid-se/releases/latest'>Sdmaid</a>
     ----
