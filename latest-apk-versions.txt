@@ -30,7 +30,7 @@ LocalSend: 1.17.0
 Magisk: 30.7
 MoeList: 3.8.0
 Momogram: 12.6.4-a13c5e1229
-Morphe_Manager: 1.14.0
+Morphe_Manager: 1.15.0
 Morphe_MicroG: 6.1.2
 Morphe_YTMusic: 8.44.54
 Morphe_YouTube: 20.45.36
