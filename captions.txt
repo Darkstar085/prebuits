@@ -1,6 +1,12 @@
-📦 <b>File name</b> – Morphe_Manager_v1.15.0.apk
-    🛠️ Manage and install Morphe patches easily
-🚀 Version: 1.14.0 → 1.15.0
+📦 <b>File name</b> – Momogram_v12.6.4-c677dafa07.apk
+    📱 Telegram client with privacy and customization features
+🚀 Version: 12.6.4-a13c5e1229 → 12.6.4-c677dafa07
 
-Changelog: <a href='https://github.com/MorpheApp/morphe-manager/releases/latest'>Morphe_Manager</a>
+Changelog: <a href='https://github.com/dic1911/Momogram/releases/latest'>Momogram</a>
+    ----
+📦 <b>File name</b> – Morphe_MicroG_v6.1.3.apk
+    🧩 MicroG for Morphe - enables Google sign-in
+🚀 Version: 6.1.2 → 6.1.3
+
+Changelog: <a href='https://github.com/MorpheApp/MicroG-RE/releases/latest'>Morphe_MicroG</a>
     ----
