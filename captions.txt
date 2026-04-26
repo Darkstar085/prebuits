@@ -1,12 +1,24 @@
-📦 <b>File name</b> – Momogram_v12.6.4-c677dafa07.apk
-    📱 Telegram client with privacy and customization features
-🚀 Version: 12.6.4-a13c5e1229 → 12.6.4-c677dafa07
+📦 <b>File name</b> – IceravenBrowser_viceraven-2.43.1.apk
+    🦦 Privacy-focused web browser
+🚀 Version: iceraven-2.42.1 → iceraven-2.43.1
 
-Changelog: <a href='https://github.com/dic1911/Momogram/releases/latest'>Momogram</a>
+Changelog: <a href='https://github.com/fork-maintainers/iceraven-browser/releases/latest'>IceravenBrowser</a>
     ----
-📦 <b>File name</b> – Morphe_MicroG_v6.1.3.apk
-    🧩 MicroG for Morphe - enables Google sign-in
-🚀 Version: 6.1.2 → 6.1.3
+📦 <b>File name</b> – Morphe_YTMusic_v8.47.56.apk
+    🎵 YouTube Music with premium unlock, ad-block and advanced playback
+🚀 Version: 8.44.54 → 8.47.56
 
-Changelog: <a href='https://github.com/MorpheApp/MicroG-RE/releases/latest'>Morphe_MicroG</a>
+Changelog: <a href='https://github.com/MorpheApp/morphe-patches/releases/latest'>Morphe_YTMusic</a>
+    ----
+📦 <b>File name</b> – Morphe_YouTube_v20.47.62.apk
+    🎬 YouTube with ad-block, background play, sponsor block and more
+🚀 Version: 20.45.36 → 20.47.62
+
+Changelog: <a href='https://github.com/MorpheApp/morphe-patches/releases/latest'>Morphe_YouTube</a>
+    ----
+📦 <b>File name</b> – ABDownloadManager_v1.8.8.exe
+    📥 Powerful download manager with multi-threading
+🚀 Version: 1.8.7 → 1.8.8
+
+Changelog: <a href='https://github.com/amir1376/ab-download-manager/releases/latest'>ABDownloadManager</a>
     ----
