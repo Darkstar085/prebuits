@@ -1,24 +1,30 @@
-📦 <b>File name</b> – IceravenBrowser_viceraven-2.43.1.apk
-    🦦 Privacy-focused web browser
-🚀 Version: iceraven-2.42.1 → iceraven-2.43.1
+📦 <b>File name</b> – BreezyWeather_v6.2.0_freenet.apk
+    🌦️ Clean, customizable open-source weather app
+🚀 Version: 6.1.3_freenet → 6.2.0_freenet
 
-Changelog: <a href='https://github.com/fork-maintainers/iceraven-browser/releases/latest'>IceravenBrowser</a>
+Changelog: <a href='https://github.com/breezy-weather/breezy-weather/releases/latest'>BreezyWeather</a>
     ----
-📦 <b>File name</b> – Morphe_YTMusic_v8.47.56.apk
-    🎵 YouTube Music with premium unlock, ad-block and advanced playback
-🚀 Version: 8.44.54 → 8.47.56
+📦 <b>File name</b> – DeltaIcons_v2.15.0.apk
+    🎨 Beautiful, minimal icon pack
+🚀 Version: 2.14.0 → 2.15.0
 
-Changelog: <a href='https://github.com/MorpheApp/morphe-patches/releases/latest'>Morphe_YTMusic</a>
+Changelog: <a href='https://github.com/Delta-Icons/android/releases/latest'>DeltaIcons</a>
     ----
-📦 <b>File name</b> – Morphe_YouTube_v20.47.62.apk
-    🎬 YouTube with ad-block, background play, sponsor block and more
-🚀 Version: 20.45.36 → 20.47.62
+📦 <b>File name</b> – DuckDuckGo_v5.277.0.apk
+    🦆 Private, tracker-blocking browser
+🚀 Version: 5.276.0 → 5.277.0
 
-Changelog: <a href='https://github.com/MorpheApp/morphe-patches/releases/latest'>Morphe_YouTube</a>
+Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
     ----
-📦 <b>File name</b> – ABDownloadManager_v1.8.8.exe
-    📥 Powerful download manager with multi-threading
-🚀 Version: 1.8.7 → 1.8.8
+📦 <b>File name</b> – Morphe_MicroG_v6.1.4.apk
+    🧩 MicroG for Morphe - enables Google sign-in
+🚀 Version: 6.1.3 → 6.1.4
 
-Changelog: <a href='https://github.com/amir1376/ab-download-manager/releases/latest'>ABDownloadManager</a>
+Changelog: <a href='https://github.com/MorpheApp/MicroG-RE/releases/latest'>Morphe_MicroG</a>
+    ----
+📦 <b>File name</b> – Sdmaid_v1.7.2-rc0.apk
+    🧹 Powerful system cleaning tool
+🚀 Version: 1.7.1-rc0 → 1.7.2-rc0
+
+Changelog: <a href='https://github.com/d4rken-org/sdmaid-se/releases/latest'>Sdmaid</a>
     ----

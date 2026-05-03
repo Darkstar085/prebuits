@@ -6,14 +6,14 @@ AmarokHider: 0.10.1
 AmazeFileManager: 1.11.6
 Arcticons: 14.5.5
 Bitwarden: 2026.4.0
-BreezyWeather: 6.1.3_freenet
+BreezyWeather: 6.2.0_freenet
 Cherrygram: 12.6.4
 ConverterNOW: 4.6.0
 CpuInfo: 6.6.2
 Cromite: 147.0.7727.56
-DeltaIcons: 2.14.0
+DeltaIcons: 2.15.0
 DotGallery: 4.1.0
-DuckDuckGo: 5.276.0
+DuckDuckGo: 5.277.0
 Flip2DND: 12.0.9-free
 Florisboard: 0.5.2
 Fossify_Calculator: 1.4.0
@@ -31,7 +31,7 @@ Magisk: 30.7
 MoeList: 3.8.0
 Momogram: 12.6.4-c677dafa07
 Morphe_Manager: 1.15.0
-Morphe_MicroG: 6.1.3
+Morphe_MicroG: 6.1.4
 Morphe_YTMusic: 8.47.56
 Morphe_YouTube: 20.47.62
 Nekogram: 12.6.4
@@ -48,7 +48,7 @@ ReVanced_MicroG: 0.3.13.2.250932
 ReVanced_YTMusic: 8.44.54
 ReVanced_YouTube: 20.45.36
 RevancedManager: 2.5.1
-Sdmaid: 1.7.1-rc0
+Sdmaid: 1.7.2-rc0
 Shizuku: 13.6.0.r1086.2650830c
 SimpMusic: 1.1.1
 Spotify_Revanced: 9.0.72.949
