@@ -4,7 +4,7 @@ Acode: 1.11.6
 Aegis: 3.4.2
 AmarokHider: 0.10.1
 AmazeFileManager: 1.11.6
-Arcticons: 14.5.5
+Arcticons: 14.7.1
 Bitwarden: 2026.4.0
 BreezyWeather: 6.2.0_freenet
 Cherrygram: 12.6.4
@@ -13,7 +13,7 @@ CpuInfo: 6.6.2
 Cromite: 147.0.7727.56
 DeltaIcons: 2.15.0
 DotGallery: 4.1.0
-DuckDuckGo: 5.277.0
+DuckDuckGo: 5.278.1
 Flip2DND: 12.0.9-free
 Florisboard: 0.5.2
 Fossify_Calculator: 1.4.0
@@ -30,7 +30,7 @@ LocalSend: 1.17.0
 Magisk: 30.7
 MoeList: 3.8.0
 Momogram: 12.6.4-c677dafa07
-Morphe_Manager: 1.15.0
+Morphe_Manager: 1.16.0
 Morphe_MicroG: 6.1.4
 Morphe_YTMusic: 8.47.56
 Morphe_YouTube: 20.47.62
@@ -50,12 +50,12 @@ ReVanced_YouTube: 20.45.36
 RevancedManager: 2.5.1
 Sdmaid: 1.7.2-rc0
 Shizuku: 13.6.0.r1086.2650830c
-SimpMusic: 1.1.1
+SimpMusic: 1.2.0
 Spotify_Revanced: 9.0.72.949
 Symphony: 2024.12.115
 Termux: 0.118.3
 ThunderbirdAndroid: 17.0
 VisualCodeSpace: 2.0.1
 WeatherMaster: 2.7.1
-XedEditor: 3.2.7
+XedEditor: 3.2.9
 Ytdlnis: 1.8.8
