@@ -1,30 +1,48 @@
-📦 <b>File name</b> – Arcticons_v14.9.1.apk
-    🎭 Modern icon pack and theming app
-🚀 Version: 14.7.1 → 14.9.1
+📦 <b>File name</b> – Bitwarden_v2026.7.0.apk
+    🔑 Open-source password manager with cloud sync
+🚀 Version: 2026.6.1 → 2026.7.0
 
-Changelog: <a href='https://github.com/Arcticons-Team/Arcticons/releases/latest'>Arcticons</a>
+Changelog: <a href='https://github.com/bitwarden/android/releases/latest'>Bitwarden</a>
     ----
-📦 <b>File name</b> – Cherrygram_v12.8.1.apk
-    🍒 Enhanced Telegram client with extra features
-🚀 Version: 12.6.4 → 12.8.1
-
-Changelog: <a href='https://github.com/arsLan4k1390/Cherrygram/releases/latest'>Cherrygram</a>
-    ----
-📦 <b>File name</b> – DuckDuckGo_v5.288.0.apk
+📦 <b>File name</b> – DuckDuckGo_v5.290.0.apk
     🦆 Private, tracker-blocking browser
-🚀 Version: 5.287.2 → 5.288.0
+🚀 Version: 5.288.0 → 5.290.0
 
 Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
     ----
-📦 <b>File name</b> – Morphe_YouTube_v21.04.223.apk
-    🎬 YouTube with ad-block, background play, sponsor block and more
-🚀 Version: 20.51.39 → 21.04.223
+📦 <b>File name</b> – Gramophone_v1.1.1.apk
+    🎼 Minimalist, elegant music player
+🚀 Version: 1.1.0 → 1.1.1
 
-Changelog: <a href='https://github.com/MorpheApp/morphe-patches/releases/latest'>Morphe_YouTube</a>
+Changelog: <a href='https://github.com/FoedusProgramme/Gramophone/releases/latest'>Gramophone</a>
     ----
-📦 <b>File name</b> – Nekogram_v12.9.0.apk
+📦 <b>File name</b> – Momogram_v12.9.0-670182556e.apk
+    📱 Telegram client with privacy and customization features
+🚀 Version: 12.8.1-8453086bc7 → 12.9.0-670182556e
+
+Changelog: <a href='https://github.com/dic1911/Momogram/releases/latest'>Momogram</a>
+    ----
+📦 <b>File name</b> – Morphe_Manager_v1.24.3.apk
+    🛠️ Manage and install Morphe patches easily
+🚀 Version: 1.23.0 → 1.24.3
+
+Changelog: <a href='https://github.com/MorpheApp/morphe-manager/releases/latest'>Morphe_Manager</a>
+    ----
+📦 <b>File name</b> – Nekogram_v12.9.0.1.apk
     🐱 Feature-rich Telegram client with enhanced privacy
-🚀 Version: 12.8.1 → 12.9.0
+🚀 Version: 12.9.0 → 12.9.0.1
 
 Changelog: <a href='https://github.com/Nekogram/Nekogram/releases/latest'>Nekogram</a>
+    ----
+📦 <b>File name</b> – SimpMusic_v1.6.0.apk
+    🎵 Lightweight YT music player with Material You support
+🚀 Version: 1.5.1 → 1.6.0
+
+Changelog: <a href='https://github.com/maxrave-dev/SimpMusic/releases/latest'>SimpMusic</a>
+    ----
+📦 <b>File name</b> – ABDownloadManager_v1.10.1.exe
+    📥 Powerful download manager with multi-threading
+🚀 Version: 1.9.2 → 1.10.1
+
+Changelog: <a href='https://github.com/amir1376/ab-download-manager/releases/latest'>ABDownloadManager</a>
     ----
