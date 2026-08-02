@@ -1,48 +1,18 @@
-📦 <b>File name</b> – Bitwarden_v2026.7.0.apk
-    🔑 Open-source password manager with cloud sync
-🚀 Version: 2026.6.1 → 2026.7.0
+📦 <b>File name</b> – DeltaIcons_v2.18.0.apk
+    🎨 Beautiful, minimal icon pack
+🚀 Version: 2.17.0 → 2.18.0
 
-Changelog: <a href='https://github.com/bitwarden/android/releases/latest'>Bitwarden</a>
+Changelog: <a href='https://github.com/Delta-Icons/android/releases/latest'>DeltaIcons</a>
     ----
-📦 <b>File name</b> – DuckDuckGo_v5.290.0.apk
+📦 <b>File name</b> – DuckDuckGo_v5.291.1.apk
     🦆 Private, tracker-blocking browser
-🚀 Version: 5.288.0 → 5.290.0
+🚀 Version: 5.290.0 → 5.291.1
 
 Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
     ----
-📦 <b>File name</b> – Gramophone_v1.1.1.apk
-    🎼 Minimalist, elegant music player
-🚀 Version: 1.1.0 → 1.1.1
+📦 <b>File name</b> – IceravenBrowser_viceraven-2.46.0.apk
+    🦦 Privacy-focused web browser
+🚀 Version: iceraven-2.45.0 → iceraven-2.46.0
 
-Changelog: <a href='https://github.com/FoedusProgramme/Gramophone/releases/latest'>Gramophone</a>
-    ----
-📦 <b>File name</b> – Momogram_v12.9.0-670182556e.apk
-    📱 Telegram client with privacy and customization features
-🚀 Version: 12.8.1-8453086bc7 → 12.9.0-670182556e
-
-Changelog: <a href='https://github.com/dic1911/Momogram/releases/latest'>Momogram</a>
-    ----
-📦 <b>File name</b> – Morphe_Manager_v1.24.3.apk
-    🛠️ Manage and install Morphe patches easily
-🚀 Version: 1.23.0 → 1.24.3
-
-Changelog: <a href='https://github.com/MorpheApp/morphe-manager/releases/latest'>Morphe_Manager</a>
-    ----
-📦 <b>File name</b> – Nekogram_v12.9.0.1.apk
-    🐱 Feature-rich Telegram client with enhanced privacy
-🚀 Version: 12.9.0 → 12.9.0.1
-
-Changelog: <a href='https://github.com/Nekogram/Nekogram/releases/latest'>Nekogram</a>
-    ----
-📦 <b>File name</b> – SimpMusic_v1.6.0.apk
-    🎵 Lightweight YT music player with Material You support
-🚀 Version: 1.5.1 → 1.6.0
-
-Changelog: <a href='https://github.com/maxrave-dev/SimpMusic/releases/latest'>SimpMusic</a>
-    ----
-📦 <b>File name</b> – ABDownloadManager_v1.10.1.exe
-    📥 Powerful download manager with multi-threading
-🚀 Version: 1.9.2 → 1.10.1
-
-Changelog: <a href='https://github.com/amir1376/ab-download-manager/releases/latest'>ABDownloadManager</a>
+Changelog: <a href='https://github.com/fork-maintainers/iceraven-browser/releases/latest'>IceravenBrowser</a>
     ----

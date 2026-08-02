@@ -11,9 +11,9 @@ Cherrygram: 12.8.1
 ConverterNOW: 4.6.2
 CpuInfo: 6.6.2
 Cromite: 148.0.7778.168
-DeltaIcons: 2.17.0
+DeltaIcons: 2.18.0
 DotGallery: 4.1.0
-DuckDuckGo: 5.290.0
+DuckDuckGo: 5.291.1
 Flip2DND: 12.1.1-free
 Florisboard: 0.5.2
 Fossify_Calculator: 1.4.0
@@ -22,7 +22,7 @@ Fossify_MusicPlayer: 1.8.1
 Fossify_Notes: 1.7.0
 Fossify_VoiceRecorder: 1.7.1
 Gramophone: 1.1.1
-IceravenBrowser: iceraven-2.45.0
+IceravenBrowser: iceraven-2.46.0
 ImageToolbox: 4.1.0
 LTECleanerFOSS: 5.1.0
 LibreTube: 0.29.1
