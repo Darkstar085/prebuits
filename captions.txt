@@ -1,18 +1,54 @@
-📦 <b>File name</b> – DeltaIcons_v2.18.0.apk
-    🎨 Beautiful, minimal icon pack
-🚀 Version: 2.17.0 → 2.18.0
+📦 <b>File name</b> – Bitwarden_v2026.7.1.apk
+    🔑 Open-source password manager with cloud sync
+🚀 Version: 2026.7.0 → 2026.7.1
 
-Changelog: <a href='https://github.com/Delta-Icons/android/releases/latest'>DeltaIcons</a>
+Changelog: <a href='https://github.com/bitwarden/android/releases/latest'>Bitwarden</a>
     ----
-📦 <b>File name</b> – DuckDuckGo_v5.291.1.apk
+📦 <b>File name</b> – Cherrygram_v12.9.2.apk
+    🍒 Enhanced Telegram client with extra features
+🚀 Version: 12.8.1 → 12.9.2
+
+Changelog: <a href='https://github.com/arsLan4k1390/Cherrygram/releases/latest'>Cherrygram</a>
+    ----
+📦 <b>File name</b> – DuckDuckGo_v5.291.2.apk
     🦆 Private, tracker-blocking browser
-🚀 Version: 5.290.0 → 5.291.1
+🚀 Version: 5.291.1 → 5.291.2
 
 Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
     ----
-📦 <b>File name</b> – IceravenBrowser_viceraven-2.46.0.apk
-    🦦 Privacy-focused web browser
-🚀 Version: iceraven-2.45.0 → iceraven-2.46.0
+📦 <b>File name</b> – Momogram_v12.9.0-31742cbd66.apk
+    📱 Telegram client with privacy and customization features
+🚀 Version: 12.9.0-670182556e → 12.9.0-31742cbd66
 
-Changelog: <a href='https://github.com/fork-maintainers/iceraven-browser/releases/latest'>IceravenBrowser</a>
+Changelog: <a href='https://github.com/dic1911/Momogram/releases/latest'>Momogram</a>
+    ----
+📦 <b>File name</b> – Morphe_Manager_v1.25.0.apk
+    🛠️ Manage and install Morphe patches easily
+🚀 Version: 1.24.3 → 1.25.0
+
+Changelog: <a href='https://github.com/MorpheApp/morphe-manager/releases/latest'>Morphe_Manager</a>
+    ----
+📦 <b>File name</b> – Nekogram_v12.9.2.apk
+    🐱 Feature-rich Telegram client with enhanced privacy
+🚀 Version: 12.9.0.1 → 12.9.2
+
+Changelog: <a href='https://github.com/Nekogram/Nekogram/releases/latest'>Nekogram</a>
+    ----
+📦 <b>File name</b> – Sdmaid_v2.0.2-rc0.apk
+    🧹 Powerful system cleaning tool
+🚀 Version: 1.7.5-rc0 → 2.0.2-rc0
+
+Changelog: <a href='https://github.com/d4rken-org/sdmaid-se/releases/latest'>Sdmaid</a>
+    ----
+📦 <b>File name</b> – SimpMusic_v1.7.0.apk
+    🎵 Lightweight YT music player with Material You support
+🚀 Version: 1.6.0 → 1.7.0
+
+Changelog: <a href='https://github.com/maxrave-dev/SimpMusic/releases/latest'>SimpMusic</a>
+    ----
+📦 <b>File name</b> – ThunderbirdAndroid_v21.1.apk
+    📧 Official Thunderbird email client for Android
+🚀 Version: 20.0 → 21.1
+
+Changelog: <a href='https://github.com/thunderbird/thunderbird-android/releases/latest'>ThunderbirdAndroid</a>
     ----
