@@ -107,56 +107,74 @@ jobs:
           echo "Not today's random day → exiting"
           exit 0
           fi
-      - name: Download AB Download Manager
-        run: gh release download --repo ${{ env.ABDOWNLOADER_REPO }} --pattern "*windows_x64*.exe" || true
-      - name: Download Acode
-        run: gh release download --repo ${{ env.ACODE_REPO }} --pattern "*fdroid*.apk" || true
-      - name: Download Aegis
-        run: gh release download --repo ${{ env.AEGIS_REPO }} --pattern "*.apk" || true
-      - name: Download NopeRemote
-        run: gh release download --repo ${{ env.NOPE_REMOTE_REPO }} --pattern "NopeRemote*.apk" || true
-      - name: Download Kudu
-        run: gh release download --repo ${{ env.KUDU_REPO }} --pattern "Kudu-Setup-*.exe" || true
-      - name: Download SpotiFLAC
-        run: gh release download --repo ${{ env.SPOTIFLAC_REPO }} --pattern "SpotiFLAC-*-arm64.apk" || true
-      - name: Download LibreCuts
-        run: gh release download --repo ${{ env.LIBRECUTS_REPO }} --pattern "*arm64*.apk" || true
-      - name: Download Organic Maps
-        run: gh release download --repo ${{ env.ORGANIC_MAPS_REPO }} --pattern "OrganicMaps*-web-release.apk" || true
-      - name: Download Amarok Hider
+      - name: Download all apps
         run: |
+          set +e
+          echo "::group::Download AB Download Manager"
+          gh release download --repo ${{ env.ABDOWNLOADER_REPO }} --pattern "*windows_x64*.exe" || true
+          echo "::endgroup::Download AB Download Manager"
+          echo "::group::Download Acode"
+          gh release download --repo ${{ env.ACODE_REPO }} --pattern "*fdroid*.apk" || true
+          echo "::endgroup::Download Acode"
+          echo "::group::Download Aegis"
+          gh release download --repo ${{ env.AEGIS_REPO }} --pattern "*.apk" || true
+          echo "::endgroup::Download Aegis"
+          echo "::group::Download NopeRemote"
+          gh release download --repo ${{ env.NOPE_REMOTE_REPO }} --pattern "NopeRemote*.apk" || true
+          echo "::endgroup::Download NopeRemote"
+          echo "::group::Download Kudu"
+          gh release download --repo ${{ env.KUDU_REPO }} --pattern "Kudu-Setup-*.exe" || true
+          echo "::endgroup::Download Kudu"
+          echo "::group::Download SpotiFLAC"
+          gh release download --repo ${{ env.SPOTIFLAC_REPO }} --pattern "SpotiFLAC-*-arm64.apk" || true
+          echo "::endgroup::Download SpotiFLAC"
+          echo "::group::Download LibreCuts"
+          gh release download --repo ${{ env.LIBRECUTS_REPO }} --pattern "*arm64*.apk" || true
+          echo "::endgroup::Download LibreCuts"
+          echo "::group::Download Organic Maps"
+          gh release download --repo ${{ env.ORGANIC_MAPS_REPO }} --pattern "OrganicMaps*-web-release.apk" || true
+          echo "::endgroup::Download Organic Maps"
+          echo "::group::Download Amarok Hider"
           gh release download --repo ${{ env.AMAROK_HIDER_REPO }} --pattern "*.apk" || true
           rm -f *foss*.apk || true
-      - name: Download Arcticons
-        run: gh release download --repo ${{ env.ARCTICONS_REPO }} --pattern "*dayNight*.apk" || true
-      - name: Download Bitwarden
-        run: gh release download --repo ${{ env.BITWARDEN_REPO }} --pattern "*bitwarden-fdroid*.apk" || true
-      - name: Download Breezy Weather
-        run: gh release download --repo ${{ env.BREEZY_REPO }} --pattern "*freenet*.apk" || true
-      - name: Download Cherrygram
-        run: |
+          echo "::endgroup::Download Amarok Hider"
+          echo "::group::Download Arcticons"
+          gh release download --repo ${{ env.ARCTICONS_REPO }} --pattern "*dayNight*.apk" || true
+          echo "::endgroup::Download Arcticons"
+          echo "::group::Download Bitwarden"
+          gh release download --repo ${{ env.BITWARDEN_REPO }} --pattern "*bitwarden-fdroid*.apk" || true
+          echo "::endgroup::Download Bitwarden"
+          echo "::group::Download Breezy Weather"
+          gh release download --repo ${{ env.BREEZY_REPO }} --pattern "*freenet*.apk" || true
+          echo "::endgroup::Download Breezy Weather"
+          echo "::group::Download Cherrygram"
           gh release download --repo ${{ env.CHERRYGRAM_REPO }} --pattern "Cherrygram*universal*.apk" || true
           rm -f *Huawei*.apk || true
-      - name: Download ConverterNOW
-        run: gh release download --repo ${{ env.CONVERTERNOW_REPO }} --pattern "*app-arm64-v8a-release*.apk" || true
-      - name: Download Cromite APK (arm64)
-        run: gh release download --repo ${{ env.CROMITE_REPO }} --pattern "*arm64_ChromePublic*.apk" || true
-      - name: Download CpuInfo
-        run: gh release download --repo ${{ env.CPU_INFO_REPO }} --pattern "*androidApp*.apk" || true
-      - name: Download DeltaIcons
-        run: |
+          echo "::endgroup::Download Cherrygram"
+          echo "::group::Download ConverterNOW"
+          gh release download --repo ${{ env.CONVERTERNOW_REPO }} --pattern "*app-arm64-v8a-release*.apk" || true
+          echo "::endgroup::Download ConverterNOW"
+          echo "::group::Download Cromite APK (arm64)"
+          gh release download --repo ${{ env.CROMITE_REPO }} --pattern "*arm64_ChromePublic*.apk" || true
+          echo "::endgroup::Download Cromite APK (arm64)"
+          echo "::group::Download CpuInfo"
+          gh release download --repo ${{ env.CPU_INFO_REPO }} --pattern "*androidApp*.apk" || true
+          echo "::endgroup::Download CpuInfo"
+          echo "::group::Download DeltaIcons"
           gh release download --repo ${{ env.DELTAICONS_REPO }} --pattern "*.apk" || true
           rm -f *foss*.apk || true
-      - name: Download DotGallery (arm64-v8a) and Remove nomaps variant
-        run: |
+          echo "::endgroup::Download DeltaIcons"
+          echo "::group::Download DotGallery (arm64-v8a) and Remove nomaps variant"
           gh release download --repo ${{ env.DOTGALLERY_REPO }} --pattern "*arm64-v8a*.apk" || true
           rm -f *nomaps*.apk || true
-      - name: Download DuckDuckGo
-        run: gh release download --repo ${{ env.DUCKDUCKGO_REPO }} --pattern "*.apk" || true
-      - name: Download Florisboard
-        run: gh release download --repo ${{ env.FLORISBOARD_REPO }} --pattern "*stable*.apk" || true
-      - name: Download Flip 2 DND APK and Rename APK
-        run: |
+          echo "::endgroup::Download DotGallery (arm64-v8a) and Remove nomaps variant"
+          echo "::group::Download DuckDuckGo"
+          gh release download --repo ${{ env.DUCKDUCKGO_REPO }} --pattern "*.apk" || true
+          echo "::endgroup::Download DuckDuckGo"
+          echo "::group::Download Florisboard"
+          gh release download --repo ${{ env.FLORISBOARD_REPO }} --pattern "*stable*.apk" || true
+          echo "::endgroup::Download Florisboard"
+          echo "::group::Download Flip 2 DND APK and Rename APK"
           rm -f ./*.apk
           if gh release download --repo ${{ env.FLIP2DND_REPO }} --pattern "*.apk" --clobber; then
             APK=$(find . -maxdepth 1 -type f -name "*.apk" | head -n 1)
@@ -164,28 +182,38 @@ jobs:
           else
             echo "⚠️ Flip2DND: no APK asset matched"
           fi
-      - name: Download Fossify Calculator
-        run: gh release download --repo ${{ env.FOSSIFY_CALC_REPO }} --pattern "*.apk" || true
-      - name: Download Fossify Keyboard
-        run: gh release download --repo ${{ env.FOSSIFY_KEYBOARD_REPO }} --pattern "*.apk" || true
-      - name: Download Fossify Music Player
-        run: gh release download --repo ${{ env.FOSSIFY_MUSIC_REPO }} --pattern "*.apk" || true
-      - name: Download Fossify Notes
-        run: gh release download --repo ${{ env.FOSSIFY_NOTES_REPO }} --pattern "*.apk" || true
-      - name: Download Fossify Voice Recorder
-        run: gh release download --repo ${{ env.FOSSIFY_VR_REPO }} --pattern "*.apk" || true
-      - name: Download Gramophone
-        run: gh release download --repo ${{ env.GRAMOPHONE_REPO }} --pattern "*.apk" || true
-      - name: Download Iceraven Browser
-        run: gh release download --repo ${{ env.ICERAVEN_REPO }} --pattern "*v8a*.apk" || true
-      - name: Download ImageToolbox
-        run: gh release download --repo ${{ env.IMAGETOOLBOX_REPO }} --pattern "*v8a*.apk" || true
-      - name: Download LibreTube
-        run: gh release download --repo ${{ env.LIBRETUBE_REPO }} --pattern "app-release.apk" || true
-      - name: Download LocalSend
-        run: gh release download --repo ${{ env.LOCAL_SEND_REPO }} --pattern "*android-arm64v8.apk" || true
-      - name: Download LTECleanerFOSS and Rename APK
-        run: |
+          echo "::endgroup::Download Flip 2 DND APK and Rename APK"
+          echo "::group::Download Fossify Calculator"
+          gh release download --repo ${{ env.FOSSIFY_CALC_REPO }} --pattern "*.apk" || true
+          echo "::endgroup::Download Fossify Calculator"
+          echo "::group::Download Fossify Keyboard"
+          gh release download --repo ${{ env.FOSSIFY_KEYBOARD_REPO }} --pattern "*.apk" || true
+          echo "::endgroup::Download Fossify Keyboard"
+          echo "::group::Download Fossify Music Player"
+          gh release download --repo ${{ env.FOSSIFY_MUSIC_REPO }} --pattern "*.apk" || true
+          echo "::endgroup::Download Fossify Music Player"
+          echo "::group::Download Fossify Notes"
+          gh release download --repo ${{ env.FOSSIFY_NOTES_REPO }} --pattern "*.apk" || true
+          echo "::endgroup::Download Fossify Notes"
+          echo "::group::Download Fossify Voice Recorder"
+          gh release download --repo ${{ env.FOSSIFY_VR_REPO }} --pattern "*.apk" || true
+          echo "::endgroup::Download Fossify Voice Recorder"
+          echo "::group::Download Gramophone"
+          gh release download --repo ${{ env.GRAMOPHONE_REPO }} --pattern "*.apk" || true
+          echo "::endgroup::Download Gramophone"
+          echo "::group::Download Iceraven Browser"
+          gh release download --repo ${{ env.ICERAVEN_REPO }} --pattern "*v8a*.apk" || true
+          echo "::endgroup::Download Iceraven Browser"
+          echo "::group::Download ImageToolbox"
+          gh release download --repo ${{ env.IMAGETOOLBOX_REPO }} --pattern "*v8a*.apk" || true
+          echo "::endgroup::Download ImageToolbox"
+          echo "::group::Download LibreTube"
+          gh release download --repo ${{ env.LIBRETUBE_REPO }} --pattern "app-release.apk" || true
+          echo "::endgroup::Download LibreTube"
+          echo "::group::Download LocalSend"
+          gh release download --repo ${{ env.LOCAL_SEND_REPO }} --pattern "*android-arm64v8.apk" || true
+          echo "::endgroup::Download LocalSend"
+          echo "::group::Download LTECleanerFOSS and Rename APK"
           rm -f ./*.apk
           if gh release download --repo ${{ env.LTECLEANER_REPO }} --pattern "*.apk" --clobber; then
             APK=$(find . -maxdepth 1 -type f -name "*.apk" | head -n 1)
@@ -193,18 +221,23 @@ jobs:
           else
             echo "⚠️ LTECleanerFOSS: no APK asset matched"
           fi
-      - name: Download Magisk APK
-        run: gh release download --repo ${{ env.MAGISK_REPO }} --pattern "*.apk" || true
-      - name: Download MicroG RE APK
-        run: gh release download --repo ${{ env.MICROG_RE_REPO }} --pattern "*.apk" || true
-      - name: Download MoeList
-        run: gh release download --repo ${{ env.MOELIST_REPO }} --pattern "*universal*.apk" || true
-      - name: Download Momogram
-        run: gh release download --repo ${{ env.MOMOGRAM_REPO }} --pattern "*arm64-v8a*.apk" || true
-      - name: Download Nekogram
-        run: gh release download --repo ${{ env.NEKOGRAM_REPO }} --pattern "*universal*.apk" || true
-      - name: Download Omni APK and Rename APK
-        run: |
+          echo "::endgroup::Download LTECleanerFOSS and Rename APK"
+          echo "::group::Download Magisk APK"
+          gh release download --repo ${{ env.MAGISK_REPO }} --pattern "*.apk" || true
+          echo "::endgroup::Download Magisk APK"
+          echo "::group::Download MicroG RE APK"
+          gh release download --repo ${{ env.MICROG_RE_REPO }} --pattern "*.apk" || true
+          echo "::endgroup::Download MicroG RE APK"
+          echo "::group::Download MoeList"
+          gh release download --repo ${{ env.MOELIST_REPO }} --pattern "*universal*.apk" || true
+          echo "::endgroup::Download MoeList"
+          echo "::group::Download Momogram"
+          gh release download --repo ${{ env.MOMOGRAM_REPO }} --pattern "*arm64-v8a*.apk" || true
+          echo "::endgroup::Download Momogram"
+          echo "::group::Download Nekogram"
+          gh release download --repo ${{ env.NEKOGRAM_REPO }} --pattern "*universal*.apk" || true
+          echo "::endgroup::Download Nekogram"
+          echo "::group::Download Omni APK and Rename APK"
           rm -f ./*.apk
           if gh release download --repo ${{ env.OMNI_REPO }} --pattern "*.apk" --clobber; then
             APK=$(find . -maxdepth 1 -type f -name "*.apk" | head -n 1)
@@ -212,14 +245,17 @@ jobs:
           else
             echo "⚠️ Omni: no APK asset matched"
           fi
-      - name: Download OuterTune
-        run: gh release download --repo ${{ env.OUTERTUNE_REPO }} --pattern "*core*.apk" || true
-      - name: Download Pixelplay
-        run: gh release download --repo ${{ env.PIXELPLAY_REPO }} --pattern "*PixelPlay*.apk" || true
-      - name: Download Phonograph Plus
-        run: gh release download --repo ${{ env.PHONOGRAPHPLUS_REPO }} --pattern "*ModernStableRelease*.apk" || true
-      - name: Download Prism File Explorer and Rename APK
-        run: |
+          echo "::endgroup::Download Omni APK and Rename APK"
+          echo "::group::Download OuterTune"
+          gh release download --repo ${{ env.OUTERTUNE_REPO }} --pattern "*core*.apk" || true
+          echo "::endgroup::Download OuterTune"
+          echo "::group::Download Pixelplay"
+          gh release download --repo ${{ env.PIXELPLAY_REPO }} --pattern "*PixelPlay*.apk" || true
+          echo "::endgroup::Download Pixelplay"
+          echo "::group::Download Phonograph Plus"
+          gh release download --repo ${{ env.PHONOGRAPHPLUS_REPO }} --pattern "*ModernStableRelease*.apk" || true
+          echo "::endgroup::Download Phonograph Plus"
+          echo "::group::Download Prism File Explorer and Rename APK"
           rm -f ./*.apk
           if gh release download --repo ${{ env.PRISM_REPO }} --pattern "*.apk" --clobber; then
             APK=$(find . -maxdepth 1 -type f -name "*.apk" | head -n 1)
@@ -227,35 +263,47 @@ jobs:
           else
             echo "⚠️ PrismFileExplorer: no APK asset matched"
           fi
-      - name: Download QDM
-        run: gh release download --repo ${{ env.QDM_REPO }} --pattern "*.exe" || true
-      - name: Download RikkaApps Shizuku
-        run: gh release download --repo ${{ env.RIKKAAPPS_SHIZUKU_REPO }} --pattern "*.apk" || true
-      - name: Download Retro Music Player
-        run: gh release download --repo ${{ env.RETROMUSIC_REPO }} --pattern "*normal*.apk" || true
-      - name: Download Morphe YouTube
-        run: gh release download --repo ${{ env.MORPHE_REPO }} --pattern "youtube*all*.apk" || true
-      - name: Download Morphe YT Music
-        run: gh release download --repo ${{ env.MORPHE_REPO }} --pattern "music*v8a*.apk" || true
-      - name: Download Morphe Google Photos
-        run: gh release download --repo ${{ env.MORPHE_REPO }} --pattern "googlephotos*v8a*.apk" || true
-      - name: Download Morphe MicroG
-        run: |
+          echo "::endgroup::Download Prism File Explorer and Rename APK"
+          echo "::group::Download QDM"
+          gh release download --repo ${{ env.QDM_REPO }} --pattern "*.exe" || true
+          echo "::endgroup::Download QDM"
+          echo "::group::Download RikkaApps Shizuku"
+          gh release download --repo ${{ env.RIKKAAPPS_SHIZUKU_REPO }} --pattern "*.apk" || true
+          echo "::endgroup::Download RikkaApps Shizuku"
+          echo "::group::Download Retro Music Player"
+          gh release download --repo ${{ env.RETROMUSIC_REPO }} --pattern "*normal*.apk" || true
+          echo "::endgroup::Download Retro Music Player"
+          echo "::group::Download Morphe YouTube"
+          gh release download --repo ${{ env.MORPHE_REPO }} --pattern "youtube*all*.apk" || true
+          echo "::endgroup::Download Morphe YouTube"
+          echo "::group::Download Morphe YT Music"
+          gh release download --repo ${{ env.MORPHE_REPO }} --pattern "music*v8a*.apk" || true
+          echo "::endgroup::Download Morphe YT Music"
+          echo "::group::Download Morphe Google Photos"
+          gh release download --repo ${{ env.MORPHE_REPO }} --pattern "googlephotos*v8a*.apk" || true
+          echo "::endgroup::Download Morphe Google Photos"
+          echo "::group::Download Morphe MicroG"
           gh release download --repo ${{ env.MICROG_REPO }} --pattern "*microg*.apk" || true
-      - name: Download Morphe Manager APK
-        run: gh release download --repo ${{ env.MORPHE_MANAGER_REPO }} --pattern "*.apk" || true
-      - name: Download Sdmaid Cleaner
-        run: gh release download --repo ${{ env.SDMAID_REPO }} --pattern "*.apk" || true
-      - name: Download Simp Music
-        run: gh release download --repo ${{ env.SIMP_MUSIC_REPO }} --pattern "*foss*universal*.apk" || true
-      - name: Download Symphony
-        run: gh release download --repo "${{ env.SYMPHONY_REPO }}" --pattern "*.apk" || true
-      - name: Download Thunderbird Android
-        run: gh release download --repo ${{ env.THUNDERBIRD_REPO }} --pattern "*.apk" || true
-      - name: Download Termux APK
-        run: gh release download --repo ${{ env.TERMUX_REPO }} --pattern "*universal.apk" || true
-      - name: Download Visual Code Space
-        run: |
+          echo "::endgroup::Download Morphe MicroG"
+          echo "::group::Download Morphe Manager APK"
+          gh release download --repo ${{ env.MORPHE_MANAGER_REPO }} --pattern "*.apk" || true
+          echo "::endgroup::Download Morphe Manager APK"
+          echo "::group::Download Sdmaid Cleaner"
+          gh release download --repo ${{ env.SDMAID_REPO }} --pattern "*.apk" || true
+          echo "::endgroup::Download Sdmaid Cleaner"
+          echo "::group::Download Simp Music"
+          gh release download --repo ${{ env.SIMP_MUSIC_REPO }} --pattern "*foss*universal*.apk" || true
+          echo "::endgroup::Download Simp Music"
+          echo "::group::Download Symphony"
+          gh release download --repo "${{ env.SYMPHONY_REPO }}" --pattern "*.apk" || true
+          echo "::endgroup::Download Symphony"
+          echo "::group::Download Thunderbird Android"
+          gh release download --repo ${{ env.THUNDERBIRD_REPO }} --pattern "*.apk" || true
+          echo "::endgroup::Download Thunderbird Android"
+          echo "::group::Download Termux APK"
+          gh release download --repo ${{ env.TERMUX_REPO }} --pattern "*universal.apk" || true
+          echo "::endgroup::Download Termux APK"
+          echo "::group::Download Visual Code Space"
           rm -f ./*.apk
           if gh release download --repo ${{ env.VCS_REPO }} --pattern "*.apk" --clobber; then
             APK=$(find . -maxdepth 1 -type f -name "*.apk" | head -n 1)
@@ -263,19 +311,24 @@ jobs:
           else
             echo "⚠️ VisualCodeSpace: no APK asset matched"
           fi
-      - name: Download WeatherMaster APK
-        run: gh release download --repo ${{ env.WEATHERMASTER_REPO }} --pattern "*WeatherMaster*.apk" || true
-      - name: Download Xed Editor
-        run: gh release download --repo ${{ env.XED_EDITOR_REPO }} --pattern "*xed*.apk" || true
-      - name: Download YTDlnis
-        run: gh release download --repo ${{ env.YTDLNIS_REPO }} --pattern "YTDLnis*universal*.apk" || true
-      - name: Backup previous versions for diff
-        run: |
-          cp latest-apk-versions.txt old-apk-versions.txt 2>/dev/null || touch old-apk-versions.txt
-      - name: Version and rename APKs and EXE
+          echo "::endgroup::Download Visual Code Space"
+          echo "::group::Download WeatherMaster APK"
+          gh release download --repo ${{ env.WEATHERMASTER_REPO }} --pattern "*WeatherMaster*.apk" || true
+          echo "::endgroup::Download WeatherMaster APK"
+          echo "::group::Download Xed Editor"
+          gh release download --repo ${{ env.XED_EDITOR_REPO }} --pattern "*xed*.apk" || true
+          echo "::endgroup::Download Xed Editor"
+          echo "::group::Download YTDlnis"
+          gh release download --repo ${{ env.YTDLNIS_REPO }} --pattern "YTDLnis*universal*.apk" || true
+          echo "::endgroup::Download YTDlnis"
+      - name: Process downloaded apps
         id: versioning
         run: |
           set -e
+          echo "::group::Backup previous versions"
+          cp latest-apk-versions.txt old-apk-versions.txt 2>/dev/null || touch old-apk-versions.txt
+          echo "::endgroup::"
+          echo "::group::Version and rename APKs and EXE"
           UPDATED_APPS=""
           declare -A OLD
           if [ -f old-apk-versions.txt ]; then
@@ -390,14 +443,16 @@ jobs:
           else
             echo "UPDATED_APPS=" >> $GITHUB_ENV
           fi
+          echo "::endgroup::"
       - name: Stop if no updates
         if: env.UPDATED_APPS == ''
         run: |
           echo "No updates found. Exiting."
           exit 0
-      - name: Generate captions.txt
+      - name: Prepare release metadata
         if: env.UPDATED_APPS != ''
         run: |
+          echo "::group::Generate captions.txt"
           declare -A old_versions
           if [ -f old-apk-versions.txt ]; then
             while IFS=: read -r app ver; do
@@ -407,7 +462,7 @@ jobs:
               old_versions["$app"]="$ver"
             done < old-apk-versions.txt
           fi
-
+          
           declare -A app_desc=(
             ["ABDownloadManager"]="Powerful download manager with multi-threading"
             ["Acode"]="Lightweight yet powerful code editor"
@@ -468,9 +523,9 @@ jobs:
             ["ImageToolbox"]="All-in-one image editing and viewing app"
             ["OuterTune"]="A Material 3 YouTube Music client & local music player for Android"
             ["Quantum_Download_Manager"]="A modern, open-source download manager for Windows"
-
+          
           )
-
+          
           declare -A app_emoji=(
             ["ABDownloadManager"]="📥"
             ["Acode"]="💻"
@@ -532,7 +587,7 @@ jobs:
             ["OuterTune"]="🎧"
             ["Quantum_Download_Manager"]="📥"
           )
-
+          
           declare -A app_repo=(
             ["ABDownloadManager"]="https://github.com/amir1376/ab-download-manager/releases/latest"
             ["Acode"]="https://github.com/Acode-Foundation/Acode/releases/latest"
@@ -594,7 +649,7 @@ jobs:
             ["OuterTune"]="https://github.com/OuterTune/OuterTune/releases/latest"
             ["Quantum_Download_Manager"]="https://github.com/PBhadoo/QDM/releases/latest"
           )
-
+          
           rm -f captions.txt
           for apkfile in *_v*.apk *_v*.exe; do
             FILE=$(basename "$apkfile")
@@ -603,29 +658,28 @@ jobs:
             DESC="${app_desc[$APP]:-No description available}"
             NEW_VER=$(echo "$FILE" | sed -E 's/.*_v(.*)\.(apk|exe)/\1/')
             OLD_VER="${old_versions[$APP]:-}"
-
+          
             if [ "$OLD_VER" = "$NEW_VER" ]; then
               continue
             fi
-
+          
             if [ -z "$OLD_VER" ]; then
               VERSION="🆕 Version: $NEW_VER"
             else
               VERSION="🚀 Version: $OLD_VER → $NEW_VER"
             fi
-
+          
             CHANGELOG="Changelog: <a href='${app_repo[$APP]}'>Open</a>"
-
+          
             echo "📦 <b>File name</b> – ${FILE}
               ${EMOJI} ${DESC}
           ${VERSION}
-
+          
           ${CHANGELOG}
               ----" >> captions.txt
           done
-      - name: Build release notes
-        if: env.UPDATED_APPS != ''
-        run: |
+          echo "::endgroup::Generate captions.txt"
+          echo "::group::Build release notes"
           declare -A old_versions
           if [ -f old-apk-versions.txt ]; then
             while IFS=: read -r app ver; do
@@ -635,14 +689,14 @@ jobs:
               old_versions["$app"]="$ver"
             done < old-apk-versions.txt
           fi
-
+          
           declare -A new_versions
           for apk in *_v*.apk *_v*.exe; do
             APP="${apk%%_v*}"
             VER="$(echo "$apk" | sed -E 's/.*_v(.*)\.(apk|exe)/\1/')"
             new_versions["$APP"]="$VER"
           done
-
+          
           NOTES=""
           for app in "${!new_versions[@]}"; do
             OLD="${old_versions[$app]}"
@@ -653,7 +707,7 @@ jobs:
               NOTES+="$app: $OLD → $NEW"$'\n'
             fi
           done
-
+          
           if [ -z "$NOTES" ]; then
             if ls *_v*.apk *_v*.exe 1>/dev/null 2>&1; then
               for apk in *_v*.apk *_v*.exe; do
@@ -665,20 +719,18 @@ jobs:
               NOTES="No app versions updated."
             fi
           fi
-
+          
           echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
           echo -e "${NOTES//\\n/$'\n'}" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
-      - name: Build release name (IST)
-        if: env.UPDATED_APPS != ''
-        run: |
+          echo "::endgroup::Build release notes"
+          echo "::group::Build release name (IST)"
           export TZ=Asia/Kolkata
           echo "REL_NAME=Prebuilts Update - $(date +'%Y-%m-%d %H:%M %Z')" >> $GITHUB_ENV
-      - name: Write latest versions
-        if: env.UPDATED_APPS != ''
-        run: |
+          echo "::endgroup::Build release name (IST)"
+          echo "::group::Write latest versions"
           declare -A LATEST
-
+          
           if [ -f latest-apk-versions.txt ]; then
             while IFS=: read -r app ver; do
               app=$(echo "$app" | xargs)
@@ -686,16 +738,17 @@ jobs:
               LATEST["$app"]="$ver"
             done < latest-apk-versions.txt
           fi
-
+          
           for apk in *_v*.apk *_v*.exe; do
             APP="${apk%%_v*}"
             VER="$(echo "$apk" | sed -E 's/.*_v(.*)\.(apk|exe)/\1/')"
             LATEST["$APP"]="$VER"
           done
-
+          
           for app in "${!LATEST[@]}"; do
             echo "$app: ${LATEST[$app]}"
           done | sort > latest-apk-versions.txt
+          echo "::endgroup::Write latest versions"
       - name: Create release
         if: env.UPDATED_APPS != ''
         uses: softprops/action-gh-release@v3
