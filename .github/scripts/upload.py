@@ -45,7 +45,17 @@ def load_captions():
         if not match:
             continue
         filename = match.group(1).strip()
-        captions[normalize_name(filename)] = block[:MAX_CAPTION]
+        # Keep the GitHub captions.txt format intact, but remove the
+        # redundant "File name" line from the Telegram caption. The
+        # uploaded Telegram document already displays its filename.
+        telegram_caption = re.sub(
+            r"^\s*📦\s*<b>File name</b>\s*[–-]\s*[^\n]*\n?",
+            "",
+            block,
+            count=1,
+            flags=re.MULTILINE,
+        ).strip()
+        captions[normalize_name(filename)] = telegram_caption[:MAX_CAPTION]
     return captions
 
 
@@ -59,7 +69,9 @@ def find_caption(filename: str) -> str:
     for key, value in captions.items():
         if norm.startswith(key) or key.startswith(norm):
             return value
-    return f"📦 <b>{html.escape(Path(filename).stem)}</b>"
+    # Never repeat the filename in the Telegram caption. Telegram already
+    # shows the uploaded document's filename.
+    return ""
 
 
 def file_key(path: str) -> str:

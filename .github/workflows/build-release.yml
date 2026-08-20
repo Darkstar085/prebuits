@@ -594,7 +594,7 @@ jobs:
               VERSION="🚀 Version: $OLD_VER → $NEW_VER"
             fi
 
-            CHANGELOG="Changelog: <a href='${app_repo[$APP]}'>$APP</a>"
+            CHANGELOG="Changelog: <a href='${app_repo[$APP]}'>Open</a>"
 
             echo "📦 <b>File name</b> – ${FILE}
               ${EMOJI} ${DESC}
