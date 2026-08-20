@@ -651,6 +651,7 @@ jobs:
           files: |
             *_v*.apk
             *_v*.exe
+            captions.txt
         env:
           GITHUB_TOKEN: ${{ env.ACCESS_TOKEN }}
       - name: Commit latest versions and captions

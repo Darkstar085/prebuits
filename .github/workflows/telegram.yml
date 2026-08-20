@@ -6,8 +6,11 @@ on:
     types: [completed]
 
 concurrency:
-  group: prebuilts-telegram-${{ github.ref }}
-  cancel-in-progress: true
+  group: prebuilts-telegram-${{ github.event.workflow_run.id }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
 
 jobs:
   send-telegram:
@@ -15,11 +18,13 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
+      GH_TOKEN: ${{ secrets.TOKEN }}
       TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
       TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       API_ID: ${{ secrets.TELEGRAM_API_ID }}
       API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
       SESSION: ${{ secrets.TELEGRAM_SESSION }}
+      TAG: prebuilts-${{ github.event.workflow_run.id }}
 
     steps:
       - name: Checkout repo
@@ -28,31 +33,61 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y python3 python3-pip jq
-          pip3 install pyrogram tgcrypto telethon
+          sudo apt-get install -y python3 python3-pip gh
+          python3 -m pip install --disable-pip-version-check --no-cache-dir telethon tgcrypto
 
-      - name: Determine release tag
-        run: echo "TAG=prebuilts-${{ github.event.workflow_run.id }}" >> $GITHUB_ENV
-
-      - name: Get release assets
+      - name: Wait for release to become available
+        id: release
+        shell: bash
         run: |
-          url="https://api.github.com/repos/${{ github.repository }}/releases/tags/${TAG}"
-          resp=$(curl -s -H "Accept: application/vnd.github+json" "$url" || true)
-          if [ -z "$resp" ] || echo "$resp" | grep -q '"Not Found"'; then exit 0; fi
-          echo "$resp" | jq -r '.assets[] | 
-            select(.name|test("_v.*\\.(apk|exe)$")) |
-            [.name, .browser_download_url] | @tsv' > urls.tsv
-          if [ ! -s urls.tsv ]; then exit 0; fi
+          set -euo pipefail
+          echo "Waiting for release: ${TAG}"
 
-      - name: Download APPs
-        if: success() && hashFiles('urls.tsv') != ''
+          for attempt in $(seq 1 30); do
+            if gh release view "$TAG" --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
+              echo "Release is available."
+              echo "found=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "Release not available yet (attempt ${attempt}/30). Sleeping 10s..."
+            sleep 10
+          done
+
+          echo "No release was created for this successful build (likely no app updates). Nothing to send."
+          echo "found=false" >> "$GITHUB_OUTPUT"
+
+      - name: Download release assets
+        if: steps.release.outputs.found == 'true'
+        shell: bash
         run: |
+          set -euo pipefail
+          rm -rf dl
           mkdir -p dl
-          while IFS=$'\t' read -r name url; do
-            curl -L -o "dl/$name" "$url"
-          done < urls.tsv
 
-      - name: Upload to Telegram
-        if: success() && hashFiles('dl/*') != ''
+          gh release download "$TAG" \
+            --repo "${GITHUB_REPOSITORY}" \
+            --pattern "*_v*.apk" \
+            --pattern "*_v*.exe" \
+            --pattern "captions.txt" \
+            --dir dl
+
+          shopt -s nullglob
+          files=(dl/*.apk dl/*.exe)
+          if [ "${#files[@]}" -eq 0 ]; then
+            echo "Release contains no app files. Nothing to send."
+            exit 0
+          fi
+
+          if [ -f dl/captions.txt ]; then
+            cp dl/captions.txt captions.txt
+          fi
+
+          printf 'Downloaded files:\n'
+          printf ' - %s\n' "${files[@]}"
+
+      - name: Upload apps to Telegram
+        if: steps.release.outputs.found == 'true'
+        shell: bash
         run: |
+          set -euo pipefail
           python3 .github/scripts/upload.py
