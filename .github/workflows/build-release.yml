@@ -709,13 +709,63 @@ jobs:
             captions.txt
         env:
           GITHUB_TOKEN: ${{ env.ACCESS_TOKEN }}
-      - name: Commit latest versions and captions
+      - name: Commit update summary
         if: env.UPDATED_APPS != ''
         env:
           GITHUB_TOKEN: ${{ env.ACCESS_TOKEN }}
         run: |
-          git config --local user.email "sipunkumar85@gmail.com"
-          git config --local user.name "S I P U N"
+          set -euo pipefail
+
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+          export TZ=Asia/Kolkata
+          COMMIT_DATE="$(date +'%Y-%m-%d')"
+          COMMIT_TIME="$(date +'%H:%M %Z')"
+
+          declare -A OLD_VERSIONS
+          if [ -f old-apk-versions.txt ]; then
+            while IFS=: read -r app ver; do
+              app="$(echo "$app" | xargs)"
+              ver="$(echo "$ver" | xargs)"
+              [ -z "$app" ] && continue
+              OLD_VERSIONS["$app"]="$ver"
+            done < old-apk-versions.txt
+          fi
+
+          UPDATE_LINES=""
+          UPDATED_COUNT=0
+          for file in *_v*.apk *_v*.exe; do
+            [ -f "$file" ] || continue
+            APP="${file%%_v*}"
+            NEW_VER="$(echo "$file" | sed -E 's/.*_v(.*)\.(apk|exe)/\1/')"
+            OLD_VER="${OLD_VERSIONS[$APP]:-}"
+
+            if [ -n "$OLD_VER" ] && [ "$OLD_VER" != "$NEW_VER" ]; then
+              UPDATE_LINES+="- $APP: $OLD_VER → $NEW_VER"$'\n'
+            else
+              UPDATE_LINES+="- $APP: $NEW_VER (new)"$'\n'
+            fi
+            UPDATED_COUNT=$((UPDATED_COUNT + 1))
+          done
+
+          COMMIT_BODY=$(cat <<EOF
+          📦 Prebuilts Update
+
+          📅 Date: ${COMMIT_DATE}
+          🕐 Time: ${COMMIT_TIME}
+
+          ✅ Updated apps (${UPDATED_COUNT}):
+          ${UPDATE_LINES}
+          📁 Updated files:
+          - latest-apk-versions.txt
+          - captions.txt
+          - .run_week
+
+          🤖 Automated by GitHub Actions
+          EOF
+          )
+
           git add latest-apk-versions.txt captions.txt .run_week
-          git commit -m "Update APK versions and Telegram captions [ci skip]" || echo "No changes to commit"
+          git commit -m "📦 Prebuilts Update — ${COMMIT_DATE} [skip ci]" -m "$COMMIT_BODY" || echo "No changes to commit"
           git push origin main
