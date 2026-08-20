@@ -1,18 +1,66 @@
-📦 <b>File name</b> – Arcticons_v15.0.5.apk
-    🎭 Modern icon pack and theming app
-🚀 Version: 14.9.1 → 15.0.5
+📦 <b>File name</b> – ConverterNOW_v4.6.3.apk
+    🔄 Simple unit and currency converter
+🚀 Version: 4.6.2 → 4.6.3
 
-Changelog: <a href='https://github.com/Arcticons-Team/Arcticons/releases/latest'>Arcticons</a>
+Changelog: <a href='https://github.com/ferraridamiano/ConverterNOW/releases/latest'>Open</a>
     ----
-📦 <b>File name</b> – DuckDuckGo_v5.292.0.apk
+📦 <b>File name</b> – DuckDuckGo_v5.292.1.apk
     🦆 Private, tracker-blocking browser
-🚀 Version: 5.291.2 → 5.292.0
+🚀 Version: 5.292.0 → 5.292.1
 
-Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
+Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>Open</a>
     ----
-📦 <b>File name</b> – LocalSend_v1.18.1.apk
-    📤 Secure, local file sharing app
-🚀 Version: 1.17.0 → 1.18.1
+📦 <b>File name</b> – LibreCuts_v1.0-beta7.apk
+    🎬 Free, open-source video editor for Android
+🆕 Version: 1.0-beta7
 
-Changelog: <a href='https://github.com/localsend/localsend/releases/latest'>LocalSend</a>
+Changelog: <a href='https://github.com/tharunbirla/LibreCuts/releases/latest'>Open</a>
+    ----
+📦 <b>File name</b> – Momogram_v12.9.2-28fab50e21.apk
+    📱 Telegram client with privacy and customization features
+🚀 Version: 12.9.0-31742cbd66 → 12.9.2-28fab50e21
+
+Changelog: <a href='https://github.com/dic1911/Momogram/releases/latest'>Open</a>
+    ----
+📦 <b>File name</b> – Morphe_Manager_v1.26.1.apk
+    🛠️ Manage and install Morphe patches easily
+🚀 Version: 1.25.0 → 1.26.1
+
+Changelog: <a href='https://github.com/MorpheApp/morphe-manager/releases/latest'>Open</a>
+    ----
+📦 <b>File name</b> – NopeRemote_v2.3.apk
+    📺 Open-source universal IR remote control app for Android
+🆕 Version: 2.3
+
+Changelog: <a href='https://github.com/monuk7735/nope-remote/releases/latest'>Open</a>
+    ----
+📦 <b>File name</b> – OrganicMaps_v2026.07.23-6-Web.apk
+    🗺️ Privacy-focused offline maps and navigation app
+🆕 Version: 2026.07.23-6-Web
+
+Changelog: <a href='https://github.com/organicmaps/organicmaps/releases/latest'>Open</a>
+    ----
+📦 <b>File name</b> – PhonographPlus_v2.0.1.apk
+    🎧 Enhanced music player fork
+🚀 Version: 2.0.0 → 2.0.1
+
+Changelog: <a href='https://github.com/chr56/Phonograph_Plus/releases/latest'>Open</a>
+    ----
+📦 <b>File name</b> – Sdmaid_v2.0.3-rc0.apk
+    🧹 Powerful system cleaning tool
+🚀 Version: 2.0.2-rc0 → 2.0.3-rc0
+
+Changelog: <a href='https://github.com/d4rken-org/sdmaid-se/releases/latest'>Open</a>
+    ----
+📦 <b>File name</b> – SpotiFLAC_v4.8.5.apk
+    🎵 Open-source music player and lossless audio downloader for Android
+🆕 Version: 4.8.5
+
+Changelog: <a href='https://github.com/spotiflacapp/SpotiFLAC-Mobile/releases/latest'>Open</a>
+    ----
+📦 <b>File name</b> – Kudu_v2.1.0.exe
+    🧹 Open-source system cleaner and security scanner for Windows, macOS and Linux
+🆕 Version: 2.1.0
+
+Changelog: <a href='https://github.com/AdventDevInc/kudu/releases/latest'>Open</a>
     ----
