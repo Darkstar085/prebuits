@@ -1,8 +1,29 @@
-# Update Prebuilt APKs
+# Android App Updater
 
-Keeps popular Android APKs updated and easy to download — automatically. 🚀
+Automatically tracks GitHub releases, downloads updated Android apps, packages them into a GitHub Release, and publishes new updates to Telegram. 🚀
 
-## Apps Covered
+## ✨ How It Works
+
+The GitHub Actions workflow runs automatically and:
+
+1. 🔎 Checks the configured GitHub repositories for new releases.
+2. 📥 Downloads matching APK/EXE release assets.
+3. 🧩 Detects and processes the actual downloaded filenames.
+4. 🏷️ Renames updated files using a consistent `App_VERSION.apk` format.
+5. 📝 Generates release notes and Telegram captions.
+6. 📦 Creates one GitHub Release containing all updated apps.
+7. 📲 Publishes the updated files to the Telegram channel.
+8. 💾 Records the latest versions so the same update is not released twice.
+
+The workflow is organized into clear phases in GitHub Actions, making runs easier to follow:
+
+- **Download all apps**
+- **Process downloaded apps**
+- **Prepare release metadata**
+- **Create release**
+- **Commit update summary**
+
+## 📱 Apps Covered
 
 - 🔐 Aegis — Modern two-factor authentication app
 - 📂 AmazeFileManager — Fast, customizable file manager
@@ -12,58 +33,101 @@ Keeps popular Android APKs updated and easy to download — automatically. 🚀
 - 🌦️ BreezyWeather — Clean, customizable open-source weather app
 - 🍒 Cherrygram — Enhanced Telegram client with extra features
 - 🔄 ConverterNOW — Simple unit and currency converter
-- 🌐 Cromite — Bromite-based privacy browser
-- 💻 CpuInfo — Detailed CPU info tool
-- 🎨 DeltaIcons — Beautiful, minimal icon pack
-- 📷 DotGallery — Jetpack Compose-based photo gallery app
+- 🌐 Cromite — Privacy-focused browser
+- 💻 CpuInfo — Detailed CPU information tool
+- 🎨 DeltaIcons — Minimal icon pack
+- 📷 DotGallery — Jetpack Compose-based photo gallery
 - 🦆 DuckDuckGo — Private, tracker-blocking browser
 - ⌨️ Florisboard — Privacy-friendly Android keyboard
-- 🤳 Flip2DND — Flip your phone to toggle Do Not Disturb automatically
-- 🧮 Fossify_Calculator — Open-source, privacy-friendly calculator by Fossify
-- ⌨️ Fossify_Keyboard — Easy keyboard for inserting texts, special characters and numbers
-- 🎶 Fossify_MusicPlayer — Modern music player by Fossify
-- 🗒️ Fossify_Notes — Secure, privacy-focused notes app by Fossify
-- 🎤 Fossify_VoiceRecorder — Simple, privacy-respecting voice recorder by Fossify
-- 🎼 Gramophone — Minimalist, elegant music player
-- 🦦 IceravenBrowser — Privacy-focused web browser
-- 🔒 LibreTube — Open-source YouTube app focusing on privacy
-- 📤 LocalSend — Secure, local file sharing app
-- 🧩 MicroG_RE — MicroG RE - Enhanced Play Services compatibility
-- 📖 MoeList — Anime and manga tracking app
-- 🛠️ Omni — All-in-one tool app with Compass, Spirit Level, Ruler and Flashlight
+- 🤳 Flip2DND — Flip your phone to toggle Do Not Disturb
+- 🧮 Fossify Calculator — Open-source calculator
+- ⌨️ Fossify Keyboard — Privacy-friendly keyboard
+- 🎶 Fossify Music Player — Modern music player
+- 🗒️ Fossify Notes — Privacy-focused notes app
+- 🎤 Fossify Voice Recorder — Privacy-respecting voice recorder
+- 🎼 Gramophone — Minimalist music player
+- 🦦 IceravenBrowser — Privacy-focused browser
+- 🔒 LibreTube — Open-source YouTube app
+- ✂️ LibreCuts — Video editing app
+- 📤 LocalSend — Secure local file sharing
+- 🧩 MicroG_RE — Enhanced Play Services compatibility
+- 📖 MoeList — Anime and manga tracking
+- 🛠️ Omni — All-in-one utility app
 - 🎧 PhonographPlus — Enhanced music player fork
-- 🖼️ Photok — Simple photo gallery app
-- 🗂️ PrismFileExplorer — Powerful, material design file explorer
-- 📷 ReVanced_GooglePhotos — Google Photos with premium/unlocked features
-- 🧩 ReVanced_MicroG — MicroG for ReVanced - enables Google sign-in
-- 🎵 ReVanced_YTMusic — YouTube Music with premium unlock, ad-block and advanced playback
-- 🎬 ReVanced_YouTube — YouTube with ad-block, background play, sponsor block and more
-- 🧹 Sdmaid — Powerful system cleaning tool
-- 🤖 Shizuku — Advanced Android background task manager
-- 🎶 Spotify_Revanced — Spotify MOD with no ads and premium features
-- 🎼 Symphony — Lightweight music player for Android 9+
-- 🖥️ Termux — Terminal emulator and Linux environment for Android
-- 📧 ThunderbirdAndroid — Official Thunderbird email client for Android
-- 💻 VisualCodeSpace — Lightweight, feature-rich Android code editor and IDE
-- ☁️ WeatherMaster — Modern weather app with graphs
-- ✏️ XedEditor — Simple and fast text/code editor
-- ⬇️ Ytdlnis — YouTube downloader with advanced features
+- 🖼️ Photok — Simple photo gallery
+- 🗂️ PrismFileExplorer — Material-design file explorer
+- 🖥️ Kudu — Desktop application
+- 🕹️ NopeRemote — Remote-control application
+- 🎵 ReVanced_GooglePhotos — ReVanced Google Photos build
+- 🧩 ReVanced_MicroG — MicroG for ReVanced
+- 🎵 ReVanced_YTMusic — ReVanced YouTube Music build
+- 🎬 ReVanced_YouTube — ReVanced YouTube build
+- 🧹 Sdmaid — System cleaning tool
+- 🤖 Shizuku — Advanced Android background utility
+- 🎶 Spotify_Revanced — Spotify ReVanced build
+- 🎼 SpotiFLAC — Spotify/FLAC-related music application
+- 🎼 Symphony — Lightweight music player
+- 🖥️ Termux — Terminal emulator and Linux environment
+- 📧 ThunderbirdAndroid — Thunderbird email client
+- 💻 VisualCodeSpace — Android code editor and IDE
+- ☁️ WeatherMaster — Modern weather application
+- ✏️ XedEditor — Text/code editor
+- ⬇️ Ytdlnis — YouTube downloader
+- 🗺️ Organic Maps — Privacy-focused offline maps
 
-## What You'll See
+## 📦 Releases
 
-- 📦 A GitHub Release with the latest APKs
-- 🏷️ Filenames like App\_{VERSION}.apk
-- 📝 A short release description listing app names and versions
-- 📲 Files get posted to Telegram channel: [https://t.me/darkstar085_channel](https://t.me/darkstar085_channel)
+Each update creates a GitHub Release containing only apps that have changed since the previous run.
 
-## Requests & Support
+Files follow a consistent naming style such as:
 
-- 💬 Want an app added or have a question? Join: [https://t.me/darkstar085_group](https://t.me/darkstar085_group)
+```text
+AppName_VERSION.apk
+```
 
+The release metadata contains the updated app names, versions, descriptions, and changelog links.
 
-## License
+## 📲 Telegram
 
-This repository’s workflow scripts and automation code are licensed under the [MIT License](./LICENSE).  
-Third-party APK files referenced here remain the property of their respective copyright holders.
+New releases are automatically published to the Telegram channel:
 
----
+- 📢 **Channel:** [Darkstar's Hub](https://t.me/darkstar085_channel)
+
+Telegram captions are kept clean and avoid repeating information already displayed by Telegram, such as the uploaded filename.
+
+## ⚙️ Automation
+
+The workflow is designed to be resilient when a repository changes its release asset naming:
+
+- Detects actual downloaded APK filenames where necessary.
+- Avoids assuming every APK is named `app-release.apk`.
+- Skips repositories when no matching release asset is available.
+- Tracks versions to prevent duplicate releases.
+- Uses controlled Telegram uploads with retry/error handling.
+
+## 🔐 Required GitHub Secrets
+
+The Telegram publishing workflow uses these repository secrets:
+
+```text
+TOKEN
+TELEGRAM_API_ID
+TELEGRAM_API_HASH
+TELEGRAM_SESSION
+TELEGRAM_CHAT_ID
+```
+
+Keep these values private and never commit them directly to the repository.
+
+## 🤝 Requests & Support
+
+Want an app added or found an issue?
+
+- 💬 Telegram group: [Darkstar's Group](https://t.me/darkstar085_group)
+- 🐛 Open an issue in this repository for workflow/app problems.
+
+## 📜 License
+
+This repository's workflow scripts and automation code are licensed under the [MIT License](./LICENSE).
+
+Third-party APK/EXE files referenced or redistributed by the workflow remain the property of their respective copyright holders.
