@@ -18,6 +18,11 @@ jobs:
       ABDOWNLOADER_REPO: "amir1376/ab-download-manager"
       ACODE_REPO: "Acode-Foundation/Acode"
       AEGIS_REPO: "beemdevelopment/Aegis"
+      NOPE_REMOTE_REPO: "monuk7735/nope-remote"
+      KUDU_REPO: "AdventDevInc/kudu"
+      SPOTIFLAC_REPO: "spotiflacapp/SpotiFLAC-Mobile"
+      LIBRECUTS_REPO: "tharunbirla/LibreCuts"
+      ORGANIC_MAPS_REPO: "organicmaps/organicmaps"
       AMAROK_HIDER_REPO: "deltazefiro/Amarok-Hider"
       ARCTICONS_REPO: "Arcticons-Team/Arcticons"
       BITWARDEN_REPO: "bitwarden/android"
@@ -108,6 +113,16 @@ jobs:
         run: gh release download --repo ${{ env.ACODE_REPO }} --pattern "*app-fdroid-release*.apk" || true
       - name: Download Aegis
         run: gh release download --repo ${{ env.AEGIS_REPO }} --pattern "*.apk" || true
+      - name: Download NopeRemote
+        run: gh release download --repo ${{ env.NOPE_REMOTE_REPO }} --pattern "NopeRemote*.apk" || true
+      - name: Download Kudu
+        run: gh release download --repo ${{ env.KUDU_REPO }} --pattern "Kudu-Setup-*.exe" || true
+      - name: Download SpotiFLAC
+        run: gh release download --repo ${{ env.SPOTIFLAC_REPO }} --pattern "SpotiFLAC-*-arm64.apk" || true
+      - name: Download LibreCuts
+        run: gh release download --repo ${{ env.LIBRECUTS_REPO }} --pattern "*arm64*.apk" || true
+      - name: Download Organic Maps
+        run: gh release download --repo ${{ env.ORGANIC_MAPS_REPO }} --pattern "OrganicMaps*-web-release.apk" || true
       - name: Download Amarok Hider
         run: |
           gh release download --repo ${{ env.AMAROK_HIDER_REPO }} --pattern "*.apk" || true
@@ -256,6 +271,11 @@ jobs:
             ["*windows_x64*.exe"]="ABDownloadManager"
             ["*app-fdroid-release*.apk"]="Acode"
             ["*aegis*.apk"]="Aegis"
+            ["NopeRemote*.apk"]="NopeRemote"
+            ["Kudu-Setup-*.exe"]="Kudu"
+            ["SpotiFLAC-*-arm64.apk"]="SpotiFLAC"
+            ["*LibreCuts*arm64*.apk"]="LibreCuts"
+            ["OrganicMaps*-web-release.apk"]="OrganicMaps"
             ["*Amarok*.apk"]="AmarokHider"
             ["*Arcticons*.apk"]="Arcticons"
             ["*bitwarden-fdroid*.apk"]="Bitwarden"
@@ -316,7 +336,7 @@ jobs:
 
             # Skip checks for EXE; extract version from filename only
             if [[ "$NEW_APK" == *.exe ]]; then
-              NEW_VER=$(echo "$NEW_APK" | sed -nE 's/.*_([0-9]+\.[0-9]+\.[0-9]+).*\.exe/\1/p')
+              NEW_VER=$(echo "$NEW_APK" | sed -nE 's/.*[-_]([0-9]+\.[0-9]+\.[0-9]+).*\.exe/\1/p')
               [ -z "$NEW_VER" ] && NEW_VER="unknown"
               OLD_VER="${OLD[$APP]:-}"
               if [ -n "$OLD_VER" ] && [ "$OLD_VER" = "$NEW_VER" ]; then
@@ -372,6 +392,11 @@ jobs:
             ["ABDownloadManager"]="Powerful download manager with multi-threading"
             ["Acode"]="Lightweight yet powerful code editor"
             ["Aegis"]="Modern two-factor authentication app"
+            ["NopeRemote"]="Open-source universal IR remote control app for Android"
+            ["Kudu"]="Open-source system cleaner and security scanner for Windows, macOS and Linux"
+            ["SpotiFLAC"]="Open-source music player and lossless audio downloader for Android"
+            ["LibreCuts"]="Free, open-source video editor for Android"
+            ["OrganicMaps"]="Privacy-focused offline maps and navigation app"
             ["AmarokHider"]="Hide apps as your choice"
             ["Arcticons"]="Modern icon pack and theming app"
             ["Bitwarden"]="Open-source password manager with cloud sync"
@@ -430,6 +455,11 @@ jobs:
             ["ABDownloadManager"]="📥"
             ["Acode"]="💻"
             ["Aegis"]="🔐"
+            ["NopeRemote"]="📺"
+            ["Kudu"]="🧹"
+            ["SpotiFLAC"]="🎵"
+            ["LibreCuts"]="🎬"
+            ["OrganicMaps"]="🗺️"
             ["AmarokHider"]="🙈"
             ["Arcticons"]="🎭"
             ["Bitwarden"]="🔑"
@@ -487,6 +517,11 @@ jobs:
             ["ABDownloadManager"]="https://github.com/amir1376/ab-download-manager/releases/latest"
             ["Acode"]="https://github.com/Acode-Foundation/Acode/releases/latest"
             ["Aegis"]="https://github.com/beemdevelopment/Aegis/releases/latest"
+            ["NopeRemote"]="https://github.com/monuk7735/nope-remote/releases/latest"
+            ["Kudu"]="https://github.com/AdventDevInc/kudu/releases/latest"
+            ["SpotiFLAC"]="https://github.com/spotiflacapp/SpotiFLAC-Mobile/releases/latest"
+            ["LibreCuts"]="https://github.com/tharunbirla/LibreCuts/releases/latest"
+            ["OrganicMaps"]="https://github.com/organicmaps/organicmaps/releases/latest"
             ["AmarokHider"]="https://github.com/deltazefiro/Amarok-Hider/releases/latest"
             ["Arcticons"]="https://github.com/Arcticons-Team/Arcticons/releases/latest"
             ["Bitwarden"]="https://github.com/bitwarden/android/releases/latest"
