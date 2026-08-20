@@ -1,18 +1,36 @@
-📦 <b>File name</b> – Arcticons_v15.0.5.apk
-    🎭 Modern icon pack and theming app
-🚀 Version: 14.9.1 → 15.0.5
+📦 <b>File name</b> – ConverterNOW_v4.6.3.apk
+    🔄 Simple unit and currency converter
+🚀 Version: 4.6.2 → 4.6.3
 
-Changelog: <a href='https://github.com/Arcticons-Team/Arcticons/releases/latest'>Arcticons</a>
+Changelog: <a href='https://github.com/ferraridamiano/ConverterNOW/releases/latest'>ConverterNOW</a>
     ----
-📦 <b>File name</b> – DuckDuckGo_v5.292.0.apk
+📦 <b>File name</b> – DuckDuckGo_v5.292.1.apk
     🦆 Private, tracker-blocking browser
-🚀 Version: 5.291.2 → 5.292.0
+🚀 Version: 5.292.0 → 5.292.1
 
 Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>DuckDuckGo</a>
     ----
-📦 <b>File name</b> – LocalSend_v1.18.1.apk
-    📤 Secure, local file sharing app
-🚀 Version: 1.17.0 → 1.18.1
+📦 <b>File name</b> – Momogram_v12.9.2-28fab50e21.apk
+    📱 Telegram client with privacy and customization features
+🚀 Version: 12.9.0-31742cbd66 → 12.9.2-28fab50e21
 
-Changelog: <a href='https://github.com/localsend/localsend/releases/latest'>LocalSend</a>
+Changelog: <a href='https://github.com/dic1911/Momogram/releases/latest'>Momogram</a>
+    ----
+📦 <b>File name</b> – Morphe_Manager_v1.26.1.apk
+    🛠️ Manage and install Morphe patches easily
+🚀 Version: 1.25.0 → 1.26.1
+
+Changelog: <a href='https://github.com/MorpheApp/morphe-manager/releases/latest'>Morphe_Manager</a>
+    ----
+📦 <b>File name</b> – PhonographPlus_v2.0.1.apk
+    🎧 Enhanced music player fork
+🚀 Version: 2.0.0 → 2.0.1
+
+Changelog: <a href='https://github.com/chr56/Phonograph_Plus/releases/latest'>PhonographPlus</a>
+    ----
+📦 <b>File name</b> – Sdmaid_v2.0.3-rc0.apk
+    🧹 Powerful system cleaning tool
+🚀 Version: 2.0.2-rc0 → 2.0.3-rc0
+
+Changelog: <a href='https://github.com/d4rken-org/sdmaid-se/releases/latest'>Sdmaid</a>
     ----
