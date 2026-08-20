@@ -110,7 +110,7 @@ jobs:
       - name: Download AB Download Manager
         run: gh release download --repo ${{ env.ABDOWNLOADER_REPO }} --pattern "*windows_x64*.exe" || true
       - name: Download Acode
-        run: gh release download --repo ${{ env.ACODE_REPO }} --pattern "*app-fdroid-release*.apk" || true
+        run: gh release download --repo ${{ env.ACODE_REPO }} --pattern "*fdroid*.apk" || true
       - name: Download Aegis
         run: gh release download --repo ${{ env.AEGIS_REPO }} --pattern "*.apk" || true
       - name: Download NopeRemote
@@ -157,9 +157,13 @@ jobs:
         run: gh release download --repo ${{ env.FLORISBOARD_REPO }} --pattern "*stable*.apk" || true
       - name: Download Flip 2 DND APK and Rename APK
         run: |
-          gh release download --repo ${{ env.FLIP2DND_REPO }} --pattern "*.apk" || true
-          mv app-release.apk Flip2DND.apk || true
-          rm -f app-release.apk || true
+          rm -f ./*.apk
+          if gh release download --repo ${{ env.FLIP2DND_REPO }} --pattern "*.apk" --clobber; then
+            APK=$(find . -maxdepth 1 -type f -name "*.apk" | head -n 1)
+            if [ -n "$APK" ]; then mv "$APK" Flip2DND.apk; else echo "⚠️ Flip2DND: APK asset not found"; fi
+          else
+            echo "⚠️ Flip2DND: no APK asset matched"
+          fi
       - name: Download Fossify Calculator
         run: gh release download --repo ${{ env.FOSSIFY_CALC_REPO }} --pattern "*.apk" || true
       - name: Download Fossify Keyboard
@@ -177,14 +181,18 @@ jobs:
       - name: Download ImageToolbox
         run: gh release download --repo ${{ env.IMAGETOOLBOX_REPO }} --pattern "*v8a*.apk" || true
       - name: Download LibreTube
-        run: gh release download --repo ${{ env.LIBRETUBE_REPO }} --pattern "*app-universal-release*.apk" || true
+        run: gh release download --repo ${{ env.LIBRETUBE_REPO }} --pattern "app-release.apk" || true
       - name: Download LocalSend
-        run: gh release download --repo ${{ env.LOCAL_SEND_REPO }} --pattern "*google-play*.apk" || true
+        run: gh release download --repo ${{ env.LOCAL_SEND_REPO }} --pattern "*android-arm64v8.apk" || true
       - name: Download LTECleanerFOSS and Rename APK
         run: |
-          gh release download --repo ${{ env.LTECLEANER_REPO }} --pattern "*app-release*.apk" || true
-          mv app-release.apk LTECleanerFOSS.apk || true
-          rm -f app-release.apk || true
+          rm -f ./*.apk
+          if gh release download --repo ${{ env.LTECLEANER_REPO }} --pattern "*.apk" --clobber; then
+            APK=$(find . -maxdepth 1 -type f -name "*.apk" | head -n 1)
+            if [ -n "$APK" ]; then mv "$APK" LTECleanerFOSS.apk; else echo "⚠️ LTECleanerFOSS: APK asset not found"; fi
+          else
+            echo "⚠️ LTECleanerFOSS: no APK asset matched"
+          fi
       - name: Download Magisk APK
         run: gh release download --repo ${{ env.MAGISK_REPO }} --pattern "*.apk" || true
       - name: Download MicroG RE APK
@@ -197,9 +205,13 @@ jobs:
         run: gh release download --repo ${{ env.NEKOGRAM_REPO }} --pattern "*universal*.apk" || true
       - name: Download Omni APK and Rename APK
         run: |
-          gh release download --repo ${{ env.OMNI_REPO }} --pattern "*.apk" || true
-          mv app-release.apk Omni.apk || true
-          rm -f app-release.apk || true
+          rm -f ./*.apk
+          if gh release download --repo ${{ env.OMNI_REPO }} --pattern "*.apk" --clobber; then
+            APK=$(find . -maxdepth 1 -type f -name "*.apk" | head -n 1)
+            if [ -n "$APK" ]; then mv "$APK" Omni.apk; else echo "⚠️ Omni: APK asset not found"; fi
+          else
+            echo "⚠️ Omni: no APK asset matched"
+          fi
       - name: Download OuterTune
         run: gh release download --repo ${{ env.OUTERTUNE_REPO }} --pattern "*core*.apk" || true
       - name: Download Pixelplay
@@ -208,9 +220,13 @@ jobs:
         run: gh release download --repo ${{ env.PHONOGRAPHPLUS_REPO }} --pattern "*ModernStableRelease*.apk" || true
       - name: Download Prism File Explorer and Rename APK
         run: |
-          gh release download --repo ${{ env.PRISM_REPO }} --pattern "*.apk" || true
-          mv app-release.apk PrismFileExplorer.apk || true
-          rm -f app-release.apk || true
+          rm -f ./*.apk
+          if gh release download --repo ${{ env.PRISM_REPO }} --pattern "*.apk" --clobber; then
+            APK=$(find . -maxdepth 1 -type f -name "*.apk" | head -n 1)
+            if [ -n "$APK" ]; then mv "$APK" PrismFileExplorer.apk; else echo "⚠️ PrismFileExplorer: APK asset not found"; fi
+          else
+            echo "⚠️ PrismFileExplorer: no APK asset matched"
+          fi
       - name: Download QDM
         run: gh release download --repo ${{ env.QDM_REPO }} --pattern "*.exe" || true
       - name: Download RikkaApps Shizuku
@@ -240,11 +256,15 @@ jobs:
         run: gh release download --repo ${{ env.TERMUX_REPO }} --pattern "*universal.apk" || true
       - name: Download Visual Code Space
         run: |
-          gh release download --repo ${{ env.VCS_REPO }} --pattern "*.apk" || true
-          mv app-release.apk VisualCodeSpace.apk || true
-          rm -f app-release.apk || true
+          rm -f ./*.apk
+          if gh release download --repo ${{ env.VCS_REPO }} --pattern "*.apk" --clobber; then
+            APK=$(find . -maxdepth 1 -type f -name "*.apk" | head -n 1)
+            if [ -n "$APK" ]; then mv "$APK" VisualCodeSpace.apk; else echo "⚠️ VisualCodeSpace: APK asset not found"; fi
+          else
+            echo "⚠️ VisualCodeSpace: no APK asset matched"
+          fi
       - name: Download WeatherMaster APK
-        run: gh release download --repo ${{ env.WEATHERMASTER_REPO }} --pattern "*WeatherMaster*v8a*.apk" || true
+        run: gh release download --repo ${{ env.WEATHERMASTER_REPO }} --pattern "*WeatherMaster*.apk" || true
       - name: Download Xed Editor
         run: gh release download --repo ${{ env.XED_EDITOR_REPO }} --pattern "*xed*.apk" || true
       - name: Download YTDlnis
@@ -269,7 +289,7 @@ jobs:
 
           declare -A apps=(
             ["*windows_x64*.exe"]="ABDownloadManager"
-            ["*app-fdroid-release*.apk"]="Acode"
+            ["*fdroid*.apk"]="Acode"
             ["*aegis*.apk"]="Aegis"
             ["NopeRemote*.apk"]="NopeRemote"
             ["Kudu-Setup-*.exe"]="Kudu"
@@ -297,8 +317,8 @@ jobs:
             ["*Gramophone*.apk"]="Gramophone"
             ["*iceraven*.apk"]="IceravenBrowser"
             ["*image-toolbox*.apk"]="ImageToolbox"
-            ["*google-play*.apk"]="LocalSend"
-            ["*app-universal-release*.apk"]="LibreTube"
+            ["*android-arm64v8.apk"]="LocalSend"
+            ["app-release.apk"]="LibreTube"
             ["LTECleanerFOSS.apk"]="LTECleanerFOSS"
             ["*Magisk*.apk"]="Magisk"
             ["*moelist*.apk"]="MoeList"
@@ -324,7 +344,7 @@ jobs:
             ["*termux*.apk"]="Termux"
             ["*k9mail*.apk"]="ThunderbirdAndroid"
             ["*VisualCodeSpace*.apk"]="VisualCodeSpace"
-            ["*WeatherMaster*v8a*.apk"]="WeatherMaster"
+            ["*WeatherMaster*.apk"]="WeatherMaster"
             ["xed*.apk"]="XedEditor"
             ["YTD*.apk"]="Ytdlnis"
           )
