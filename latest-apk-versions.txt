@@ -1,5 +1,5 @@
 *: *
-ABDownloadManager: 1.10.1
+ABDownloadManager: 1.10.2
 Acode: 1.11.6
 Aegis: 3.4.2
 AmarokHider: 0.10.1
@@ -24,7 +24,7 @@ Fossify_VoiceRecorder: 1.7.1
 Gramophone: 1.1.1
 IceravenBrowser: iceraven-2.46.0
 ImageToolbox: 4.1.0
-Kudu: 2.1.0
+Kudu: 2.6.0
 LTECleanerFOSS: 5.1.0
 LibreTube: 0.29.1
 LocalSend: 1.18.1
@@ -57,6 +57,6 @@ Symphony: 2024.12.115
 Termux: 0.118.3
 ThunderbirdAndroid: 21.1
 VisualCodeSpace: 2.0.1
-WeatherMaster: 3.9.1
+WeatherMaster: 3.10.4
 XedEditor: 3.3.4
 Ytdlnis: 1.8.9.1
