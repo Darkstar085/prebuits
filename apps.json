@@ -16,7 +16,7 @@
   {"name":"Cromite","repo":"uazo/cromite","pattern":"*arm64_ChromePublic*.apk","description":"Bromite-based privacy browser","emoji":"🌐","rename":null},
   {"name":"CpuInfo","repo":"kamgurgul/cpu-info","pattern":"*androidApp*.apk","description":"Detailed CPU info tool","emoji":"💻","rename":null},
   {"name":"DeltaIcons","repo":"Delta-Icons/android","pattern":"*.apk","description":"Beautiful, minimal icon pack","emoji":"🎨","rename":null},
-  {"name":"DotGallery","repo":"IacobIonut01/ReFra","pattern":"ReFra-*-NoML-arm64-v8a-release.apk","description":"Jetpack Compose-based photo gallery app","emoji":"📷","rename":null},
+  {"name":"ReFra","repo":"IacobIonut01/ReFra","pattern":"ReFra-*-NoML-arm64-v8a-release.apk","description":"Jetpack Compose-based photo gallery app","emoji":"📷","rename":null},
   {"name":"DuckDuckGo","repo":"duckduckgo/Android","pattern":"*.apk","description":"Private, tracker-blocking browser","emoji":"🦆","rename":null},
   {"name":"Florisboard","repo":"florisboard/florisboard","pattern":"*stable*.apk","description":"Privacy-friendly Android keyboard","emoji":"⌨️","rename":null},
   {"name":"Flip2DND","repo":"robinsrk/flip_2_dnd","pattern":"*.apk","description":"Flip your phone to toggle Do Not Disturb automatically","emoji":"🤳","rename":"Flip2DND.apk"},
