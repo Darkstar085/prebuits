@@ -5,11 +5,13 @@ from __future__ import annotations
 
 import fnmatch
 import glob
+import html
 import json
+import os
 import re
 import shutil
 import subprocess
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -32,16 +34,31 @@ def load_apps() -> list[tuple[str, str, str, str, str, str | None]]:
     with APPS_FILE.open(encoding="utf-8") as handle:
         data = json.load(handle)
     return [
-        (item["name"], item["repo"], item["pattern"], item.get("description", ""), item.get("emoji", ""), item.get("rename"))
+        (
+            item["name"],
+            item["repo"],
+            item["pattern"],
+            item.get("description", ""),
+            item.get("emoji", ""),
+            item.get("rename"),
+        )
         for item in data
     ]
 
 
 APPS = load_apps()
+APP_INFO = {app: (repo, description, emoji) for app, repo, _pattern, description, emoji, _rename in APPS}
 
 
-def latest_release(repo: str) -> dict:
-    return gh_api(f"repos/{repo}/releases/latest")
+def latest_release(repo: str, pattern: str) -> dict:
+    """Find the newest non-draft release containing an asset matching pattern."""
+    releases = gh_api(f"repos/{repo}/releases?per_page=30")
+    for release in releases:
+        if release.get("draft") or release.get("prerelease"):
+            continue
+        if any(fnmatch.fnmatch(asset.get("name", ""), pattern) for asset in release.get("assets", [])):
+            return release
+    raise RuntimeError(f"no release asset matching {pattern!r} found in {repo}")
 
 
 def download_asset(app: str, repo: str, pattern: str) -> None:
@@ -50,32 +67,33 @@ def download_asset(app: str, repo: str, pattern: str) -> None:
     destination.mkdir(parents=True, exist_ok=True)
 
     try:
-        release = latest_release(repo)
+        release = latest_release(repo, pattern)
+        tag = release["tag_name"]
+        result = run(
+            [
+                "gh",
+                "release",
+                "download",
+                tag,
+                "--repo",
+                repo,
+                "--pattern",
+                pattern,
+                "--dir",
+                str(destination),
+                "--clobber",
+            ],
+            check=False,
+        )
     except Exception as exc:
-        print(f"⚠️ {app}: could not fetch latest release: {exc}")
+        print(f"⚠️ {app}: could not fetch matching release: {exc}")
         shutil.rmtree(destination, ignore_errors=True)
         return
 
-    assets = release.get("assets", [])
-    matched = [asset for asset in assets if fnmatch.fnmatchcase(asset.get("name", ""), pattern)]
-    if not matched:
-        print(f"⚠️ {app}: no matching release asset")
+    if result.returncode != 0:
+        print(f"⚠️ {app}: no matching release asset for selected release")
         shutil.rmtree(destination, ignore_errors=True)
         return
-
-    for asset in matched:
-        target = destination / asset["name"]
-        try:
-            subprocess.run(
-                ["gh", "api", asset["url"], "-H", "Accept: application/octet-stream", "--output", str(target)],
-                check=True,
-                text=True,
-                capture_output=True,
-            )
-        except subprocess.CalledProcessError as exc:
-            print(f"⚠️ {app}: failed to download {asset['name']}: {exc}")
-            shutil.rmtree(destination, ignore_errors=True)
-            return
 
     if app in {"AmarokHider", "DeltaIcons"}:
         for path in destination.glob("*foss*.apk"):
@@ -95,7 +113,18 @@ def apk_metadata(path: Path) -> tuple[str | None, str | None]:
 
 
 def matching_files(app: str, pattern: str) -> list[Path]:
-    return [Path(p) for p in glob.glob(str(DOWNLOAD_DIR / app / pattern)) if Path(p).is_file()]
+    return sorted(Path(p) for p in glob.glob(str(DOWNLOAD_DIR / app / pattern)) if Path(p).is_file())
+
+
+def asset_priority(path: Path) -> tuple[int, int, int, int, str]:
+    name = path.name.lower()
+    return (
+        0 if "universal" in name else 1 if "arm64-v8a" in name else 2,
+        0 if "release" in name else 1 if "stable" in name else 2,
+        0 if "foss" not in name else 1,
+        0 if "debug" not in name else 1,
+        name,
+    )
 
 
 def choose_asset(app: str, pattern: str) -> tuple[Path, str] | None:
@@ -106,23 +135,41 @@ def choose_asset(app: str, pattern: str) -> tuple[Path, str] | None:
         return None
 
     inspected = []
-    for candidate in sorted(apk_candidates):
+    for candidate in apk_candidates:
         package, version = apk_metadata(candidate)
-        inspected.append((candidate, package, version))
+        if package and version:
+            inspected.append((candidate, package, version))
 
-    universal = [item for item in inspected if "universal" in item[0].name.lower()]
-    arm64 = [item for item in inspected if "arm64-v8a" in item[0].name.lower()]
-    selected = universal or arm64 or inspected
-
-    if len(selected) > 1:
-        details = ", ".join(f"{path.name}: {package or 'unknown package'}" for path, package, _ in selected)
-        print(f"⚠️ {app}: multiple APKs remain after universal/arm64-v8a selection; skipping app: {details}")
+    if not inspected:
+        print(f"⚠️ {app}: could not read Android package metadata; skipping app")
         return None
 
-    path, package, version = selected[0]
-    if not package or not version:
-        print(f"⚠️ {app}: could not read Android package metadata from {path.name}; skipping app")
-        return None
+    identities = {(package, version) for _path, package, version in inspected}
+    if len(identities) > 1:
+        packages = {package for _path, package, _version in inspected}
+        non_foss = [item for item in inspected if "foss" not in item[0].name.lower()]
+        foss = [item for item in inspected if "foss" in item[0].name.lower()]
+
+        # Some releases publish the same app twice with a normal and a FOSS
+        # build. When the package is the same, prefer the normal build rather
+        # than treating the FOSS suffix as a version conflict.
+        if len(packages) == 1 and non_foss and foss:
+            inspected = non_foss
+        else:
+            universal = [item for item in inspected if "universal" in item[0].name.lower()]
+            arm64 = [item for item in inspected if "arm64-v8a" in item[0].name.lower()]
+            preferred = universal or arm64 or inspected
+            preferred_identities = {(package, version) for _path, package, version in preferred}
+            if len(preferred_identities) > 1:
+                details = ", ".join(
+                    f"{path.name}: {package or 'unknown package'} {version or 'unknown version'}"
+                    for path, package, version in preferred
+                )
+                print(f"⚠️ {app}: multiple APK versions/packages remain; skipping app: {details}")
+                return None
+            inspected = preferred
+
+    path, package, version = sorted(inspected, key=lambda item: asset_priority(item[0]))[0]
     return path, version
 
 
@@ -133,9 +180,9 @@ def process_assets(old: dict[str, str]) -> list[tuple[str, str, Path]]:
         if not candidates:
             continue
 
-        if candidates[0].suffix.lower() == ".exe":
+        if all(path.suffix.lower() == ".exe" for path in candidates):
             source = sorted(candidates)[0]
-            match = re.search(r"[-_]([0-9]+\.[0-9]+\.[0-9]+).*\.exe$", source.name, re.I)
+            match = re.search(r"[-_]v?([0-9]+(?:\.[0-9]+){1,3})[^0-9]*\.exe$", source.name, re.I)
             version = match.group(1) if match else "unknown"
         else:
             selected = choose_asset(app, pattern)
@@ -171,26 +218,49 @@ def read_versions() -> dict[str, str]:
         return {}
     versions: dict[str, str] = {}
     for line in VERSIONS_FILE.read_text(encoding="utf-8").splitlines():
-        if "=" in line:
+        line = line.strip()
+        if not line:
+            continue
+        if ":" in line:
+            app, version = line.split(":", 1)
+        elif "=" in line:
             app, version = line.split("=", 1)
-            if app and version:
-                versions[app.strip()] = version.strip()
+        else:
+            continue
+        app, version = app.strip(), version.strip()
+        if app and version:
+            versions[app] = version
     return versions
 
 
 def generate_metadata(updates: list[tuple[str, str, Path]], old: dict[str, str]) -> None:
-    version_lines = dict(old)
-    captions = []
-    for app, version, _path in updates:
+    version_lines = {app: old[app] for app, _repo, _pattern, _desc, _emoji, _rename in APPS if app in old}
+    captions: list[str] = []
+
+    for app, version, path in updates:
+        previous = old.get(app)
         version_lines[app] = version
-        captions.append(f"{app} v{version}")
+        repo, description, emoji = APP_INFO[app]
+        version_line = f"🚀 Version: {previous} → {version}" if previous else f"🆕 Version: {version}"
+        filename = html.escape(path.name)
+        description = html.escape(description)
+        changelog = f"Changelog: <a href='https://github.com/{repo}/releases/latest'>Open</a>"
+        captions.append(
+            f"📦 <b>File name</b> – {filename}\n"
+            f"    {emoji} {description}\n"
+            f"{version_line}\n\n"
+            f"{changelog}\n"
+            f"    ----"
+        )
 
     with VERSIONS_FILE.open("w", encoding="utf-8") as handle:
-        for app, version in version_lines.items():
-            handle.write(f"{app}={version}\n")
+        for app, _repo, _pattern, _desc, _emoji, _rename in APPS:
+            if app in version_lines:
+                handle.write(f"{app}: {version_lines[app]}\n")
+
     with CAPTIONS_FILE.open("w", encoding="utf-8") as handle:
-        handle.write("\n".join(captions))
         if captions:
+            handle.write("\n".join(captions))
             handle.write("\n")
 
 
@@ -198,15 +268,31 @@ def publish(updates: list[tuple[str, str, Path]]) -> None:
     if not updates:
         print("No app updates to publish")
         return
-    now = datetime.utcnow()
-    tag = f"prebuilts-{now:%Y%m%d%H%M%S}"
+
+    now = datetime.now(timezone.utc)
+    run_id = os.getenv("GITHUB_RUN_ID")
+    tag = f"prebuilts-{run_id}" if run_id else f"prebuilts-{now:%Y%m%d%H%M%S}"
     title = f"Prebuilts {now:%Y-%m-%d %H:%M UTC}"
     body = "\n".join(f"- {app} v{version}" for app, version, _ in updates)
-    run(["gh", "release", "create", tag, *[str(path) for _, _, path in updates], "--title", title, "--notes", body])
+    run(
+        [
+            "gh",
+            "release",
+            "create",
+            tag,
+            *[str(path) for _, _, path in updates],
+            str(CAPTIONS_FILE),
+            "--title",
+            title,
+            "--notes",
+            body,
+        ]
+    )
+    print(f"Published release {tag}")
 
 
 def main() -> None:
-    print(f"Build started: {datetime.utcnow():%Y-%m-%d %H:%M UTC}")
+    print(f"Build started: {datetime.now(timezone.utc):%Y-%m-%d %H:%M UTC}")
     DOWNLOAD_DIR.mkdir(parents=True, exist_ok=True)
     for app, repo, pattern, _desc, _emoji, _rename in APPS:
         print(f"::group::Download {app}")

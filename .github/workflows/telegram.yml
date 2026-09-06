@@ -27,8 +27,10 @@ jobs:
       TAG: prebuilts-${{ github.event.workflow_run.id }}
 
     steps:
-      - name: Checkout repo
+      - name: Checkout build revision
         uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
 
       - name: Install dependencies
         run: |
@@ -36,16 +38,16 @@ jobs:
           sudo apt-get install -y python3 python3-pip gh
           python3 -m pip install --disable-pip-version-check --no-cache-dir telethon tgcrypto
 
-      - name: Wait for release to become available
+      - name: Find release for this build
         id: release
         shell: bash
         run: |
           set -euo pipefail
-          echo "Waiting for release: ${TAG}"
+          echo "Looking for release: ${TAG}"
 
           for attempt in $(seq 1 30); do
             if gh release view "$TAG" --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
-              echo "Release is available."
+              echo "Release found: ${TAG}"
               echo "found=true" >> "$GITHUB_OUTPUT"
               exit 0
             fi
@@ -53,7 +55,7 @@ jobs:
             sleep 10
           done
 
-          echo "No release was created for this successful build (likely no app updates). Nothing to send."
+          echo "No release was created for build ${TAG}; nothing to send."
           echo "found=false" >> "$GITHUB_OUTPUT"
 
       - name: Download release assets
@@ -78,9 +80,7 @@ jobs:
             exit 0
           fi
 
-          if [ -f dl/captions.txt ]; then
-            cp dl/captions.txt captions.txt
-          fi
+          cp dl/captions.txt captions.txt
 
           printf 'Downloaded files:\n'
           printf ' - %s\n' "${files[@]}"

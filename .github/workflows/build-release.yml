@@ -20,6 +20,8 @@ concurrency:
 jobs:
   build-release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     env:
       GH_TOKEN: ${{ secrets.TOKEN }}
       GITHUB_TOKEN: ${{ secrets.TOKEN }}
@@ -35,3 +37,38 @@ jobs:
 
       - name: Build and publish prebuilts
         run: python3 .github/scripts/build.py
+
+      - name: Commit generated metadata
+        run: |
+          if [ ! -f latest-apk-versions.txt ] || [ ! -f captions.txt ]; then
+            echo "Generated metadata files are missing"
+            exit 1
+          fi
+
+          if git diff --quiet -- latest-apk-versions.txt captions.txt && [ -z "$(git ls-files --others --exclude-standard -- latest-apk-versions.txt captions.txt)" ]; then
+            echo "No metadata changes to commit"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add latest-apk-versions.txt captions.txt
+
+          updated_apps="$(git diff --cached --unified=0 -- latest-apk-versions.txt | grep -E '^\\+[^+].*: ' | sed 's/^+//' || true)"
+          updated_count="$(printf '%s\\n' "$updated_apps" | sed '/^$/d' | wc -l | tr -d ' ')"
+
+          date_ist="$(TZ=Asia/Kolkata date '+%Y-%m-%d')"
+          time_ist="$(TZ=Asia/Kolkata date '+%H:%M')"
+
+          description="📦 Prebuilts Update\\n\\n📅 Date: ${date_ist}\\n🕐 Time: ${time_ist} IST\\n\\n✅ Updated apps (${updated_count}):\\n"
+          while IFS= read -r line; do
+            [ -z "$line" ] && continue
+            app="${line%%:*}"
+            version="${line#*: }"
+            description+="- ${app}: ${version}\\n"
+          done <<< "$updated_apps"
+
+          description+="\\n📁 Updated files:\\n- latest-apk-versions.txt\\n- captions.txt\\n\\n🤖 Automated by GitHub Actions"
+
+          git commit -m "${description}"
+          git push origin HEAD:main
