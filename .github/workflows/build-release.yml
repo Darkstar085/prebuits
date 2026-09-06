@@ -60,15 +60,16 @@ jobs:
           date_ist="$(TZ=Asia/Kolkata date '+%Y-%m-%d')"
           time_ist="$(TZ=Asia/Kolkata date '+%H:%M')"
 
-          description="📦 Prebuilts Update\\n\\n📅 Date: ${date_ist}\\n🕐 Time: ${time_ist} IST\\n\\n✅ Updated apps (${updated_count}):\\n"
+          description="📦 Prebuilts Update"$'\n\n'"📅 Date: ${date_ist}"$'\n'"🕐 Time: ${time_ist} IST"$'\n\n'"✅ Updated apps (${updated_count}):"$'\n'
           while IFS= read -r line; do
             [ -z "$line" ] && continue
             app="${line%%:*}"
             version="${line#*: }"
-            description+="- ${app}: ${version}\\n"
+            description+="- ${app}: ${version}"$'\n'
           done <<< "$updated_apps"
 
-          description+="\\n📁 Updated files:\\n- latest-apk-versions.txt\\n- captions.txt\\n\\n🤖 Automated by GitHub Actions"
+          description+=$'\n'"📁 Updated files:"$'\n'"- latest-apk-versions.txt"$'\n'"- captions.txt"$'\n\n'"🤖 Automated by GitHub Actions"
 
-          git commit -m "${description}"
+          git commit -m "Prebuilt Update - ${date_ist}" \
+            -m "${description}"
           git push origin HEAD:main
