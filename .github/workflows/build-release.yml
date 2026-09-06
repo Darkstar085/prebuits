@@ -23,8 +23,7 @@ jobs:
     permissions:
       contents: write
     env:
-      GH_TOKEN: ${{ secrets.TOKEN }}
-      GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      GH_TOKEN: ${{ github.token }}
 
     steps:
       - name: Checkout
@@ -36,7 +35,7 @@ jobs:
           sudo apt-get install -y aapt gh
 
       - name: Build and publish prebuilts
-        run: python3 .github/scripts/build.py
+        run: python3 scripts/build.py
 
       - name: Commit generated metadata
         run: |
@@ -54,13 +53,13 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add latest-apk-versions.txt captions.txt
 
-          updated_apps="$(git diff --cached --unified=0 -- latest-apk-versions.txt | grep -E '^\\+[^+].*: ' | sed 's/^+//' || true)"
+          updated_apps="$(git diff --cached --unified=0 -- latest-apk-versions.txt | grep -E '^\+[^+].*: ' | sed 's/^+//' || true)"
           if [ -z "$updated_apps" ]; then
             echo "No app updates; skipping metadata commit"
             exit 0
           fi
 
-          updated_count="$(printf '%s\\n' "$updated_apps" | sed '/^$/d' | wc -l | tr -d ' ')"
+          updated_count="$(printf '%s\n' "$updated_apps" | sed '/^$/d' | wc -l | tr -d ' ')"
 
           date_ist="$(TZ=Asia/Kolkata date '+%Y-%m-%d')"
           time_ist="$(TZ=Asia/Kolkata date '+%H:%M')"

@@ -92,7 +92,6 @@ Release metadata includes updated application names, versions, descriptions, and
 ## ⏰ Automation
 
 - **Build & Release:** Every Sunday at **10:00 AM Asia/Kolkata**
-- **Cleanup:** 1st of every month at **10:00 AM Asia/Kolkata**
 - Both workflows support manual execution.
 
 ## 📲 Telegram
@@ -114,12 +113,13 @@ Telegram uploads use a bounded recent-message scan to avoid duplicate filename/s
 The following GitHub Actions secrets are required:
 
 ```text
-TOKEN
 TELEGRAM_API_ID
 TELEGRAM_API_HASH
 TELEGRAM_SESSION
 TELEGRAM_CHAT_ID
 ```
+
+GitHub authentication uses the built-in `GITHUB_TOKEN` provided by GitHub Actions.
 
 Keep all credentials and session data private and never commit them directly to the repository.
 

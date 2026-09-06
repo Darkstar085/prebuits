@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      GH_TOKEN: ${{ secrets.TOKEN }}
+      GH_TOKEN: ${{ github.token }}
       TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
       TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       API_ID: ${{ secrets.TELEGRAM_API_ID }}
@@ -90,4 +90,4 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 .github/scripts/upload.py
+          python3 scripts/upload.py

@@ -13,7 +13,7 @@ jobs:
       actions: write
       contents: write
     env:
-      GH_TOKEN: ${{ secrets.TOKEN }}
+      GH_TOKEN: ${{ github.token }}
 
     steps:
       - name: Checkout
@@ -23,4 +23,4 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y gh
 
       - name: Run cleanup
-        run: python3 .github/scripts/cleanup.py
+        run: python3 scripts/cleanup.py

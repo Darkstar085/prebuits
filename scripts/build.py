@@ -14,7 +14,7 @@ import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[1]
 DOWNLOAD_DIR = ROOT / "dl"
 APPS_FILE = ROOT / "apps.json"
 VERSIONS_FILE = ROOT / "latest-apk-versions.txt"
