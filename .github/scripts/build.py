@@ -19,6 +19,7 @@ DOWNLOAD_DIR = ROOT / "dl"
 APPS_FILE = ROOT / "apps.json"
 VERSIONS_FILE = ROOT / "latest-apk-versions.txt"
 CAPTIONS_FILE = ROOT / "captions.txt"
+VERSION_RE = re.compile(r"(?<!\d)v?(\d+(?:\.\d+){1,3})(?!\d)", re.I)
 
 
 def run(command: list[str], *, check: bool = True) -> subprocess.CompletedProcess[str]:
@@ -61,13 +62,36 @@ def latest_release(repo: str, pattern: str) -> dict:
     raise RuntimeError(f"no release asset matching {pattern!r} found in {repo}")
 
 
-def download_asset(app: str, repo: str, pattern: str) -> None:
+def asset_version(release: dict, pattern: str) -> str | None:
+    """Return a version discoverable from release metadata without downloading an asset."""
+    matching = sorted(
+        asset.get("name", "")
+        for asset in release.get("assets", [])
+        if fnmatch.fnmatch(asset.get("name", ""), pattern)
+    )
+    versions = {match.group(1) for name in matching if (match := VERSION_RE.search(name))}
+    if len(versions) == 1:
+        return versions.pop()
+
+    tag = release.get("tag_name", "")
+    match = VERSION_RE.fullmatch(tag.lstrip("v"))
+    if match:
+        return match.group(1)
+    return None
+
+
+def download_asset(app: str, repo: str, pattern: str, old: dict[str, str]) -> None:
     destination = DOWNLOAD_DIR / app
     shutil.rmtree(destination, ignore_errors=True)
-    destination.mkdir(parents=True, exist_ok=True)
 
     try:
         release = latest_release(repo, pattern)
+        external_version = asset_version(release, pattern)
+        if external_version and old.get(app) == external_version:
+            print(f"{app} unchanged (v{external_version}) — skipping download")
+            return
+
+        destination.mkdir(parents=True, exist_ok=True)
         tag = release["tag_name"]
         result = run(
             [
@@ -294,12 +318,12 @@ def publish(updates: list[tuple[str, str, Path]]) -> None:
 def main() -> None:
     print(f"Build started: {datetime.now(timezone.utc):%Y-%m-%d %H:%M UTC}")
     DOWNLOAD_DIR.mkdir(parents=True, exist_ok=True)
+    old = read_versions()
     for app, repo, pattern, _desc, _emoji, _rename in APPS:
-        print(f"::group::Download {app}")
-        download_asset(app, repo, pattern)
+        print(f"::group::Check {app}")
+        download_asset(app, repo, pattern, old)
         print("::endgroup::")
 
-    old = read_versions()
     updates = process_assets(old)
     generate_metadata(updates, old)
     publish(updates)
