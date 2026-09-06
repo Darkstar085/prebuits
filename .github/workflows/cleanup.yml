@@ -2,7 +2,8 @@ name: Cleanup Old Workflow Runs, Releases, and Tags
 
 on:
   schedule:
-    - cron: "30 4 * * 0"
+    - cron: "0 10 1 * *"
+      timezone: "Asia/Kolkata"
   workflow_dispatch:
 
 jobs:
@@ -36,27 +37,24 @@ jobs:
         run: |
           set -euo pipefail
 
-          # Gather all tags
           all_tags=$(git ls-remote --tags "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" | awk '{print $2}' | sed 's|refs/tags/||' | sed 's/\^{}//')
           echo "Total tags found:"
           echo "$all_tags" | wc -l
 
-          # Keep the newest 3 prebuilts-* tags (sorted by version-like numeric suffix if present)
-          prebuilts_tags=$(echo "$all_tags" | grep -E '^prebuilts-' || true)
-          keep_prebuilts=$(echo "$prebuilts_tags" | sort -r | head -n 3 || true)
+          # Build tags use the numeric GitHub Actions run ID, so sort the
+          # suffix numerically instead of lexicographically (e.g. 1000 > 999).
+          prebuilts_tags=$(echo "$all_tags" | grep -E '^prebuilts-[0-9]+$' || true)
+          keep_prebuilts=$(echo "$prebuilts_tags" | sort -t- -k2,2nr | head -n 3 || true)
 
-          # Also keep tags currently attached to the latest 3 releases (already kept by the previous step)
           releases_json=$(curl -sS -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" \
             "https://api.github.com/repos/${{ github.repository }}/releases?per_page=100")
           release_tags=$(echo "$releases_json" | jq -r '.[].tag_name' | sed '/^null$/d' || true)
 
-          # Compose keep set
           keep_set=$(printf "%s\n%s\n" "$keep_prebuilts" "$release_tags" | sed '/^$/d' | sort -u)
 
           echo "Keeping tags:"
           echo "$keep_set" || true
 
-          # Determine deletable tags: all - keep_set
           deletable=$(comm -23 <(echo "$all_tags" | sort -u) <(echo "$keep_set" | sort -u) || true)
 
           if [ -z "${deletable:-}" ]; then
@@ -67,7 +65,6 @@ jobs:
           echo "Deleting tags:"
           echo "$deletable"
 
-          # Delete tags via GitHub API
           while IFS= read -r tag; do
             [ -z "$tag" ] && continue
             ref="refs/tags/${tag}"

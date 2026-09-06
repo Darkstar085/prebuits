@@ -1,21 +1,21 @@
 # Android App Updater
 
-Automatically tracks GitHub releases, downloads updated Android apps, packages them into a GitHub Release, and publishes new updates to Telegram. 🚀
+Automatically tracks configured GitHub releases, downloads matching APK/EXE assets, packages changed apps into a GitHub Release, and publishes the same updates to Telegram. 🚀
 
 ## ✨ How It Works
 
-The GitHub Actions workflow runs automatically and:
+The main GitHub Actions workflow:
 
-1. 🔎 Checks the configured GitHub repositories for new releases.
-2. 📥 Downloads matching APK/EXE release assets.
-3. 🧩 Detects and processes the actual downloaded filenames.
-4. 🏷️ Renames updated files using a consistent `App_VERSION.apk` format.
+1. 🔎 Checks configured upstream repositories for their latest releases.
+2. 📥 Downloads matching APK/EXE assets.
+3. 🧩 Handles repositories whose release asset names need special matching or renaming.
+4. 🏷️ Extracts versions and renames changed files as `App_vVERSION.apk` or `App_vVERSION.exe`.
 5. 📝 Generates release notes and Telegram captions.
-6. 📦 Creates one GitHub Release containing all updated apps.
-7. 📲 Publishes the updated files to the Telegram channel.
-8. 💾 Records the latest versions so the same update is not released twice.
+6. 📦 Creates one GitHub Release containing only changed apps.
+7. 📲 Publishes changed files to Telegram.
+8. 💾 Updates `latest-apk-versions.txt` so unchanged versions are skipped later.
 
-The workflow is organized into clear phases in GitHub Actions, making runs easier to follow:
+Workflow phases:
 
 - **Download all apps**
 - **Process downloaded apps**
@@ -25,89 +25,114 @@ The workflow is organized into clear phases in GitHub Actions, making runs easie
 
 ## 📱 Apps Covered
 
-- 🔐 Aegis — Modern two-factor authentication app
-- 📂 AmazeFileManager — Fast, customizable file manager
-- 🙈 AmarokHider — Keep Amarok music app hidden when needed
-- 🎭 Arcticons — Modern icon pack and theming app
-- 🔑 Bitwarden — Open-source password manager with cloud sync
-- 🌦️ BreezyWeather — Clean, customizable open-source weather app
-- 🍒 Cherrygram — Enhanced Telegram client with extra features
-- 🔄 ConverterNOW — Simple unit and currency converter
-- 🌐 Cromite — Privacy-focused browser
-- 💻 CpuInfo — Detailed CPU information tool
-- 🎨 DeltaIcons — Minimal icon pack
-- 📷 DotGallery — Jetpack Compose-based photo gallery
-- 🦆 DuckDuckGo — Private, tracker-blocking browser
-- ⌨️ Florisboard — Privacy-friendly Android keyboard
-- 🤳 Flip2DND — Flip your phone to toggle Do Not Disturb
-- 🧮 Fossify Calculator — Open-source calculator
-- ⌨️ Fossify Keyboard — Privacy-friendly keyboard
-- 🎶 Fossify Music Player — Modern music player
-- 🗒️ Fossify Notes — Privacy-focused notes app
-- 🎤 Fossify Voice Recorder — Privacy-respecting voice recorder
-- 🎼 Gramophone — Minimalist music player
-- 🦦 IceravenBrowser — Privacy-focused browser
-- 🔒 LibreTube — Open-source YouTube app
-- ✂️ LibreCuts — Video editing app
-- 📤 LocalSend — Secure local file sharing
-- 🧩 MicroG_RE — Enhanced Play Services compatibility
-- 📖 MoeList — Anime and manga tracking
-- 🛠️ Omni — All-in-one utility app
-- 🎧 PhonographPlus — Enhanced music player fork
-- 🖼️ Photok — Simple photo gallery
-- 🗂️ PrismFileExplorer — Material-design file explorer
-- 🖥️ Kudu — Desktop application
-- 🕹️ NopeRemote — Remote-control application
-- 🎵 ReVanced_GooglePhotos — ReVanced Google Photos build
-- 🧩 ReVanced_MicroG — MicroG for ReVanced
-- 🎵 ReVanced_YTMusic — ReVanced YouTube Music build
-- 🎬 ReVanced_YouTube — ReVanced YouTube build
-- 🧹 Sdmaid — System cleaning tool
-- 🤖 Shizuku — Advanced Android background utility
-- 🎶 Spotify_Revanced — Spotify ReVanced build
-- 🎼 SpotiFLAC — Spotify/FLAC-related music application
-- 🎼 Symphony — Lightweight music player
-- 🖥️ Termux — Terminal emulator and Linux environment
-- 📧 ThunderbirdAndroid — Thunderbird email client
-- 💻 VisualCodeSpace — Android code editor and IDE
-- ☁️ WeatherMaster — Modern weather application
-- ✏️ XedEditor — Text/code editor
-- ⬇️ Ytdlnis — YouTube downloader
-- 🗺️ Organic Maps — Privacy-focused offline maps
+The configured updater currently covers:
+
+- 📥 ABDownloadManager
+- 💻 Acode
+- 🔐 Aegis
+- 📺 NopeRemote
+- 🧹 Kudu
+- 🎵 SpotiFLAC
+- 🎬 LibreCuts
+- 🗺️ Organic Maps
+- 🙈 Amarok Hider
+- 🎭 Arcticons
+- 🔑 Bitwarden
+- 🌦️ BreezyWeather
+- 🍒 Cherrygram
+- 🔄 ConverterNOW
+- 🌐 Cromite
+- 💻 CpuInfo
+- 🎨 DeltaIcons
+- 📷 DotGallery
+- 🦆 DuckDuckGo
+- 🤳 Flip2DND
+- ⌨️ Florisboard
+- 🧮 Fossify Calculator
+- ⌨️ Fossify Keyboard
+- 🎶 Fossify Music Player
+- 🗒️ Fossify Notes
+- 🎤 Fossify Voice Recorder
+- 🎼 Gramophone
+- 🦦 Iceraven Browser
+- 🖼️ ImageToolbox
+- 🔒 LibreTube
+- 📤 LocalSend
+- 🧹 LTECleanerFOSS
+- 🪄 Magisk
+- 🧩 MicroG RE
+- 📖 MoeList
+- 📱 Momogram
+- 🐱 Nekogram
+- 🛠️ Omni
+- 🎧 OuterTune
+- 🎵 Pixelplay
+- 🎧 Phonograph Plus
+- 🗂️ Prism File Explorer
+- 📥 Quantum Download Manager
+- 🤖 Shizuku
+- 🧹 SD Maid SE
+- 🎵 SimpMusic
+- 🎼 Symphony
+- 🖥️ Termux
+- 📧 Thunderbird Android
+- 💻 Visual Code Space
+- ☁️ WeatherMaster
+- ✏️ Xed Editor
+- ⬇️ YTDLnis
+- 🎬 Morphe YouTube
+- 🎵 Morphe YT Music
+- 📷 Morphe Google Photos
+- 🧩 Morphe MicroG
+- 🛠️ Morphe Manager
+
+The source-of-truth configuration is `.github/workflows/build-release.yml`; `latest-apk-versions.txt` is runtime version state, not a second app configuration list.
 
 ## 📦 Releases
 
-Each update creates a GitHub Release containing only apps that have changed since the previous run.
+Each update creates a GitHub Release containing only apps whose detected version changed since the previous successful update.
 
-Files follow a consistent naming style such as:
+Release assets use:
 
 ```text
-AppName_VERSION.apk
+AppName_vVERSION.apk
+AppName_vVERSION.exe
 ```
 
-The release metadata contains the updated app names, versions, descriptions, and changelog links.
+Release metadata includes updated app names, versions, descriptions, and upstream changelog links.
+
+## 🕐 Automation Schedule
+
+- **Build & Release:** every Sunday at **10:00 AM Asia/Kolkata**.
+- **Cleanup:** the **1st of every month at 10:00 AM Asia/Kolkata**.
+- Both workflows support manual runs.
+- Documentation, version-text, and workflow-only changes are excluded from the automatic build push trigger; manual runs remain available.
+
+## 🧹 Cleanup Policy
+
+The monthly cleanup job:
+
+- Keeps at least 5 recent workflow runs while removing runs older than 1 day.
+- Keeps the latest 3 GitHub Releases.
+- Keeps the latest 3 numeric `prebuilts-*` tags by run ID.
+- Preserves tags attached to retained releases.
+- Removes remaining orphaned/old tags.
 
 ## 📲 Telegram
 
-New releases are automatically published to the Telegram channel:
+Successful releases are automatically published to the configured Telegram channel.
 
-- 📢 **Channel:** [Darkstar's Hub](https://t.me/darkstar085_channel)
+Telegram uploads use a bounded recent-message scan to avoid duplicate filename/size combinations. Captions do not repeat the filename because Telegram already displays the uploaded document name.
 
-Telegram captions are kept clean and avoid repeating information already displayed by Telegram, such as the uploaded filename.
+## ⚙️ Reliability
 
-## ⚙️ Automation
-
-The workflow is designed to be resilient when a repository changes its release asset naming:
-
-- Detects actual downloaded APK filenames where necessary.
-- Avoids assuming every APK is named `app-release.apk`.
-- Skips repositories when no matching release asset is available.
-- Tracks versions to prevent duplicate releases.
-- Uses controlled Telegram uploads with retry/error handling.
+- Handles special asset naming and explicit rename cases.
+- Continues when an upstream repository has no matching asset.
+- Tracks versions to avoid republishing unchanged apps.
+- Retries Telegram uploads and handles FloodWait errors.
+- Uses concurrency controls to prevent overlapping build or delivery runs.
 
 ## 🔐 Required GitHub Secrets
-
-The Telegram publishing workflow uses these repository secrets:
 
 ```text
 TOKEN
@@ -121,13 +146,14 @@ Keep these values private and never commit them directly to the repository.
 
 ## 🤝 Requests & Support
 
-Want an app added or found an issue?
-
-- 💬 Telegram group: [Darkstar's Group](https://t.me/darkstar085_group)
-- 🐛 Open an issue in this repository for workflow/app problems.
+Want an app added or found an issue? Open an issue in the repository or use the project's configured Telegram support channels.
 
 ## 📜 License
 
-This repository's workflow scripts and automation code are licensed under the [MIT License](./LICENSE).
+This repository's workflow scripts and automation code are licensed under the MIT License.
 
 Third-party APK/EXE files referenced or redistributed by the workflow remain the property of their respective copyright holders.
+
+## 🧭 CI Notes
+
+Changes limited to documentation, version text, or workflow files do not need an automatic build. The build workflow remains available through manual dispatch and its weekly schedule.

@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import asyncio
 import glob
-import hashlib
 import html
 import os
 import re
@@ -45,9 +44,6 @@ def load_captions():
         if not match:
             continue
         filename = match.group(1).strip()
-        # Keep the GitHub captions.txt format intact, but remove the
-        # redundant "File name" line from the Telegram caption. The
-        # uploaded Telegram document already displays its filename.
         telegram_caption = re.sub(
             r"^\s*📦\s*<b>File name</b>\s*[–-]\s*[^\n]*\n?",
             "",
@@ -69,18 +65,19 @@ def find_caption(filename: str) -> str:
     for key, value in captions.items():
         if norm.startswith(key) or key.startswith(norm):
             return value
-    # Never repeat the filename in the Telegram caption. Telegram already
-    # shows the uploaded document's filename.
     return ""
 
 
 def file_key(path: str) -> str:
-    size = os.path.getsize(path)
-    digest = hashlib.sha256()
-    with open(path, "rb") as fh:
-        for chunk in iter(lambda: fh.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return f"{Path(path).name}:{size}:{digest.hexdigest()[:16]}"
+    """Return a Telegram-compatible deduplication key.
+
+    Telegram exposes the uploaded document's filename and size without
+    downloading the message contents. Matching the same filename+size on
+    both sides makes the local duplicate key comparable with history scans.
+    Release assets already contain the version in their filename, so this is
+    sufficient while avoiding an unnecessary full-file SHA-256 pass.
+    """
+    return f"{Path(path).name}:{os.path.getsize(path)}"
 
 
 files = sorted(glob.glob("dl/*.apk") + glob.glob("dl/*.exe"))
@@ -142,16 +139,14 @@ async def collect_recent_filenames(client):
         if filename:
             sent.add(filename)
             try:
-                sent.add(f"{filename}:{message.file.size}:{''}")
+                sent.add(f"{filename}:{message.file.size}")
             except Exception:
                 pass
-    print(f"Found {len(sent)} existing filename marker(s).")
+    print(f"Found {len(sent)} existing filename/size marker(s).")
     return sent
 
 
 async def main():
-    # Use the Telethon user session for every file. This avoids the Bot API's
-    # smaller upload limit and gives one consistent retry/error path.
     if not session:
         raise RuntimeError("TELEGRAM_SESSION is empty")
 
