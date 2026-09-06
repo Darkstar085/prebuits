@@ -44,7 +44,7 @@ The configured updater currently covers:
 - 🌐 Cromite
 - 💻 CpuInfo
 - 🎨 DeltaIcons
-- 📷 DotGallery
+- 📷 ReFra
 - 🦆 DuckDuckGo
 - 🤳 Flip2DND
 - ⌨️ Florisboard
