@@ -98,7 +98,7 @@ def download_asset(app: str, repo: str, pattern: str) -> None:
     if app in {"AmarokHider", "DeltaIcons"}:
         for path in destination.glob("*foss*.apk"):
             path.unlink(missing_ok=True)
-    if app == "DotGallery":
+    if app == "ReFra":
         for path in destination.glob("*nomaps*.apk"):
             path.unlink(missing_ok=True)
 
