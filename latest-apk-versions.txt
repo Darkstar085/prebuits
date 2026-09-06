@@ -24,7 +24,7 @@ Fossify_VoiceRecorder: 1.7.1
 Gramophone: 1.1.1
 IceravenBrowser: iceraven-2.46.0
 ImageToolbox: 4.1.0
-Kudu: 2.6.0
+Kudu: 2.7.0
 LTECleanerFOSS: 5.1.0
 LibreTube: 0.29.1
 LocalSend: 1.18.1
