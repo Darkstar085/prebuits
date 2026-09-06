@@ -182,7 +182,7 @@ def process_assets(old: dict[str, str]) -> list[tuple[str, str, Path]]:
 
         if all(path.suffix.lower() == ".exe" for path in candidates):
             source = sorted(candidates)[0]
-            match = re.search(r"[-_]v?([0-9]+(?:\.[0-9]+){1,3})[^0-9]*\.exe$", source.name, re.I)
+            match = re.search(r"[-_]v?([0-9]+(?:\.[0-9]+){1,3}).*\.exe$", source.name, re.I)
             version = match.group(1) if match else "unknown"
         else:
             selected = choose_asset(app, pattern)
